@@ -1,0 +1,13 @@
+// 所有路径都是相对于此文件，所以要重新覆盖 "declarationDir" 和 "include"
+{
+  "extends": "./tsconfig.base",
+  "compilerOptions": {
+    "baseUrl": ".",
+    "declarationDir": "../types",
+    "paths": {
+      "@/*": ["src/*"],
+      "@tmp/*": ["src/pages/.umi/*"]
+    }
+  },
+  "include": ["./src/**/*"]
+}

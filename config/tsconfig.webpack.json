@@ -1,0 +1,5 @@
+// 此文件的上下文在 webpack.dev.js 中定义为项目根目录
+{
+  "extends": "./config/tsconfig.base",
+  "files": ["./demo/index"]
+}

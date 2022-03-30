@@ -1,0 +1,11 @@
+build/
+coverage/
+lib/
+test/
+vendors/
+node_modules/
+**/*.min.js
+**/*-min.js
+*.tpl
+*.bak
+*.html

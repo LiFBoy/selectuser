@@ -1,0 +1,13 @@
+# stylelint config
+# @author Pluto <huarse@gmail.com>
+# @create 2019/11/14
+
+extends: stylelint-config-standard
+rules:
+  no-descending-specificity: null
+  at-rule-no-unknown: null
+  selector-pseudo-class-no-unknown: null
+  no-empty-source: null
+  no-duplicate-selectors: true
+  font-family-no-missing-generic-family-keyword: null
+

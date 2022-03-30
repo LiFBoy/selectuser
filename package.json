@@ -1,0 +1,119 @@
+{
+  "name": "select-ss-user",
+  "version": "0.0.51",
+  "description": "select-user",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "main": "./lib/index.js",
+  "types": "./types/externals.d.ts",
+  "scripts": {
+    "start": "npm run dev",
+    "proxy": "node config/anyproxy.config.js",
+    "dev": "webpack-dev-server --config ./config/webpack.dev.js",
+    "build:types": "tsc -p tsconfig.json ",
+    "clean": "rimraf lib esm dist",
+    "build": "npm run clean && npm run build:types && gulp build",
+    "stylelint": "gulp stylelint",
+    "eslint": "gulp eslint",
+    "lint": "npm run stylelint && npm run eslint",
+    "prepublishOnly": "npm run build"
+  },
+  "license": "BSD-3-Clause",
+  "lint-staged": {
+    "*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "git add ."
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "dependencies": {
+    "@alifd/next": "^1.21.8",
+    "@ant-design/icons": "^4.1.0",
+    "@irim/ds-core": "^1.0.3",
+    "@irim/ds-net": "^1.0.7",
+    "@irim/saber": "1.2.1",
+    "@types/qs": "^6.9.5",
+    "antd-mobile": "^2.3.4",
+    "antd-mobile-v5": "npm:antd-mobile@5.0.0-rc.8",
+    "classnames": "^2.2.6",
+    "file-loader": "^6.2.0",
+    "qs": "^6.9.4",
+    "ss-mobile-card": "^0.0.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.4.5",
+    "@babel/plugin-proposal-class-properties": "^7.4.4",
+    "@babel/plugin-proposal-decorators": "^7.10.1",
+    "@babel/plugin-proposal-object-rest-spread": "^7.10.1",
+    "@babel/plugin-transform-runtime": "^7.4.4",
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-react": "^7.0.0",
+    "@babel/preset-typescript": "^7.10.1",
+    "@babel/runtime": "^7.4.5",
+    "@commitlint/cli": "~9.1.2",
+    "@commitlint/config-conventional": "~9.1.2",
+    "@types/classnames": "latest",
+    "@types/lodash": "^4.14.165",
+    "@types/react": "16.14.8",
+    "@types/react-dom": "16.9.13",
+    "@typescript-eslint/eslint-plugin": "^4.7.0",
+    "@typescript-eslint/parser": "^4.7.0",
+    "antd": "^4.7.0",
+    "anyproxy": "^4.1.0",
+    "babel-eslint": "^10.0.1",
+    "babel-loader": "^8.0.6",
+    "babel-plugin-import": "^1.11.0",
+    "css-loader": "~4.2.1",
+    "detect-port": "^1.3.0",
+    "eslint": "~7.7.0",
+    "eslint-loader": "~4.0.2",
+    "eslint-plugin-react": "~7.20.6",
+    "gulp": "^4.0.2",
+    "gulp-babel": "^8.0.0",
+    "gulp-base64": "^0.1.3",
+    "gulp-eslint": "^6.0.0",
+    "gulp-stylelint": "^13.0.0",
+    "gulp-typescript": "^6.0.0-alpha.1",
+    "html-webpack-plugin": "~4.3.0",
+    "husky": "~4.2.5",
+    "less": "^3.12.2",
+    "less-loader": "^5.0.0",
+    "lint-staged": "^10.5.1",
+    "lodash": "^4.17.20",
+    "moment": "^2.29.1",
+    "node-sass": "~4.14.1",
+    "react": "16.8.6",
+    "react-dom": "16.8.6",
+    "sass-loader": "~9.0.3",
+    "style-loader": "~1.2.1",
+    "stylelint": "^13.6.1",
+    "stylelint-config-standard": "^20.0.0",
+    "ts-loader": "~8.0.3",
+    "typescript": "^4.0.2",
+    "webpack": "~4.44.1",
+    "webpack-cli": "~3.3.12",
+    "webpack-dev-server": "~3.11.0"
+  },
+  "peerDependencies": {
+    "antd": "^4.7.0",
+    "react": "16"
+  },
+  "publishConfig": {
+    "registry": ""
+  },
+  "keywords": [
+    "React Component"
+  ],
+  "files": [
+    "esm",
+    "lib",
+    "types"
+  ]
+}

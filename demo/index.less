@@ -1,0 +1,42 @@
+// demo style
+
+body {
+  padding: 20px;
+  font-family: PingFang SC, Verdana, Helvetica Neue, Microsoft Yahei,
+    Hiragino Sans GB, 'Microsoft Sans Serif', WenQuanYi Micro Hei, sans-serif;
+  background-color: #f0f0f0;
+  color: #333;
+  font-size: 12px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+
+  * {
+    box-sizing: border-box;
+  }
+  overflow: hidden;
+}
+
+.demo-container {
+  margin: 20px 0;
+  padding: 20px 16px;
+  // min-height: ~'calc(100vh - 40px)';
+  background-color: #f6f6f6;
+  position: relative;
+
+  &::after {
+    content: attr(data-title);
+    position: absolute;
+    right: 0;
+    top: 0;
+    padding: 1px 8px;
+    min-width: 40px;
+    text-align: center;
+    color: #999;
+    background-color: #f8f8f8;
+  }
+}
+
+pre {
+  font-family: 'Andale Mono', 'Menlo', 'Monaco', 'Consolas', 'Courier New',
+    monospace;
+}

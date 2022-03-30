@@ -1,0 +1,35 @@
+// Just For VScode Editor
+{
+  "extends": "./config/tsconfig.base",
+  "compilerOptions": {
+    // "jsx": "react",
+    // "experimentalDecorators": true,
+    // "module": "commonjs",
+    // "noUnusedLocals": true,
+    // "noUnusedParameters": true,
+    // "moduleResolution": "node",
+    // "esModuleInterop": true,
+    // "strictNullChecks": false,
+    // "target": "ES5",
+    // "strict": true,
+    "baseUrl": "./",
+    "target": "esnext",
+    "module": "commonjs",
+    "jsx": "react",
+    // "declaration": false,
+    // "declarationDir": "./lib",
+    "strict": true,
+    "strictNullChecks": false,
+    "moduleResolution": "node",
+    "allowSyntheticDefaultImports": true,
+    "esModuleInterop": true,
+    "resolveJsonModule": true
+    // "emitDeclarationOnly": true
+    // "paths": {
+    //   "@/*": ["./src/*"],
+    //   "@tmp/*": ["src/pages/.umi/*"]
+    // }
+    // "lib": ["DOM", "DOM.Iterable", "ES6"]
+  },
+  "include": ["src/**/*"]
+}
