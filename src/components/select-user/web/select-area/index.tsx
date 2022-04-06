@@ -16,7 +16,11 @@ const SelectArea: React.FunctionComponent<PropType> = (props: PropType) => {
   return (
     <div className="select-area-wrap">
       {currentTab === 'tags' ? (
-        <SelectTagTree multiple={multiple} currentTab={currentTab} selectType={selectType} />
+        <SelectTagTree
+          multiple={multiple}
+          currentTab={currentTab}
+          selectType={selectType}
+        />
       ) : (
         <SelectCommonTree
           selectType={selectType}

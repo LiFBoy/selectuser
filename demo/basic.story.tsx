@@ -13,7 +13,7 @@ export const MethodInvoke = () => {
       dialogProps: {
         title: '关联居民',
       },
-      userOrigin: '//gateway.community-sit.easyj.top/user-center',
+      userOrigin: '//gateway.community-dev.easyj.top/user-center',
       searchPlaceholder: '请输入姓名或手机号进行搜索',
 
       requestParams: {
@@ -58,7 +58,7 @@ export const JSX = () => {
     dialogProps: {
       title: '选人组件',
     },
-    userOrigin: '//gateway.community-sit.easyj.top/user-center',
+    userOrigin: '//gateway.community-dev.easyj.top/user-center',
     showTabList: ['innerContacts'],
     requestParams: {
       strictUser: true,
@@ -109,7 +109,7 @@ JSX.storyName = 'JSX 中使用选人组件';
 //     dialogProps: {
 //       title: '基础校区',
 //     },
-//     userOrigin: '//gateway.community-sit.easyj.top/user-center',
+//     userOrigin: '//gateway.community-dev.easyj.top/user-center',
 //     requestParams: {
 //       campusType: 'base_school_type',
 //       deptTypeList: ['class'],
@@ -153,14 +153,14 @@ export const JSX2 = () => {
     visible,
     multiple: true,
     selectType: 'dept',
-    showTabList: ['equipmentContacts'],
+    showTabList: ['tagContacts'],
     dialogProps: {
-      title: '设备',
+      title: '标签',
     },
-    searchPlaceholder: '搜索设备',
-    userOrigin: '//gateway.community-sit.easyj.top/user-center',
+    searchPlaceholder: '搜索标签',
+    userOrigin: '//gateway.community-dev.easyj.top/user-center',
     requestParams: {
-      selectTypeList: ['equipment'],
+      selectTypeList: ['tag'],
     },
     isSaveSelectSignature: true,
     selectSignature: '',
@@ -183,7 +183,7 @@ export const JSX2 = () => {
 
   return (
     <>
-      <Button onClick={show}>设备</Button>
+      <Button onClick={show}>标签</Button>
       <SelectUser {...props} />
     </>
   );
@@ -205,7 +205,7 @@ export const JSX3 = () => {
       title: 'tv',
     },
     searchPlaceholder: '搜索tv',
-    userOrigin: '//gateway.community-sit.easyj.top/user-center',
+    userOrigin: '//gateway.community-dev.easyj.top/user-center',
     requestParams: {
       selectTypeList: ['tv'],
     },
@@ -273,7 +273,7 @@ export const MOBILE = () => {
     requestParams: {
       selectTypeList: ['user'],
     },
-    userOrigin: '//gateway.community-sit.easyj.top/user-center',
+    userOrigin: '//gateway.community-dev.easyj.top/user-center',
     onOk(data) {
       console.log('onOk data', data);
       const { selectSignature } = data;
@@ -303,7 +303,7 @@ export const MOBILE = () => {
     dialogProps: {
       title: '选人组件',
     },
-    userOrigin: '//gateway.community-sit.easyj.top/user-center',
+    userOrigin: '//gateway.community-dev.easyj.top/user-center',
     requestParams: {
       // strictUser: true,
       selectTypeList: ['user', 'member', 'group'],

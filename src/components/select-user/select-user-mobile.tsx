@@ -43,7 +43,7 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
     'innerContacts',
     'equipmentContacts',
     'schoolContacts',
-    'tags',
+    'tagContacts',
     'orgRel',
     'groupContacts',
   ],

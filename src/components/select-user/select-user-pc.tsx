@@ -24,7 +24,7 @@ const SelectUserPc: React.FunctionComponent<PropTypes> = ({
     'memberContacts',
     'memberDeptContacts',
     'schoolContacts',
-    'tags',
+    'tagContacts',
     'orgRel',
   ],
   selectType = 'user',

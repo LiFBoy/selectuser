@@ -1,6 +1,6 @@
 {
   "name": "select-ss-user",
-  "version": "0.0.51",
+  "version": "0.0.52",
   "description": "select-user",
   "repository": {
     "type": "git",
@@ -13,7 +13,7 @@
     "proxy": "node config/anyproxy.config.js",
     "dev": "webpack-dev-server --config ./config/webpack.dev.js",
     "build:types": "tsc -p tsconfig.json ",
-    "clean": "rimraf lib esm dist",
+    "clean": "rm -rf lib esm dist",
     "build": "npm run clean && npm run build:types && gulp build",
     "stylelint": "gulp stylelint",
     "eslint": "gulp eslint",
@@ -102,8 +102,9 @@
     "webpack-dev-server": "~3.11.0"
   },
   "peerDependencies": {
-    "antd": "^4.7.0",
-    "react": "16"
+    "antd": ">=4.7.0",
+    "react": ">=16.8.6",
+    "react-dom": ">=16.8.6"
   },
   "publishConfig": {
     "registry": ""

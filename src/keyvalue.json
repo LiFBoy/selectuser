@@ -1,0 +1,20 @@
+[
+  { "key": "/wisdom", "value": "disabled-home" },
+  { "key": "/operation", "value": "operation-adhibition" },
+  { "key": "/contacts", "value": "contacts" },
+  { "key": "/game", "value": "educationGame" },
+  { "key": "/game", "value": "educationGame" },
+  { "key": "/content-model", "value": "sc-main" },
+  { "key": "/microsite", "value": "mico-site" },
+  { "key": "/notice", "value": "notice-simple" },
+  { "key": "/community", "value": "community" },
+  { "key": "/workstyle", "value": "workNews" },
+  { "key": "/sq-activity", "value": "m_activity" },
+  { "key": "/property", "value": "equipment" },
+  { "key": "/task", "value": "task" },
+  { "key": "/setting", "value": "setting" },
+  { "key": "/receipt", "value": "xxtz" },
+  { "key": "/notification", "value": "notification" },
+  { "key": "/collect", "value": "sjsj" },
+  { "key": "/speechcraft", "value": "hsk" }
+]

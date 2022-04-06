@@ -22,7 +22,7 @@ export default function SelectUser({
     'group',
     'innerContacts',
     'schoolContacts',
-    'tags',
+    'tagContacts',
     'orgRel',
   ],
   onOk,

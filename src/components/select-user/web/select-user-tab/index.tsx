@@ -13,7 +13,7 @@ const TAB_MAPS = {
   memberDeptContacts: '社区通讯录',
   schoolContacts: '家校通讯录',
   groupContacts: '互连微信群',
-  tags: '标签',
+  tagContacts: '标签',
   orgRel: '行政组织',
 };
 

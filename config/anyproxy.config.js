@@ -2,7 +2,7 @@ const AnyProxy = require('anyproxy');
 const chalk = require('chalk');
 
 // 需要代理的域名列表
-const proxyList = ['fe-m.community-sit.easyj.top'];
+const proxyList = ['fe-m.community-dev.easyj.top'];
 
 const rule = {
   *beforeSendRequest(requestDetail) {

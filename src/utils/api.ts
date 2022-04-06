@@ -5,7 +5,7 @@ const env = meta?.content || 'sit';
 const urlCollect: any = {
   // 开发环境
   dev: 'https://gateway.community-dev.easyj.top/user-center',
-  sit: 'https://gateway.community-sit.easyj.top/user-center',
+  sit: 'https://gateway.community-dev.easyj.top/user-center',
   production: 'https://gateway.suosihulian.com/user-center',
   pre: 'https://gateway.pre.suosihulian.com/user-center',
 };
