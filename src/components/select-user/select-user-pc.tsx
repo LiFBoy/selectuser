@@ -20,6 +20,7 @@ const SelectUserPc: React.FunctionComponent<PropTypes> = ({
     'dept',
     'group',
     'innerContacts',
+    'maternalContacts',
     'equipmentContacts',
     'memberContacts',
     'memberDeptContacts',

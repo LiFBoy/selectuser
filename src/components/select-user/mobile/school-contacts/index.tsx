@@ -4,6 +4,7 @@ const TAB_MAPS: any = {
   dept: '所属部门',
   group: '下属组织',
   innerContacts: '内部通讯录',
+  maternalContacts: '母婴通讯录',
   equipmentContacts: '资产通讯录',
   memberContacts: '居民',
   memberDeptContacts: '社区通讯录',
@@ -104,6 +105,7 @@ const SchoolContacts: React.FunctionComponent<PropType> = (props: PropType) => {
       'dept',
       'group',
       'innerContacts',
+      'maternalContacts',
       'equipmentContacts',
       'schoolContacts',
       'tagContacts',
@@ -190,7 +192,8 @@ const SchoolContacts: React.FunctionComponent<PropType> = (props: PropType) => {
       case 'group': // 下属组织
         return <OrgIcon />;
       case 'innerContacts': // 内部通讯录
-      case 'equipmentContacts': // 内部通讯录
+      case 'maternalContacts': // 母婴通讯录
+      case 'equipmentContacts': // 资产通讯录
       case 'memberContacts': // 居民
       case 'memberDeptContacts': // 社区通讯录
       case 'schoolContacts': // 家校通讯录

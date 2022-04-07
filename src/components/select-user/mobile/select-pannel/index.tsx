@@ -120,14 +120,18 @@ const SelectPannel: React.FunctionComponent<Iprops> = (props: Iprops) => {
       }
 
       if (
-        (currentTab === 'innerContacts' || currentTab === 'schoolContacts') && // 在家校通迅录和内部通迅录
+        (currentTab === 'innerContacts' ||
+          currentTab === 'schoolContacts' ||
+          currentTab === 'maternalContacts') && // 在家校通迅录和内部通迅录
         item.type === 'DEPT' && // 如果节点类型为DEPT
         selectType === 'user'
       ) {
         // 且当前组件selectType为user
         item.isLeaf = false; // 则DEPT节点一律视为非叶子结点 (实际场景中DEPT节点下一定有子节点)
       } else if (
-        (currentTab === 'innerContacts' || currentTab === 'schoolContacts') &&
+        (currentTab === 'innerContacts' ||
+          currentTab === 'schoolContacts' ||
+          currentTab === 'maternalContacts') &&
         selectType === 'dept'
       ) {
         // 如果当前组件selectType为dept

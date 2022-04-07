@@ -11,23 +11,18 @@ export const MethodInvoke = () => {
       multiple: true,
       selectType: 'user',
       dialogProps: {
-        title: '关联居民',
+        title: '选人组件',
       },
       userOrigin: '//gateway.community-dev.easyj.top/user-center',
       searchPlaceholder: '请输入姓名或手机号进行搜索',
 
       requestParams: {
-        // campusType: 'base_school_type',
-        // deptTypeList: ['class'],
-        // strictUser: true,
-        selectTypeList: ['user', 'dept', 'group'],
-        // type: 2,
+        selectTypeList: ['user'],
       },
       isSaveSelectSignature: true,
       // selectSignature: '3001001001000005-0f1b3ef353474c2aba8f13be9d50cdee',
       // selectSignature: '3001001001000005-ff5b213e99a64b49ab3d6ef2ce37fe1f',
-      showTabList: ['groupContacts'],
-      // showTabList: ['groupContacts'],
+      showTabList: ['maternalContacts'],
       onOk: action('onOk'),
       onCancel: action('onCancel'),
       getCheckedNodes(data) {
@@ -63,7 +58,6 @@ export const JSX = () => {
     requestParams: {
       strictUser: true,
       selectTypeList: ['user', 'dept'],
-      // tagTypeList: ['0', '1', '2', '3'],
     },
     isSaveSelectSignature: true,
 
@@ -94,55 +88,6 @@ export const JSX = () => {
 };
 JSX.storyName = 'JSX 中使用选人组件';
 
-// export const JSX1 = () => {
-//   const [visible, setVisible] = useState(false);
-//   const [selectSignature, setSelectSignature] = useState('');
-//   const show = () => {
-//     setVisible(true);
-//   };
-//   const props: PropTypes = {
-//     visible,
-//     multiple: false,
-//     selectType: 'dept',
-//     showTabList: ['schoolContacts'],
-//     onlyLeafCheckable: true,
-//     dialogProps: {
-//       title: '基础校区',
-//     },
-//     userOrigin: '//gateway.community-dev.easyj.top/user-center',
-//     requestParams: {
-//       campusType: 'base_school_type',
-//       deptTypeList: ['class'],
-//       selectTypeList: ['dept'],
-//     },
-//     isSaveSelectSignature: true,
-//     selectSignature: selectSignature,
-//     onOk(data) {
-//       console.log('onOk data', data);
-//       const { selectSignature } = data;
-//       setSelectSignature(selectSignature);
-//       setVisible(false);
-//     },
-//     onCancel() {
-//       setVisible(false);
-//     },
-//     getCheckedNodes(data) {
-//       console.log('getCheckedNodes data', data);
-//     },
-//     getTotalCount(data) {
-//       console.log('getTotalCount data', data);
-//     },
-//   };
-
-//   return (
-//     <>
-//       <Button onClick={show}>基础校区</Button>
-//       <SelectUser {...props} />
-//     </>
-//   );
-// };
-// JSX1.storyName = 'JSX 中使用选人组件';
-
 export const JSX2 = () => {
   const [visible, setVisible] = useState(false);
   const [selectSignature, setSelectSignature] = useState('');
@@ -151,7 +96,7 @@ export const JSX2 = () => {
   };
   const props: PropTypes = {
     visible,
-    multiple: true,
+    multiple: false,
     selectType: 'dept',
     showTabList: ['tagContacts'],
     dialogProps: {

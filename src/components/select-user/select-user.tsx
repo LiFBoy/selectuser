@@ -21,6 +21,7 @@ export default function SelectUser({
     'dept',
     'group',
     'innerContacts',
+    'maternalContacts',
     'schoolContacts',
     'tagContacts',
     'orgRel',

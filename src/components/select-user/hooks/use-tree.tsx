@@ -269,7 +269,9 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
         );
 
         // 家校通迅录和内部通迅录的特殊逻辑
-        if (['innerContacts', 'schoolContacts'].includes(type)) {
+        if (
+          ['innerContacts', 'schoolContacts', 'maternalContacts'].includes(type)
+        ) {
           if (
             item.type === 'DEPT' && // 如果节点类型为DEPT
             selectType === 'user' // 且当前组件 selectType 为 user
