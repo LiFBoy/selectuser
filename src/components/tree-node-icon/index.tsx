@@ -79,6 +79,7 @@ export type IconType =
   | 'DEPT'
   | 'EQUIPMENT'
   | 'TV'
+  | 'CAMERA'
   | 'MATERNAL'
   | 'WORK_GROUP'
   | 'GROUP_DEPT'
@@ -106,6 +107,7 @@ const iconMap: {
   DEPT: DeptIcon,
   EQUIPMENT: EQUIPMENTICON,
   TV: TVCON,
+  CAMERA: TVCON,
   MATERNAL: MATERNALCON,
   WORK_GROUP: MATERNALCON,
   GROUP_DEPT: GroupIcon,

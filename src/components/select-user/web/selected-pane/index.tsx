@@ -23,6 +23,8 @@ const SelectPane: React.FunctionComponent<PropTypes> = (props: PropTypes) => {
     groupInfoList,
     equipmentInfoList,
     tvInfoList,
+    cameraInfoList,
+    workGroupInfoList,
     maternalInfoList,
     orgRelInfoList,
     userCount,
@@ -56,6 +58,12 @@ const SelectPane: React.FunctionComponent<PropTypes> = (props: PropTypes) => {
           break;
         case 'TV':
           userCount.tvCount = 0;
+          break;
+        case 'CAMERA':
+          userCount.cameraCount = 0;
+          break;
+        case 'WORK_GROUP':
+          userCount.workGroupCount = 0;
           break;
         case 'MATERNAL':
           userCount.maternalCount = 0;
@@ -105,6 +113,36 @@ const SelectPane: React.FunctionComponent<PropTypes> = (props: PropTypes) => {
       unit: '个',
       count: userCount.tvCount || 0,
       itemList: tvInfoList,
+    };
+    groupList.push(tvItem);
+  }
+  if (maternalInfoList?.length) {
+    const tvItem = {
+      title: '母婴',
+      type: 'MATERNAL',
+      unit: '个',
+      count: userCount.tvCount || 0,
+      itemList: maternalInfoList,
+    };
+    groupList.push(tvItem);
+  }
+  if (cameraInfoList?.length) {
+    const tvItem = {
+      title: '摄像头',
+      type: 'CAMERA',
+      unit: '个',
+      count: userCount.cameraCount || 0,
+      itemList: cameraInfoList,
+    };
+    groupList.push(tvItem);
+  }
+  if (workGroupInfoList?.length) {
+    const tvItem = {
+      title: '告警群',
+      type: 'WORK_GROUP',
+      unit: '个',
+      count: userCount.workGroupCount || 0,
+      itemList: workGroupInfoList,
     };
     groupList.push(tvItem);
   }

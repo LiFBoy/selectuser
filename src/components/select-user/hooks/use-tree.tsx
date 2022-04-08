@@ -49,9 +49,11 @@ type ItreeState = StaticProps & {
   userInfoList: ItreeItem[];
   equipmentInfoList: ItreeItem[];
   tvInfoList: ItreeItem[];
-  tagInfoList: ItreeItem[];
   maternalInfoList: ItreeItem[];
+  cameraInfoList: ItreeItem[];
+  tagInfoList: ItreeItem[];
   groupInfoList: ItreeItem[];
+  workGroupInfoList: ItreeItem[];
   orgRelInfoList: ItreeItem[];
   userCount: IuserCount;
   corpidAppId: {
@@ -74,6 +76,8 @@ interface IuserCount {
   deptCount: number;
   equipmentCount?: number;
   tvCount?: number;
+  cameraCount?: number;
+  workGroupCount?: number;
   maternalCount?: number;
   tagCount: number;
   groupCount: number;
@@ -138,10 +142,13 @@ const INIT_STATE: ItreeState = {
   equipmentInfoList: [],
   // 选中的tv节点
   tvInfoList: [],
+  maternalInfoList: [],
+  cameraInfoList: [],
   // 选中的标签类型节点
   tagInfoList: [],
   // 选中的分组类型节点
   groupInfoList: [],
+  workGroupInfoList: [],
   // 行政组织-精准推送
   orgRelInfoList: [],
   // 不同类型选中的人员数量统计
@@ -150,6 +157,8 @@ const INIT_STATE: ItreeState = {
     deptCount: 0,
     equipmentCount: 0,
     tvCount: 0,
+    cameraCount: 0,
+    workGroupCount: 0,
     maternalCount: 0,
     tagCount: 0,
     groupCount: 0,
@@ -190,8 +199,10 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
       USER: 'userInfoList',
       EQUIPMENT: 'equipmentInfoList',
       TV: 'tvInfoList',
+      CAMERA: 'cameraInfoList',
       MATERNAL: 'maternalInfoList',
       GROUP: 'groupInfoList',
+      WORK_GROUP: 'workGroupInfoList',
       ORG_REL: 'orgRelInfoList',
       REGULATORY: 'orgRelInfoList',
       SCHOOL: 'orgRelInfoList',
@@ -475,6 +486,8 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
           deptCount: 0,
           equipmentCount: 0,
           tvCount: 0,
+          cameraCount: 0,
+          workGroupCount: 0,
           maternalCount: 0,
           tagCount: 0,
           groupCount: 0,
@@ -491,6 +504,10 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
               count.equipmentCount = item.equipmentCount;
             case 'TV':
               count.tvCount = item.tvCount;
+            case 'CAMERA':
+              count.cameraCount = item.cameraCount;
+            case 'WORK_GROUP':
+              count.workGroupCount = item.workGroupCount;
             case 'MATERNAL':
               count.maternalCount = item.maternalCount;
               break;
@@ -632,6 +649,9 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
           'userInfoList',
           'equipmentInfoList',
           'tvInfoList',
+          'maternalInfoList',
+          'cameraInfoList',
+          'workGroupInfoList',
           'tagInfoList',
           'groupInfoList',
           'orgRelInfoList',
@@ -658,6 +678,9 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
     treeState.userInfoList = [];
     treeState.equipmentInfoList = [];
     treeState.tvInfoList = [];
+    treeState.maternalInfoList = [];
+    treeState.cameraInfoList = [];
+    treeState.workGroupInfoList = [];
     treeState.tagInfoList = [];
     treeState.groupInfoList = [];
     treeState.orgRelInfoList = [];
@@ -666,6 +689,8 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
       deptCount: 0,
       equipmentCount: 0,
       tvCount: 0,
+      cameraCount: 0,
+      workGroupCount: 0,
       maternalCount: 0,
       tagCount: 0,
       groupCount: 0,
@@ -765,6 +790,20 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
                   item.userCount
                 );
                 break;
+              case 'CAMERA':
+                userCount.cameraCount = resultCount(
+                  checked,
+                  userCount.cameraCount,
+                  item.userCount
+                );
+                break;
+              case 'WORK_GROUP':
+                userCount.workGroupCount = resultCount(
+                  checked,
+                  userCount.workGroupCount,
+                  item.userCount
+                );
+                break;
               case 'MATERNAL':
                 userCount.maternalCount = resultCount(
                   checked,
@@ -820,6 +859,16 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
       case 'TV':
         userCount.tvCount = resultCount(checked, userCount.tvCount, 1);
         break;
+      case 'CAMERA':
+        userCount.cameraCount = resultCount(checked, userCount.cameraCount, 1);
+        break;
+      case 'WORK_GROUP':
+        userCount.workGroupCount = resultCount(
+          checked,
+          userCount.workGroupCount,
+          1
+        );
+        break;
       case 'MATERNAL':
         userCount.maternalCount = resultCount(
           checked,
@@ -859,6 +908,9 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
       userInfoList,
       equipmentInfoList,
       tvInfoList,
+      maternalInfoList,
+      cameraInfoList,
+      workGroupInfoList,
       groupInfoList,
       tagInfoList,
       orgRelInfoList,
@@ -912,6 +964,9 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
       orgRelInfoList: formatParam(orgRelInfoList),
       equipmentInfoList: formatParam(equipmentInfoList),
       tvInfoList: formatParam(tvInfoList),
+      maternalInfoList: formatParam(maternalInfoList),
+      cameraInfoList: formatParam(cameraInfoList),
+      workGroupInfoList: formatParam(workGroupInfoList),
       id: null,
     };
 
@@ -926,6 +981,9 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
         orgRelInfoList: params.orgRelInfoList,
         equipmentInfoList: params.equipmentInfoList,
         tvInfoList: params.tvInfoList,
+        maternalInfoList: params.maternalInfoList,
+        cameraInfoList: params.cameraInfoList,
+        workGroupInfoList: params.workGroupInfoList,
       });
       return;
     }
@@ -960,6 +1018,9 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
           orgRelInfoList: params.orgRelInfoList,
           equipmentInfoList: params.equipmentInfoList,
           tvInfoList: params.tvInfoList,
+          maternalInfoList: params.maternalInfoList,
+          cameraInfoList: params.cameraInfoList,
+          workGroupInfoList: params.workGroupInfoList,
         });
       });
   }, [treeState]);

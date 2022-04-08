@@ -10,7 +10,9 @@ export interface ItreeItem {
     | 'DEPT' // 部门
     | 'EQUIPMENT' //  设备
     | 'TV' //  广告电视
-    | 'MATERNAL' //  广告电视
+    | 'CAMERA' //  摄像头
+    | 'WORK_GROUP' //  告警群
+    | 'MATERNAL' //  母婴
     | 'GROUP_DEPT' //  虚拟部门
     | 'USER' // 个人
     | 'ORG' // 组织

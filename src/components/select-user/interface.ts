@@ -6,6 +6,8 @@ export type NodeType =
   | 'DEPT'
   | 'EQUIPMENT'
   | 'TV'
+  | 'CAMERA'
+  | 'WORK_GROUP'
   | 'MATERNAL'
   | 'GROUP_DEPT'
   | 'GROUP'
@@ -48,11 +50,15 @@ export interface ValueObj {
   orgInfoList: IlistItem[];
   // 分组列表
   groupInfoList: IlistItem[];
+  workGroupInfoList: IlistItem[];
   // 行政组织
   orgRelInfoList: IlistItem[];
   // 设备
   equipmentInfoList?: IlistItem[];
   tvInfoList?: IlistItem[];
+  cameraInfoList?: IlistItem[];
+
+  maternalInfoList?: IlistItem[];
 
   totalCount?: number;
   count?: any;
@@ -221,9 +227,12 @@ export interface IsaveResultParams {
   orgInfoList: any;
   userInfoList: any;
   groupInfoList: any;
+  workGroupInfoList: any;
   tagInfoList: any;
   equipmentInfoList?: any;
   tvInfoList?: any;
+  maternalInfoList?: any;
+  cameraInfoList?: any;
   id: string | null;
   totalCount?: any;
   orgRelInfoList: any;

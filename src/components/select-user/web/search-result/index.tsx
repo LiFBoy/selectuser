@@ -68,6 +68,9 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
     tagInfoList,
     equipmentInfoList,
     tvInfoList,
+    maternalInfoList,
+    cameraInfoList,
+    workGroupInfoList,
     groupInfoList,
     orgRelInfoList,
     requestParams,
@@ -140,7 +143,23 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
           orgId: item.orgId,
         };
         break;
+      case 'CAMERA':
+        node = {
+          id: item.userId,
+          key: item.userId,
+          name: item.userName,
+          orgId: item.orgId,
+        };
+        break;
       case 'TV':
+        node = {
+          id: item.userId,
+          key: item.userId,
+          name: item.userName,
+          orgId: item.orgId,
+        };
+        break;
+      case 'WORK_GROUP':
         node = {
           id: item.userId,
           key: item.userId,
@@ -253,11 +272,55 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
     });
   };
 
+  const renderDom = (list: any, title: string, infoList: any) => {
+    return (
+      <React.Fragment>
+        <div className="search-result-group-title">
+          {title}({list.length})
+        </div>
+        {list.map((user: any, index: number) => {
+          let checked = false;
+
+          for (const item of infoList) {
+            if (user.userId === item?.id) {
+              checked = true;
+            }
+          }
+          return (
+            <div
+              className="search-result-group-item"
+              key={`${user.userId}-${index}`}
+            >
+              <UserIcon />
+              <div className="search-result-item-detail">
+                <div
+                  className="search-result-item-title overflow-ellipsis"
+                  title={user.userName}
+                >
+                  {renderSearchText(user.userName)}
+                </div>
+              </div>
+              <div className="checkbox-wrap">
+                <Checkbox
+                  checked={checked}
+                  onChange={() => onCheckBoxChange(user, user.type)}
+                />
+              </div>
+            </div>
+          );
+        })}
+        {renderSearchHint(list)}
+      </React.Fragment>
+    );
+  };
+
   // 渲染tab内容
   const renderTabContent = () => {
     const userList: any[] = [];
     const equipmentList: any[] = [];
     const tvList: any[] = [];
+    const cameraList: any[] = [];
+    const workGroupList: any[] = [];
     const maternalList: any[] = [];
     const deptList: any[] = [];
     const orgList: any[] = [];
@@ -266,12 +329,19 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
     const orgRelList: any[] = [];
 
     for (const resultItem of searchResult) {
+      console.log(resultItem.type, 'console.log(resultItem.type)');
       switch (resultItem.type) {
         case 'EQUIPMENT':
           equipmentList.push(resultItem);
           break;
         case 'TV':
           tvList.push(resultItem);
+          break;
+        case 'CAMERA':
+          cameraList.push(resultItem);
+          break;
+        case 'WORK_GROUP':
+          workGroupList.push(resultItem);
           break;
         case 'MATERNAL':
           maternalList.push(resultItem);
@@ -296,10 +366,18 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
           break;
       }
     }
-    console.log(equipmentList, 'equipmentList');
 
     return (
       <div className="search-result-box">
+        {workGroupList.length > 0
+          ? renderDom(workGroupList, '相关告警群', workGroupInfoList)
+          : ''}
+        {cameraList.length > 0
+          ? renderDom(cameraList, '相关摄像头', cameraInfoList)
+          : ''}
+        {maternalList.length > 0
+          ? renderDom(maternalList, '相关母婴', maternalInfoList)
+          : ''}
         {tvList.length > 0 ? (
           <React.Fragment>
             <div className="search-result-group-title">
