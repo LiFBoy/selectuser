@@ -47,7 +47,7 @@ export const MethodInvoke = () => {
       searchPlaceholder: '请输入姓名或手机号进行搜索',
 
       requestParams: {
-        selectTypeList: ['member'],
+        selectTypeList: ['user'],
       },
       isSaveSelectSignature: true,
       // selectSignature: '3001001001000005-0f1b3ef353474c2aba8f13be9d50cdee',
