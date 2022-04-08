@@ -40,6 +40,9 @@ export const EQUIPMENTICON: React.FunctionComponent = () => {
 export const TVCON: React.FunctionComponent = () => {
   return <span className="user-center-tree-node-icon select-user-icon-dept" />;
 };
+export const MATERNALCON: React.FunctionComponent = () => {
+  return <span className="user-center-tree-node-icon select-user-icon-dept" />;
+};
 
 // 权限
 export const PermissionIcon: React.FunctionComponent = () => {
@@ -76,9 +79,12 @@ export type IconType =
   | 'DEPT'
   | 'EQUIPMENT'
   | 'TV'
+  | 'MATERNAL'
+  | 'WORK_GROUP'
   | 'GROUP_DEPT'
   | 'GROUP'
   | 'TAG'
+  | 'TAG_GROUP'
   | 'orgRel'
   | 'ORG_REL'
   | 'REGULATORY'
@@ -100,10 +106,13 @@ const iconMap: {
   DEPT: DeptIcon,
   EQUIPMENT: EQUIPMENTICON,
   TV: TVCON,
+  MATERNAL: MATERNALCON,
+  WORK_GROUP: MATERNALCON,
   GROUP_DEPT: GroupIcon,
   ORG_REL: OrgRelIcon,
   GROUP: GroupIcon,
   TAG: TagIcon,
+  TAG_GROUP: TagIcon,
   orgRel: OrgRelIcon,
   REGULATORY: OrgRelIcon,
   SCHOOL: OrgIcon,

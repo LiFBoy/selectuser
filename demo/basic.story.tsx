@@ -5,6 +5,36 @@ import { action } from './utils';
 import SelectUser, { PropTypes } from '../src/components/select-user';
 import SelectUserResult from '../src/components/select-user/web/select-user-result';
 
+export const MethodInvoke2 = () => {
+  const show = () => {
+    SelectUser.show({
+      multiple: true,
+      selectType: 'user',
+      dialogProps: {
+        title: '选人组件',
+      },
+      userOrigin: '//gateway.community-dev.easyj.top/user-center',
+      searchPlaceholder: '请输入姓名或手机号进行搜索',
+      requestParams: {
+        selectTypeList: ['work_group'],
+      },
+      isSaveSelectSignature: true,
+      showTabList: ['groupContacts'],
+      onOk: action('onOk'),
+      onCancel: action('onCancel'),
+      getCheckedNodes(data) {
+        console.log('getCheckedNodes data', data);
+      },
+      getTotalCount(data) {
+        console.log('getTotalCount data', data);
+      },
+    });
+  };
+  return <Button onClick={show}>告警群</Button>;
+};
+
+MethodInvoke2.storyName = '告警群';
+
 export const MethodInvoke = () => {
   const show = () => {
     SelectUser.show({
@@ -17,7 +47,7 @@ export const MethodInvoke = () => {
       searchPlaceholder: '请输入姓名或手机号进行搜索',
 
       requestParams: {
-        selectTypeList: ['user'],
+        selectTypeList: ['member'],
       },
       isSaveSelectSignature: true,
       // selectSignature: '3001001001000005-0f1b3ef353474c2aba8f13be9d50cdee',
@@ -107,6 +137,7 @@ export const JSX2 = () => {
     requestParams: {
       selectTypeList: ['tag'],
     },
+    // onlyLeafCheckable: true,
     isSaveSelectSignature: true,
     selectSignature: '',
     onOk(data) {
@@ -149,10 +180,10 @@ export const JSX3 = () => {
     dialogProps: {
       title: 'tv',
     },
-    searchPlaceholder: '搜索tv',
+    searchPlaceholder: '搜索摄像头',
     userOrigin: '//gateway.community-dev.easyj.top/user-center',
     requestParams: {
-      selectTypeList: ['tv'],
+      selectTypeList: ['camera'],
     },
     isSaveSelectSignature: true,
     selectSignature: '',
@@ -175,12 +206,12 @@ export const JSX3 = () => {
 
   return (
     <>
-      <Button onClick={show}>tv</Button>
+      <Button onClick={show}>摄像头</Button>
       <SelectUser {...props} />
     </>
   );
 };
-JSX3.storyName = 'JSX 中使用选人组件';
+JSX3.storyName = '摄像头';
 
 export const MOBILE = () => {
   const [visible, setVisible] = useState(false);

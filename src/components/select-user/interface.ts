@@ -6,9 +6,11 @@ export type NodeType =
   | 'DEPT'
   | 'EQUIPMENT'
   | 'TV'
+  | 'MATERNAL'
   | 'GROUP_DEPT'
   | 'GROUP'
   | 'TAG'
+  | 'TAG_GROUP'
   | 'ORG_REL';
 
 export interface ListItem {

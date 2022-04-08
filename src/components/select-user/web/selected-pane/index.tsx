@@ -23,6 +23,7 @@ const SelectPane: React.FunctionComponent<PropTypes> = (props: PropTypes) => {
     groupInfoList,
     equipmentInfoList,
     tvInfoList,
+    maternalInfoList,
     orgRelInfoList,
     userCount,
   } = treeState;
@@ -55,6 +56,9 @@ const SelectPane: React.FunctionComponent<PropTypes> = (props: PropTypes) => {
           break;
         case 'TV':
           userCount.tvCount = 0;
+          break;
+        case 'MATERNAL':
+          userCount.maternalCount = 0;
           break;
         case 'GROUP':
         case 'ORG': // 分组和组织放在一起展示，因此清空的时候两个一起清空
@@ -103,6 +107,16 @@ const SelectPane: React.FunctionComponent<PropTypes> = (props: PropTypes) => {
       itemList: tvInfoList,
     };
     groupList.push(tvItem);
+  }
+  if (maternalInfoList?.length) {
+    const maternalItem = {
+      title: '人员',
+      type: 'MATERNAL',
+      unit: '人',
+      count: userCount.maternalCount || 0,
+      itemList: maternalInfoList,
+    };
+    groupList.push(maternalItem);
   }
   if (deptInfoList?.length) {
     const groupItem = {

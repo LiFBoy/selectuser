@@ -50,6 +50,7 @@ type ItreeState = StaticProps & {
   equipmentInfoList: ItreeItem[];
   tvInfoList: ItreeItem[];
   tagInfoList: ItreeItem[];
+  maternalInfoList: ItreeItem[];
   groupInfoList: ItreeItem[];
   orgRelInfoList: ItreeItem[];
   userCount: IuserCount;
@@ -73,6 +74,7 @@ interface IuserCount {
   deptCount: number;
   equipmentCount?: number;
   tvCount?: number;
+  maternalCount?: number;
   tagCount: number;
   groupCount: number;
   orgRelCount: number;
@@ -148,6 +150,7 @@ const INIT_STATE: ItreeState = {
     deptCount: 0,
     equipmentCount: 0,
     tvCount: 0,
+    maternalCount: 0,
     tagCount: 0,
     groupCount: 0,
     orgRelCount: 0,
@@ -187,6 +190,7 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
       USER: 'userInfoList',
       EQUIPMENT: 'equipmentInfoList',
       TV: 'tvInfoList',
+      MATERNAL: 'maternalInfoList',
       GROUP: 'groupInfoList',
       ORG_REL: 'orgRelInfoList',
       REGULATORY: 'orgRelInfoList',
@@ -236,11 +240,13 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
 
         let NodeIcon = treeNodeIconMap[item.type];
         let label = item.name;
+
         if (item.type === 'TAG') {
           // 标签需要展示标签下的人数
-          label = `${item.name} ${
-            item.isLeaf ? '(' + (item.count || 0) + ')' : ''
-          }`;
+          // label = `${item.name} ${
+          //   item.isLeaf ? '(' + (item.count || 0) + ')' : ''
+          // }`;
+          label = `${item.name}`;
         }
 
         // 特殊处理内部通讯录根节点
@@ -295,6 +301,11 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
 
         // 标签的非叶子节点不可选
         if (item.type === 'TAG' && item.isLeaf === false) {
+          item.checkable = false;
+        }
+
+        // 标签组节点不可选
+        if (item.type === 'TAG_GROUP') {
           item.checkable = false;
         }
 
@@ -464,6 +475,7 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
           deptCount: 0,
           equipmentCount: 0,
           tvCount: 0,
+          maternalCount: 0,
           tagCount: 0,
           groupCount: 0,
           orgRelCount: 0,
@@ -479,6 +491,8 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
               count.equipmentCount = item.equipmentCount;
             case 'TV':
               count.tvCount = item.tvCount;
+            case 'MATERNAL':
+              count.maternalCount = item.maternalCount;
               break;
             case 'ORG':
               count.orgCount = item.userCount;
@@ -652,6 +666,7 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
       deptCount: 0,
       equipmentCount: 0,
       tvCount: 0,
+      maternalCount: 0,
       tagCount: 0,
       groupCount: 0,
       orgRelCount: 0,
@@ -750,6 +765,13 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
                   item.userCount
                 );
                 break;
+              case 'MATERNAL':
+                userCount.maternalCount = resultCount(
+                  checked,
+                  userCount.maternalCount,
+                  item.userCount
+                );
+                break;
               case 'ORG':
                 userCount.orgCount = resultCount(
                   checked,
@@ -797,6 +819,13 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
         break;
       case 'TV':
         userCount.tvCount = resultCount(checked, userCount.tvCount, 1);
+        break;
+      case 'MATERNAL':
+        userCount.maternalCount = resultCount(
+          checked,
+          userCount.maternalCount,
+          1
+        );
         break;
       case 'ORG':
         userCount.orgCount = resultCount(checked, userCount.orgCount, 1);

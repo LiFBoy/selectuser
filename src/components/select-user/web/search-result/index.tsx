@@ -148,6 +148,14 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
           orgId: item.orgId,
         };
         break;
+      case 'MATERNAL':
+        node = {
+          id: item.userId,
+          key: item.userId,
+          name: item.userName,
+          orgId: item.orgId,
+        };
+        break;
       case 'TAG':
         node = {
           id: item.tagCode,
@@ -250,6 +258,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
     const userList: any[] = [];
     const equipmentList: any[] = [];
     const tvList: any[] = [];
+    const maternalList: any[] = [];
     const deptList: any[] = [];
     const orgList: any[] = [];
     const tagList: any[] = [];
@@ -263,6 +272,9 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
           break;
         case 'TV':
           tvList.push(resultItem);
+          break;
+        case 'MATERNAL':
+          maternalList.push(resultItem);
           break;
         case 'USER':
           userList.push(resultItem);
