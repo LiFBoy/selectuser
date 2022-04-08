@@ -116,16 +116,6 @@ const SelectPane: React.FunctionComponent<PropTypes> = (props: PropTypes) => {
     };
     groupList.push(tvItem);
   }
-  if (maternalInfoList?.length) {
-    const tvItem = {
-      title: '母婴',
-      type: 'MATERNAL',
-      unit: '个',
-      count: userCount.tvCount || 0,
-      itemList: maternalInfoList,
-    };
-    groupList.push(tvItem);
-  }
   if (cameraInfoList?.length) {
     const tvItem = {
       title: '摄像头',
