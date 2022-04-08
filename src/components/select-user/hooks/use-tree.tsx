@@ -206,6 +206,7 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
       ORG_REL: 'orgRelInfoList',
       REGULATORY: 'orgRelInfoList',
       SCHOOL: 'orgRelInfoList',
+      TAG_GROUP: '',
     };
     const key: string = typeToKeyMap[type];
     // @ts-ignore
@@ -396,12 +397,12 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
             // 获取当前节点的序号路径
             const position = pos
               ? pos
-                .split('-')
-              // 去掉第一级的 0（antd 的 tree 组件的 pos 前面额外多了个 0）
-                .slice(1)
-                .reduce((setterPath: (number | string)[], index: string) => {
-                  return setterPath.concat([+index, 'children']);
-                }, [])
+                  .split('-')
+                  // 去掉第一级的 0（antd 的 tree 组件的 pos 前面额外多了个 0）
+                  .slice(1)
+                  .reduce((setterPath: (number | string)[], index: string) => {
+                    return setterPath.concat([+index, 'children']);
+                  }, [])
               : [];
             cachedDataSource.current = setWith(
               clone(cachedDataSource.current),
@@ -558,7 +559,7 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
         method: 'POST',
         data: params,
       })
-      .then(({ data = {}}) => {
+      .then(({ data = {} }) => {
         setLoading(false);
         setSearchResult(data || []);
       })
@@ -598,9 +599,9 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
       keyIndex === -1
         ? [...checkedKeys, dealtKey(basePath, node, tabType)]
         : [
-          ...checkedKeys.slice(0, keyIndex),
-          ...checkedKeys.slice(keyIndex + 1),
-        ];
+            ...checkedKeys.slice(0, keyIndex),
+            ...checkedKeys.slice(keyIndex + 1),
+          ];
     // updateNode必须在setTreeState之前调用，更新nextTreeState内数据
     const result = updateNode(node);
 

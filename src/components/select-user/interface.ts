@@ -9,10 +9,12 @@ export type NodeType =
   | 'CAMERA'
   | 'WORK_GROUP'
   | 'MATERNAL'
+  | 'TAG'
   | 'GROUP_DEPT'
   | 'GROUP'
-  | 'TAG'
   | 'TAG_GROUP'
+  | 'REGULATORY'
+  | 'SCHOOL'
   | 'ORG_REL';
 
 export interface ListItem {
@@ -49,10 +51,10 @@ export interface ValueObj {
   // 组织列表
   orgInfoList: IlistItem[];
   // 分组列表
-  groupInfoList: IlistItem[];
-  workGroupInfoList: IlistItem[];
+  groupInfoList?: IlistItem[];
+  workGroupInfoList?: IlistItem[];
   // 行政组织
-  orgRelInfoList: IlistItem[];
+  orgRelInfoList?: IlistItem[];
   // 设备
   equipmentInfoList?: IlistItem[];
   tvInfoList?: IlistItem[];
@@ -225,10 +227,10 @@ export interface SelectUserStaticFunctions {
 export interface IsaveResultParams {
   deptInfoList: any;
   orgInfoList: any;
-  userInfoList: any;
-  groupInfoList: any;
-  workGroupInfoList: any;
-  tagInfoList: any;
+  userInfoList?: any;
+  groupInfoList?: any;
+  workGroupInfoList?: any;
+  tagInfoList?: any;
   equipmentInfoList?: any;
   tvInfoList?: any;
   maternalInfoList?: any;
