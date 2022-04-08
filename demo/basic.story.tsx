@@ -9,7 +9,7 @@ export const MethodInvoke2 = () => {
   const show = () => {
     SelectUser.show({
       multiple: true,
-      selectType: 'user',
+      selectType: 'dept',
       dialogProps: {
         title: '选对象',
       },
@@ -39,7 +39,7 @@ export const MethodInvoke = () => {
   const show = () => {
     SelectUser.show({
       multiple: true,
-      selectType: 'user',
+      selectType: 'dept',
       dialogProps: {
         title: '选人组件',
       },

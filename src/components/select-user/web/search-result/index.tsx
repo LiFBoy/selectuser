@@ -11,6 +11,7 @@ import {
   OrgIcon,
   GroupIcon,
   OrgRelIcon,
+  TVCON,
 } from '../../../../components/tree-node-icon';
 import './index.less';
 
@@ -161,9 +162,9 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
         break;
       case 'WORK_GROUP':
         node = {
-          id: item.userId,
-          key: item.userId,
-          name: item.userName,
+          id: item.groupId,
+          key: item.groupId,
+          name: item.groupName,
           orgId: item.orgId,
         };
         break;
@@ -177,9 +178,9 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
         break;
       case 'TAG':
         node = {
-          id: item.tagCode,
-          key: item.tagCode,
-          name: item.tagName,
+          id: item.userId,
+          key: item.userId,
+          name: item.userName,
           orgId: item.orgId,
         };
         break;
@@ -272,7 +273,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
     });
   };
 
-  const renderDom = (list: any, title: string, infoList: any) => {
+  const renderDom = (list: any, title: string, infoList: any, icon: any) => {
     return (
       <React.Fragment>
         <div className="search-result-group-title">
@@ -282,7 +283,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
           let checked = false;
 
           for (const item of infoList) {
-            if (user.userId === item?.id) {
+            if ((user.userId || user.groupId) === item?.id) {
               checked = true;
             }
           }
@@ -291,13 +292,13 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
               className="search-result-group-item"
               key={`${user.userId}-${index}`}
             >
-              <UserIcon />
+              {icon}
               <div className="search-result-item-detail">
                 <div
                   className="search-result-item-title overflow-ellipsis"
                   title={user.userName}
                 >
-                  {renderSearchText(user.userName)}
+                  {renderSearchText(user.userName || user.groupName)}
                 </div>
               </div>
               <div className="checkbox-wrap">
@@ -366,17 +367,23 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
           break;
       }
     }
+    console.log(maternalList, 'maternalList');
 
     return (
       <div className="search-result-box">
         {workGroupList.length > 0
-          ? renderDom(workGroupList, '相关告警群', workGroupInfoList)
+          ? renderDom(
+              workGroupList,
+              '相关告警群',
+              workGroupInfoList,
+              <GroupIcon />
+            )
           : ''}
         {cameraList.length > 0
-          ? renderDom(cameraList, '相关摄像头', cameraInfoList)
+          ? renderDom(cameraList, '相关摄像头', cameraInfoList, <TVCON />)
           : ''}
         {maternalList.length > 0
-          ? renderDom(maternalList, '相关母婴', maternalInfoList)
+          ? renderDom(maternalList, '相关母婴', maternalInfoList, <UserIcon />)
           : ''}
         {tvList.length > 0 ? (
           <React.Fragment>
@@ -691,28 +698,20 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
               let checked = false;
 
               for (const item of tagInfoList) {
-                if (tag.tagCode === item?.id) {
+                if (tag.userId === item?.id) {
                   checked = true;
                 }
               }
               return (
                 <div
                   className="search-result-group-item"
-                  key={`${tag.tagCode}-${index}`}
+                  key={`${tag.userId}-${index}`}
                 >
                   <TagIcon />
                   <div className="search-result-item-detail">
                     <div className="search-result-item-title">
-                      <div className="overflow-ellipsis" title={tag.tagName}>
-                        {renderSearchText(tag.tagName)}
-                      </div>
-                    </div>
-                    <div className="search-result-item-des">
-                      <div
-                        className="search-result-info-dept"
-                        title={TAGTYPELIST[tag.tagType]}
-                      >
-                        {TAGTYPELIST[tag.tagType]}
+                      <div className="overflow-ellipsis" title={tag.userName}>
+                        {renderSearchText(tag.userName)}
                       </div>
                     </div>
                   </div>
