@@ -5,6 +5,10 @@ import './index.less';
 export const TagIcon: React.FunctionComponent = () => {
   return <span className="user-center-tree-node-icon select-user-icon-tag" />;
 };
+// 标签组
+export const TagGroupIcon: React.FunctionComponent = () => {
+  return <span className="" />;
+};
 
 // 用户
 export const UserIcon: React.FunctionComponent = () => {
@@ -108,13 +112,13 @@ const iconMap: {
   EQUIPMENT: EQUIPMENTICON,
   TV: TVCON,
   CAMERA: TVCON,
-  MATERNAL: MATERNALCON,
-  WORK_GROUP: MATERNALCON,
+  MATERNAL: UserIcon,
+  WORK_GROUP: GroupIcon,
   GROUP_DEPT: GroupIcon,
   ORG_REL: OrgRelIcon,
   GROUP: GroupIcon,
   TAG: TagIcon,
-  TAG_GROUP: TagIcon,
+  TAG_GROUP: TagGroupIcon,
   orgRel: OrgRelIcon,
   REGULATORY: OrgRelIcon,
   SCHOOL: OrgIcon,

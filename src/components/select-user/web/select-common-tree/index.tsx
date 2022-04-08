@@ -33,6 +33,7 @@ const SelectCommonTree: React.FunctionComponent<PropType> = (
 
   // 树节点选中事件
   const onCheck = (_: any, event: any) => {
+    // debugger;
     const node = event.node.props;
 
     const item: ItreeItem = {
@@ -84,14 +85,17 @@ const SelectCommonTree: React.FunctionComponent<PropType> = (
         // isNodeBlock
         treeData={treeData}
       />
-      {['equipmentContacts', 'memberContacts', 'groupContacts'].indexOf(
-        currentTab
-      ) > -1 &&
+      {[
+        'equipmentContacts',
+        'memberContacts',
+        'groupContacts',
+        'maternalContacts',
+      ].indexOf(currentTab) > -1 &&
         treeData.length > 19 && (
-        <div className="more-text">
+          <div className="more-text">
             仅展示前20个搜索结果，请输入更精确的搜索内容获取
-        </div>
-      )}
+          </div>
+        )}
     </>
   ) : (
     <div className="cf-tree-result-empty no-data-result-empty">暂无内容</div>

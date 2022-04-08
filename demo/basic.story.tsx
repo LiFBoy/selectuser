@@ -11,10 +11,10 @@ export const MethodInvoke2 = () => {
       multiple: true,
       selectType: 'user',
       dialogProps: {
-        title: '选人组件',
+        title: '选对象',
       },
       userOrigin: '//gateway.community-dev.easyj.top/user-center',
-      searchPlaceholder: '请输入姓名或手机号进行搜索',
+      searchPlaceholder: '请输入群主或群名称进行搜索',
       requestParams: {
         selectTypeList: ['work_group'],
       },
@@ -132,7 +132,7 @@ export const JSX2 = () => {
     dialogProps: {
       title: '标签',
     },
-    searchPlaceholder: '搜索标签',
+    searchPlaceholder: '请输入标签名称进行搜索',
     userOrigin: '//gateway.community-dev.easyj.top/user-center',
     requestParams: {
       selectTypeList: ['tag'],
@@ -180,7 +180,7 @@ export const JSX3 = () => {
     dialogProps: {
       title: 'tv',
     },
-    searchPlaceholder: '搜索摄像头',
+    searchPlaceholder: '请输入设备编码进行搜素',
     userOrigin: '//gateway.community-dev.easyj.top/user-center',
     requestParams: {
       selectTypeList: ['camera'],
