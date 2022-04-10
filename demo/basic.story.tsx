@@ -16,10 +16,10 @@ export const MethodInvoke2 = () => {
       userOrigin: '//gateway.community-dev.easyj.top/user-center',
       searchPlaceholder: '请输入群主或群名称进行搜索',
       requestParams: {
-        selectTypeList: ['work_group'],
+        selectTypeList: ['member'],
       },
       isSaveSelectSignature: true,
-      showTabList: ['groupContacts'],
+      showTabList: ['memberContacts'],
       onOk: action('onOk'),
       onCancel: action('onCancel'),
       getCheckedNodes(data) {
@@ -87,11 +87,11 @@ export const JSX = () => {
     showTabList: ['innerContacts'],
     requestParams: {
       strictUser: true,
-      selectTypeList: ['user', 'dept'],
+      selectTypeList: ['user'],
     },
+    onlyLeafCheckable: true,
     isSaveSelectSignature: true,
-
-    selectSignature: '',
+    // selectSignature: '',
     onOk(data) {
       console.log('onOk data', data);
       const { selectSignature } = data;
@@ -185,8 +185,8 @@ export const JSX3 = () => {
     requestParams: {
       selectTypeList: ['camera'],
     },
-    isSaveSelectSignature: true,
-    selectSignature: '',
+    isSaveSelectSignature: false,
+    selectSignature: '3001001001000006-821519e77a59435494612498d95380c2',
     onOk(data) {
       console.log('onOk data', data);
       const { selectSignature } = data;

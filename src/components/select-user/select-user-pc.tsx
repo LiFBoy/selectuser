@@ -109,6 +109,9 @@ const SelectUserPc: React.FunctionComponent<PropTypes> = ({
   return (
     <Modal
       {...dialogProps}
+      okText="确认"
+      cancelText="取消"
+      // confirmLoading={true}
       wrapClassName="select-user-pc-modal"
       destroyOnClose
       // closable={false}
