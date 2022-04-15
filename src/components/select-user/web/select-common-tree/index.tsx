@@ -27,13 +27,12 @@ const SelectCommonTree: React.FunctionComponent<PropType> = (
     handleSelect,
     loadTreeData: loadData,
   } = useSelectExpand(currentTab);
-  console.log(currentTab, 'currentTab');
+  // console.log(currentTab, 'currentTab');
 
   const [checkedKeys] = useCheckedKeys(basePath, currentTab);
 
   // 树节点选中事件
   const onCheck = (_: any, event: any) => {
-    // debugger;
     const node = event.node.props;
 
     const item: ItreeItem = {
