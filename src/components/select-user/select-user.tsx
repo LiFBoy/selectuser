@@ -3,7 +3,7 @@
  */
 import React from 'react';
 import { ConfigProvider } from 'antd';
-// import locale from '../../utils/locale';
+import locale from '../../utils/locale';
 import useTree, { ItreeContext } from './hooks/use-tree';
 import SelectUserPc from './select-user-pc';
 import SelectUserMobile from './select-user-mobile';

@@ -85,10 +85,10 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
   const allNumber = /^([0-9])+$/.test(search);
 
   const renderSearchHint = (list: Array<any>) => {
-    if (list && list.length >= 10) {
+    if (list && list.length > 19) {
       return (
         <div className="tree-footer">
-          仅展示前 10 个搜索结果，请输入更精确的搜索内容
+          仅展示前 20 个搜索结果，请输入更精确的搜索内容
         </div>
       );
     }
@@ -373,11 +373,11 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
       <div className="search-result-box">
         {workGroupList.length > 0
           ? renderDom(
-              workGroupList,
-              '相关告警群',
-              workGroupInfoList,
-              <GroupIcon />
-            )
+            workGroupList,
+            '相关告警群',
+            workGroupInfoList,
+            <GroupIcon />
+          )
           : ''}
         {cameraList.length > 0
           ? renderDom(cameraList, '相关摄像头', cameraInfoList, <TVCON />)

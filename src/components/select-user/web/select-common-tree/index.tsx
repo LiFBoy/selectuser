@@ -92,10 +92,10 @@ const SelectCommonTree: React.FunctionComponent<PropType> = (
         'maternalContacts',
       ].indexOf(currentTab) > -1 &&
         treeData.length > 19 && (
-          <div className="more-text">
-            仅展示前20个搜索结果，请输入更精确的搜索内容获取
-          </div>
-        )}
+        <div className="more-text">
+            仅展示前20个搜索结果，请输入更精确的搜索内容
+        </div>
+      )}
     </>
   ) : (
     <div className="cf-tree-result-empty no-data-result-empty">暂无内容</div>

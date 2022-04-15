@@ -62,10 +62,10 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
   const allNumber = /^([0-9])+$/.test(search);
 
   const renderSearchHint = (list: Array<any>) => {
-    if (list && list.length >= 10) {
+    if (list && list.length > 19) {
       return (
         <div className="search-result-group-item tree-footer">
-          仅展示前 10 个搜索结果，请输入更精确的搜索内容。
+          仅展示前 20 个搜索结果，请输入更精确的搜索内容。
         </div>
       );
     }
