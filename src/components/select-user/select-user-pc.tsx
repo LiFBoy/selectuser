@@ -6,12 +6,13 @@ import RightPane from './web/right-pane';
 import SelectArea from './web/select-area';
 import { PropTypes } from './interface';
 import SelectedPane from './web/selected-pane';
-import { Modal, Input, Spin } from 'antd';
+import { Modal, Input, Spin, Button } from 'antd';
 import { TREE_CONTEXT } from './select-user';
 
 const SelectUserPc: React.FunctionComponent<PropTypes> = ({
   dialogProps = {},
   selectPaneProps = {},
+  target,
   visible = false,
   multiple = true,
   onCancel,
@@ -38,7 +39,7 @@ const SelectUserPc: React.FunctionComponent<PropTypes> = ({
   const { treeState, loading, clear, getTreeRoot, getSearchResult, handleOk } =
     treeContext;
 
-  const { searchResult } = treeState;
+  const { searchResult, userCount } = treeState;
   const [searchValue, setSearchValue] = useState<string>('');
   const [searchTab, setSearchTab] = useState<string>('all');
 
@@ -106,6 +107,7 @@ const SelectUserPc: React.FunctionComponent<PropTypes> = ({
     getSearchResult(params);
   };
 
+  console.log(target, 'selectPaneProps');
   return (
     <Modal
       {...dialogProps}
@@ -119,20 +121,41 @@ const SelectUserPc: React.FunctionComponent<PropTypes> = ({
       bodyStyle={{ padding: 0 }}
       visible={visible}
       onOk={handleOk}
-      width="720px"
+      width={target ? 720 : 720}
       onCancel={handleCancel}
+      footer={
+        <div className="footer-box">
+          <div className="user-count">{userCount.tagCount}</div>
+          <Button key="back" onClick={handleCancel}>
+            取消
+          </Button>
+
+          <Button
+            key="submit"
+            type="primary"
+            // loading={loading}
+            onClick={handleOk}
+          >
+            确认
+          </Button>
+        </div>
+      }
     >
       <div className="select-user-pc-content">
         <div className="left-pane">
-          <div className="select-user-pc-search-wrapper">
-            <Search
-              allowClear
-              className="select-user-pc-search"
-              onSearch={handleSearch}
-              // onChange={onSearchChange}    // 这里暂时取消onChange时搜索,以后有机会再用上吧
-              placeholder={showTabList.length > 1 ? '搜索' : searchPlaceholder}
-            />
-          </div>
+          {!target && (
+            <div className="select-user-pc-search-wrapper">
+              <Search
+                allowClear
+                className="select-user-pc-search"
+                onSearch={handleSearch}
+                // onChange={onSearchChange}    // 这里暂时取消onChange时搜索,以后有机会再用上吧
+                placeholder={
+                  showTabList.length > 1 ? '搜索' : searchPlaceholder
+                }
+              />
+            </div>
+          )}
           {searchValue ? (
             <SearchResult
               currentTab={searchTab}
@@ -152,6 +175,7 @@ const SelectUserPc: React.FunctionComponent<PropTypes> = ({
               />
               <SelectArea
                 currentTab={tab}
+                target={target}
                 multiple={multiple}
                 selectType={selectType}
               />
@@ -164,13 +188,15 @@ const SelectUserPc: React.FunctionComponent<PropTypes> = ({
             className="cf-select-user-spin"
           />
         </div>
-        <RightPane>
-          <SelectedPane
-            selectType={selectType}
-            showUserDeptName={requestParams?.strictUser}
-            selectPaneProps={selectPaneProps}
-          />
-        </RightPane>
+        {1 === 1 && (
+          <RightPane>
+            <SelectedPane
+              selectType={selectType}
+              showUserDeptName={requestParams?.strictUser}
+              selectPaneProps={selectPaneProps}
+            />
+          </RightPane>
+        )}
       </div>
     </Modal>
   );

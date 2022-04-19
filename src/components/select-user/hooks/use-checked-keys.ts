@@ -3,10 +3,11 @@ import { TREE_CONTEXT } from '../select-user';
 import { dealtKey } from '../../../utils/index';
 export default (basePath: string, tabType: string) => {
   const {
-    treeState: { treeData, checkedKeys }
+    treeState: { treeData, checkedKeys },
   } = useContext(TREE_CONTEXT);
   const [checkedTreeKeys, setCheckedTreeKeys] = useState([]);
   useEffect(() => {
+    // debugger;
     // 根据 dfs 获取选中的 key
     let stack = [...treeData];
     const _checkedTreeKeys = [];
@@ -22,5 +23,6 @@ export default (basePath: string, tabType: string) => {
     }
     setCheckedTreeKeys(_checkedTreeKeys);
   }, [checkedKeys, treeData]);
+
   return [checkedTreeKeys];
 };

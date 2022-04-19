@@ -15,7 +15,6 @@ export const TREE_CONTEXT = React.createContext<ItreeContext | null>(null);
 
 export default function SelectUser({
   defaultValue,
-
   visible = false,
   showTabList = [
     'dept',
@@ -27,6 +26,7 @@ export default function SelectUser({
     'orgRel',
   ],
   onOk,
+  target = '',
   onCancel,
   userOrigin,
   appId,
@@ -85,6 +85,7 @@ export default function SelectUser({
           basePath={basePath}
           selectType={selectType}
           multiple={multiple}
+          target={target}
           searchPlaceholder={searchPlaceholder}
           selectSignature={selectSignature}
           isSaveSelectSignature={isSaveSelectSignature}

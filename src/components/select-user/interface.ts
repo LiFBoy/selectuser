@@ -86,6 +86,8 @@ export interface IlistItem {
   contactType?: string;
   nodeType?: string; // 所属部门 id（用于区分不同部门下的同一人，对应 strictUser 配置）
   deptId?: string;
+  extendedAttribute?: any;
+  childDelete?: boolean;
   // 所属部门名称（用于区分不同部门下的同一人，对应 strictUser 配置）
   deptName?: string;
 }
@@ -94,6 +96,8 @@ export interface IlistItem {
 export interface SelectUserCountRequestItem {
   selectNodeList: {
     contactType: string;
+    childDelete?: boolean;
+    extendedAttribute?: any;
     type?: string;
     key?: string;
     id: string;
@@ -124,6 +128,8 @@ export interface ItreeItem
   fullName?: string;
   // 图标
   icon?: any;
+  parentId?: any;
+  selectType?: any;
   contactType?: string;
   count?: number;
 }
@@ -133,6 +139,7 @@ export interface PropTypes {
   defaultValue?: IdefaultValue;
   // origin
   userOrigin?: string;
+  target?: string;
   // 快照 id，用于获取已有数据
   selectSignature?: string;
   // 是否需要请求后台保存快照，true(默认): 在onOk的时候请求后台保存快照; false: 在onOk的时候仅返回当前选中的数据
@@ -247,6 +254,8 @@ export interface IsaveResultParams {
 
 interface ISelectNodeListItem {
   contactType: string;
+  extendedAttribute?: any;
+  childDelete?: boolean;
   type?: string;
   key?: string;
   id: string;

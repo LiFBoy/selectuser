@@ -126,7 +126,7 @@ export const JSX2 = () => {
   };
   const props: PropTypes = {
     visible,
-    multiple: false,
+    multiple: true,
     selectType: 'dept',
     showTabList: ['tagContacts'],
     dialogProps: {
@@ -134,12 +134,14 @@ export const JSX2 = () => {
     },
     searchPlaceholder: '请输入标签名称进行搜索',
     userOrigin: '//gateway.community-dev.easyj.top/user-center',
-    requestParams: {
-      selectTypeList: ['tag'],
-    },
+    // requestParams: {
+    //   selectTypeList: ['tag'],
+    // },
+    target: 'tool',
     // onlyLeafCheckable: true,
-    isSaveSelectSignature: true,
-    selectSignature: '',
+    isSaveSelectSignature: false,
+
+    // selectSignature: '',
     onOk(data) {
       console.log('onOk data', data);
       const { selectSignature } = data;
@@ -185,8 +187,8 @@ export const JSX3 = () => {
     requestParams: {
       selectTypeList: ['camera'],
     },
-    isSaveSelectSignature: false,
-    selectSignature: '3001001001000006-821519e77a59435494612498d95380c2',
+    isSaveSelectSignature: true,
+    // selectSignature: '3001001001000006-821519e77a59435494612498d95380c2',
     onOk(data) {
       console.log('onOk data', data);
       const { selectSignature } = data;
@@ -241,7 +243,20 @@ export const MOBILE = () => {
     unCheckableNodeType: ['ORG'],
     isSaveSelectSignature: true,
     showTabList: ['innerContacts'],
-    selectSignature: '3001001001000006-821519e77a59435494612498d95380c2',
+    // selectSignature: '3001001001000006-821519e77a59435494612498d95380c2',
+    value: {
+      key: '1437253451940294678&1437253451344703506',
+      deptId: '1437253451344703506',
+      deptName: '开发部门测试',
+      label: '杨林颖',
+      type: 'USER',
+      isLeaf: true,
+      contactType: '1',
+      extendedAttribute: null,
+      childDelete: true,
+      selectType: 'checkbox',
+      parentId: null,
+    },
     dialogProps: {
       title: '选人组件',
     },

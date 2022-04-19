@@ -2,6 +2,7 @@ import React, { useState, useCallback, useRef } from 'react';
 import { stringify } from 'qs';
 import net from '../../../services/index';
 import { URL } from '../../../utils/api';
+import { intersectionWith, isEqual } from 'lodash';
 import {
   NodeType,
   ItreeItem,
@@ -44,6 +45,7 @@ type ItreeState = StaticProps & {
   treeData: ItreeItem[];
   searchResult: any[];
   checkedKeys: string[];
+  tagGroupItemList?: any[];
   orgInfoList: ItreeItem[];
   deptInfoList: ItreeItem[];
   userInfoList: ItreeItem[];
@@ -132,6 +134,7 @@ const INIT_STATE: ItreeState = {
   searchResult: [],
   // 存储当前所有选中的keys
   checkedKeys: [],
+  tagGroupItemList: [],
   // 选中的组织类型节点
   orgInfoList: [],
   // 选中的部门类型节点
@@ -232,6 +235,15 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
       };
     });
   };
+  // 设置标签组
+  const setTagGroupItemList = (tagGroupItemList: any[]) => {
+    setTreeState((treeState) => {
+      return {
+        ...treeState,
+        tagGroupItemList,
+      };
+    });
+  };
 
   const setRequest = (loading: boolean) => {
     setResultLoading(loading);
@@ -279,7 +291,7 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
             <NodeIcon />
             <div className="nodeContent">
               <div className="titleWrapper">
-                <div className="title">{label}33</div>
+                <div className="title">{label}</div>
               </div>
             </div>
           </div>
@@ -346,9 +358,40 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
     [treeState]
   );
 
+  const getObjById = (list: any, id: string): any => {
+    // 判断list是否是数组
+    if (!list instanceof Array) {
+      return null;
+    }
+
+    // 遍历数组
+    for (const i in list) {
+      const item = list[i];
+      if (item.id === id) {
+        return item;
+      } else {
+        // 查不到继续遍历
+        if (item.children) {
+          const _value = getObjById(item.children, id);
+          // 查询到直接返回
+          if (_value) {
+            return _value;
+          }
+        }
+      }
+    }
+  };
+
   const loadData = async (item: ItreeItem, type: string) => {
     if (item.children && item.children.length !== 0) return;
     await fetchTreeNodes(item, type);
+    const { id, selectType, type: _type } = item;
+    if (_type === 'TAG_GROUP' && selectType === 'radio') {
+      const newTagGroup = treeState.tagGroupItemList.concat(
+        getObjById(cachedDataSource.current, id)
+      );
+      setTagGroupItemList(newTagGroup);
+    }
     setTreeData(cachedDataSource.current);
   };
 
@@ -384,13 +427,14 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
           })
           .then((result: IResult) => {
             const _dataSource = result.data;
-            console.log(_dataSource, '_dataSource', type, isRoot, 'xxxxxxx');
+            console.log(_dataSource, '_dataSource');
+            // console.log(_dataSource, '_dataSource', type, isRoot, 'xxxxxxx');
             // @ts-ignore
             formatData(_dataSource, type, isRoot);
             if (isRoot) {
               // @ts-ignore
               cachedDataSource.current = _dataSource;
-              resolve();
+              resolve(1);
               return;
             }
             // 获取当前节点的序号路径
@@ -410,7 +454,7 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
               clone
             );
 
-            resolve();
+            resolve(2);
           });
       });
     },
@@ -569,14 +613,14 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
 
   // 更新选中节点
   const updateCheckedNode = (node: ItreeItem, tabType?: string) => {
-    const { checkedKeys, basePath } = treeState;
-    const keyIndex = checkedKeys.indexOf(dealtKey(basePath, node, tabType));
+    const { basePath } = treeState;
     const nextTreeState = { ...treeState };
-    // 更新node节点选中状态
-    const updateNode = (node: ItreeItem): boolean => {
+    const { tagGroupItemList } = treeState;
+    let checkedKeys = treeState.checkedKeys;
+
+    const updateNode = (node: ItreeItem, deleteItem?: any): boolean => {
       const [list = [], listKey] = getListByType(node.type);
       let nextList = [];
-      console.log(list, 'list1');
       const nodeIndex = list.findIndex((item: ItreeItem) => {
         return item.id === node.id;
       });
@@ -588,10 +632,45 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
         // 否则取消选中
         nextList = list.slice(0, nodeIndex).concat(list.slice(nodeIndex + 1));
       }
+      if (deleteItem) {
+        const nodeIndex = nextList.findIndex((item: ItreeItem) => {
+          return item.id === deleteItem.id;
+        });
+
+        nextList = nextList
+          .slice(0, nodeIndex)
+          .concat(nextList.slice(nodeIndex + 1));
+      }
       // @ts-ignore
       nextTreeState[listKey] = nextList;
-      return nextList.length > list.length;
+      return !deleteItem ? nextList.length > list.length : false;
     };
+
+    let deleteItem = null;
+
+    if (tagGroupItemList.length > 0 && node.selectType === 'radio') {
+      const tagGropChild = treeState.tagGroupItemList.find(
+        (tag) => tag.id === node.parentId
+      ).children;
+      const _checkedKeys = intersectionWith(
+        tagGropChild.map((child: any) => child.id),
+        checkedKeys,
+        isEqual
+      );
+      const key = _checkedKeys[0];
+      const keyIndex = checkedKeys.indexOf(key);
+
+      if (keyIndex !== -1) {
+        checkedKeys = checkedKeys.filter((item) => item !== key);
+        deleteItem = tagGropChild.find((child: any) => child.id === key);
+      } else {
+        resetUserCount(node, true, false);
+      }
+    }
+    // debugger;
+    const keyIndex = checkedKeys.indexOf(dealtKey(basePath, node, tabType));
+
+    // 更新node节点选中状态
 
     // 如果key不在被选中的数组中，则添加
     const _nextCheckedKeys =
@@ -602,8 +681,7 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
           ...checkedKeys.slice(keyIndex + 1),
         ];
     // updateNode必须在setTreeState之前调用，更新nextTreeState内数据
-    const result = updateNode(node);
-
+    const result = updateNode(node, deleteItem);
     setTreeState({ ...nextTreeState, checkedKeys: _nextCheckedKeys });
     return result;
   };
@@ -921,6 +999,7 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
       requestParams,
       orgRelAnalysisRange,
     } = treeState;
+    console.log(maternalInfoList, 'maternalInfoList');
     /**
      * 保存快照参数格式化，主要是为了把之前组装的key还原
      * @param list 存储在treeState中的各种list
@@ -943,6 +1022,13 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
 
         if (item.contactType) {
           obj.contactType = item.contactType;
+        }
+        if (item.extendedAttribute) {
+          obj.extendedAttribute = item.extendedAttribute;
+        }
+
+        if (item.childDelete) {
+          obj.childDelete = item.childDelete;
         }
 
         if (item?.nodeType) {

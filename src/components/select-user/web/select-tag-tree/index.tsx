@@ -4,6 +4,8 @@ import { TREE_CONTEXT } from '../../select-user';
 import { ItreeItem } from '../../interface';
 import useSelectExpand from '../../hooks/use-select-expand';
 import useCheckedKeys from '../../hooks/use-checked-keys';
+const { TreeNode } = Tree;
+import './index.less';
 
 interface PropType {
   currentTab: string; // 用当前选中的tab作为Tree组件的key，当切换tab时使Tree组件重新生成
@@ -13,19 +15,19 @@ interface PropType {
 
 const SelectTagTree: React.FunctionComponent<PropType> = (props: PropType) => {
   // 获取props
-  const { currentTab, multiple, selectType } = props;
+  const { currentTab, selectType } = props;
   // 获取treeContext
   const treeContext = useContext(TREE_CONTEXT);
-  const { treeState, updateCheckedNode, clear, resetUserCount } = treeContext;
+  const { treeState, updateCheckedNode, resetUserCount } = treeContext;
   const { treeData, basePath } = treeState;
   const {
     expandedKeys,
     setExpandedKeys,
     handleSelect,
-    loadTreeData: loadData
+    loadTreeData: loadData,
   } = useSelectExpand(currentTab);
   const [checkedKeys] = useCheckedKeys(basePath, currentTab);
-
+  console.log(basePath, 'basePath');
   // 树节点选中事件
   const onCheck = (_: any, event: any) => {
     const node = event.node.props;
@@ -33,6 +35,7 @@ const SelectTagTree: React.FunctionComponent<PropType> = (props: PropType) => {
       ...node,
       title: node.label,
     };
+    const multiple = node.selectType === 'checkbox';
 
     // 获取当前节点是勾选还是取消勾选
     let checked = null;
@@ -41,16 +44,38 @@ const SelectTagTree: React.FunctionComponent<PropType> = (props: PropType) => {
     if (multiple) {
       // 更新选中节点
       checked = updateCheckedNode(item);
-    } else if (treeState.checkedKeys[0] !== item.id) { // 如果是单选的情况
-      // 先清空所选
-      (typeof clear === 'function') && clear();
-      // 更新选中节点
-      checked = updateCheckedNode(item);
+      resetUserCount(item, checked, selectType === 'user');
+    } else {
+      // checked = updateCheckedNode(item);
+      updateCheckedNode(item);
     }
-
-    // selectType为user时 需要请求获取人数，否则仅计算当前选中的部门及节点数量
-    resetUserCount(item, checked, selectType === 'user');
   };
+
+  const renderTreeNodes = (data) =>
+    data.map((item) => {
+      console.log(item.selectType, 'itemitem');
+
+      if (item.children) {
+        return (
+          <TreeNode
+            checkable={false}
+            title={item.title}
+            key={item.key}
+            selectType={item.selectType}
+            isLeaf={item.isLeaf}
+            dataRef={item}
+          >
+            {renderTreeNodes(item.children)}
+          </TreeNode>
+        );
+      }
+      if (item.selectType === 'radio') {
+        return <TreeNode className="radio" key={item.key} {...item} />;
+      }
+      return <TreeNode key={item.key} {...item} />;
+    });
+  console.log(checkedKeys, '_checkedKeys', treeState.checkedKeys);
+  // console.log(treeData, 'treeData');
   return treeData && treeData.length > 0 ? (
     <Tree
       className="cf-select-user-tree"
@@ -59,16 +84,18 @@ const SelectTagTree: React.FunctionComponent<PropType> = (props: PropType) => {
       checkedKeys={checkedKeys}
       onCheck={onCheck}
       checkable
-      multiple={multiple}
+      // multiple={multiple}
       blockNode
       expandedKeys={expandedKeys}
-      onExpand={setExpandedKeys}
+      // onExpand={setExpandedKeys}
       onSelect={handleSelect}
       checkStrictly
       loadData={loadData}
       // height={340}
-      treeData={treeData}
-    />
+      // treeData={treeData}
+    >
+      {renderTreeNodes(treeData)}
+    </Tree>
   ) : (
     <div className="cf-tree-result-empty">暂无内容</div>
   );

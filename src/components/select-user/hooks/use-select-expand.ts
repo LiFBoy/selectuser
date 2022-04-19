@@ -6,7 +6,7 @@ export default (currentTab: string) => {
   const [expandedKeys, setExpandedKeys] = useState([]);
   const {
     loadData,
-    treeState: { treeData }
+    treeState: { treeData },
   } = useContext(TREE_CONTEXT);
 
   // fusion tree 的异步获取子节点回调
@@ -23,7 +23,8 @@ export default (currentTab: string) => {
         nodeType,
         orgId,
         contactType,
-        pos
+        pos,
+        selectType,
       } = !node?.props ? node : node.props;
       const item: ItreeItem = {
         id,
@@ -35,7 +36,8 @@ export default (currentTab: string) => {
         nodeType,
         orgId,
         contactType,
-        pos
+        pos,
+        selectType,
       };
       return loadData(item, currentTab);
     },
@@ -43,7 +45,7 @@ export default (currentTab: string) => {
   );
 
   // 解决切换 tab 后，展开状态仍保持原样的问题
-  const rootKeys = treeData.map(_ => _.key);
+  const rootKeys = treeData.map((_) => _.key);
   useEffect(() => {
     // 如果只有一个根节点，则默认展开
     if (rootKeys.length === 1) {
@@ -61,12 +63,13 @@ export default (currentTab: string) => {
       if (event.node.props.isLeaf) {
         return;
       }
+
       const [key] = selectedKeys;
       const matchedExpandIndex = expandedKeys.indexOf(key);
       if (matchedExpandIndex >= 0) {
         setExpandedKeys([
           ...expandedKeys.slice(0, matchedExpandIndex),
-          ...expandedKeys.slice(matchedExpandIndex + 1)
+          ...expandedKeys.slice(matchedExpandIndex + 1),
         ]);
       } else {
         // tslint:disable-next-line: no-floating-promises
@@ -83,6 +86,6 @@ export default (currentTab: string) => {
     // TODO: 数据渲染滞后问题待解决
     setExpandedKeys,
     handleSelect,
-    loadTreeData
+    loadTreeData,
   };
 };
