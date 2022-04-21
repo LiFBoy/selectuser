@@ -192,11 +192,12 @@ const SelectUserPc: React.FunctionComponent<PropTypes> = ({
             className="cf-select-user-spin"
           />
         </div>
-        {!target && (
+        {target ? null : (
           <RightPane>
             <SelectedPane
               selectType={selectType}
               showUserDeptName={requestParams?.strictUser}
+              selectTypeList={requestParams.selectTypeList}
               selectPaneProps={selectPaneProps}
             />
           </RightPane>

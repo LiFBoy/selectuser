@@ -12,11 +12,11 @@ interface PropType {
 
 const SelectArea: React.FunctionComponent<PropType> = (props: PropType) => {
   // 获取props
-  const { currentTab, multiple, selectType, target } = props;
+  const { currentTab, multiple, selectType } = props;
   console.log(currentTab, 'currentTab');
   return (
     <div className="select-area-wrap">
-      {currentTab === 'tagContacts' && target === 'tool' ? (
+      {currentTab === 'tagContacts' ? (
         <SelectTagTree
           multiple={multiple}
           currentTab={currentTab}

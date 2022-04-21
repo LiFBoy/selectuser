@@ -45,9 +45,13 @@ const SelectTagTree: React.FunctionComponent<PropType> = (props: PropType) => {
       // 更新选中节点
       checked = updateCheckedNode(item);
       resetUserCount(item, checked, selectType === 'user');
-    } else {
+    } else if (treeState.checkedKeys.indexOf(item.id) === -1) {
+      // debugger;
+      console.log(treeState.checkedKeys, item.id, 'xxxxx');
       // checked = updateCheckedNode(item);
       updateCheckedNode(item);
+    } else {
+      return;
     }
   };
 

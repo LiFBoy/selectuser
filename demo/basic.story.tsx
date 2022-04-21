@@ -126,7 +126,7 @@ export const JSX2 = () => {
   };
   const props: PropTypes = {
     visible,
-    multiple: true,
+    multiple: false,
     selectType: 'dept',
     showTabList: ['tagContacts'],
     dialogProps: {
@@ -137,8 +137,8 @@ export const JSX2 = () => {
     requestParams: {
       selectTypeList: ['tag'],
     },
-    target: 'tool',
-    modalWidth: 300,
+    // target: 'tool',
+    // modalWidth: 300,
     // onlyLeafCheckable: true,
     isSaveSelectSignature: false,
 
@@ -168,6 +168,57 @@ export const JSX2 = () => {
   );
 };
 JSX2.storyName = 'JSX 中使用选人组件';
+
+export const JSX10 = () => {
+  const [visible, setVisible] = useState(false);
+  const [selectSignature, setSelectSignature] = useState('');
+  const show = () => {
+    setVisible(true);
+  };
+  const props: PropTypes = {
+    visible,
+    multiple: false,
+    selectType: 'dept',
+    showTabList: ['tagContacts'],
+    dialogProps: {
+      title: '标签',
+    },
+    searchPlaceholder: '请输入标签名称进行搜索',
+    userOrigin: '//gateway.community-dev.easyj.top/user-center',
+    requestParams: {
+      selectTypeList: ['group_tag'],
+    },
+    // target: 'tool',
+    // modalWidth: 300,
+    // onlyLeafCheckable: true,
+    isSaveSelectSignature: false,
+
+    // selectSignature: '',
+    onOk(data) {
+      console.log('onOk data', data);
+      const { selectSignature } = data;
+      setSelectSignature(selectSignature);
+      setVisible(false);
+    },
+    onCancel() {
+      setVisible(false);
+    },
+    getCheckedNodes(data) {
+      console.log('getCheckedNodes data', data);
+    },
+    getTotalCount(data) {
+      console.log('getTotalCount data', data);
+    },
+  };
+
+  return (
+    <>
+      <Button onClick={show}>标签10</Button>
+      <SelectUser {...props} />
+    </>
+  );
+};
+JSX10.storyName = 'JSX 中使用选人组件';
 
 export const JSX3 = () => {
   const [visible, setVisible] = useState(false);

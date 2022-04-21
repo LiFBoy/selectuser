@@ -9,11 +9,13 @@ interface PropTypes {
   selectType: 'user' | 'dept'; // 可选节点列表
   showUserDeptName?: boolean; // 是否展示用户的 deptName
   selectPaneProps?: any; // 已选分类文案支持自定义
+  selectTypeList?: any; // 类型
 }
 
 const SelectPane: React.FunctionComponent<PropTypes> = (props: PropTypes) => {
   const treeContext = useContext(TREE_CONTEXT);
-  const { selectType, showUserDeptName, selectPaneProps } = props;
+  const { selectType, showUserDeptName, selectPaneProps, selectTypeList } =
+    props;
   const { treeState, delKeys, setUserCount, resetUserCount } = treeContext;
   const {
     deptInfoList,
@@ -29,7 +31,7 @@ const SelectPane: React.FunctionComponent<PropTypes> = (props: PropTypes) => {
     orgRelInfoList,
     userCount,
   } = treeState;
-  console.log(treeState, 'treeState');
+  console.log(selectTypeList, 'selectTypeList');
 
   // 删除单个items
   const delItem = useCallback(
@@ -184,7 +186,8 @@ const SelectPane: React.FunctionComponent<PropTypes> = (props: PropTypes) => {
 
   if (tagInfoList?.length) {
     const groupItem = {
-      title: '标签',
+      // title: '标签2',
+      title: selectTypeList.indexOf('targ') > -1 ? '客户标签' : '群标签',
       type: 'TAG',
       unit: '人',
       count: userCount.tagCount || 0,
