@@ -13,6 +13,7 @@ const SelectUserPc: React.FunctionComponent<PropTypes> = ({
   dialogProps = {},
   selectPaneProps = {},
   target,
+  modalWidth,
   visible = false,
   multiple = true,
   onCancel,
@@ -121,11 +122,14 @@ const SelectUserPc: React.FunctionComponent<PropTypes> = ({
       bodyStyle={{ padding: 0 }}
       visible={visible}
       onOk={handleOk}
-      width={target ? 720 : 720}
+      width={target ? modalWidth : 720}
       onCancel={handleCancel}
       footer={
         <div className="footer-box">
-          <div className="user-count">{userCount.tagCount}</div>
+          <div className="user-count">
+            {target && <span>已选{userCount.tagCount}对象</span>}
+          </div>
+
           <Button key="back" onClick={handleCancel}>
             取消
           </Button>
@@ -142,7 +146,7 @@ const SelectUserPc: React.FunctionComponent<PropTypes> = ({
       }
     >
       <div className="select-user-pc-content">
-        <div className="left-pane">
+        <div className="left-pane" style={target ? { width: modalWidth } : {}}>
           {!target && (
             <div className="select-user-pc-search-wrapper">
               <Search
@@ -188,7 +192,7 @@ const SelectUserPc: React.FunctionComponent<PropTypes> = ({
             className="cf-select-user-spin"
           />
         </div>
-        {1 === 1 && (
+        {!target && (
           <RightPane>
             <SelectedPane
               selectType={selectType}

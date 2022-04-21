@@ -359,11 +359,6 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
   );
 
   const getObjById = (list: any, id: string): any => {
-    // 判断list是否是数组
-    if (!list instanceof Array) {
-      return null;
-    }
-
     // 遍历数组
     for (const i in list) {
       const item = list[i];

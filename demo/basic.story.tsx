@@ -134,10 +134,11 @@ export const JSX2 = () => {
     },
     searchPlaceholder: '请输入标签名称进行搜索',
     userOrigin: '//gateway.community-dev.easyj.top/user-center',
-    // requestParams: {
-    //   selectTypeList: ['tag'],
-    // },
+    requestParams: {
+      selectTypeList: ['tag'],
+    },
     target: 'tool',
+    modalWidth: 300,
     // onlyLeafCheckable: true,
     isSaveSelectSignature: false,
 

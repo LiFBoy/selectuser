@@ -140,6 +140,7 @@ export interface PropTypes {
   // origin
   userOrigin?: string;
   target?: string;
+  modalWidth?: number;
   // 快照 id，用于获取已有数据
   selectSignature?: string;
   // 是否需要请求后台保存快照，true(默认): 在onOk的时候请求后台保存快照; false: 在onOk的时候仅返回当前选中的数据

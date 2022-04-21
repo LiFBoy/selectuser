@@ -51,26 +51,24 @@ const SelectTagTree: React.FunctionComponent<PropType> = (props: PropType) => {
     }
   };
 
-  const renderTreeNodes = (data) =>
-    data.map((item) => {
-      console.log(item.selectType, 'itemitem');
-
+  const renderTreeNodes = (data: any) =>
+    data.map((item: any) => {
+      console.log(item, 'item');
       if (item.children) {
         return (
           <TreeNode
             checkable={false}
             title={item.title}
             key={item.key}
-            selectType={item.selectType}
             isLeaf={item.isLeaf}
-            dataRef={item}
+            {...item}
           >
             {renderTreeNodes(item.children)}
           </TreeNode>
         );
       }
       if (item.selectType === 'radio') {
-        return <TreeNode className="radio" key={item.key} {...item} />;
+        return <TreeNode className="radio" {...item} />;
       }
       return <TreeNode key={item.key} {...item} />;
     });
@@ -87,7 +85,7 @@ const SelectTagTree: React.FunctionComponent<PropType> = (props: PropType) => {
       // multiple={multiple}
       blockNode
       expandedKeys={expandedKeys}
-      // onExpand={setExpandedKeys}
+      onExpand={setExpandedKeys}
       onSelect={handleSelect}
       checkStrictly
       loadData={loadData}

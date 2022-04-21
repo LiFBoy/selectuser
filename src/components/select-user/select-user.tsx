@@ -27,6 +27,7 @@ export default function SelectUser({
   ],
   onOk,
   target = '',
+  modalWidth = 0,
   onCancel,
   userOrigin,
   appId,
@@ -86,6 +87,7 @@ export default function SelectUser({
           selectType={selectType}
           multiple={multiple}
           target={target}
+          modalWidth={modalWidth}
           searchPlaceholder={searchPlaceholder}
           selectSignature={selectSignature}
           isSaveSelectSignature={isSaveSelectSignature}
