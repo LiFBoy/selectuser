@@ -18,7 +18,7 @@ export const MethodInvoke2 = () => {
       requestParams: {
         selectTypeList: ['member'],
       },
-      isSaveSelectSignature: true,
+      isSaveSelectSignature: false,
       showTabList: ['memberContacts'],
       onOk: action('onOk'),
       onCancel: action('onCancel'),

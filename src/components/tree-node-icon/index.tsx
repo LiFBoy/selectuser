@@ -7,7 +7,9 @@ export const TagIcon: React.FunctionComponent = () => {
 };
 // 标签组
 export const TagGroupIcon: React.FunctionComponent = () => {
-  return <span className="user-center-tree-node-icon select-user-icon-tag" />;
+  return (
+    <span className="user-center-tree-node-icon select-user-icon-tag-group" />
+  );
 };
 
 // 用户

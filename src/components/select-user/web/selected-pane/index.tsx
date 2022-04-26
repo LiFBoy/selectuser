@@ -187,7 +187,7 @@ const SelectPane: React.FunctionComponent<PropTypes> = (props: PropTypes) => {
   if (tagInfoList?.length) {
     const groupItem = {
       // title: '标签2',
-      title: selectTypeList.indexOf('targ') > -1 ? '客户标签' : '群标签',
+      title: selectTypeList.indexOf('tag') > -1 ? '客户标签' : '群标签',
       type: 'TAG',
       unit: '人',
       count: userCount.tagCount || 0,
