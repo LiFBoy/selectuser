@@ -48,6 +48,7 @@ export default (
         tagInfoList = [],
         groupInfoList = [],
         orgRelInfoList = [],
+        maternalInfoList = [],
       } = data;
       const checkedKeys: string[] = [];
 
@@ -98,6 +99,21 @@ export default (
         });
       }
 
+      // 存储所有母婴id
+      const maternalObject: SelectUserCountRequestItem = {
+        selectNodeList: [],
+        type: 'MATERNAL',
+      };
+      for (const item of maternalInfoList) {
+        // 如果传入的数据中没有type属性，则在初始化时需要设置item的type
+        if (!item.type) item.type = 'MATERNAL';
+
+        maternalObject.selectNodeList.push({
+          contactType: item.contactType,
+          id: item.id,
+        });
+      }
+
       // 存储所有分组id
       const groupObject: SelectUserCountRequestItem = {
         selectNodeList: [],
@@ -133,6 +149,7 @@ export default (
         orgObject,
         tagObject,
         groupObject,
+        maternalObject,
         orgRelObject,
       ];
 
@@ -144,6 +161,7 @@ export default (
           tagCount: tagObject.selectNodeList.length,
           groupCount: groupObject.selectNodeList.length,
           orgRelCount: orgRelObject.selectNodeList.length,
+          maternalCount: maternalObject.selectNodeList.length,
         };
         setUserCount(count);
       } else {
@@ -165,6 +183,7 @@ export default (
       generateKey(orgInfoList, 'ORG');
       generateKey(userInfoList);
       generateKey(tagInfoList);
+      generateKey(maternalInfoList);
       generateKey(groupInfoList);
       generateKey(orgRelInfoList);
 
@@ -174,6 +193,7 @@ export default (
         orgInfoList,
         userInfoList,
         tagInfoList,
+        maternalInfoList,
         groupInfoList,
         orgRelInfoList,
         checkedKeys,

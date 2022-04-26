@@ -13,7 +13,7 @@ export const MethodInvoke2 = () => {
       dialogProps: {
         title: '选对象',
       },
-      userOrigin: '//gateway.community-dev.easyj.top/user-center',
+      userOrigin: '//gateway.community-sit.easyj.top/user-center',
       searchPlaceholder: '请输入群主或群名称进行搜索',
       requestParams: {
         selectTypeList: ['member'],
@@ -43,14 +43,14 @@ export const MethodInvoke = () => {
       dialogProps: {
         title: '选人组件',
       },
-      userOrigin: '//gateway.community-dev.easyj.top/user-center',
+      userOrigin: '//gateway.community-sit.easyj.top/user-center',
       searchPlaceholder: '请输入姓名或手机号进行搜索',
 
       requestParams: {
         selectTypeList: ['user'],
       },
       isSaveSelectSignature: true,
-      // selectSignature: '3001001001000005-0f1b3ef353474c2aba8f13be9d50cdee',
+      selectSignature: '3001001001000006-cb94f644c7384e9db6bef86fa1228758',
       // selectSignature: '3001001001000005-ff5b213e99a64b49ab3d6ef2ce37fe1f',
       showTabList: ['maternalContacts'],
       onOk: action('onOk'),
@@ -83,7 +83,7 @@ export const JSX = () => {
     dialogProps: {
       title: '选人组件',
     },
-    userOrigin: '//gateway.community-dev.easyj.top/user-center',
+    userOrigin: '//gateway.community-sit.easyj.top/user-center',
     showTabList: ['innerContacts'],
     requestParams: {
       strictUser: true,
@@ -126,23 +126,23 @@ export const JSX2 = () => {
   };
   const props: PropTypes = {
     visible,
-    multiple: false,
+    multiple: true,
     selectType: 'dept',
-    showTabList: ['tagContacts'],
+    showTabList: ['maternalContacts'],
     dialogProps: {
       title: '标签',
     },
     searchPlaceholder: '请输入标签名称进行搜索',
-    userOrigin: '//gateway.community-dev.easyj.top/user-center',
+    userOrigin: '//gateway.community-sit.easyj.top/user-center',
     requestParams: {
-      selectTypeList: ['tag'],
+      selectTypeList: ['user'],
     },
     // target: 'tool',
     // modalWidth: 300,
     // onlyLeafCheckable: true,
-    isSaveSelectSignature: false,
+    isSaveSelectSignature: true,
 
-    // selectSignature: '',
+    selectSignature: '3001001001000006-cb94f644c7384e9db6bef86fa1228758',
     onOk(data) {
       console.log('onOk data', data);
       const { selectSignature } = data;
@@ -152,18 +152,12 @@ export const JSX2 = () => {
     onCancel() {
       setVisible(false);
     },
-    getCheckedNodes(data) {
-      console.log('getCheckedNodes data', data);
-    },
-    getTotalCount(data) {
-      console.log('getTotalCount data', data);
-    },
   };
 
   return (
     <>
       <Button onClick={show}>标签</Button>
-      <SelectUser {...props} />
+      {visible && <SelectUser {...props} />}
     </>
   );
 };
@@ -177,14 +171,14 @@ export const JSX10 = () => {
   };
   const props: PropTypes = {
     visible,
-    multiple: false,
+    multiple: true,
     selectType: 'dept',
     showTabList: ['tagContacts'],
     dialogProps: {
       title: '标签',
     },
     searchPlaceholder: '请输入标签名称进行搜索',
-    userOrigin: '//gateway.community-dev.easyj.top/user-center',
+    userOrigin: '//gateway.community-sit.easyj.top/user-center',
     requestParams: {
       selectTypeList: ['group_tag'],
     },
@@ -235,7 +229,7 @@ export const JSX3 = () => {
       title: 'tv',
     },
     searchPlaceholder: '请输入设备编码进行搜素',
-    userOrigin: '//gateway.community-dev.easyj.top/user-center',
+    userOrigin: '//gateway.community-sit.easyj.top/user-center',
     requestParams: {
       selectTypeList: ['camera'],
     },
@@ -316,7 +310,7 @@ export const MOBILE = () => {
     requestParams: {
       selectTypeList: ['user'],
     },
-    userOrigin: '//gateway.community-dev.easyj.top/user-center',
+    userOrigin: '//gateway.community-sit.easyj.top/user-center',
     onOk(data) {
       console.log('onOk data', data);
       const { selectSignature } = data;
@@ -346,7 +340,7 @@ export const MOBILE = () => {
     dialogProps: {
       title: '选人组件',
     },
-    userOrigin: '//gateway.community-dev.easyj.top/user-center',
+    userOrigin: '//gateway.community-sit.easyj.top/user-center',
     requestParams: {
       // strictUser: true,
       selectTypeList: ['user', 'member', 'group'],

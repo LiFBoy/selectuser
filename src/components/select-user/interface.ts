@@ -75,6 +75,7 @@ export interface IdefaultValue {
   tagInfoList?: IlistItem[];
   groupInfoList?: IlistItem[];
   orgRelInfoList?: IlistItem[];
+  maternalInfoList?: IlistItem[];
 }
 
 export interface IlistItem {
