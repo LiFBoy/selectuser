@@ -88,7 +88,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
     if (list && list.length > 19) {
       return (
         <div className="tree-footer">
-          仅展示前 20 个搜索结果，请输入更精确的搜索内容
+          仅展示前20个搜索结果，请输入更精确的搜索内容获取
         </div>
       );
     }
