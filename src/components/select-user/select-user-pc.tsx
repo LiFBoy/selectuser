@@ -6,6 +6,7 @@ import RightPane from './web/right-pane';
 import SelectArea from './web/select-area';
 import { PropTypes } from './interface';
 import SelectedPane from './web/selected-pane';
+import classnames from 'classnames';
 import { Modal, Input, Spin, Button } from 'antd';
 import { TREE_CONTEXT } from './select-user';
 
@@ -112,10 +113,17 @@ const SelectUserPc: React.FunctionComponent<PropTypes> = ({
   return (
     <Modal
       {...dialogProps}
+      title={
+        <div style={target ? { fontSize: '14px' } : {}}>
+          {dialogProps.title}
+        </div>
+      }
       okText="确认"
       cancelText="取消"
       // confirmLoading={true}
-      wrapClassName="select-user-pc-modal"
+      wrapClassName={classnames('select-user-pc-modal', {
+        'ct-modal-close': target,
+      })}
       destroyOnClose
       // closable={false}
       maskClosable={false}
@@ -127,7 +135,12 @@ const SelectUserPc: React.FunctionComponent<PropTypes> = ({
       footer={
         <div className="footer-box">
           <div className="user-count">
-            {target && <span>已选{userCount.tagCount}对象</span>}
+            {target && (
+              <>
+                <span className="pl8">已选对象</span>
+                {userCount.tagCount}
+              </>
+            )}
           </div>
 
           <Button key="back" onClick={handleCancel}>

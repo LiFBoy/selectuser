@@ -182,8 +182,8 @@ export const JSX10 = () => {
     requestParams: {
       selectTypeList: ['group_tag'],
     },
-    // target: 'tool',
-    // modalWidth: 300,
+    target: 'tool',
+    modalWidth: 300,
     // onlyLeafCheckable: true,
     isSaveSelectSignature: false,
 

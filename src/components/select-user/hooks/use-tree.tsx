@@ -3,6 +3,7 @@ import { stringify } from 'qs';
 import net from '../../../services/index';
 import { URL } from '../../../utils/api';
 import { intersectionWith, isEqual } from 'lodash';
+import { Popover } from 'antd';
 import {
   NodeType,
   ItreeItem,
@@ -285,15 +286,32 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
           // nodeType展示学校或教育局icon
           NodeIcon = treeNodeIconMap[item.nodeType];
         }
+        const overlayStyle = {
+          maxWidth: '20em',
+          wordBreak: 'break-all',
+          fontSize: '12px',
+          color: '#666',
+          overflow: 'auto',
+          backgroud: '#fff',
+          maxHeight: '400px',
+          boxShadow: '5px 5px 10px rgba(129, 133, 167, 0.2)',
+        };
 
         item.title = (
-          <div className="treeNode" title={item.name}>
-            <NodeIcon />
-            <div className="nodeContent">
-              <div className="titleWrapper">
-                <div className="title">{label}</div>
+          <div className="treeNode">
+            <Popover
+              placement="bottomLeft"
+              trigger="hover"
+              overlayStyle={overlayStyle}
+              content={item.name}
+            >
+              <NodeIcon />
+              <div className="nodeContent">
+                <div className="titleWrapper">
+                  <div className="title">{label}11</div>
+                </div>
               </div>
-            </div>
+            </Popover>
           </div>
         );
 
