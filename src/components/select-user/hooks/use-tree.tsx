@@ -288,7 +288,6 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
         }
         const overlayStyle = {
           maxWidth: '20em',
-          wordBreak: 'break-all',
           fontSize: '12px',
           color: '#666',
           overflow: 'auto',
@@ -301,9 +300,9 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
           <div className="treeNode">
             <Popover
               placement="bottomLeft"
-              trigger="hover"
               overlayStyle={overlayStyle}
               content={item.name}
+              trigger="hover"
             >
               <NodeIcon />
               <div className="nodeContent">
