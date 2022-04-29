@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="16" height="16" viewBox="0 0 16 16">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.5" x2="0.5" y2="1" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#54adff"/>
+      <stop offset="1" stop-color="#1786ec"/>
+    </linearGradient>
+  </defs>
+  <g id="组_8149" data-name="组 8149" transform="translate(-686 -455)">
+    <rect id="矩形_1038" data-name="矩形 1038" width="16" height="16" transform="translate(686 455)" fill="none"/>
+    <g id="组_8147" data-name="组 8147" transform="translate(-78.218 -23.052)">
+      <g id="编组" transform="translate(764.218 480.598)">
+        <circle id="椭圆形备份" cx="3.159" cy="3.159" r="3.159" transform="translate(1.579)" fill="url(#linear-gradient)"/>
+        <path id="矩形备份" d="M2.961,0H6.515A2.961,2.961,0,0,1,9.476,2.961v0a.987.987,0,0,1-.987.987H.987A.987.987,0,0,1,0,2.961v0A2.961,2.961,0,0,1,2.961,0Z" transform="translate(0 6.961)" fill="url(#linear-gradient)"/>
+      </g>
+      <g id="编组-2" data-name="编组" transform="translate(773.163 481.44)">
+        <circle id="椭圆形备份-2" data-name="椭圆形备份" cx="2.738" cy="2.738" r="2.738" transform="translate(0 0)" fill="url(#linear-gradient)"/>
+        <path id="矩形备份-2" data-name="矩形备份" d="M3,0H7.422A2.527,2.527,0,0,1,9.949,2.527v.579a.842.842,0,0,1-.842.842c-.074,0-3.517,0-3.853,0C3.63,3.831,5.594,1.96,3,0Z" transform="translate(-2.895 6.118)" fill="url(#linear-gradient)"/>
+      </g>
+    </g>
+  </g>
+</svg>

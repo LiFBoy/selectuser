@@ -11,7 +11,7 @@ import {
   OrgIcon,
   GroupIcon,
   OrgRelIcon,
-  TVCON,
+  EQUIPMENTICON,
 } from '../../../../components/tree-node-icon';
 import './index.less';
 
@@ -380,7 +380,12 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
           )
           : ''}
         {cameraList.length > 0
-          ? renderDom(cameraList, '相关摄像头', cameraInfoList, <TVCON />)
+          ? renderDom(
+            cameraList,
+            '相关摄像头',
+            cameraInfoList,
+            <EQUIPMENTICON />
+          )
           : ''}
         {maternalList.length > 0
           ? renderDom(maternalList, '相关母婴', maternalInfoList, <UserIcon />)

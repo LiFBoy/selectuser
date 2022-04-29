@@ -10,11 +10,9 @@ export const MethodInvoke2 = () => {
     SelectUser.show({
       multiple: true,
       selectType: 'dept',
-      dialogProps: {
-        title: '选对象',
-      },
-      userOrigin: '//gateway.community-sit.easyj.top/user-center',
-      searchPlaceholder: '请输入群主或群名称进行搜索',
+
+      userOrigin: '//gateway.community-dev.easyj.top/user-center',
+      // searchPlaceholder: '请输入群主或群名称进行搜索',
       requestParams: {
         selectTypeList: ['member'],
       },
@@ -43,7 +41,7 @@ export const MethodInvoke = () => {
       dialogProps: {
         title: '选人组件',
       },
-      userOrigin: '//gateway.community-sit.easyj.top/user-center',
+      userOrigin: '//gateway.community-dev.easyj.top/user-center',
       searchPlaceholder: '请输入姓名或手机号进行搜索',
 
       requestParams: {
@@ -83,7 +81,7 @@ export const JSX = () => {
     dialogProps: {
       title: '选人组件',
     },
-    userOrigin: '//gateway.community-sit.easyj.top/user-center',
+    userOrigin: '//gateway.community-dev.easyj.top/user-center',
     showTabList: ['innerContacts'],
     requestParams: {
       strictUser: true,
@@ -133,7 +131,7 @@ export const JSX2 = () => {
       title: '标签',
     },
     searchPlaceholder: '请输入标签名称进行搜索',
-    userOrigin: '//gateway.community-sit.easyj.top/user-center',
+    userOrigin: '//gateway.community-dev.easyj.top/user-center',
     requestParams: {
       selectTypeList: ['user'],
     },
@@ -178,7 +176,7 @@ export const JSX10 = () => {
       title: '标签',
     },
     searchPlaceholder: '请输入标签名称进行搜索',
-    userOrigin: '//gateway.community-sit.easyj.top/user-center',
+    userOrigin: '//gateway.community-dev.easyj.top/user-center',
     requestParams: {
       selectTypeList: ['group_tag'],
     },
@@ -229,7 +227,7 @@ export const JSX3 = () => {
       title: 'tv',
     },
     searchPlaceholder: '请输入设备编码进行搜素',
-    userOrigin: '//gateway.community-sit.easyj.top/user-center',
+    userOrigin: '//gateway.community-dev.easyj.top/user-center',
     requestParams: {
       selectTypeList: ['camera'],
     },
@@ -310,7 +308,7 @@ export const MOBILE = () => {
     requestParams: {
       selectTypeList: ['user'],
     },
-    userOrigin: '//gateway.community-sit.easyj.top/user-center',
+    userOrigin: '//gateway.community-dev.easyj.top/user-center',
     onOk(data) {
       console.log('onOk data', data);
       const { selectSignature } = data;
@@ -340,7 +338,7 @@ export const MOBILE = () => {
     dialogProps: {
       title: '选人组件',
     },
-    userOrigin: '//gateway.community-sit.easyj.top/user-center',
+    userOrigin: '//gateway.community-dev.easyj.top/user-center',
     requestParams: {
       // strictUser: true,
       selectTypeList: ['user', 'member', 'group'],

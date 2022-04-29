@@ -278,7 +278,7 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
           // 内部通讯录的跟节点不允许被选择
           item.checkable = false;
           // 强制使用部门的 icon
-          NodeIcon = treeNodeIconMap.dept;
+          // NodeIcon = treeNodeIconMap.dept;
         }
 
         // 若为行政组织时，Icon进行覆盖
@@ -307,7 +307,7 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
               <NodeIcon />
               <div className="nodeContent">
                 <div className="titleWrapper">
-                  <div className="title">{label}11</div>
+                  <div className="title">{label}</div>
                 </div>
               </div>
             </Popover>

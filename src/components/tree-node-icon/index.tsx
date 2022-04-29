@@ -17,7 +17,7 @@ export const UserIcon: React.FunctionComponent = () => {
   return <span className="user-center-tree-node-icon select-user-icon-user" />;
 };
 
-// 分组
+// 群
 export const GroupIcon: React.FunctionComponent = () => {
   return <span className="user-center-tree-node-icon select-user-icon-group" />;
 };
@@ -27,41 +27,26 @@ export const OrgIcon: React.FunctionComponent = () => {
   return <span className="user-center-tree-node-icon select-user-icon-org" />;
 };
 
-// 组织根节点
-export const OrgRootIcon: React.FunctionComponent = () => {
-  return (
-    <span className="user-center-tree-node-icon select-user-icon-org-root" />
-  );
+// 根节点
+export const RootIcon: React.FunctionComponent = () => {
+  return <span className="user-center-tree-node-icon select-user-icon-root" />;
 };
 
 // 部门
 export const DeptIcon: React.FunctionComponent = () => {
   return <span className="user-center-tree-node-icon select-user-icon-dept" />;
 };
+
 // 设备
 export const EQUIPMENTICON: React.FunctionComponent = () => {
-  return <span className="user-center-tree-node-icon select-user-icon-dept" />;
+  return (
+    <span className="user-center-tree-node-icon select-user-icon-equipment" />
+  );
 };
-// tv
-export const TVCON: React.FunctionComponent = () => {
-  return <span className="user-center-tree-node-icon select-user-icon-dept" />;
-};
+
+// 母婴
 export const MATERNALCON: React.FunctionComponent = () => {
-  return <span className="user-center-tree-node-icon select-user-icon-dept" />;
-};
-
-// 权限
-export const PermissionIcon: React.FunctionComponent = () => {
-  return (
-    <span className="user-center-tree-node-icon select-user-icon-permission" />
-  );
-};
-
-// 权限根节点
-export const PermissionRootIcon: React.FunctionComponent = () => {
-  return (
-    <span className="user-center-tree-node-icon select-user-icon-permission-root" />
-  );
+  return <span className="user-center-tree-node-icon select-user-icon-user" />;
 };
 
 // 行政组织
@@ -81,6 +66,8 @@ export type IconType =
   | 'permissionRoot'
   | 'orgRoot'
   | 'USER'
+  | 'ROOT'
+  | 'root'
   | 'ORG'
   | 'DEPT'
   | 'EQUIPMENT'
@@ -104,17 +91,16 @@ const iconMap: {
   dept: DeptIcon,
   group: GroupIcon,
   tag: TagIcon,
-  permission: PermissionIcon,
   user: UserIcon,
-  permissionRoot: PermissionRootIcon,
-  orgRoot: OrgRootIcon,
   USER: UserIcon,
+  ROOT: RootIcon,
+  root: RootIcon,
   ORG: OrgIcon,
   DEPT: DeptIcon,
   EQUIPMENT: EQUIPMENTICON,
-  TV: TVCON,
-  CAMERA: TVCON,
-  MATERNAL: UserIcon,
+  TV: EQUIPMENTICON,
+  CAMERA: EQUIPMENTICON,
+  MATERNAL: MATERNALCON,
   WORK_GROUP: GroupIcon,
   GROUP_DEPT: GroupIcon,
   ORG_REL: OrgRelIcon,

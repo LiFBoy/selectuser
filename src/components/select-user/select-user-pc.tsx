@@ -32,7 +32,7 @@ const SelectUserPc: React.FunctionComponent<PropTypes> = ({
     'orgRel',
   ],
   selectType = 'user',
-  searchPlaceholder = '搜索姓名、部门名称、手机号',
+  searchPlaceholder = '搜索',
 }) => {
   const { Search } = Input;
   const [tab, setTab] = useState<TabTypes | ''>('');
@@ -109,13 +109,13 @@ const SelectUserPc: React.FunctionComponent<PropTypes> = ({
     getSearchResult(params);
   };
 
-  console.log(target, 'selectPaneProps');
+  console.log(showTabList, 'selectPaneProps');
   return (
     <Modal
       {...dialogProps}
       title={
         <div style={target ? { fontSize: '14px' } : {}}>
-          {dialogProps.title}
+          {dialogProps.title || '请选择'}
         </div>
       }
       okText="确认"
