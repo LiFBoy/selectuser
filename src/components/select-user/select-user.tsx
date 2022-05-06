@@ -21,6 +21,7 @@ export default function SelectUser({
     'group',
     'innerContacts',
     'maternalContacts',
+    'disabledHomeContacts',
     'schoolContacts',
     'tagContacts',
     'orgRel',

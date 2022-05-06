@@ -122,6 +122,7 @@ const SelectPannel: React.FunctionComponent<Iprops> = (props: Iprops) => {
       if (
         (currentTab === 'innerContacts' ||
           currentTab === 'schoolContacts' ||
+          currentTab === 'disabledHomeContacts' ||
           currentTab === 'maternalContacts') && // 在家校通迅录和内部通迅录
         item.type === 'DEPT' && // 如果节点类型为DEPT
         selectType === 'user'
@@ -131,6 +132,7 @@ const SelectPannel: React.FunctionComponent<Iprops> = (props: Iprops) => {
       } else if (
         (currentTab === 'innerContacts' ||
           currentTab === 'schoolContacts' ||
+          currentTab === 'disabledHomeContacts' ||
           currentTab === 'maternalContacts') &&
         selectType === 'dept'
       ) {

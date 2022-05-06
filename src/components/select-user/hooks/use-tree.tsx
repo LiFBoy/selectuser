@@ -316,7 +316,12 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
 
         // 家校通迅录和内部通迅录的特殊逻辑
         if (
-          ['innerContacts', 'schoolContacts', 'maternalContacts'].includes(type)
+          [
+            'innerContacts',
+            'schoolContacts',
+            'maternalContacts',
+            'disabledHomeContacts',
+          ].includes(type)
         ) {
           if (
             item.type === 'DEPT' && // 如果节点类型为DEPT
@@ -636,7 +641,7 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
       const nodeIndex = list.findIndex((item: ItreeItem) => {
         return item.id === node.id;
       });
-
+      // debugger;
       // 如果节点未选中则选中
       if (nodeIndex === -1) {
         nextList = list.concat({ ...node });
@@ -653,6 +658,8 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
           .slice(0, nodeIndex)
           .concat(nextList.slice(nodeIndex + 1));
       }
+
+      console.log(nextTreeState, 'nextTreeState');
       // @ts-ignore
       nextTreeState[listKey] = nextList;
       return !deleteItem ? nextList.length > list.length : false;

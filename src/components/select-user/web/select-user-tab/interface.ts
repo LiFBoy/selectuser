@@ -9,6 +9,7 @@ export type TabTypes =
   | 'group' // 下属组织
   | 'innerContacts' // 内部通讯录
   | 'maternalContacts' // 母婴通讯录
+  | 'disabledHomeContacts' // 残疾人之家
   | 'equipmentContacts' // 资产通讯录
   | 'memberContacts' // 居民
   | 'memberDeptContacts' // 社区通讯录

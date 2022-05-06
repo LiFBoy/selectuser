@@ -89,6 +89,7 @@ const SelectCommonTree: React.FunctionComponent<PropType> = (
         'memberContacts',
         'groupContacts',
         'maternalContacts',
+        'disabledHomeContacts',
         'tagContacts',
       ].indexOf(currentTab) > -1 &&
         treeData.length > 19 && (

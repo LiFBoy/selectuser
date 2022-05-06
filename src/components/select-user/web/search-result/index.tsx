@@ -33,6 +33,7 @@ const SHOW_TAB_LIST_ITEM_MAP: any = {
   group: '下属组织',
   innerContacts: '内部通迅录',
   maternalContacts: '母婴通迅录',
+  disabledHomeContacts: '残疾人之家',
   equipmentContacts: '资产通迅录',
   memberContacts: '居民',
   memberDeptContacts: '社区通讯录',

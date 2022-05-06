@@ -155,6 +155,7 @@ export interface PropTypes {
     | 'group' // 局端-下属组织
     | 'innerContacts' // 内部通讯录
     | 'maternalContacts' // 母婴通讯录
+    | 'disabledHomeContacts' // 残疾人之家
     | 'memberContacts' // 居民
     | 'memberDeptContacts' // 社区通讯录
     | 'equipmentContacts' // 资产通讯录

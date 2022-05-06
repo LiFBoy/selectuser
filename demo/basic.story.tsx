@@ -8,17 +8,22 @@ import SelectUserResult from '../src/components/select-user/web/select-user-resu
 export const MethodInvoke2 = () => {
   const show = () => {
     SelectUser.show({
-      multiple: true,
+      multiple: false,
       selectType: 'dept',
 
       userOrigin: '//gateway.community-dev.easyj.top/user-center',
       // searchPlaceholder: '请输入群主或群名称进行搜索',
       requestParams: {
-        selectTypeList: ['member'],
+        selectTypeList: ['dept'],
       },
       isSaveSelectSignature: false,
-      showTabList: ['memberContacts'],
-      onOk: action('onOk'),
+      showTabList: ['disabledHomeContacts'],
+      onOk: (data) => {
+        console.log('onOk data', data);
+        const { selectSignature } = data;
+        // setSelectSignature(selectSignature);
+        // setVisible(false);
+      },
       onCancel: action('onCancel'),
       getCheckedNodes(data) {
         console.log('getCheckedNodes data', data);
