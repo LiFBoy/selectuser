@@ -587,14 +587,14 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
                         {renderSearchText(dept.deptName)}
                       </div>
                     </div>
-                    <div className="search-result-item-des">
+                    {/* <div className="search-result-item-des">
                       <div
                         className="search-result-info-dept"
                         title={deptNameAndOrgName}
                       >
                         {`位置: ${funTranName(`${deptNameAndOrgName}`, true)}`}
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                   <div className="checkbox-wrap">
                     <Checkbox
