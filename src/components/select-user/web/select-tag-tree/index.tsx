@@ -76,8 +76,7 @@ const SelectTagTree: React.FunctionComponent<PropType> = (props: PropType) => {
       }
       return <TreeNode key={item.key} {...item} />;
     });
-  console.log(checkedKeys, '_checkedKeys', treeState.checkedKeys);
-  // console.log(treeData, 'treeData');
+
   return treeData && treeData.length > 0 ? (
     <Tree
       className="cf-select-user-tree"
@@ -99,7 +98,7 @@ const SelectTagTree: React.FunctionComponent<PropType> = (props: PropType) => {
       {renderTreeNodes(treeData)}
     </Tree>
   ) : (
-    <div className="cf-tree-result-empty">暂无内容</div>
+    <div className="cf-tree-result-empty no-data-result-empty">暂无内容</div>
   );
 };
 

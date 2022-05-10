@@ -5,6 +5,7 @@ import { ItreeItem } from '../../interface';
 import useSelectExpand from '../../hooks/use-select-expand';
 import useCheckedKeys from '../../hooks/use-checked-keys';
 import './index.less';
+const { TreeNode } = Tree;
 
 interface PropType {
   currentTab: string; // 用当前选中的tab作为Tree组件的key，当切换tab时使Tree组件重新生成
@@ -16,7 +17,7 @@ const SelectCommonTree: React.FunctionComponent<PropType> = (
   props: PropType
 ) => {
   // 获取props
-  const { currentTab, multiple, selectType } = props;
+  const { currentTab, multiple: _multiple, selectType } = props;
   // 获取treeContext
   const treeContext = useContext(TREE_CONTEXT);
   const { treeState, updateCheckedNode, clear, resetUserCount } = treeContext;
@@ -40,6 +41,9 @@ const SelectCommonTree: React.FunctionComponent<PropType> = (
       title: node.label,
     };
 
+    const multiple = node.selectType
+      ? node.selectType === 'checkbox'
+      : _multiple;
     // 获取当前节点是勾选还是取消勾选
     let checked = null;
 
@@ -62,6 +66,27 @@ const SelectCommonTree: React.FunctionComponent<PropType> = (
     resetUserCount(item, checked, selectType === 'user');
   };
 
+  const renderTreeNodes = (data: any) =>
+    data.map((item: any) => {
+      console.log(item, 'item');
+      if (item.children) {
+        return (
+          <TreeNode
+            checkable={false}
+            title={item.title}
+            key={item.key}
+            isLeaf={item.isLeaf}
+            {...item}
+          >
+            {renderTreeNodes(item.children)}
+          </TreeNode>
+        );
+      }
+      if (item.selectType ? item.selectType === 'radio' : false) {
+        return <TreeNode className="radio" {...item} />;
+      }
+      return <TreeNode key={item.key} {...item} />;
+    });
   return treeData && treeData.length > 0 ? (
     <>
       <Tree
@@ -71,7 +96,7 @@ const SelectCommonTree: React.FunctionComponent<PropType> = (
         checkedKeys={checkedKeys}
         onCheck={onCheck}
         checkable
-        multiple={multiple}
+        // multiple={multiple}
         // selectable={false}
         blockNode
         expandedKeys={expandedKeys}
@@ -82,8 +107,10 @@ const SelectCommonTree: React.FunctionComponent<PropType> = (
         // height={340}
         // isLabelBlock
         // isNodeBlock
-        treeData={treeData}
-      />
+        // treeData={treeData}
+      >
+        {renderTreeNodes(treeData)}
+      </Tree>
       {[
         'equipmentContacts',
         'memberContacts',

@@ -65,7 +65,7 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
   const renderSearchHint = (list: Array<any>) => {
     if (list && list.length > 19) {
       return (
-        <div className="search-result-group-item tree-footer">
+        <div className="more-text">
           仅展示前 20 个搜索结果，请输入更精确的搜索内容。
         </div>
       );
