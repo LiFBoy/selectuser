@@ -249,6 +249,23 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
   const setRequest = (loading: boolean) => {
     setResultLoading(loading);
   };
+  const renderSearchText = (text: string) => {
+    const nextSearchValue = localStorage.getItem('nextSearchValue');
+    if (!text?.includes(nextSearchValue)) return text;
+    const [str1, str2] = text.replace(nextSearchValue, '&').split('&');
+    return (
+      <>
+        {str1}
+        <span
+          style={{ color: 'red' }}
+          className="search-result-item-title_matched"
+        >
+          {nextSearchValue}
+        </span>
+        {str2}
+      </>
+    );
+  };
 
   const formatData = useCallback(
     (
@@ -260,7 +277,7 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
       const { onlyLeafCheckable, unCheckableNodeType, selectType } = treeState;
       for (const item of list) {
         item.id = item.key;
-        item.key = getUid();
+        // item.key = getUid();
         item.name = item.label;
         let NodeIcon = treeNodeIconMap[item.type];
         let label = item.name;
@@ -295,7 +312,11 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
           maxHeight: '400px',
           boxShadow: '5px 5px 10px rgba(129, 133, 167, 0.2)',
         };
-
+        const testid = localStorage.getItem('testa');
+        console.log(testid, 'testid');
+        if (item.id === testid) {
+          label = renderSearchText(label);
+        }
         item.title = (
           <div className="treeNode">
             <Popover
@@ -307,7 +328,7 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
               <NodeIcon />
               <div className="nodeContent">
                 <div className="titleWrapper">
-                  <div className="title">{label}</div>
+                  <div className="title">22{label}</div>
                 </div>
               </div>
             </Popover>
@@ -444,7 +465,7 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
           })
           .then((result: IResult) => {
             const _dataSource = result.data;
-            console.log(_dataSource, '_dataSource');
+            console.log(_dataSource, '_dataSource', requestParams);
             // console.log(_dataSource, '_dataSource', type, isRoot, 'xxxxxxx');
             // @ts-ignore
             formatData(_dataSource, type, isRoot);

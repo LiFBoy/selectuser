@@ -2,6 +2,7 @@ import React, { useContext, useMemo, useState } from 'react';
 import { Tabs, Checkbox, Typography } from 'antd';
 import { InfoCircleFilled } from '@ant-design/icons';
 import { TREE_CONTEXT } from '../../select-user';
+import useSelectExpand from '../../hooks/use-select-expand';
 import { funTransformationSubstr } from '../../../../utils';
 import { get } from 'lodash';
 import {
@@ -58,7 +59,10 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
     showTabList,
     selectType,
     currentTab,
+    setExpandedKeys2,
   } = props;
+
+  const { onExpand, setExpandedKeys } = useSelectExpand(currentTab);
 
   // 获取treeContext
   const treeContext = useContext(TREE_CONTEXT);
@@ -98,6 +102,24 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
   // const funStitching = (id: string, key: string, name: string, orgId: string, type: string, contactType: string) => {
   //   return { id, key, name, orgId, type, contactType };
   // };
+  const handleClick = (item: any, type: string) => {
+    console.log(item, 'item99999');
+    const a = [
+      '1519884017599488002',
+      '1519884121001664513',
+      '1519884206770987010',
+      '1519886599357177857',
+      '1519889504036134914',
+    ];
+    localStorage.setItem('test', a);
+    localStorage.setItem('testa', '1519889504036134914');
+
+    setExpandedKeys(a);
+
+    setTimeout(() => {
+      setExpandedKeys2(a);
+    }, 0);
+  };
 
   // checkbox状态改变事件
   const onCheckBoxChange = (item: any, type: string) => {
@@ -361,6 +383,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
           groupList.push(resultItem);
           break;
         case 'TAG':
+        case 'GROUP_TAG':
           tagList.push(resultItem);
           break;
         case 'ORG_REL':
@@ -368,7 +391,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
           break;
       }
     }
-    console.log(maternalList, 'maternalList');
+    console.log(tagList, 'tagList', tagInfoList);
 
     return (
       <div className="search-result-box">
@@ -712,6 +735,8 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
                 <div
                   className="search-result-group-item"
                   key={`${tag.userId}-${index}`}
+                  style={{ border: '1px solid red' }}
+                  onClick={() => handleClick(tag, tag.type)}
                 >
                   <TagIcon />
                   <div className="search-result-item-detail">
@@ -721,12 +746,16 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
                       </div>
                     </div>
                   </div>
-                  <div className="checkbox-wrap">
+                  {/* <div
+                    className="checkbox-wrap"
+                    style={{ border: '1px solid red' }}
+                    onClick={() => onCheckBoxChange(tag, tag.type)}
+                  >
                     <Checkbox
                       checked={checked}
                       onChange={() => onCheckBoxChange(tag, tag.type)}
                     />
-                  </div>
+                  </div> */}
                 </div>
               );
             })}

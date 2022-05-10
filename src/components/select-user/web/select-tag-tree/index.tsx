@@ -24,6 +24,7 @@ const SelectTagTree: React.FunctionComponent<PropType> = (props: PropType) => {
     expandedKeys,
     setExpandedKeys,
     handleSelect,
+    onExpand,
     loadTreeData: loadData,
   } = useSelectExpand(currentTab);
   const [checkedKeys] = useCheckedKeys(basePath, currentTab);
@@ -31,6 +32,7 @@ const SelectTagTree: React.FunctionComponent<PropType> = (props: PropType) => {
   // 树节点选中事件
   const onCheck = (_: any, event: any) => {
     const node = event.node.props;
+    console.log(node, 'node333');
     const item: ItreeItem = {
       ...node,
       title: node.label,
@@ -62,8 +64,8 @@ const SelectTagTree: React.FunctionComponent<PropType> = (props: PropType) => {
         return (
           <TreeNode
             checkable={false}
-            title={item.title}
-            key={item.key}
+            // title={renderSearchText(item.title)}
+            key={item.id}
             isLeaf={item.isLeaf}
             {...item}
           >
@@ -72,11 +74,33 @@ const SelectTagTree: React.FunctionComponent<PropType> = (props: PropType) => {
         );
       }
       if (item.selectType === 'radio') {
-        return <TreeNode className="radio" {...item} />;
+        return (
+          <TreeNode
+            key={item.id}
+            // title={renderSearchText(item.title)}
+            clssName="radio"
+            {...item}
+          />
+        );
       }
-      return <TreeNode key={item.key} {...item} />;
+      return (
+        <TreeNode
+          key={item.id}
+          // title={renderSearchText(item.title)}
+          {...item}
+        />
+      );
     });
-  console.log(checkedKeys, '_checkedKeys', treeState.checkedKeys);
+  console.log(
+    'expandedKeys',
+    expandedKeys,
+    treeData,
+    expandedKeys.length > 0
+      ? expandedKeys
+      : localStorage.getItem('test')
+        ? localStorage.getItem('test').split(',')
+        : expandedKeys
+  );
   // console.log(treeData, 'treeData');
   return treeData && treeData.length > 0 ? (
     <Tree
@@ -88,15 +112,28 @@ const SelectTagTree: React.FunctionComponent<PropType> = (props: PropType) => {
       checkable
       // multiple={multiple}
       blockNode
-      expandedKeys={expandedKeys}
+      expandedKeys={
+        expandedKeys.length > 0
+          ? expandedKeys
+          : localStorage.getItem('test')
+            ? localStorage.getItem('test').split(',')
+            : expandedKeys
+      }
+      // expandedKeys={[
+      //   '1519884017599488002',
+      //   '1519884121001664513',
+      //   '1519884206770987010',
+      //   '1519886599357177857',
+      //   '1519889504036134914',
+      // ]}
       onExpand={setExpandedKeys}
       onSelect={handleSelect}
       checkStrictly
       loadData={loadData}
       // height={340}
-      // treeData={treeData}
+      treeData={treeData}
     >
-      {renderTreeNodes(treeData)}
+      {/* {renderTreeNodes(treeData)} */}
     </Tree>
   ) : (
     <div className="cf-tree-result-empty">暂无内容</div>

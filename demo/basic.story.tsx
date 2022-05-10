@@ -11,7 +11,7 @@ export const MethodInvoke2 = () => {
       multiple: false,
       selectType: 'dept',
 
-      userOrigin: '//gateway.community-dev.easyj.top/user-center',
+      userOrigin: '//gateway.community-sit.easyj.top/user-center',
       // searchPlaceholder: '请输入群主或群名称进行搜索',
       requestParams: {
         selectTypeList: ['dept'],
@@ -46,7 +46,7 @@ export const MethodInvoke = () => {
       dialogProps: {
         title: '选人组件',
       },
-      userOrigin: '//gateway.community-dev.easyj.top/user-center',
+      userOrigin: '//gateway.community-sit.easyj.top/user-center',
       searchPlaceholder: '请输入姓名或手机号进行搜索',
 
       requestParams: {
@@ -86,7 +86,7 @@ export const JSX = () => {
     dialogProps: {
       title: '选人组件',
     },
-    userOrigin: '//gateway.community-dev.easyj.top/user-center',
+    userOrigin: '//gateway.community-sit.easyj.top/user-center',
     showTabList: ['innerContacts'],
     requestParams: {
       strictUser: true,
@@ -136,7 +136,7 @@ export const JSX2 = () => {
       title: '标签',
     },
     searchPlaceholder: '请输入标签名称进行搜索',
-    userOrigin: '//gateway.community-dev.easyj.top/user-center',
+    userOrigin: '//gateway.community-sit.easyj.top/user-center',
     requestParams: {
       selectTypeList: ['user'],
     },
@@ -181,12 +181,12 @@ export const JSX10 = () => {
       title: '标签',
     },
     searchPlaceholder: '请输入标签名称进行搜索',
-    userOrigin: '//gateway.community-dev.easyj.top/user-center',
+    userOrigin: '//gateway.community-sit.easyj.top/user-center',
     requestParams: {
       selectTypeList: ['group_tag'],
     },
-    target: 'tool',
-    modalWidth: 300,
+    // target: 'tool',
+    // modalWidth: 300,
     // onlyLeafCheckable: true,
     isSaveSelectSignature: false,
 
@@ -232,7 +232,7 @@ export const JSX3 = () => {
       title: 'tv',
     },
     searchPlaceholder: '请输入设备编码进行搜素',
-    userOrigin: '//gateway.community-dev.easyj.top/user-center',
+    userOrigin: '//gateway.community-sit.easyj.top/user-center',
     requestParams: {
       selectTypeList: ['camera'],
     },
@@ -293,27 +293,15 @@ export const MOBILE = () => {
     isSaveSelectSignature: true,
     showTabList: ['innerContacts'],
     // selectSignature: '3001001001000006-821519e77a59435494612498d95380c2',
-    value: {
-      key: '1437253451940294678&1437253451344703506',
-      deptId: '1437253451344703506',
-      deptName: '开发部门测试',
-      label: '杨林颖',
-      type: 'USER',
-      isLeaf: true,
-      contactType: '1',
-      extendedAttribute: null,
-      childDelete: true,
-      selectType: 'checkbox',
-      parentId: null,
-    },
     dialogProps: {
       title: '选人组件',
     },
     searchPlaceholder: '请搜索',
     requestParams: {
-      selectTypeList: ['user'],
+      selectTypeList: ['dept'],
+      contactType: 1,
     },
-    userOrigin: '//gateway.community-dev.easyj.top/user-center',
+    userOrigin: '//gateway.community-sit.easyj.top/user-center',
     onOk(data) {
       console.log('onOk data', data);
       const { selectSignature } = data;
@@ -343,7 +331,7 @@ export const MOBILE = () => {
     dialogProps: {
       title: '选人组件',
     },
-    userOrigin: '//gateway.community-dev.easyj.top/user-center',
+    userOrigin: '//gateway.community-sit.easyj.top/user-center',
     requestParams: {
       // strictUser: true,
       selectTypeList: ['user', 'member', 'group'],

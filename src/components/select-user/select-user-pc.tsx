@@ -6,6 +6,7 @@ import RightPane from './web/right-pane';
 import SelectArea from './web/select-area';
 import { PropTypes } from './interface';
 import SelectedPane from './web/selected-pane';
+// import useSelectExpand from './hooks/use-select-expand';
 import classnames from 'classnames';
 import { Modal, Input, Spin, Button } from 'antd';
 import { TREE_CONTEXT } from './select-user';
@@ -45,10 +46,15 @@ const SelectUserPc: React.FunctionComponent<PropTypes> = ({
   const { searchResult, userCount } = treeState;
   const [searchValue, setSearchValue] = useState<string>('');
   const [searchTab, setSearchTab] = useState<string>('all');
+  const [lineHeigth, setLineHeigth] = useState<any>([]);
 
+  // const { expandedKeys } = useSelectExpand(searchTab);
+
+  // console.log(expandedKeys, 'expandedKeys');
   // 搜索的回调
   const handleSearch = useCallback(
     (nextSearchValue: string) => {
+      localStorage.setItem('nextSearchValue', nextSearchValue);
       // 搜索图标点击事件
       const params = {
         search: nextSearchValue,
@@ -57,6 +63,7 @@ const SelectUserPc: React.FunctionComponent<PropTypes> = ({
       };
       getSearchResult(params);
       setSearchValue(nextSearchValue);
+      setLineHeigth([]);
     },
     [searchTab, showTabList, getSearchResult, setSearchValue]
   );
@@ -86,6 +93,7 @@ const SelectUserPc: React.FunctionComponent<PropTypes> = ({
 
   useEffect(() => {
     clear();
+    localStorage.clear();
   }, [visible]);
 
   // 处理关闭
@@ -174,7 +182,7 @@ const SelectUserPc: React.FunctionComponent<PropTypes> = ({
               />
             </div>
           )}
-          {searchValue ? (
+          {searchValue && lineHeigth?.length === 0 ? (
             <SearchResult
               currentTab={searchTab}
               search={searchValue}
@@ -183,6 +191,7 @@ const SelectUserPc: React.FunctionComponent<PropTypes> = ({
               onSearchTabChange={onSearchTabChange}
               showTabList={showTabList}
               multiple={multiple}
+              setExpandedKeys2={(v) => setLineHeigth(v)}
             />
           ) : (
             <React.Fragment>
