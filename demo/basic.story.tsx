@@ -50,7 +50,7 @@ export const MethodInvoke = () => {
       searchPlaceholder: '请输入姓名或手机号进行搜索',
 
       requestParams: {
-        selectTypeList: ['user'],
+        selectTypeList: ['user', 'dept'],
       },
       isSaveSelectSignature: true,
       selectSignature: '3001001001000006-cb94f644c7384e9db6bef86fa1228758',
@@ -90,7 +90,7 @@ export const JSX = () => {
     showTabList: ['innerContacts'],
     requestParams: {
       strictUser: true,
-      selectTypeList: ['user'],
+      selectTypeList: ['user', 'dept'],
     },
     onlyLeafCheckable: true,
     isSaveSelectSignature: true,

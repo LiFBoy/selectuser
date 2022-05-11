@@ -1,5 +1,5 @@
 import React, { useContext, useMemo, useState } from 'react';
-import { Tabs, Checkbox, Typography } from 'antd';
+import { Tabs, Checkbox, Typography, Radio } from 'antd';
 import { InfoCircleFilled } from '@ant-design/icons';
 import { TREE_CONTEXT } from '../../select-user';
 import { funTransformationSubstr } from '../../../../utils';
@@ -200,9 +200,10 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
 
     // 获取当前节点是勾选还是取消勾选
     let checked = null;
-
+    // debugger;
+    // multiple = item.selectType ? item.selectType === 'radio' : false
     // 如果是多选
-    if (multiple) {
+    if (item.selectType ? item.selectType === 'checkbox' : multiple) {
       // 更新选中节点
       checked = updateCheckedNode(node, currentTab);
     } else if (treeState.checkedKeys[0] !== node.id) {
@@ -568,7 +569,9 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
             </div>
             {deptList.map((dept: any, index: number) => {
               let checked = false;
-
+              const _selectType = dept.selectType
+                ? dept.selectType === 'checkbox'
+                : multiple;
               for (const item of deptInfoList) {
                 if (dept.deptId === item?.id) {
                   checked = true;
@@ -587,20 +590,27 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
                         {renderSearchText(dept.deptName)}
                       </div>
                     </div>
-                    {/* <div className="search-result-item-des">
+                    <div className="search-result-item-des">
                       <div
                         className="search-result-info-dept"
                         title={deptNameAndOrgName}
                       >
                         {`位置: ${funTranName(`${deptNameAndOrgName}`, true)}`}
                       </div>
-                    </div> */}
+                    </div>
                   </div>
                   <div className="checkbox-wrap">
-                    <Checkbox
-                      checked={checked}
-                      onChange={() => onCheckBoxChange(dept, dept.type)}
-                    />
+                    {_selectType ? (
+                      <Checkbox
+                        checked={checked}
+                        onChange={() => onCheckBoxChange(dept, dept.type)}
+                      />
+                    ) : (
+                      <Radio
+                        checked={checked}
+                        onChange={() => onCheckBoxChange(dept, dept.type)}
+                      />
+                    )}
                   </div>
                 </div>
               );

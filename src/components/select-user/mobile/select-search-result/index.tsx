@@ -330,14 +330,14 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
                           onClick={() => onCheckBoxChange(dept, dept.type)}
                         >
                           {searchResultNameReplace(dept.deptName)}
-                          {/* <div className="search-result-item-des">
+                          <div className="search-result-item-des">
                             <div
                               className="overflow-ellipsis"
                               title={`${dept.orgName} - ${dept.deptNamePath}`}
                             >
                               位置:{`${dept.orgName} - ${dept.deptNamePath}`}
                             </div>
-                          </div> */}
+                          </div>
                         </div>
                       </div>
                     </div>
