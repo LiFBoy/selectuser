@@ -197,13 +197,12 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
 
     node.type = item.type;
     node.contactType = item.contactType;
-
+    const _multiple =
+      currentTab === 'tagContacts' ? item?.selectType === 'checkbox' : multiple;
     // 获取当前节点是勾选还是取消勾选
     let checked = null;
-    // debugger;
-    // multiple = item.selectType ? item.selectType === 'radio' : false
     // 如果是多选
-    if (item.selectType ? item.selectType === 'checkbox' : multiple) {
+    if (_multiple) {
       // 更新选中节点
       checked = updateCheckedNode(node, currentTab);
     } else if (treeState.checkedKeys[0] !== node.id) {
@@ -569,9 +568,9 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
             </div>
             {deptList.map((dept: any, index: number) => {
               let checked = false;
-              const _selectType = dept.selectType
-                ? dept.selectType === 'checkbox'
-                : multiple;
+              // const _selectType = dept.selectType
+              //   ? dept.selectType === 'checkbox'
+              //   : multiple;
               for (const item of deptInfoList) {
                 if (dept.deptId === item?.id) {
                   checked = true;
@@ -600,7 +599,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
                     </div>
                   </div>
                   <div className="checkbox-wrap">
-                    {_selectType ? (
+                    {multiple ? (
                       <Checkbox
                         checked={checked}
                         onChange={() => onCheckBoxChange(dept, dept.type)}

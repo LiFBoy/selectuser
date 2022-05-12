@@ -17,7 +17,7 @@ const SelectCommonTree: React.FunctionComponent<PropType> = (
   props: PropType
 ) => {
   // 获取props
-  const { currentTab, multiple: _multiple, selectType } = props;
+  const { currentTab, multiple, selectType } = props;
   // 获取treeContext
   const treeContext = useContext(TREE_CONTEXT);
   const { treeState, updateCheckedNode, clear, resetUserCount } = treeContext;
@@ -41,9 +41,9 @@ const SelectCommonTree: React.FunctionComponent<PropType> = (
       title: node.label,
     };
 
-    const multiple = node.selectType
-      ? node.selectType === 'checkbox'
-      : _multiple;
+    // const multiple = node.selectType
+    //   ? node.selectType === 'checkbox'
+    //   : _multiple;
     // 获取当前节点是勾选还是取消勾选
     let checked = null;
 
@@ -82,7 +82,7 @@ const SelectCommonTree: React.FunctionComponent<PropType> = (
           </TreeNode>
         );
       }
-      if (item.selectType ? item.selectType === 'radio' : false) {
+      if (!multiple) {
         return <TreeNode className="radio" {...item} />;
       }
       return <TreeNode key={item.key} {...item} />;
