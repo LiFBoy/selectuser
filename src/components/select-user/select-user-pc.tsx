@@ -54,7 +54,14 @@ const SelectUserPc: React.FunctionComponent<PropTypes> = ({
   // 搜索的回调
   const handleSearch = useCallback(
     (nextSearchValue: string) => {
-      localStorage.setItem('nextSearchValue', nextSearchValue);
+      // debugger;
+      if (!nextSearchValue) {
+        localStorage.clear();
+        // setLineHeigth([]);
+      } else {
+        localStorage.setItem('nextSearchValue', nextSearchValue);
+      }
+
       // 搜索图标点击事件
       const params = {
         search: nextSearchValue,
@@ -73,7 +80,11 @@ const SelectUserPc: React.FunctionComponent<PropTypes> = ({
     if (tab) {
       getTreeRoot(tab);
     }
-  }, [tab]);
+    //
+    if (tab === 'tagContacts' && searchValue) {
+      getTreeRoot(tab);
+    }
+  }, [tab, searchValue]);
 
   useEffect(() => {
     if (!searchValue) {

@@ -251,6 +251,7 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
   };
   const renderSearchText = (text: string) => {
     const nextSearchValue = localStorage.getItem('nextSearchValue');
+    // debugger;
     if (!text?.includes(nextSearchValue)) return text;
     const [str1, str2] = text.replace(nextSearchValue, '&').split('&');
     return (
@@ -275,6 +276,10 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
       isRoot?: boolean // 是否是根节点
     ) => {
       const { onlyLeafCheckable, unCheckableNodeType, selectType } = treeState;
+      const enmu = {
+        1: '运营标签组',
+        2: '系统标签组',
+      };
       for (const item of list) {
         item.id = item.key;
         // item.key = getUid();
@@ -315,8 +320,10 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
         const testid = localStorage.getItem('testa');
         console.log(testid, 'testid');
         if (item.id === testid) {
-          label = renderSearchText(label);
+          // debugger;
+          label = renderSearchText(item.name);
         }
+
         item.title = (
           <div className="treeNode">
             <Popover
@@ -328,7 +335,14 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
               <NodeIcon />
               <div className="nodeContent">
                 <div className="titleWrapper">
-                  <div className="title">22{label}</div>
+                  <div className="title">11{label}</div>
+                  {item.labelPermission === 2 && <span>不可修改</span>}
+                  {/* {!item.labelGroupType && <span>不可修改</span>} */}
+                  {item.labelGroupType && (
+                    <span className="label-group-type">
+                      {enmu[item.labelGroupType]}
+                    </span>
+                  )}
                 </div>
               </div>
             </Popover>

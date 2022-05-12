@@ -133,6 +133,8 @@ export interface ItreeItem
   selectType?: any;
   contactType?: string;
   count?: number;
+  labelPermission?: number;
+  labelGroupType?: string;
 }
 
 export interface PropTypes {

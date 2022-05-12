@@ -104,20 +104,21 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
   // };
   const handleClick = (item: any, type: string) => {
     console.log(item, 'item99999');
-    const a = [
-      '1519884017599488002',
-      '1519884121001664513',
-      '1519884206770987010',
-      '1519886599357177857',
-      '1519889504036134914',
-    ];
-    localStorage.setItem('test', a);
-    localStorage.setItem('testa', '1519889504036134914');
+    // const a = [
+    //   '1519884017599488002',
+    //   '1519884121001664513',
+    //   '1519884206770987010',
+    //   '1519886599357177857',
+    //   '1519889504036134914',
+    // ];
+    localStorage.setItem('test', item.labelPath);
+    localStorage.setItem('testa', item.userId);
+    // debugger;
 
-    setExpandedKeys(a);
+    setExpandedKeys(item.labelPath);
 
     setTimeout(() => {
-      setExpandedKeys2(a);
+      setExpandedKeys2(item.labelPath);
     }, 0);
   };
 
@@ -591,7 +592,6 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
             </div>
             {deptList.map((dept: any, index: number) => {
               let checked = false;
-
               for (const item of deptInfoList) {
                 if (dept.deptId === item?.id) {
                   checked = true;

@@ -77,6 +77,9 @@ const SelectTagTree: React.FunctionComponent<PropType> = (props: PropType) => {
         return (
           <TreeNode
             key={item.id}
+            disabled={
+              item?.labelPermission ? item?.labelPermission === 2 : false
+            }
             // title={renderSearchText(item.title)}
             clssName="radio"
             {...item}
@@ -86,6 +89,7 @@ const SelectTagTree: React.FunctionComponent<PropType> = (props: PropType) => {
       return (
         <TreeNode
           key={item.id}
+          disabled={item?.labelPermission ? item?.labelPermission === 2 : false}
           // title={renderSearchText(item.title)}
           {...item}
         />
@@ -98,7 +102,7 @@ const SelectTagTree: React.FunctionComponent<PropType> = (props: PropType) => {
     expandedKeys.length > 0
       ? expandedKeys
       : localStorage.getItem('test')
-        ? localStorage.getItem('test').split(',')
+        ? localStorage.getItem('test').split('-')
         : expandedKeys
   );
   // console.log(treeData, 'treeData');
@@ -116,7 +120,7 @@ const SelectTagTree: React.FunctionComponent<PropType> = (props: PropType) => {
         expandedKeys.length > 0
           ? expandedKeys
           : localStorage.getItem('test')
-            ? localStorage.getItem('test').split(',')
+            ? localStorage.getItem('test').split('-')
             : expandedKeys
       }
       // expandedKeys={[
@@ -131,9 +135,9 @@ const SelectTagTree: React.FunctionComponent<PropType> = (props: PropType) => {
       checkStrictly
       loadData={loadData}
       // height={340}
-      treeData={treeData}
+      // treeData={treeData}
     >
-      {/* {renderTreeNodes(treeData)} */}
+      {renderTreeNodes(treeData)}
     </Tree>
   ) : (
     <div className="cf-tree-result-empty">暂无内容</div>
