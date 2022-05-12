@@ -140,7 +140,7 @@ const SelectTagTree: React.FunctionComponent<PropType> = (props: PropType) => {
       {renderTreeNodes(treeData)}
     </Tree>
   ) : (
-    <div className="cf-tree-result-empty">暂无内容</div>
+    <div className="cf-tree-result-empty no-data-result-empty">暂无内容</div>
   );
 };
 

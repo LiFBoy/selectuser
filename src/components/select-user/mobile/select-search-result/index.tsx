@@ -65,7 +65,7 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
   const renderSearchHint = (list: Array<any>) => {
     if (list && list.length > 19) {
       return (
-        <div className="search-result-group-item tree-footer">
+        <div className="more-text">
           仅展示前 20 个搜索结果，请输入更精确的搜索内容。
         </div>
       );
@@ -183,7 +183,7 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
     const groupList: any[] = [];
     const orgRelList: any[] = [];
 
-    for (const resultItem of searchResult) {
+    for (const resultItem of searchResult?.dataSource) {
       switch (resultItem.type) {
         case 'USER':
           userList.push(resultItem);
@@ -554,9 +554,9 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
       <>
         {/* 标签tab下不展示手机号提示*/}
         {searchTab !== 'tags' && $allNumberAlert}
-        {searchResult?.length > 0 ? (
+        {searchResult?.dataSource?.length > 0 ? (
           <React.Fragment>{renderTabContent()}</React.Fragment>
-        ) : searchResult?.length === 0 ? (
+        ) : searchResult?.dataSource?.length === 0 ? (
           <div className="mobile-tree-result-empty">
             <div className="empty-img"></div>
             <div className="text">没有搜索到相关内容</div>

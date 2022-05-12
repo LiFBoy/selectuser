@@ -1,5 +1,5 @@
 import React, { useContext, useMemo, useState } from 'react';
-import { Tabs, Checkbox, Typography } from 'antd';
+import { Tabs, Checkbox, Typography, Radio } from 'antd';
 import { InfoCircleFilled } from '@ant-design/icons';
 import { TREE_CONTEXT } from '../../select-user';
 import useSelectExpand from '../../hooks/use-select-expand';
@@ -92,7 +92,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
   const renderSearchHint = (list: Array<any>) => {
     if (list && list.length > 19) {
       return (
-        <div className="tree-footer">
+        <div className="more-text">
           仅展示前20个搜索结果，请输入更精确的搜索内容获取
         </div>
       );
@@ -220,12 +220,12 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
 
     node.type = item.type;
     node.contactType = item.contactType;
-
+    const _multiple =
+      currentTab === 'tagContacts' ? item?.selectType === 'checkbox' : multiple;
     // 获取当前节点是勾选还是取消勾选
     let checked = null;
-
     // 如果是多选
-    if (multiple) {
+    if (_multiple) {
       // 更新选中节点
       checked = updateCheckedNode(node, currentTab);
     } else if (treeState.checkedKeys[0] !== node.id) {
@@ -352,8 +352,8 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
     const tagList: any[] = [];
     const groupList: any[] = [];
     const orgRelList: any[] = [];
-
-    for (const resultItem of searchResult) {
+    
+    for (const resultItem of searchResult?.dataSource) {
       console.log(resultItem.type, 'console.log(resultItem.type)');
       switch (resultItem.type) {
         case 'EQUIPMENT':
@@ -620,10 +620,17 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
                     </div>
                   </div>
                   <div className="checkbox-wrap">
-                    <Checkbox
-                      checked={checked}
-                      onChange={() => onCheckBoxChange(dept, dept.type)}
-                    />
+                    {multiple ? (
+                      <Checkbox
+                        checked={checked}
+                        onChange={() => onCheckBoxChange(dept, dept.type)}
+                      />
+                    ) : (
+                      <Radio
+                        checked={checked}
+                        onChange={() => onCheckBoxChange(dept, dept.type)}
+                      />
+                    )}
                   </div>
                 </div>
               );
@@ -828,15 +835,24 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
     return (
       <>
         {$allNumberAlert}
-        <React.Fragment>{renderTabContent()}</React.Fragment>
+        {searchResult?.dataSource?.length > 0 ? (
+          <React.Fragment>{renderTabContent()}</React.Fragment>
+        ) : null}
       </>
     );
   };
 
   const handleDefault = () => {
-    return searchResult.length === 0 ? (
-      <div className="cf-tree-result-empty">未搜索到相关内容</div>
-    ) : null;
+    return (
+      <>
+        {searchResult?.dataSource?.length === 0 ? (
+          <div className="mobile-tree-result-empty">
+            <div className="empty-img"></div>
+            <div className="text">没有搜索到相关内容</div>
+          </div>
+        ) : null}
+      </>
+    );
   };
 
   return (

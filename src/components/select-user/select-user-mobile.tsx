@@ -498,7 +498,6 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
       .then((res) => {
         Toast.hide();
         const data = res.data;
-
         setSearchResult(data);
       })
       .catch(() => {
@@ -508,7 +507,7 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
         Toast.hide();
       });
   };
-  console.log(searchValue, searchResult, 'xxxxx');
+  console.log(searchValue, searchResult, 'xxxxx111');
 
   return (
     <>

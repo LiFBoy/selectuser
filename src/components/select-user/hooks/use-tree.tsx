@@ -656,7 +656,8 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
       })
       .then(({ data = {}}) => {
         setLoading(false);
-        setSearchResult(data || []);
+        // debugger;
+        setSearchResult(data || null);
       })
       .catch(() => {
         setLoading(false);
