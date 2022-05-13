@@ -275,7 +275,7 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
       isRoot?: boolean // 是否是根节点
     ) => {
       const { onlyLeafCheckable, unCheckableNodeType, selectType } = treeState;
-      const enmu = {
+      const enmu: any = {
         1: '运营标签组',
         2: '系统标签组',
       };
@@ -284,7 +284,7 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
         // item.key = getUid();
         item.name = item.label;
         let NodeIcon = treeNodeIconMap[item.type];
-        let label = item.name;
+        let label: any = item.name;
 
         if (item.type === 'TAG') {
           // 标签需要展示标签下的人数

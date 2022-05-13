@@ -199,7 +199,7 @@ const SelectUserPc: React.FunctionComponent<PropTypes> = ({
               onSearchTabChange={onSearchTabChange}
               showTabList={showTabList}
               multiple={multiple}
-              onExpandedKeys={(v) => setLineHeigth(v)}
+              onExpandedKeys={(v: any) => setLineHeigth(v)}
             />
           ) : (
             <React.Fragment>
