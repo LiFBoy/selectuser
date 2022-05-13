@@ -378,7 +378,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
           groupList.push(resultItem);
           break;
         case 'TAG':
-        case 'GROUP_TAG':
+        case 'TAG_GROUP':
           tagList.push(resultItem);
           break;
         case 'ORG_REL':
@@ -389,7 +389,8 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
 
     for (const resultItem of searchResult?.tagList) {
       switch (resultItem.type) {
-        case 'GROUP_TAG':
+        case 'TAG_GROUP':
+        case 'TAG':
           tagGroupList.push(resultItem);
           break;
       }
@@ -778,7 +779,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
                 </div>
               );
             })}
-            {renderSearchHint(tagList)}
+            {renderSearchHint(tagGroupList)}
           </React.Fragment>
         ) : (
           ''
