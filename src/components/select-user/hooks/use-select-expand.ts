@@ -55,24 +55,15 @@ export default (currentTab: string) => {
         setExpandedKeys(rootKeys);
       });
     } else {
-      // debugger;
       setExpandedKeys([]);
     }
   }, [rootKeys.join(',')]);
 
-  const onExpand = (expandedKeysValue) => {
-    // debugger;
-    // console.log('onExpand', expandedKeysValue);
-    // // if not set autoExpandParent to false, if children expanded, parent can not collapse.
-    // // or, you can remove all expanded children keys.
-    // setExpandedKeys(expandedKeysValue);
-    // setAutoExpandParent(false);
-  };
+  const onExpand = (expandedKeysValue) => {};
 
   // 点击树节点时，控制展开 & 收起，获取子节点
   const handleSelect = useCallback(
     (selectedKeys, event) => {
-      // debugger;
       if (event.node.props.isLeaf) {
         return;
       }

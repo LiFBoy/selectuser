@@ -34,6 +34,7 @@ const SelectedShowPane: React.FunctionComponent<PropType> = (
       <div className="selected-show-pane-detail-box">
         {groupList.map((group: IgroupItem) => {
           const { title, itemList, count, type } = group;
+          console.log(group, 'group2222');
           return (
             <div className="selected-show-pane-group" key={title}>
               <div className="selected-show-pane-group-top">
@@ -42,12 +43,14 @@ const SelectedShowPane: React.FunctionComponent<PropType> = (
                 <span className="selected-show-pane-group-total">
                   {title} ({type === 'USER' ? itemList.length : count})
                 </span>
-                <span
-                  className="selected-show-pane-group-clear"
-                  onClick={() => delGroup(group)}
-                >
-                  <DeleteOutlined />
-                </span>
+                {!itemList.find((_) => _.labelPermission === 2) && (
+                  <span
+                    className="selected-show-pane-group-clear"
+                    onClick={() => delGroup(group)}
+                  >
+                    <DeleteOutlined />
+                  </span>
+                )}
               </div>
               <div className="selected-show-pane-group-content selected-tag-container">
                 {itemList.map((item: ItreeItem) => {
@@ -64,10 +67,12 @@ const SelectedShowPane: React.FunctionComponent<PropType> = (
                       >
                         {showName}
                       </span>
-                      <CloseOutlined
-                        className="selected-tag-clear"
-                        onClick={() => delItem(item, group)}
-                      />
+                      {item.labelPermission === 1 && (
+                        <CloseOutlined
+                          className="selected-tag-clear"
+                          onClick={() => delItem(item, group)}
+                        />
+                      )}
                     </div>
                   );
                 })}

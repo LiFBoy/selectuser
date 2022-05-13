@@ -48,9 +48,6 @@ const SelectTagTree: React.FunctionComponent<PropType> = (props: PropType) => {
       checked = updateCheckedNode(item);
       resetUserCount(item, checked, selectType === 'user');
     } else if (treeState.checkedKeys.indexOf(item.id) === -1) {
-      // debugger;
-      console.log(treeState.checkedKeys, item.id, 'xxxxx');
-      // checked = updateCheckedNode(item);
       updateCheckedNode(item);
     } else {
       return;
@@ -95,16 +92,7 @@ const SelectTagTree: React.FunctionComponent<PropType> = (props: PropType) => {
         />
       );
     });
-  console.log(
-    'expandedKeys',
-    expandedKeys,
-    treeData,
-    expandedKeys.length > 0
-      ? expandedKeys
-      : localStorage.getItem('test')
-        ? localStorage.getItem('test').split('-')
-        : expandedKeys
-  );
+
   // console.log(treeData, 'treeData');
   return treeData && treeData.length > 0 ? (
     <Tree

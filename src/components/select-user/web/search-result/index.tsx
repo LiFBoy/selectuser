@@ -81,7 +81,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
     orgRelInfoList,
     requestParams,
   } = treeState;
-  console.log(requestParams, 'requestParams');
+  console.log(treeState, 'treeState');
 
   // 更多信息展开后悬浮框的位置
   const [moreInfoStyle, setMoreInfoStyle] = useState({});
@@ -103,17 +103,8 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
   //   return { id, key, name, orgId, type, contactType };
   // };
   const handleClick = (item: any, type: string) => {
-    console.log(item, 'item99999');
-    // const a = [
-    //   '1519884017599488002',
-    //   '1519884121001664513',
-    //   '1519884206770987010',
-    //   '1519886599357177857',
-    //   '1519889504036134914',
-    // ];
     localStorage.setItem('test', item.labelPath);
     localStorage.setItem('testa', item.userId);
-    // debugger;
 
     setExpandedKeys(item.labelPath);
 
@@ -278,6 +269,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
 
   // 搜索文案匹配时颜色展示
   const renderSearchText = (text: string) => {
+    // debugger;
     if (!text?.includes(search)) return text;
     const [str1, str2] = text.replace(search, '&').split('&');
     return (
@@ -350,9 +342,10 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
     const deptList: any[] = [];
     const orgList: any[] = [];
     const tagList: any[] = [];
+    const tagGroupList: any[] = [];
     const groupList: any[] = [];
     const orgRelList: any[] = [];
-    
+
     for (const resultItem of searchResult?.dataSource) {
       console.log(resultItem.type, 'console.log(resultItem.type)');
       switch (resultItem.type) {
@@ -392,7 +385,15 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
           break;
       }
     }
-    console.log(tagList, 'tagList', tagInfoList);
+
+    for (const resultItem of searchResult?.tagList) {
+      switch (resultItem.type) {
+        case 'GROUP_TAG':
+          tagGroupList.push(resultItem);
+          break;
+      }
+    }
+    console.log(tagGroupList, 'tagGroupList', tagInfoList);
 
     return (
       <div className="search-result-box">
@@ -731,18 +732,10 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
               相关标签({tagList.length})
             </div>
             {tagList.map((tag: any, index: number) => {
-              let checked = false;
-
-              for (const item of tagInfoList) {
-                if (tag.userId === item?.id) {
-                  checked = true;
-                }
-              }
               return (
                 <div
                   className="search-result-group-item"
                   key={`${tag.userId}-${index}`}
-                  style={{ border: '1px solid red' }}
                   onClick={() => handleClick(tag, tag.type)}
                 >
                   <TagIcon />
@@ -753,16 +746,34 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
                       </div>
                     </div>
                   </div>
-                  {/* <div
-                    className="checkbox-wrap"
-                    style={{ border: '1px solid red' }}
-                    onClick={() => onCheckBoxChange(tag, tag.type)}
-                  >
-                    <Checkbox
-                      checked={checked}
-                      onChange={() => onCheckBoxChange(tag, tag.type)}
-                    />
-                  </div> */}
+                </div>
+              );
+            })}
+            {renderSearchHint(tagList)}
+          </React.Fragment>
+        ) : (
+          ''
+        )}
+        {tagGroupList.length > 0 ? (
+          <React.Fragment>
+            <div className="search-result-group-title">
+              相关标签组({tagGroupList.length})
+            </div>
+            {tagGroupList.map((tag: any, index: number) => {
+              return (
+                <div
+                  className="search-result-group-item"
+                  key={`${tag.userId}-${index}`}
+                  onClick={() => handleClick(tag, tag.type)}
+                >
+                  <TagIcon />
+                  <div className="search-result-item-detail">
+                    <div className="search-result-item-title">
+                      <div className="overflow-ellipsis" title={tag.userName}>
+                        {renderSearchText(tag.userName)}
+                      </div>
+                    </div>
+                  </div>
                 </div>
               );
             })}

@@ -258,7 +258,7 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
       <>
         {str1}
         <span
-          style={{ color: 'red' }}
+          style={{ color: '#2c7ef8' }}
           className="search-result-item-title_matched"
         >
           {nextSearchValue}
@@ -318,9 +318,8 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
           boxShadow: '5px 5px 10px rgba(129, 133, 167, 0.2)',
         };
         const testid = localStorage.getItem('testa');
-        console.log(testid, 'testid');
+
         if (item.id === testid) {
-          // debugger;
           label = renderSearchText(item.name);
         }
 
@@ -335,9 +334,11 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
               <NodeIcon />
               <div className="nodeContent">
                 <div className="titleWrapper">
-                  <div className="title">11{label}</div>
-                  {item.labelPermission === 2 && <span>不可修改</span>}
-                  {/* {!item.labelGroupType && <span>不可修改</span>} */}
+                  <div className="title">{label}</div>
+                  {item.labelPermission === 2 && (
+                    <span className="label-group-disabled">(不可修改)</span>
+                  )}
+
                   {item.labelGroupType && (
                     <span className="label-group-type">
                       {enmu[item.labelGroupType]}

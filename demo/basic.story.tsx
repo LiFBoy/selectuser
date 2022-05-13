@@ -41,23 +41,54 @@ MethodInvoke2.storyName = '告警群';
 export const MethodInvoke = () => {
   const show = () => {
     SelectUser.show({
+      visible: true,
       multiple: true,
       selectType: 'dept',
+      showTabList: ['tagContacts'],
       dialogProps: {
-        title: '选人组件',
+        title: '标签',
       },
+      searchPlaceholder: '请输入标签名称进行搜索',
       userOrigin: 'http://gateway.dev.suosihulian.com/user-center',
-      searchPlaceholder: '请输入姓名或手机号进行搜索',
-
       requestParams: {
-        selectTypeList: ['user', 'dept'],
+        selectTypeList: ['group_tag'],
+        tagTypeList: [0],
       },
-      isSaveSelectSignature: true,
-      selectSignature: '3001001001000006-cb94f644c7384e9db6bef86fa1228758',
-      // selectSignature: '3001001001000005-ff5b213e99a64b49ab3d6ef2ce37fe1f',
-      showTabList: ['maternalContacts'],
-      onOk: action('onOk'),
-      onCancel: action('onCancel'),
+      // target: 'tool',
+      // modalWidth: 300,
+      // onlyLeafCheckable: true,
+      isSaveSelectSignature: false,
+      defaultValue: {
+        tagInfoList: [
+          {
+            key: '1517104537964769281',
+            deptId: '1517104537964769281',
+            deptName: null,
+            label: '标签113',
+            type: 'TAG',
+            isLeaf: true,
+            contactType: 9,
+            extendedAttribute: null,
+            childDelete: false,
+            selectType: 'checkbox',
+            parentId: '1516254262265511937',
+            labelGroupType: null,
+            labelPermission: 2,
+          },
+        ],
+      },
+      // wrapperKey: 'tagInfoList',
+
+      // selectSignature: '',
+      // onOk(data) {
+      //   console.log('onOk data', data);
+      //   const { selectSignature } = data;
+      //   setSelectSignature(selectSignature);
+      //   setVisible(false);
+      // },
+      // onCancel() {
+      //   setVisible(false);
+      // },
       getCheckedNodes(data) {
         console.log('getCheckedNodes data', data);
       },
@@ -190,7 +221,23 @@ export const JSX10 = () => {
     // modalWidth: 300,
     // onlyLeafCheckable: true,
     isSaveSelectSignature: false,
-
+    defaultValue: [
+      {
+        key: '1517104537964769281',
+        deptId: '1517104537964769281',
+        deptName: null,
+        label: '标签113',
+        type: 'TAG',
+        isLeaf: true,
+        contactType: 9,
+        extendedAttribute: null,
+        childDelete: false,
+        selectType: 'checkbox',
+        parentId: '1516254262265511937',
+        labelGroupType: null,
+        labelPermission: 2,
+      },
+    ],
     // selectSignature: '',
     onOk(data) {
       console.log('onOk data', data);

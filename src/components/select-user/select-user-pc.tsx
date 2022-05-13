@@ -54,10 +54,8 @@ const SelectUserPc: React.FunctionComponent<PropTypes> = ({
   // 搜索的回调
   const handleSearch = useCallback(
     (nextSearchValue: string) => {
-      // debugger;
       if (!nextSearchValue) {
         localStorage.clear();
-        // setLineHeigth([]);
       } else {
         localStorage.setItem('nextSearchValue', nextSearchValue);
       }
@@ -80,11 +78,10 @@ const SelectUserPc: React.FunctionComponent<PropTypes> = ({
     if (tab) {
       getTreeRoot(tab);
     }
-    //
-    if (tab === 'tagContacts' && searchValue) {
+    if (tab === 'tagContacts' && (searchValue || lineHeigth?.length > 0)) {
       getTreeRoot(tab);
     }
-  }, [tab, searchValue]);
+  }, [tab, searchValue, lineHeigth]);
 
   useEffect(() => {
     if (!searchValue) {
