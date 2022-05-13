@@ -59,8 +59,6 @@ export default (currentTab: string) => {
     }
   }, [rootKeys.join(',')]);
 
-  const onExpand = (expandedKeysValue) => {};
-
   // 点击树节点时，控制展开 & 收起，获取子节点
   const handleSelect = useCallback(
     (selectedKeys, event) => {
@@ -90,7 +88,6 @@ export default (currentTab: string) => {
     // eslint-disable-next-line no-warning-comments
     // TODO: 数据渲染滞后问题待解决
     setExpandedKeys,
-    onExpand,
     handleSelect,
     loadTreeData,
   };

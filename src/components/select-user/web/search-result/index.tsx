@@ -63,7 +63,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
     onExpandedKeys,
   } = props;
 
-  const { onExpand, setExpandedKeys } = useSelectExpand(currentTab);
+  const { setExpandedKeys } = useSelectExpand(currentTab);
 
   // 获取treeContext
   const treeContext = useContext(TREE_CONTEXT);

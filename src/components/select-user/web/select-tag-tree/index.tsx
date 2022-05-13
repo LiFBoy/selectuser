@@ -24,7 +24,6 @@ const SelectTagTree: React.FunctionComponent<PropType> = (props: PropType) => {
     expandedKeys,
     setExpandedKeys,
     handleSelect,
-    onExpand,
     loadTreeData: loadData,
   } = useSelectExpand(currentTab);
   const [checkedKeys] = useCheckedKeys(basePath, currentTab);

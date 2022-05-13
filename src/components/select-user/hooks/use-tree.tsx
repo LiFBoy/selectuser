@@ -251,7 +251,6 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
   };
   const renderSearchText = (text: string) => {
     const nextSearchValue = localStorage.getItem('nextSearchValue');
-    // debugger;
     if (!text?.includes(nextSearchValue)) return text;
     const [str1, str2] = text.replace(nextSearchValue, '&').split('&');
     return (
