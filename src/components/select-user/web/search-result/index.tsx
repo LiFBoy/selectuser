@@ -22,7 +22,7 @@ const { TabPane } = Tabs;
 interface PropType {
   currentTab: string;
   search: string; // 搜索的字段
-  searchResult: any[]; // 搜索结果
+  searchResult: any; // 搜索结果
   onSearchTabChange: (tab: string) => void;
   showTabList: any[];
   multiple: boolean;
@@ -59,7 +59,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
     showTabList,
     selectType,
     currentTab,
-    setExpandedKeys2,
+    onExpandedKeys,
   } = props;
 
   const { onExpand, setExpandedKeys } = useSelectExpand(currentTab);
@@ -103,13 +103,13 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
   //   return { id, key, name, orgId, type, contactType };
   // };
   const handleClick = (item: any, type: string) => {
-    localStorage.setItem('test', item.labelPath);
-    localStorage.setItem('testa', item.userId);
+    localStorage.setItem('labelPath', item.labelPath);
+    localStorage.setItem('selectId', item.userId);
 
     setExpandedKeys(item.labelPath);
 
     setTimeout(() => {
-      setExpandedKeys2(item.labelPath);
+      onExpandedKeys(item.labelPath);
     }, 0);
   };
 

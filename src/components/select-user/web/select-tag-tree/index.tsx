@@ -107,8 +107,8 @@ const SelectTagTree: React.FunctionComponent<PropType> = (props: PropType) => {
       expandedKeys={
         expandedKeys.length > 0
           ? expandedKeys
-          : localStorage.getItem('test')
-            ? localStorage.getItem('test').split('-')
+          : localStorage.getItem('labelPath')
+            ? localStorage.getItem('labelPath').split('-')
             : expandedKeys
       }
       // expandedKeys={[

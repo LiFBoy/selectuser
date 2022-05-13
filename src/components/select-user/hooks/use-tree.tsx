@@ -317,9 +317,8 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
           maxHeight: '400px',
           boxShadow: '5px 5px 10px rgba(129, 133, 167, 0.2)',
         };
-        const testid = localStorage.getItem('testa');
 
-        if (item.id === testid) {
+        if (item.id === localStorage.getItem('selectId')) {
           label = renderSearchText(item.name);
         }
 
