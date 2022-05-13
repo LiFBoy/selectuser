@@ -24,6 +24,7 @@ interface PropType {
   search: string; // 搜索的字段
   searchResult: any; // 搜索结果
   onSearchTabChange: (tab: string) => void;
+  onExpandedKeys: any;
   showTabList: any[];
   multiple: boolean;
   selectType: 'user' | 'dept';

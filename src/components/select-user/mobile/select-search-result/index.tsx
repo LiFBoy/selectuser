@@ -10,7 +10,7 @@ import './index.less';
 
 interface PropType {
   search: string; // 搜索的字段
-  searchResult: any[]; // 搜索结果
+  searchResult: any; // 搜索结果
   onSearchTabChange: (tab: string) => void;
   showTabList: any[];
   multiple: boolean;
