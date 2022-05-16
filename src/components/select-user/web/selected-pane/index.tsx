@@ -10,12 +10,18 @@ interface PropTypes {
   showUserDeptName?: boolean; // 是否展示用户的 deptName
   selectPaneProps?: any; // 已选分类文案支持自定义
   selectTypeList?: any; // 类型
+  noTagLabelPermission?: boolean;
 }
 
 const SelectPane: React.FunctionComponent<PropTypes> = (props: PropTypes) => {
   const treeContext = useContext(TREE_CONTEXT);
-  const { selectType, showUserDeptName, selectPaneProps, selectTypeList } =
-    props;
+  const {
+    selectType,
+    showUserDeptName,
+    selectPaneProps,
+    selectTypeList,
+    noTagLabelPermission,
+  } = props;
   const { treeState, delKeys, setUserCount, resetUserCount } = treeContext;
   const {
     deptInfoList,
@@ -229,6 +235,7 @@ const SelectPane: React.FunctionComponent<PropTypes> = (props: PropTypes) => {
   return (
     <div className="select-pane-wrap">
       <SelectedShowPane
+        noTagLabelPermission={noTagLabelPermission}
         showUserDeptName={showUserDeptName}
         groupList={groupList}
         unit={selectType === 'user' ? '人' : ''} // selectType为user时单位为人，非user时则为部门及节点不展示单位

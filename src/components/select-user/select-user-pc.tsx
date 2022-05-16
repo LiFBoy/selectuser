@@ -16,6 +16,7 @@ const SelectUserPc: React.FunctionComponent<PropTypes> = ({
   selectPaneProps = {},
   target,
   modalWidth,
+  noTagLabelPermission,
   visible = false,
   multiple = true,
   onCancel,
@@ -212,6 +213,7 @@ const SelectUserPc: React.FunctionComponent<PropTypes> = ({
                 currentTab={tab}
                 target={target}
                 multiple={multiple}
+                noTagLabelPermission={noTagLabelPermission}
                 selectType={selectType}
               />
             </React.Fragment>
@@ -226,6 +228,7 @@ const SelectUserPc: React.FunctionComponent<PropTypes> = ({
         {target ? null : (
           <RightPane>
             <SelectedPane
+              noTagLabelPermission={noTagLabelPermission}
               selectType={selectType}
               showUserDeptName={requestParams?.strictUser}
               selectTypeList={requestParams.selectTypeList}

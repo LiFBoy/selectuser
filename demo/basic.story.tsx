@@ -48,12 +48,14 @@ export const MethodInvoke = () => {
       dialogProps: {
         title: '标签',
       },
+      noTagLabelPermission: false,
       searchPlaceholder: '请输入标签名称进行搜索',
       userOrigin: 'http://gateway.community-sit.easyj.top/user-center',
       requestParams: {
         selectTypeList: ['group_tag'],
         tagTypeList: [0],
       },
+
       // target: 'tool',
       // modalWidth: 300,
       // onlyLeafCheckable: true,
@@ -207,6 +209,7 @@ export const JSX10 = () => {
     visible,
     multiple: true,
     selectType: 'dept',
+    noTagLabelPermission: false,
     showTabList: ['tagContacts'],
     dialogProps: {
       title: '标签',

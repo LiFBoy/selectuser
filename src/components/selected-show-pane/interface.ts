@@ -5,6 +5,7 @@ export interface PropType {
   showUserDeptName?: boolean; // 是否展示用户的 deptName
   groupList: IgroupItem[];
   unit: string; // 计量单位
+  noTagLabelPermission?: boolean;
   delGroup: (group: IgroupItem) => void; // 删除分组，参数为被删除的分组
   delItem: (item: ItreeItem, group: IgroupItem) => void; // 删除items，参数为被删除的item，以及item所属的group
 }

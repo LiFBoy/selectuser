@@ -1,35 +1,44 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import SelectTagTree from '../select-tag-tree';
 import SelectCommonTree from '../select-common-tree';
 import './index.less';
+import { useEffect } from 'react';
 
 interface PropType {
   currentTab: string; // 用当前选中的tab作为Tree组件的key，当切换tab时使Tree组件重新生成
   multiple: boolean;
   target?: string;
+  noTagLabelPermission?: boolean;
   selectType: 'dept' | 'user';
 }
 
 const SelectArea: React.FunctionComponent<PropType> = (props: PropType) => {
   // 获取props
-  const { currentTab, multiple, selectType } = props;
+  const { currentTab, multiple, selectType, noTagLabelPermission } = props;
   console.log(currentTab, 'currentTab');
+  const pageView = useRef(null);
+  useEffect(() => {
+    // pageView.current.scrollTop = 0;
+  }, []);
   return (
-    <div className="select-area-wrap">
+    <>
       {currentTab === 'tagContacts' ? (
         <SelectTagTree
+          noTagLabelPermission={noTagLabelPermission}
           multiple={multiple}
           currentTab={currentTab}
           selectType={selectType}
         />
       ) : (
-        <SelectCommonTree
-          selectType={selectType}
-          multiple={multiple}
-          currentTab={currentTab}
-        />
+        <div className="select-area-wrap">
+          <SelectCommonTree
+            selectType={selectType}
+            multiple={multiple}
+            currentTab={currentTab}
+          />
+        </div>
       )}
-    </div>
+    </>
   );
 };
 

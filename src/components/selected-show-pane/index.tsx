@@ -9,7 +9,14 @@ import './index.less';
 const SelectedShowPane: React.FunctionComponent<PropType> = (
   props: PropType
 ) => {
-  const { groupList, unit, delGroup, delItem, showUserDeptName } = props;
+  const {
+    groupList,
+    unit,
+    delGroup,
+    delItem,
+    noTagLabelPermission,
+    showUserDeptName,
+  } = props;
 
   const total = useMemo(() => {
     let total = 0; // 已选总数
@@ -43,7 +50,8 @@ const SelectedShowPane: React.FunctionComponent<PropType> = (
                 <span className="selected-show-pane-group-total">
                   {title} ({type === 'USER' ? itemList.length : count})
                 </span>
-                {!itemList.find((_) => _.labelPermission === 2) && (
+                {(itemList.every((_) => _.childDelete) ||
+                  noTagLabelPermission) && (
                   <span
                     className="selected-show-pane-group-clear"
                     onClick={() => delGroup(group)}
@@ -67,7 +75,7 @@ const SelectedShowPane: React.FunctionComponent<PropType> = (
                       >
                         {showName}
                       </span>
-                      {item.labelPermission === 1 && (
+                      {(item.childDelete || noTagLabelPermission) && (
                         <CloseOutlined
                           className="selected-tag-clear"
                           onClick={() => delItem(item, group)}

@@ -16,6 +16,7 @@ export const TREE_CONTEXT = React.createContext<ItreeContext | null>(null);
 export default function SelectUser({
   defaultValue,
   visible = false,
+  noTagLabelPermission = false,
   showTabList = [
     'dept',
     'group',
@@ -90,6 +91,7 @@ export default function SelectUser({
           target={target}
           modalWidth={modalWidth}
           searchPlaceholder={searchPlaceholder}
+          noTagLabelPermission={noTagLabelPermission}
           selectSignature={selectSignature}
           isSaveSelectSignature={isSaveSelectSignature}
           dialogProps={dialogProps}

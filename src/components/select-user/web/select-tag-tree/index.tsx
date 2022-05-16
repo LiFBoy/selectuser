@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useEffect, useRef, useContext } from 'react';
 import { Tree } from 'antd';
 import { TREE_CONTEXT } from '../../select-user';
 import { ItreeItem } from '../../interface';
@@ -10,12 +10,13 @@ import './index.less';
 interface PropType {
   currentTab: string; // 用当前选中的tab作为Tree组件的key，当切换tab时使Tree组件重新生成
   multiple: boolean;
+  noTagLabelPermission?: boolean;
   selectType: 'user' | 'dept';
 }
 
 const SelectTagTree: React.FunctionComponent<PropType> = (props: PropType) => {
   // 获取props
-  const { currentTab, selectType } = props;
+  const { currentTab, selectType, noTagLabelPermission } = props;
   // 获取treeContext
   const treeContext = useContext(TREE_CONTEXT);
   const { treeState, updateCheckedNode, resetUserCount } = treeContext;
@@ -27,11 +28,26 @@ const SelectTagTree: React.FunctionComponent<PropType> = (props: PropType) => {
     loadTreeData: loadData,
   } = useSelectExpand(currentTab);
   const [checkedKeys] = useCheckedKeys(basePath, currentTab);
-  console.log(basePath, 'basePath');
+  const pageView = useRef(null);
+
+  useEffect(() => {
+    if (localStorage.getItem('labelPath')) {
+      const list = localStorage.getItem('labelPath').split('-');
+
+      const index = treeData.findIndex((item) => item.key === list[0]);
+      pageView.current.scrollTop = index * 33;
+    }
+    if (!localStorage.getItem('nextSearchValue')) {
+      pageView.current.scrollTop = 0;
+    }
+  }, [
+    localStorage.getItem('labelPath'),
+    localStorage.getItem('nextSearchValue'),
+  ]);
+
   // 树节点选中事件
   const onCheck = (_: any, event: any) => {
     const node = event.node.props;
-    console.log(node, 'node333');
     const item: ItreeItem = {
       ...node,
       title: node.label,
@@ -53,9 +69,24 @@ const SelectTagTree: React.FunctionComponent<PropType> = (props: PropType) => {
     }
   };
 
+  const setDisiabled = (
+    noTagLabelPermission: boolean,
+    LbPermission: number
+  ) => {
+    if (noTagLabelPermission) {
+      return !noTagLabelPermission;
+    }
+
+    if (LbPermission) {
+      return LbPermission === 2;
+    }
+    return false;
+  };
+
   const renderTreeNodes = (data: any) =>
     data.map((item: any) => {
-      console.log(item, 'item');
+      // console.log(item, 'item222');
+
       if (item.children) {
         return (
           <TreeNode
@@ -73,20 +104,16 @@ const SelectTagTree: React.FunctionComponent<PropType> = (props: PropType) => {
         return (
           <TreeNode
             key={item.id}
-            disabled={
-              item?.labelPermission ? item?.labelPermission === 2 : false
-            }
-            // title={renderSearchText(item.title)}
-            clssName="radio"
+            disabled={setDisiabled(noTagLabelPermission, item.labelPermission)}
             {...item}
+            className="radio"
           />
         );
       }
       return (
         <TreeNode
           key={item.id}
-          disabled={item?.labelPermission ? item?.labelPermission === 2 : false}
-          // title={renderSearchText(item.title)}
+          disabled={setDisiabled(noTagLabelPermission, item.labelPermission)}
           {...item}
         />
       );
@@ -94,38 +121,53 @@ const SelectTagTree: React.FunctionComponent<PropType> = (props: PropType) => {
 
   // console.log(treeData, 'treeData');
   return treeData && treeData.length > 0 ? (
-    <Tree
-      className="cf-select-user-tree"
-      selectedKeys={[]}
-      key={currentTab}
-      checkedKeys={checkedKeys}
-      onCheck={onCheck}
-      checkable
-      // multiple={multiple}
-      blockNode
-      expandedKeys={
-        expandedKeys.length > 0
-          ? expandedKeys
-          : localStorage.getItem('labelPath')
-            ? localStorage.getItem('labelPath').split('-')
-            : expandedKeys
-      }
-      // expandedKeys={[
-      //   '1519884017599488002',
-      //   '1519884121001664513',
-      //   '1519884206770987010',
-      //   '1519886599357177857',
-      //   '1519889504036134914',
-      // ]}
-      onExpand={setExpandedKeys}
-      onSelect={handleSelect}
-      checkStrictly
-      loadData={loadData}
-      // height={340}
-      // treeData={treeData}
-    >
-      {renderTreeNodes(treeData)}
-    </Tree>
+    <div ref={pageView} className="select-area-wrap">
+      <Tree
+        className="cf-select-user-tree"
+        selectedKeys={[]}
+        key={currentTab}
+        checkedKeys={checkedKeys}
+        onCheck={onCheck}
+        checkable
+        // multiple={multiple}
+        blockNode
+        expandedKeys={
+          expandedKeys.length > 0
+            ? expandedKeys
+            : localStorage.getItem('labelPath')
+              ? localStorage.getItem('labelPath').split('-')
+              : expandedKeys
+        }
+        // expandedKeys={[
+        //   '1519884017599488002',
+        //   '1519884121001664513',
+        //   '1519884206770987010',
+        //   '1519886599357177857',
+        //   '1519889504036134914',
+        // ]}
+        onExpand={setExpandedKeys}
+        onSelect={handleSelect}
+        checkStrictly
+        loadData={loadData}
+        // height={340}
+        // treeData={treeData}
+      >
+        {renderTreeNodes(treeData)}
+      </Tree>
+      {[
+        'equipmentContacts',
+        'memberContacts',
+        'groupContacts',
+        'maternalContacts',
+        'disabledHomeContacts',
+        'tagContacts',
+      ].indexOf(currentTab) > -1 &&
+        treeData.length > 19 && (
+        <div className="more-text">
+            仅展示前20条数据，请输入更精确的搜索内容获取
+        </div>
+      )}
+    </div>
   ) : (
     <div className="cf-tree-result-empty no-data-result-empty">暂无内容</div>
   );
