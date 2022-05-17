@@ -1,8 +1,7 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import SelectTagTree from '../select-tag-tree';
 import SelectCommonTree from '../select-common-tree';
 import './index.less';
-import { useEffect } from 'react';
 
 interface PropType {
   currentTab: string; // 用当前选中的tab作为Tree组件的key，当切换tab时使Tree组件重新生成
@@ -16,10 +15,7 @@ const SelectArea: React.FunctionComponent<PropType> = (props: PropType) => {
   // 获取props
   const { currentTab, multiple, selectType, noTagLabelPermission } = props;
   console.log(currentTab, 'currentTab');
-  const pageView = useRef(null);
-  useEffect(() => {
-    // pageView.current.scrollTop = 0;
-  }, []);
+
   return (
     <>
       {currentTab === 'tagContacts' ? (

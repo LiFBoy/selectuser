@@ -50,7 +50,7 @@ const SelectedShowPane: React.FunctionComponent<PropType> = (
                 <span className="selected-show-pane-group-total">
                   {title} ({type === 'USER' ? itemList.length : count})
                 </span>
-                {(itemList.every((_) => _.childDelete) ||
+                {(itemList.every((_: ItreeItem) => _.childDelete) ||
                   noTagLabelPermission) && (
                   <span
                     className="selected-show-pane-group-clear"

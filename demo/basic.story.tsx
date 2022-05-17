@@ -48,11 +48,13 @@ export const MethodInvoke = () => {
       dialogProps: {
         title: '标签',
       },
+      // true 无限制 false 注明不可修改并禁用
       noTagLabelPermission: false,
       searchPlaceholder: '请输入标签名称进行搜索',
       userOrigin: 'http://gateway.community-sit.easyj.top/user-center',
       requestParams: {
         selectTypeList: ['group_tag'],
+        // 仅在tab为标签时生效，0全部，1运营，2系统 tagTypeList?: ['0', '1', '2'];
         tagTypeList: [0],
       },
 

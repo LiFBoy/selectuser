@@ -31,14 +31,16 @@ const SelectTagTree: React.FunctionComponent<PropType> = (props: PropType) => {
   const pageView = useRef(null);
 
   useEffect(() => {
-    if (localStorage.getItem('labelPath')) {
-      const list = localStorage.getItem('labelPath').split('-');
+    if (pageView.current) {
+      if (localStorage.getItem('labelPath')) {
+        const list = localStorage.getItem('labelPath').split('-');
 
-      const index = treeData.findIndex((item) => item.key === list[0]);
-      pageView.current.scrollTop = index * 33;
-    }
-    if (!localStorage.getItem('nextSearchValue')) {
-      pageView.current.scrollTop = 0;
+        const index = treeData.findIndex((item) => item.key === list[0]);
+        pageView.current.scrollTop = index * 33;
+      }
+      if (!localStorage.getItem('nextSearchValue')) {
+        pageView.current.scrollTop = 0;
+      }
     }
   }, [
     localStorage.getItem('labelPath'),

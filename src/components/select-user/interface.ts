@@ -113,6 +113,7 @@ export interface ItreeItem
   nodeType?: NodeType;
   orgId?: string;
   type?: NodeType;
+  childDelete?: boolean;
   deptType?:
     | 0 // 基础校区
     | 1; // 自定义校区
