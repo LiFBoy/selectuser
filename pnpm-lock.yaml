@@ -56,7 +56,7 @@ specifiers:
   react: 16.8.6
   react-dom: 16.8.6
   sass-loader: ~9.0.3
-  ss-mobile-card: ^0.0.1
+  ss-mobile-card: ^0.0.2
   style-loader: ~1.2.1
   stylelint: ^13.6.1
   stylelint-config-standard: ^20.0.0
@@ -78,7 +78,7 @@ dependencies:
   classnames: registry.npmmirror.com/classnames/2.3.1
   file-loader: registry.nlark.com/file-loader/6.2.0_webpack@4.44.2
   qs: registry.npmmirror.com/qs/6.10.3
-  ss-mobile-card: 0.0.1
+  ss-mobile-card: 0.0.2
 
 devDependencies:
   '@babel/core': registry.npmmirror.com/@babel/core/7.16.7
@@ -981,8 +981,8 @@ packages:
     engines: {node: '>= 8'}
     dev: true
 
-  /ss-mobile-card/0.0.1:
-    resolution: {integrity: sha512-occkLHKZWE6HJhwyp5iEO3qMcoksymZ1gJr6S19mr+MA/2dxau71ynKoW624M3+uF5CxlIOcjGeBgIAhZxU/TQ==}
+  /ss-mobile-card/0.0.2:
+    resolution: {integrity: sha512-2HC4yXyOrQh0CnJrI5sGWF5gJyqn02rRu1842o+bW9qvwJ9Fn/9dK1WeXcaKIrSRGYgxIHCK5GW9OQMr/jDApA==}
     dependencies:
       axios: 0.18.1
       classnames: 2.3.1

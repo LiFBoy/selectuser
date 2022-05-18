@@ -135,6 +135,7 @@ export interface ItreeItem
   contactType?: string;
   count?: number;
   labelPermission?: number;
+  noTagLabelPermission?: boolean;
   labelGroupType?: string;
 }
 

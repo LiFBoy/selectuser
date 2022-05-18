@@ -333,7 +333,7 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
               <div className="nodeContent">
                 <div className="titleWrapper">
                   <div className="title">{label}</div>
-                  {item.labelPermission === 2 && (
+                  {item.labelPermission === 2 && !item.noTagLabelPermission && (
                     <span className="label-group-disabled">(不可修改)</span>
                   )}
 

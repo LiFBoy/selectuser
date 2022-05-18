@@ -49,13 +49,14 @@ export const MethodInvoke = () => {
         title: '标签',
       },
       // true 无限制 false 注明不可修改并禁用
-      noTagLabelPermission: false,
+      noTagLabelPermission: true,
       searchPlaceholder: '请输入标签名称进行搜索',
       userOrigin: 'http://gateway.community-sit.easyj.top/user-center',
       requestParams: {
         selectTypeList: ['group_tag'],
         // 仅在tab为标签时生效，0全部，1运营，2系统 tagTypeList?: ['0', '1', '2'];
         tagTypeList: [0],
+        noTagLabelPermission: true,
       },
 
       // target: 'tool',
@@ -211,7 +212,7 @@ export const JSX10 = () => {
     visible,
     multiple: true,
     selectType: 'dept',
-    noTagLabelPermission: false,
+    noTagLabelPermission: true,
     showTabList: ['tagContacts'],
     dialogProps: {
       title: '标签',
@@ -221,6 +222,7 @@ export const JSX10 = () => {
     requestParams: {
       selectTypeList: ['group_tag'],
       tagTypeList: [0],
+      noTagLabelPermission: true,
     },
     // target: 'tool',
     // modalWidth: 300,

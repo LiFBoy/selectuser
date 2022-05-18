@@ -1,6 +1,6 @@
 {
   "name": "select-ss-user",
-  "version": "0.0.82",
+  "version": "0.0.84",
   "description": "select-user",
   "repository": {
     "type": "git",
@@ -45,7 +45,7 @@
     "classnames": "^2.2.6",
     "file-loader": "^6.2.0",
     "qs": "^6.9.4",
-    "ss-mobile-card": "^0.0.1"
+    "ss-mobile-card": "^0.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",
