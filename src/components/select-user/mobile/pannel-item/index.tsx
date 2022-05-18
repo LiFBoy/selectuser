@@ -132,6 +132,7 @@ const PannelItem: React.FunctionComponent<PropType> = (props: PropType) => {
       className={classnames('panel-header', {
         'panel-user-header': !!className,
       })}
+      style={{ height: '54px' }}
     >
       <div className="line">
         {
