@@ -1,6 +1,7 @@
 import React, { useMemo, useContext } from 'react';
 import { DeleteOutlined, CloseOutlined } from '@ant-design/icons';
 import MyContext from '../../utils/context';
+import { Popover } from 'antd';
 import { showNameFunc } from '../../utils/index';
 import { PropType, IgroupItem } from './interface';
 import { ItreeItem } from '../select-user/interface';
@@ -33,6 +34,15 @@ const SelectedShowPane: React.FunctionComponent<PropType> = (
   }, [groupList]);
   console.log(unit, 'unit');
   const { expand: isExpand } = useContext(MyContext);
+  const overlayStyle = {
+    maxWidth: '20em',
+    fontSize: '12px',
+    color: '#666',
+    overflow: 'auto',
+    backgroud: '#fff',
+    maxHeight: '400px',
+    boxShadow: '5px 5px 10px rgba(129, 133, 167, 0.2)',
+  };
   return (
     <div className="selected-show-pane-wrap">
       <div className="selected-show-pane-total">
@@ -41,7 +51,6 @@ const SelectedShowPane: React.FunctionComponent<PropType> = (
       <div className="selected-show-pane-detail-box">
         {groupList.map((group: IgroupItem) => {
           const { title, itemList, count, type } = group;
-          console.log(group, 'group2222');
           return (
             <div className="selected-show-pane-group" key={title}>
               <div className="selected-show-pane-group-top">
@@ -65,16 +74,23 @@ const SelectedShowPane: React.FunctionComponent<PropType> = (
                   const { id } = item;
                   const showName = showNameFunc(item, showUserDeptName);
                   return (
-                    <div className="selected-tag" key={id} title={showName}>
-                      <span
-                        className={
-                          isExpand
-                            ? 'selected-tag-text-expand'
-                            : 'selected-tag-text'
-                        }
+                    <div className="selected-tag" key={id}>
+                      <Popover
+                        placement="bottomLeft"
+                        overlayStyle={overlayStyle}
+                        content={showName}
+                        trigger="hover"
                       >
-                        {showName}
-                      </span>
+                        <span
+                          className={
+                            isExpand
+                              ? 'selected-tag-text-expand'
+                              : 'selected-tag-text'
+                          }
+                        >
+                          {showName}
+                        </span>
+                      </Popover>
                       {(item.childDelete || noTagLabelPermission) && (
                         <CloseOutlined
                           className="selected-tag-clear"

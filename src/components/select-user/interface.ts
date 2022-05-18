@@ -89,6 +89,7 @@ export interface IlistItem {
   deptId?: string;
   extendedAttribute?: any;
   childDelete?: boolean;
+  noTagLabelPermission?: boolean;
   // 所属部门名称（用于区分不同部门下的同一人，对应 strictUser 配置）
   deptName?: string;
 }

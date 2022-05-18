@@ -1059,10 +1059,11 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
      * @param list 存储在treeState中的各种list
      */
     const formatParam = (list: IlistItem[]) => {
+      console.log(list, 'listlist');
       const finalList: any[] = [];
       for (const item of list) {
         const obj: any = {};
-
+      
         obj.id = item.id;
         obj.name = showNameFunc(item, staticProps?.requestParams?.strictUser);
         obj.type = item.type;
@@ -1083,6 +1084,9 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
 
         if (item.childDelete) {
           obj.childDelete = item.childDelete;
+        }
+        if (item.noTagLabelPermission) {
+          obj.noTagLabelPermission = item.noTagLabelPermission;
         }
 
         if (item?.nodeType) {

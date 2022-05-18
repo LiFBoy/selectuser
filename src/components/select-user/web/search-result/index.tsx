@@ -124,6 +124,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
           key: item.userId,
           name: item.userName,
           orgId: item.orgId,
+          childDelete: item.childDelete,
           deptName: get(item.userDeptList, [0, 'deptName']),
           fullName: item.fullName,
         };
@@ -132,6 +133,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
         node = {
           id: item.orgId,
           key: item.orgId,
+          childDelete: item.childDelete,
           name: item.orgName,
         };
         break;
@@ -140,6 +142,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
           id: item.groupId,
           key: item.groupId,
           name: item.groupName,
+          childDelete: item.childDelete,
           orgId: item.orgId,
         };
         break;
@@ -149,6 +152,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
           key: item.deptId,
           name: item.deptName,
           orgId: item.orgId,
+          childDelete: item.childDelete,
           fullName: item.fullName,
         };
         break;
@@ -157,6 +161,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
           id: item.userId,
           key: item.userId,
           name: item.userName,
+          childDelete: item.childDelete,
           orgId: item.orgId,
         };
         break;
@@ -165,6 +170,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
           id: item.userId,
           key: item.userId,
           name: item.userName,
+          childDelete: item.childDelete,
           orgId: item.orgId,
         };
         break;
@@ -173,6 +179,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
           id: item.userId,
           key: item.userId,
           name: item.userName,
+          childDelete: item.childDelete,
           orgId: item.orgId,
         };
         break;
@@ -189,6 +196,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
           id: item.userId,
           key: item.userId,
           name: item.userName,
+          childDelete: item.childDelete,
           orgId: item.orgId,
         };
         break;
@@ -197,6 +205,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
           id: item.userId,
           key: item.userId,
           name: item.userName,
+          childDelete: item.childDelete,
           orgId: item.orgId,
         };
         break;
@@ -205,6 +214,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
           id: item.orgId,
           key: item.orgId,
           name: item.orgName,
+          childDelete: item.childDelete,
           nodeType: item.orgType,
         };
         break;
@@ -436,7 +446,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
                   className="search-result-group-item"
                   key={`${user.userId}-${index}`}
                 >
-                  <UserIcon />
+                  <EQUIPMENTICON />
                   <div className="search-result-item-detail">
                     <div
                       className="search-result-item-title overflow-ellipsis"
@@ -477,7 +487,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
                   className="search-result-group-item"
                   key={`${user.userId}-${index}`}
                 >
-                  <UserIcon />
+                  <EQUIPMENTICON />
                   <div className="search-result-item-detail">
                     <div
                       className="search-result-item-title overflow-ellipsis"
@@ -859,7 +869,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
     return (
       <>
         {searchResult?.dataSource?.length === 0 ? (
-          <div className="mobile-tree-result-empty">
+          <div className="web-tree-result-empty">
             <div className="empty-img"></div>
             <div className="text">没有搜索到相关内容</div>
           </div>

@@ -49,14 +49,14 @@ export const MethodInvoke = () => {
         title: '标签',
       },
       // true 无限制 false 注明不可修改并禁用
-      noTagLabelPermission: true,
+      noTagLabelPermission: false,
       searchPlaceholder: '请输入标签名称进行搜索',
       userOrigin: 'http://gateway.community-sit.easyj.top/user-center',
       requestParams: {
         selectTypeList: ['group_tag'],
         // 仅在tab为标签时生效，0全部，1运营，2系统 tagTypeList?: ['0', '1', '2'];
         tagTypeList: [0],
-        noTagLabelPermission: true,
+        noTagLabelPermission: false,
       },
 
       // target: 'tool',
@@ -212,7 +212,7 @@ export const JSX10 = () => {
     visible,
     multiple: true,
     selectType: 'dept',
-    noTagLabelPermission: true,
+    noTagLabelPermission: false,
     showTabList: ['tagContacts'],
     dialogProps: {
       title: '标签',
@@ -222,10 +222,10 @@ export const JSX10 = () => {
     requestParams: {
       selectTypeList: ['group_tag'],
       tagTypeList: [0],
-      noTagLabelPermission: true,
+      noTagLabelPermission: false,
     },
-    // target: 'tool',
-    // modalWidth: 300,
+    target: 'tool',
+    modalWidth: 300,
     // onlyLeafCheckable: true,
     isSaveSelectSignature: false,
     defaultValue: [
@@ -289,7 +289,7 @@ export const JSX3 = () => {
     searchPlaceholder: '请输入设备编码进行搜素',
     userOrigin: 'http://gateway.community-sit.easyj.top/user-center',
     requestParams: {
-      selectTypeList: ['camera'],
+      selectTypeList: ['tv'],
     },
     isSaveSelectSignature: true,
     // selectSignature: '3001001001000006-821519e77a59435494612498d95380c2',

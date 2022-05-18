@@ -72,6 +72,7 @@ export default function SelectUser({
   const Com = basePath === 'pc' ? SelectUserPc : SelectUserMobile;
   const others = basePath === 'pc' ? {} : { appId, corpid };
   console.log(userOrigin, 'userOrigin');
+
   (window as any).userOrigin = userOrigin;
   return (
     <ConfigProvider>

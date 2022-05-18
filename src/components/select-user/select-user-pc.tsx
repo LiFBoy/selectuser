@@ -127,7 +127,6 @@ const SelectUserPc: React.FunctionComponent<PropTypes> = ({
     getSearchResult(params);
   };
 
-  console.log(showTabList, 'selectPaneProps');
   return (
     <Modal
       {...dialogProps}
@@ -177,7 +176,12 @@ const SelectUserPc: React.FunctionComponent<PropTypes> = ({
       }
     >
       <div className="select-user-pc-content">
-        <div className="left-pane" style={target ? { width: modalWidth } : {}}>
+        <div
+          className={classnames('left-pane', {
+            'tool-box': target,
+          })}
+          style={target ? { width: modalWidth } : {}}
+        >
           {!target && (
             <div className="select-user-pc-search-wrapper">
               <Search
