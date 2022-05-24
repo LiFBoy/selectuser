@@ -106,6 +106,7 @@ const SelectTagTree: React.FunctionComponent<PropType> = (props: PropType) => {
         return (
           <TreeNode
             key={item.id}
+            // disabled={true}
             disabled={setDisiabled(noTagLabelPermission, item.labelPermission)}
             {...item}
             className="radio"

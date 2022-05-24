@@ -871,7 +871,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
         {searchResult?.dataSource?.length === 0 ? (
           <div className="web-tree-result-empty">
             <div className="empty-img"></div>
-            <div className="text">没有搜索到相关内容</div>
+            <div className="text">搜索结果为空，请调整搜索内容</div>
           </div>
         ) : null}
       </>
