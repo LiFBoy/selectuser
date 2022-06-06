@@ -111,7 +111,7 @@ const PannelItem: React.FunctionComponent<PropType> = (props: PropType) => {
     checkable: boolean;
   }) => {
     if (!node.checkable) {
-      return <div></div>;
+      return null;
     }
 
     return (
@@ -121,7 +121,6 @@ const PannelItem: React.FunctionComponent<PropType> = (props: PropType) => {
           checked={
             !!treeState.checkedKeys.filter((item) => item === node.key).length
           }
-          onChange={() => onCheck(node)}
         ></Radio>
       </div>
     );
@@ -135,17 +134,10 @@ const PannelItem: React.FunctionComponent<PropType> = (props: PropType) => {
       style={{ height: '54px' }}
     >
       <div className="line">
-        {
-          <div
-            className={classnames('check-box-item', {
-              multiple: multiple === false,
-            })}
-          >
-            {renderCheckboxItem(node)}
-          </div>
-        }
-        <div className="label" onClick={() => onCheck(node)}>
-          {node.label}
+        <div className="line-item" onClick={() => onCheck(node)}>
+          {renderCheckboxItem(node)}
+
+          <div className="label">{node.label}</div>
         </div>
         {arrow && node.type !== 'USER' && !node.isLeaf && (
           <div className="icon" onClick={() => handleSelect(node, currentTab)}>

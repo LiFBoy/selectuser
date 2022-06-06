@@ -75,24 +75,24 @@ const SelectPannel: React.FunctionComponent<Iprops> = (props: Iprops) => {
       switch (item.type) {
         case 'TAG': // 标签需要展示标签下的人数
           item.label = (
-            <React.Fragment>
+            <>
               <span className="cf-select-user-tree-node">{initialName}</span>
-              <span className="cf-select-user-tree-node-num">
+              {/* <span className="cf-select-user-tree-node-num">
                 {item.isLeaf ? ` (${item.count || 0})` : ''}
-              </span>
-            </React.Fragment>
+              </span> */}
+            </>
           );
           break;
         case 'USER':
           item.label = (
-            <React.Fragment>
+            <>
               <div className="item-name-icon">
                 {initialName.substring(initialName.length - 2)}
               </div>
               <div className="cf-select-user-node-wrapper" title={initialName}>
                 <span className="cf-select-user-tree-node">{initialName}</span>
               </div>
-            </React.Fragment>
+            </>
           );
           break;
         case 'GROUP':
@@ -101,11 +101,9 @@ const SelectPannel: React.FunctionComponent<Iprops> = (props: Iprops) => {
         case 'ORG':
         case 'DEPT':
           item.label = (
-            <React.Fragment>
-              <div className="cf-select-user-node-wrapper" title={initialName}>
-                <span className="cf-select-user-tree-node">{initialName}</span>
-              </div>
-            </React.Fragment>
+            <div className="cf-select-user-node-wrapper" title={initialName}>
+              <span className="cf-select-user-tree-node">{initialName}</span>
+            </div>
           );
           break;
         default:

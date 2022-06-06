@@ -99,6 +99,7 @@ const SchoolContacts: React.FunctionComponent<PropType> = (props: PropType) => {
   const { treeData = [] } = treeState || {};
   const [accordion, setAccordion] = useState<any>([]);
   const accordionRef = useRef<any>([]);
+  console.log(treeState, 'treeState');
 
   const [currentTab, setCurrentTab] = useState<any>('');
   const [activeKey, setActiveKey] = useState<any>(

@@ -10,14 +10,6 @@ const env = meta?.content || 'sit';
 // export const env = 'test';
 
 // 域名配置
-export const domainMap: {
-  [env: string]: string;
-} = {
-  dev: 'https://gateway.community-dev.easyj.top/user-center',
-  sit: 'https://gateway.community-dev.easyj.top/user-center',
-  production: 'https://gateway.suosihulian.com/user-center',
-  pre: 'https://gateway.pre.suosihulian.com/user-center',
-};
 
 /** 是否是相对路径 */
 export function isAbsolutePath(url: string) {
@@ -35,7 +27,7 @@ export function apiPrefix(api: string) {
   }
 
   // const domain = domain || 'xxx';
-  const urlPrefix = (window as any).userOrigin || domainMap[env];
+  const urlPrefix = (window as any).userOrigin;
 
   if (!urlPrefix) {
     return api;
@@ -49,4 +41,4 @@ export default function apiPrefixMiddleware(ctx: NetOptions) {
   return ctx.next();
 }
 
-export const URL = (window as any).userOrigin || domainMap[env];
+export const URL = (window as any).userOrigin;

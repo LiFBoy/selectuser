@@ -451,18 +451,13 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
 
     // tslint:disable-next-line: no-floating-promises
     net
-      .request(
-        `${URL()}/select/component/result?corpid=${others.corpid}&appId=${
-          others?.appId
-        }`,
-        {
-          method: 'POST',
-          data: {
-            ...params,
-            ...requestParams,
-          },
-        }
-      )
+      .request(`${URL()}/select/component/result`, {
+        method: 'POST',
+        data: {
+          ...params,
+          ...requestParams,
+        },
+      })
       .then((result) => {
         setRequest(false);
         console.log(result, 'result333');
@@ -603,19 +598,17 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
                   showTabList={showTabList}
                 />
               ) : (
-                <React.Fragment>
-                  <SelectPannel
-                    visible={visible}
-                    showTabList={showTabList}
-                    multiple={multiple}
-                    selectType={selectType}
-                    basePath={basePath}
-                    requestParams={requestParams}
-                    unCheckableNodeType={unCheckableNodeType}
-                    onlyLeafCheckable={onlyLeafCheckable}
-                    {...others}
-                  />
-                </React.Fragment>
+                <SelectPannel
+                  visible={visible}
+                  showTabList={showTabList}
+                  multiple={multiple}
+                  selectType={selectType}
+                  basePath={basePath}
+                  requestParams={requestParams}
+                  unCheckableNodeType={unCheckableNodeType}
+                  onlyLeafCheckable={onlyLeafCheckable}
+                  {...others}
+                />
               )}
             </div>
             <SelectFooter

@@ -72,7 +72,6 @@ const SelectCommonTree: React.FunctionComponent<PropType> = (
       if (item.children) {
         return (
           <TreeNode
-            checkable={false}
             title={item.title}
             key={item.key}
             isLeaf={item.isLeaf}

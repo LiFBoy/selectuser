@@ -23,6 +23,7 @@ const SelectPane: React.FunctionComponent<PropTypes> = (props: PropTypes) => {
     orgRelInfoList,
     userCount,
   } = treeState;
+  console.log(treeState, 'treeState');
 
   // 删除单个items
   const delItem = useCallback(
