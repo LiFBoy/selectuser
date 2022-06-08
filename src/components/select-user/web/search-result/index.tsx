@@ -1,5 +1,5 @@
 import React, { useContext, useMemo, useState } from 'react';
-import { Tabs, Checkbox, Typography, Radio } from 'antd';
+import { Tabs, Checkbox, Typography, Radio, Popover } from 'antd';
 import { InfoCircleFilled } from '@ant-design/icons';
 import { TREE_CONTEXT } from '../../select-user';
 import useSelectExpand from '../../hooks/use-select-expand';
@@ -29,6 +29,16 @@ interface PropType {
   multiple: boolean;
   selectType: 'user' | 'dept';
 }
+
+const overlayStyle = {
+  maxWidth: '20em',
+  fontSize: '12px',
+  color: '#666',
+  overflow: 'auto',
+  backgroud: '#fff',
+  maxHeight: '400px',
+  boxShadow: '5px 5px 10px rgba(129, 133, 167, 0.2)',
+};
 
 const SHOW_TAB_LIST_ITEM_MAP: any = {
   dept: '所属部门',
@@ -266,13 +276,11 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
         key={info.id}
       >
         {isEllipsis ? (
-          <div className="search-result-info-dept" title={title}>
+          <div className="search-result-info-dept">
             {`${label}${funTranName(content, isEllipsis)}`}
           </div>
         ) : (
-          <div className="overflow-auto" title={title}>
-            {title}
-          </div>
+          <div className="overflow-auto">{title}</div>
         )}
       </div>
     );
@@ -302,7 +310,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
 
   const renderDom = (list: any, title: string, infoList: any, icon: any) => {
     return (
-      <React.Fragment>
+      <>
         <div className="search-result-group-title">
           {title}({list.length})
         </div>
@@ -319,15 +327,19 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
               className="search-result-group-item"
               key={`${user.userId}-${index}`}
             >
-              {icon}
-              <div className="search-result-item-detail">
-                <div
-                  className="search-result-item-title overflow-ellipsis"
-                  title={user.userName}
-                >
-                  {renderSearchText(user.userName || user.groupName)}
+              <Popover
+                placement="bottomLeft"
+                overlayStyle={overlayStyle}
+                content={user.userName || user.groupName}
+                trigger="hover"
+              >
+                {icon}
+                <div className="search-result-item-detail">
+                  <div className="search-result-item-title overflow-ellipsis">
+                    {renderSearchText(user.userName || user.groupName)}
+                  </div>
                 </div>
-              </div>
+              </Popover>
               <div className="checkbox-wrap">
                 <Checkbox
                   checked={checked}
@@ -338,7 +350,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
           );
         })}
         {renderSearchHint(list)}
-      </React.Fragment>
+      </>
     );
   };
 
@@ -446,15 +458,19 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
                   className="search-result-group-item"
                   key={`${user.userId}-${index}`}
                 >
-                  <EQUIPMENTICON />
-                  <div className="search-result-item-detail">
-                    <div
-                      className="search-result-item-title overflow-ellipsis"
-                      title={user.userName}
-                    >
-                      {renderSearchText(user.userName)}
+                  <Popover
+                    placement="bottomLeft"
+                    overlayStyle={overlayStyle}
+                    content={user.userName || user.groupName}
+                    trigger="hover"
+                  >
+                    <EQUIPMENTICON />
+                    <div className="search-result-item-detail">
+                      <div className="search-result-item-title overflow-ellipsis">
+                        {renderSearchText(user.userName)}
+                      </div>
                     </div>
-                  </div>
+                  </Popover>
                   <div className="checkbox-wrap">
                     <Checkbox
                       checked={checked}
@@ -487,15 +503,19 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
                   className="search-result-group-item"
                   key={`${user.userId}-${index}`}
                 >
-                  <EQUIPMENTICON />
-                  <div className="search-result-item-detail">
-                    <div
-                      className="search-result-item-title overflow-ellipsis"
-                      title={user.userName}
-                    >
-                      {renderSearchText(user.userName)}
+                  <Popover
+                    placement="bottomLeft"
+                    overlayStyle={overlayStyle}
+                    content={user.userName || user.groupName}
+                    trigger="hover"
+                  >
+                    <EQUIPMENTICON />
+                    <div className="search-result-item-detail">
+                      <div className="search-result-item-title overflow-ellipsis">
+                        {renderSearchText(user.userName)}
+                      </div>
                     </div>
-                  </div>
+                  </Popover>
                   <div className="checkbox-wrap">
                     <Checkbox
                       checked={checked}
@@ -528,62 +548,55 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
                   className="search-result-group-item"
                   key={`${user.userId}-${index}`}
                 >
-                  <UserIcon />
-                  <div className="search-result-item-detail">
-                    <div
-                      className="search-result-item-title overflow-ellipsis"
-                      title={user.userName}
-                    >
-                      {renderSearchText(user.userName)}
-                    </div>
-                    {user.userDeptList?.map((deptItem: any, index: number) => {
-                      if (index < INFO_LIMIT_NUM) {
-                        return renderSearchDept(
-                          deptItem,
-                          user.contactType,
-                          true
-                        );
-                      }
-                    })}
-                    {user.userDeptList?.length > INFO_LIMIT_NUM && (
-                      <div className="more-info-container">
-                        <span
-                          className="more-info-number"
-                          onMouseOver={handleShowMore}
-                        >
-                          等共<i>{user.userDeptList?.length}</i>个部门
-                        </span>
-                        <div
-                          className="more-info-content"
-                          style={moreInfoStyle}
-                        >
-                          {user.userDeptList?.map(
-                            (deptItem: any, index: number) => {
-                              return renderSearchDept(
-                                deptItem,
-                                user.contactType,
-                                false
-                              );
-                            }
-                          )}
-                        </div>
+                  <Popover
+                    placement="bottomLeft"
+                    overlayStyle={overlayStyle}
+                    content={user.userName}
+                    trigger="hover"
+                  >
+                    <UserIcon />
+                    <div className="search-result-item-detail">
+                      <div className="search-result-item-title overflow-ellipsis">
+                        {renderSearchText(user.userName)}
                       </div>
-                    )}
-                    {user.contactType === '3' ? (
-                      <div className="search-result-item-des">
-                        {
-                          <div
-                            className="search-result-info-dept"
-                            title={user.orgName}
-                          >
-                            学校: {user.orgName}
-                          </div>
+                      {user.userDeptList?.map(
+                        (deptItem: any, index: number) => {
+                          if (index < INFO_LIMIT_NUM) {
+                            return renderSearchDept(
+                              deptItem,
+                              user.contactType,
+                              true
+                            );
+                          }
                         }
-                      </div>
-                    ) : (
-                      ''
-                    )}
-                  </div>
+                      )}
+
+                      {user.userDeptList?.length > INFO_LIMIT_NUM && (
+                        <div className="more-info-container">
+                          <span
+                            className="more-info-number"
+                            onMouseOver={handleShowMore}
+                          >
+                            等共<i>{user.userDeptList?.length}</i>个部门
+                          </span>
+                          <div
+                            className="more-info-content"
+                            style={moreInfoStyle}
+                          >
+                            {user.userDeptList?.map(
+                              (deptItem: any, index: number) => {
+                                return renderSearchDept(
+                                  deptItem,
+                                  user.contactType,
+                                  false
+                                );
+                              }
+                            )}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </Popover>
                   <div className="checkbox-wrap">
                     <Checkbox
                       checked={checked}
@@ -616,22 +629,29 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
                   className="search-result-group-item"
                   key={`${dept.deptId}-${index}`}
                 >
-                  <DeptIcon />
-                  <div className="search-result-item-detail">
-                    <div className="search-result-item-title">
-                      <div className="overflow-ellipsis" title={dept.deptName}>
-                        {renderSearchText(dept.deptName)}
+                  <Popover
+                    placement="bottomLeft"
+                    overlayStyle={overlayStyle}
+                    content={deptNameAndOrgName}
+                    trigger="hover"
+                  >
+                    <DeptIcon />
+                    <div className="search-result-item-detail">
+                      <div className="search-result-item-title">
+                        <div className="overflow-ellipsis">
+                          {renderSearchText(dept.deptName)}
+                        </div>
+                      </div>
+                      <div className="search-result-item-des">
+                        <div className="search-result-info-dept">
+                          {`位置: ${funTranName(
+                            `${deptNameAndOrgName}`,
+                            true
+                          )}`}
+                        </div>
                       </div>
                     </div>
-                    <div className="search-result-item-des">
-                      <div
-                        className="search-result-info-dept"
-                        title={deptNameAndOrgName}
-                      >
-                        {`位置: ${funTranName(`${deptNameAndOrgName}`, true)}`}
-                      </div>
-                    </div>
-                  </div>
+                  </Popover>
                   <div className="checkbox-wrap">
                     {multiple ? (
                       <Checkbox
@@ -653,47 +673,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
         ) : (
           ''
         )}
-        {orgList.length > 0 ? (
-          <React.Fragment>
-            <div className="search-result-group-title">
-              相关组织({orgList.length})
-            </div>
-            {orgList.map((org: any, index: number) => {
-              let checked = false;
-              for (const item of orgInfoList) {
-                // org也显示在相关组织下
-                if (org.orgId === item?.id) {
-                  checked = true;
-                }
-              }
 
-              return (
-                <div
-                  className="search-result-group-item"
-                  key={`${org.orgId}-${index}`}
-                >
-                  <OrgIcon />
-                  <div className="search-result-item-detail">
-                    <div className="search-result-item-title">
-                      <div className="overflow-ellipsis" title={org.orgName}>
-                        {renderSearchText(org.orgName)}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="checkbox-wrap">
-                    <Checkbox
-                      checked={checked}
-                      onChange={() => onCheckBoxChange(org, org.type)}
-                    />
-                  </div>
-                </div>
-              );
-            })}
-            {renderSearchHint(orgList)}
-          </React.Fragment>
-        ) : (
-          ''
-        )}
         {groupList.length > 0 ? (
           <React.Fragment>
             <div className="search-result-group-title">
@@ -713,17 +693,21 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
                   className="search-result-group-item"
                   key={`${group.groupId}-${index}`}
                 >
-                  <GroupIcon />
-                  <div className="search-result-item-detail">
-                    <div className="search-result-item-title">
-                      <div
-                        className="overflow-ellipsis"
-                        title={group.groupName}
-                      >
-                        {renderSearchText(group.groupName)}
+                  <Popover
+                    placement="bottomLeft"
+                    overlayStyle={overlayStyle}
+                    content={group.groupName}
+                    trigger="hover"
+                  >
+                    <GroupIcon />
+                    <div className="search-result-item-detail">
+                      <div className="search-result-item-title">
+                        <div className="overflow-ellipsis">
+                          {renderSearchText(group.groupName)}
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </Popover>
                   <div className="checkbox-wrap">
                     <Checkbox
                       checked={checked}
@@ -750,10 +734,16 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
                   key={`${tag.userId}-${index}`}
                   onClick={() => handleClick(tag, tag.type)}
                 >
+                  <Popover
+                    placement="bottomLeft"
+                    overlayStyle={overlayStyle}
+                    content={tag.userName}
+                    trigger="hover"
+                  ></Popover>
                   <TagIcon />
                   <div className="search-result-item-detail">
                     <div className="search-result-item-title">
-                      <div className="overflow-ellipsis" title={tag.userName}>
+                      <div className="overflow-ellipsis">
                         {renderSearchText(tag.userName)}
                       </div>
                     </div>
@@ -778,63 +768,25 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
                   key={`${tag.userId}-${index}`}
                   onClick={() => handleClick(tag, tag.type)}
                 >
-                  <TagIcon />
-                  <div className="search-result-item-detail">
-                    <div className="search-result-item-title">
-                      <div className="overflow-ellipsis" title={tag.userName}>
-                        {renderSearchText(tag.userName)}
+                  <Popover
+                    placement="bottomLeft"
+                    overlayStyle={overlayStyle}
+                    content={tag.userName}
+                    trigger="hover"
+                  >
+                    <TagIcon />
+                    <div className="search-result-item-detail">
+                      <div className="search-result-item-title">
+                        <div className="overflow-ellipsis">
+                          {renderSearchText(tag.userName)}
+                        </div>
                       </div>
                     </div>
-                  </div>
+                  </Popover>
                 </div>
               );
             })}
             {renderSearchHint(tagGroupList)}
-          </React.Fragment>
-        ) : (
-          ''
-        )}
-        {orgRelList.length > 0 ? (
-          <React.Fragment>
-            <div className="search-result-group-title">
-              相关组织({orgRelList.length})
-            </div>
-            {orgRelList.map((orgRel: any, index: number) => {
-              let checked = false;
-
-              for (const item of orgRelInfoList) {
-                if (orgRel.orgId === item?.id) {
-                  checked = true;
-                }
-              }
-
-              return (
-                <div
-                  className="search-result-group-item"
-                  key={`${orgRel.orgId}-${index}`}
-                >
-                  {orgRel?.orgType === 'REGULATORY' ? (
-                    <OrgRelIcon />
-                  ) : (
-                    <OrgIcon />
-                  )}
-                  <div className="search-result-item-detail">
-                    <div className="search-result-item-title">
-                      <div className="overflow-ellipsis" title={orgRel.orgName}>
-                        {renderSearchText(orgRel.orgName)}
-                      </div>
-                    </div>
-                  </div>
-                  <div className="checkbox-wrap">
-                    <Checkbox
-                      checked={checked}
-                      onChange={() => onCheckBoxChange(orgRel, orgRel.type)}
-                    />
-                  </div>
-                </div>
-              );
-            })}
-            {renderSearchHint(orgRelList)}
           </React.Fragment>
         ) : (
           ''
@@ -846,7 +798,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
   const $allNumberAlert = useMemo(() => {
     return allNumber && selectType === 'user' && search.length < 8 ? (
       <div className="search-result-tips">
-        <InfoCircleFilled className="search-result-tips-icon" />
+        {/* <InfoCircleFilled className="search-result-tips-icon" /> */}
         <Text type="secondary">
           为保证通讯录安全，手机号码输入超过8位后才能展示相关的人员结果
         </Text>

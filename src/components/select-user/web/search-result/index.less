@@ -64,7 +64,10 @@
         position: relative;
         &:hover {
           cursor: pointer;
-          background-color: #edf6fe;
+          background-color: #f5f5f5;
+        }
+        > span {
+          display: flex;
         }
         // .select-user-icon-user {
         //   margin-top: 3px;
@@ -102,7 +105,7 @@
             // white-space: nowrap;
 
             &_matched {
-              color: #1785ec;
+              color: var(--ant-primary-color, #2c7ef8);
             }
           }
           .search-result-item-des {

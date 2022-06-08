@@ -108,10 +108,10 @@ export const JSX = () => {
     showTabList: ['innerContacts'],
     requestParams: {
       strictUser: true,
-      selectTypeList: ['user', 'dept'],
+      selectTypeList: ['user'],
     },
-    // onlyLeafCheckable: true,
-    isSaveSelectSignature: true,
+    onlyLeafCheckable: true,
+    isSaveSelectSignature: false,
     // selectSignature: '',
     onOk(data) {
       console.log('onOk data', data);
