@@ -105,10 +105,10 @@ export const JSX = () => {
       title: '选人组件',
     },
     userOrigin: 'http://gateway.sit.suosihulian.com/user-center',
-    showTabList: ['innerContacts'],
+    showTabList: ['innerContacts', 'tagContacts'],
     requestParams: {
       strictUser: true,
-      selectTypeList: ['user'],
+      selectTypeList: ['user', 'tag'],
     },
     onlyLeafCheckable: true,
     isSaveSelectSignature: false,
@@ -132,7 +132,7 @@ export const JSX = () => {
 
   return (
     <>
-      <Button onClick={show}>内部通讯录</Button>
+      <Button onClick={show}>内部通讯录1</Button>
       <SelectUser {...props} />
     </>
   );
