@@ -136,11 +136,12 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
         break;
       case 'TAG':
         node = {
-          id: item.tagCode,
-          key: item.tagCode,
-          name: item.tagName,
+          id: item.userId,
+          key: item.userId,
+          name: item.userName,
           type: item.type,
-          contactType: item.contactType,
+          childDelete: item.childDelete,
+          orgId: item.orgId,
         };
         break;
       case 'ORG_REL':
@@ -448,9 +449,8 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
               >
                 {tagList.map((tag, index) => {
                   let checked = false;
-
                   for (const item of tagInfoList) {
-                    if (tag.tagCode === item.id) {
+                    if (tag.userId === item.id) {
                       checked = true;
                     }
                   }
@@ -469,7 +469,7 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
                         >
                           <div>
                             <div className="search-result-item-title">
-                              {searchResultNameReplace(tag.tagName)}
+                              {searchResultNameReplace(tag.userName)}
                             </div>
                             <div className="search-result-item-des">
                               {TAG_TYPE[tag.tagType]}

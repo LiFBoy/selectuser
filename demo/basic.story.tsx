@@ -206,8 +206,8 @@ export const JSX10 = () => {
       tagTypeList: [0],
       noTagLabelPermission: false,
     },
-    target: 'tool',
-    modalWidth: 300,
+    // target: 'tool',
+    // modalWidth: 300,
     // onlyLeafCheckable: true,
     isSaveSelectSignature: false,
 
@@ -349,7 +349,7 @@ export const MOBILE = () => {
     unCheckableNodeType: ['TAG_GROUP'],
     isSaveSelectSignature: true,
     showTabList: ['tagContacts'],
-    selectSignature: '3001001001000006-202205301653841789432',
+    // selectSignature: '3001001001000006-202205301653841789432',
     dialogProps: {
       title: '选人组件',
     },
