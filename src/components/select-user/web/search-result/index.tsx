@@ -438,7 +438,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
           )
           : ''}
         {maternalList.length > 0
-          ? renderDom(maternalList, '相关母婴', maternalInfoList, <UserIcon />)
+          ? renderDom(maternalList, '相关人员', maternalInfoList, <UserIcon />)
           : ''}
         {tvList.length > 0 ? (
           <React.Fragment>
