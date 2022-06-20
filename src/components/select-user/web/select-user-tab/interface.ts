@@ -16,4 +16,4 @@ export type TabTypes =
   | 'schoolContacts' // 家校通讯录
   | 'tagContacts' // 标签
   | 'orgRel' // 行政组织-精准推送
-  | 'groupContacts';
+  | 'groupContacts'; // 企微互联群

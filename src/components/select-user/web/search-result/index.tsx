@@ -440,7 +440,20 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
         {maternalList.length > 0
           ? renderDom(maternalList, '相关人员', maternalInfoList, <UserIcon />)
           : ''}
-        {tvList.length > 0 ? (
+
+        {tvList.length > 0
+          ? renderDom(tvList, '相关广告电视', tvInfoList, <EQUIPMENTICON />)
+          : ''}
+        {equipmentList.length > 0
+          ? renderDom(
+            equipmentList,
+            '相关设备',
+            equipmentInfoList,
+            <EQUIPMENTICON />
+          )
+          : ''}
+
+        {/* {tvList.length > 0 ? (
           <React.Fragment>
             <div className="search-result-group-title">
               相关广告电视({tvList.length})
@@ -484,8 +497,8 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
           </React.Fragment>
         ) : (
           ''
-        )}
-        {equipmentList.length > 0 ? (
+        )} */}
+        {/* {equipmentList.length > 0 ? (
           <React.Fragment>
             <div className="search-result-group-title">
               相关设备({equipmentList.length})
@@ -529,7 +542,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
           </React.Fragment>
         ) : (
           ''
-        )}
+        )} */}
         {userList.length > 0 ? (
           <React.Fragment>
             <div className="search-result-group-title">

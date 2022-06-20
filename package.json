@@ -1,6 +1,6 @@
 {
-  "name": "select-ss-user",
-  "version": "0.0.99",
+  "name": "suo-base-select-user",
+  "version": "0.0.1",
   "description": "select-user",
   "repository": {
     "type": "git",

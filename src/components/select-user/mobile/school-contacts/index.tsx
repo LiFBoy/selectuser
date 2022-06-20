@@ -202,7 +202,7 @@ const SchoolContacts: React.FunctionComponent<PropType> = (props: PropType) => {
       case 'memberDeptContacts': // 社区通讯录
       case 'schoolContacts': // 家校通讯录
         return <InternalIcon />;
-      case 'groupContacts': // 家校通讯录
+      case 'groupContacts': // 企微互联群
         return <GroupIcon />;
       case 'tagContacts': // 标签
         return <TagIcon />;

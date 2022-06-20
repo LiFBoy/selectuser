@@ -105,10 +105,10 @@ export const JSX = () => {
       title: '选人组件',
     },
     userOrigin: 'http://gateway.sit.suosihulian.com/user-center',
-    showTabList: ['innerContacts', 'tagContacts'],
+    showTabList: ['innerContacts'],
     requestParams: {
       strictUser: true,
-      selectTypeList: ['user', 'tag'],
+      selectTypeList: ['user'],
     },
     onlyLeafCheckable: true,
     isSaveSelectSignature: false,
@@ -255,7 +255,8 @@ export const JSX3 = () => {
     searchPlaceholder: '请输入设备编码进行搜素',
     userOrigin: 'http://gateway.sit.suosihulian.com/user-center',
     requestParams: {
-      selectTypeList: ['tv'],
+      // camera equipment tv
+      selectTypeList: ['equipment'],
     },
     isSaveSelectSignature: true,
     // selectSignature: '3001001001000006-821519e77a59435494612498d95380c2',
