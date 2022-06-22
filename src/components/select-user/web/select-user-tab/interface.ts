@@ -14,6 +14,9 @@ export type TabTypes =
   | 'memberContacts' // 居民
   | 'memberDeptContacts' // 社区通讯录
   | 'schoolContacts' // 家校通讯录
-  | 'tagContacts' // 标签
+  | 'customerTagContacts' // 客户标签
+  | 'groupTagContacts' // 群标签
+  | 'circlesTagContacts' // 圈子标签
+  | 'contentTagContacts' // 内容标签
   | 'orgRel' // 行政组织-精准推送
   | 'groupContacts'; // 企微互联群

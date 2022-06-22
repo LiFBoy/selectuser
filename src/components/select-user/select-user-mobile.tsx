@@ -35,20 +35,7 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
   selectSignature = '',
   isSaveSelectSignature = true,
   requestParams = { campusType: 'base_school_type' },
-  showTabList = [
-    'dept',
-    'group',
-    'memberContacts',
-    'memberDeptContacts',
-    'innerContacts',
-    'maternalContacts',
-    'disabledHomeContacts',
-    'equipmentContacts',
-    'schoolContacts',
-    'tagContacts',
-    'orgRel',
-    'groupContacts',
-  ],
+  showTabList,
   selectType = 'user',
   unCheckableNodeType = [],
   searchPlaceholder = '搜索姓名、部门名称、手机号',
@@ -105,7 +92,7 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
     const { key } = nextTab;
     setSearchTab(key);
     const params = {
-      search: searchValue,
+      keyword: searchValue,
       types: key === 'all' ? showTabList : [key],
       ...requestParams,
     };
@@ -130,6 +117,10 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
         orgInfoList = [],
         userInfoList = [],
         tagInfoList = [],
+        customerTagInfoList = [],
+        groupTagInfoList = [],
+        circlesTagInfoList = [],
+        contentTagInfoList = [],
         groupInfoList = [],
         orgRelInfoList = [],
       } = data;
@@ -182,6 +173,64 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
         });
       }
 
+      // 存储所有客户标签id
+      const customerTagObject: SelectUserCountRequestItem = {
+        selectNodeList: [],
+        type: 'CUSTOMER_TAG',
+      };
+      for (const item of customerTagInfoList) {
+        // 如果传入的数据中没有type属性，则在初始化时需要设置item的type
+        if (!item.type) item.type = 'CUSTOMER_TAG';
+
+        customerTagObject.selectNodeList.push({
+          contactType: item.contactType,
+          id: item.id,
+        });
+      }
+
+      // 存储所有群标签id
+      const groupTagObject: SelectUserCountRequestItem = {
+        selectNodeList: [],
+        type: 'GROUP_TAG',
+      };
+      for (const item of groupTagInfoList) {
+        // 如果传入的数据中没有type属性，则在初始化时需要设置item的type
+        if (!item.type) item.type = 'GROUP_TAG';
+
+        groupTagObject.selectNodeList.push({
+          contactType: item.contactType,
+          id: item.id,
+        });
+      }
+      // 存储所有圈子标签id
+      const circlesTagObject: SelectUserCountRequestItem = {
+        selectNodeList: [],
+        type: 'CIRCLES_TAG',
+      };
+      for (const item of circlesTagInfoList) {
+        // 如果传入的数据中没有type属性，则在初始化时需要设置item的type
+        if (!item.type) item.type = 'CIRCLES_TAG';
+
+        circlesTagObject.selectNodeList.push({
+          contactType: item.contactType,
+          id: item.id,
+        });
+      }
+      // 存储所有内容标签id
+      const contentTagObject: SelectUserCountRequestItem = {
+        selectNodeList: [],
+        type: 'CONTENT_TAG',
+      };
+      for (const item of contentTagInfoList) {
+        // 如果传入的数据中没有type属性，则在初始化时需要设置item的type
+        if (!item.type) item.type = 'CONTENT_TAG';
+
+        contentTagObject.selectNodeList.push({
+          contactType: item.contactType,
+          id: item.id,
+        });
+      }
+
       // 存储所有分组id
       const groupObject: SelectUserCountRequestItem = {
         selectNodeList: [],
@@ -226,6 +275,10 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
           orgCount: orgObject.selectNodeList.length,
           deptCount: deptObject.selectNodeList.length,
           tagCount: tagObject.selectNodeList.length,
+          customerTagCount: customerTagObject.selectNodeList.length,
+          groupTagCount: groupTagObject.selectNodeList.length,
+          circlesTagCount: circlesTagObject.selectNodeList.length,
+          contentTagCount: contentTagObject.selectNodeList.length,
           groupCount: groupObject.selectNodeList.length,
           orgRelCount: groupObject.selectNodeList.length,
         };
@@ -248,6 +301,10 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
       generateKey(orgInfoList);
       generateKey(userInfoList);
       generateKey(tagInfoList);
+      generateKey(customerTagInfoList);
+      generateKey(groupTagInfoList);
+      generateKey(contentTagInfoList);
+      generateKey(circlesTagInfoList);
       generateKey(groupInfoList);
       generateKey(orgRelInfoList);
 
@@ -257,6 +314,10 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
         orgInfoList,
         userInfoList,
         tagInfoList,
+        customerTagInfoList,
+        groupTagInfoList,
+        contentTagInfoList,
+        circlesTagInfoList,
         groupInfoList,
         orgRelInfoList,
         checkedKeys,
@@ -321,6 +382,10 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
           orgCount: 0,
           deptCount: 0,
           tagCount: 0,
+          customerTagCount: 0,
+          groupTagCount: 0,
+          circlesTagCount: 0,
+          contentTagCount: 0,
           groupCount: 0,
           orgRelCount: 0,
           userCount: 0,
@@ -329,16 +394,28 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
         for (const item of data) {
           switch (item.type) {
             case 'DEPT':
-              count.deptCount = item.userCount;
+              count.deptCount = item.deptCount;
               break;
             case 'ORG':
               count.orgCount = item.userCount;
               break;
             case 'GROUP':
-              count.groupCount = item.userCount;
+              count.groupCount = item.groupCount;
               break;
             case 'TAG':
-              count.tagCount = item.userCount;
+              count.tagCount = item.tagCount;
+              break;
+            case 'CUSTOMER_TAG':
+              count.customerTagCount = item.customerTagCount;
+              break;
+            case 'GROUP_TAG':
+              count.groupTagCount = item.groupTagCount;
+              break;
+            case 'CIRCLES_TAG':
+              count.circlesTagCount = item.circlesTagCount;
+              break;
+            case 'CONTENT_TAG':
+              count.contentTagCount = item.contentTagCount;
               break;
             case 'ORG_REL':
               count.orgRelCount = item.userCount;
@@ -399,6 +476,10 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
       userInfoList,
       groupInfoList,
       tagInfoList,
+      customerTagInfoList,
+      groupTagInfoList,
+      circlesTagInfoList,
+      contentTagInfoList,
       orgRelInfoList,
       userCount,
       equipmentInfoList,
@@ -417,6 +498,10 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
       userInfoList: formatParam(userInfoList),
       groupInfoList: formatParam(groupInfoList),
       tagInfoList: formatParam(tagInfoList),
+      customerTagInfoList: formatParam(customerTagInfoList),
+      groupTagInfoList: formatParam(groupTagInfoList),
+      circlesTagInfoList: formatParam(circlesTagInfoList),
+      contentTagInfoList: formatParam(contentTagInfoList),
       orgRelInfoList: formatParam(orgRelInfoList),
       equipmentInfoList: formatParam(equipmentInfoList),
       id: null,
@@ -429,6 +514,10 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
         deptInfoList: params.deptInfoList,
         userInfoList: params.userInfoList,
         tagInfoList: params.tagInfoList,
+        customerTagInfoList: params.customerTagInfoList,
+        groupTagInfoList: params.groupTagInfoList,
+        circlesTagInfoList: params.circlesTagInfoList,
+        contentTagInfoList: params.contentTagInfoList,
         orgInfoList: params.orgInfoList,
         groupInfoList: params.groupInfoList,
         orgRelInfoList: params.orgRelInfoList,
@@ -466,6 +555,10 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
           deptInfoList: params.deptInfoList,
           userInfoList: params.userInfoList,
           tagInfoList: params.tagInfoList,
+          customerTagInfoList: params.customerTagInfoList,
+          groupTagInfoList: params.groupTagInfoList,
+          circlesTagInfoList: params.circlesTagInfoList,
+          contentTagInfoList: params.contentTagInfoList,
           orgInfoList: params.orgInfoList,
           groupInfoList: params.groupInfoList,
           orgRelInfoList: params.orgRelInfoList,
@@ -481,15 +574,10 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
     Toast.loading('加载中…', 0);
     // tslint:disable-next-line: no-floating-promises
     net
-      .request(
-        `${URL()}/select/component/search?corpid=${others?.corpid}&appId=${
-          others?.appId
-        }`,
-        {
-          method: 'POST',
-          data: params,
-        }
-      )
+      .request(`${URL()}/select/component/search`, {
+        method: 'POST',
+        data: params,
+      })
       .then((res) => {
         Toast.hide();
         const data = res.data;
@@ -532,7 +620,7 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
                   }}
                   onSearch={(value) => {
                     const params = {
-                      search: value.replace(/\s+/g, ''),
+                      keyword: value.replace(/\s+/g, ''),
                       types: searchTab === 'all' ? showTabList : [searchTab],
                       ...requestParams,
                     };

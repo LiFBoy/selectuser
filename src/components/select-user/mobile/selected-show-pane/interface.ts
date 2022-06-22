@@ -17,6 +17,10 @@ export interface ItreeItem {
     | 'USER' // 个人
     | 'ORG' // 组织
     | 'TAG' // 标签
+    | 'CUSTOMER_TAG' // 标签
+    | 'GROUP_TAG' // 标签
+    | 'CIRCLES_TAG' // 标签
+    | 'CONTENT_TAG' // 标签
     | 'GROUP' // 分组
     | 'ORG_REL'; // 行政组织-精准推送业务
   deptType?:

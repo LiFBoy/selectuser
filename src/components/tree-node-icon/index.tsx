@@ -75,7 +75,15 @@ export type IconType =
   | 'GROUP_DEPT'
   | 'GROUP'
   | 'TAG'
+  | 'CUSTOMER_TAG'
+  | 'GROUP_TAG'
+  | 'CIRCLES_TAG'
+  | 'CONTENT_TAG'
   | 'TAG_GROUP'
+  | 'CUSTOMER_TAG_GROUP'
+  | 'GROUP_TAG_GROUP'
+  | 'CIRCLES_TAG_GROUP'
+  | 'CONTENT_TAG_GROUP'
   | 'orgRel'
   | 'ORG_REL'
   | 'REGULATORY'
@@ -103,7 +111,15 @@ const iconMap: {
   ORG_REL: OrgRelIcon,
   GROUP: GroupIcon,
   TAG: TagIcon,
+  GROUP_TAG: TagIcon,
+  CUSTOMER_TAG: TagIcon,
+  CIRCLES_TAG: TagIcon,
+  CONTENT_TAG: TagIcon,
   TAG_GROUP: TagGroupIcon,
+  CUSTOMER_TAG_GROUP: TagGroupIcon,
+  GROUP_TAG_GROUP: TagGroupIcon,
+  CIRCLES_TAG_GROUP: TagGroupIcon,
+  CONTENT_TAG_GROUP: TagGroupIcon,
   orgRel: OrgRelIcon,
   REGULATORY: OrgRelIcon,
   SCHOOL: OrgIcon,

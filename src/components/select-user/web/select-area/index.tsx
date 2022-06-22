@@ -18,22 +18,27 @@ const SelectArea: React.FunctionComponent<PropType> = (props: PropType) => {
 
   return (
     <>
-      {currentTab === 'tagContacts' ? (
-        <SelectTagTree
-          noTagLabelPermission={noTagLabelPermission}
-          multiple={multiple}
-          currentTab={currentTab}
-          selectType={selectType}
-        />
-      ) : (
-        <div className="select-area-wrap">
-          <SelectCommonTree
-            selectType={selectType}
+      {[
+        'customerTagContacts',
+        'groupTagContacts',
+        'circlesTagContacts',
+        'contentTagContacts',
+      ].indexOf(currentTab) > -1 ? (
+          <SelectTagTree
+            noTagLabelPermission={noTagLabelPermission}
             multiple={multiple}
             currentTab={currentTab}
+            selectType={selectType}
           />
-        </div>
-      )}
+        ) : (
+          <div className="select-area-wrap">
+            <SelectCommonTree
+              selectType={selectType}
+              multiple={multiple}
+              currentTab={currentTab}
+            />
+          </div>
+        )}
     </>
   );
 };

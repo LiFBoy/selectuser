@@ -51,7 +51,10 @@ const SHOW_TAB_LIST_ITEM_MAP: any = {
   memberDeptContacts: '社区通讯录',
   schoolContacts: '家校通迅录',
   groupContacts: '互连微信群',
-  tagContacts: '标签',
+  customerTagContacts: '客户标签',
+  groupTagContacts: '群标签',
+  circlesTagContacts: '圈子标签',
+  contentTagContacts: '内容标签',
   orgRel: '行政组织',
 };
 
@@ -83,6 +86,10 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
     deptInfoList,
     orgInfoList,
     tagInfoList,
+    customerTagInfoList,
+    groupTagInfoList,
+    circlesTagInfoList,
+    contentTagInfoList,
     equipmentInfoList,
     tvInfoList,
     maternalInfoList,
@@ -115,8 +122,9 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
   // };
   const handleClick = (item: any, type: string) => {
     localStorage.setItem('labelPath', item.labelPath);
-    localStorage.setItem('selectId', item.userId);
-
+    localStorage.setItem('selectId', item.key);
+    localStorage.setItem('tagType', type);
+    console.log(item.labelPath, 'item.labelPath');
     setExpandedKeys(item.labelPath);
 
     setTimeout(() => {
@@ -130,9 +138,9 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
     switch (type) {
       case 'USER':
         node = {
-          id: item.userId,
-          key: item.userId,
-          name: item.userName,
+          id: item.key,
+          key: item.key,
+          name: item.label,
           orgId: item.orgId,
           childDelete: item.childDelete,
           deptName: get(item.userDeptList, [0, 'deptName']),
@@ -168,27 +176,27 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
         break;
       case 'EQUIPMENT':
         node = {
-          id: item.userId,
-          key: item.userId,
-          name: item.userName,
+          id: item.key,
+          key: item.key,
+          name: item.label,
           childDelete: item.childDelete,
           orgId: item.orgId,
         };
         break;
       case 'CAMERA':
         node = {
-          id: item.userId,
-          key: item.userId,
-          name: item.userName,
+          id: item.key,
+          key: item.key,
+          name: item.label,
           childDelete: item.childDelete,
           orgId: item.orgId,
         };
         break;
       case 'TV':
         node = {
-          id: item.userId,
-          key: item.userId,
-          name: item.userName,
+          id: item.key,
+          key: item.key,
+          name: item.label,
           childDelete: item.childDelete,
           orgId: item.orgId,
         };
@@ -203,18 +211,58 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
         break;
       case 'MATERNAL':
         node = {
-          id: item.userId,
-          key: item.userId,
-          name: item.userName,
+          id: item.key,
+          key: item.key,
+          name: item.label,
           childDelete: item.childDelete,
           orgId: item.orgId,
         };
         break;
       case 'TAG':
         node = {
-          id: item.userId,
-          key: item.userId,
-          name: item.userName,
+          id: item.key,
+          key: item.key,
+          name: item.label,
+          childDelete: item.childDelete,
+          orgId: item.orgId,
+        };
+        break;
+      case 'CONTENT_TAG':
+        node = {
+          id: item.key,
+          key: item.key,
+          name: item.label,
+          type: item.type,
+          childDelete: item.childDelete,
+          orgId: item.orgId,
+        };
+        break;
+      case 'CIRCLES_TAG':
+        node = {
+          id: item.key,
+          key: item.key,
+          name: item.label,
+          type: item.type,
+          childDelete: item.childDelete,
+          orgId: item.orgId,
+        };
+        break;
+      case 'GROUP_TAG':
+        node = {
+          id: item.key,
+          key: item.key,
+          name: item.label,
+          type: item.type,
+          childDelete: item.childDelete,
+          orgId: item.orgId,
+        };
+        break;
+      case 'CUSTOMER_TAG':
+        node = {
+          id: item.key,
+          key: item.key,
+          name: item.label,
+          type: item.type,
           childDelete: item.childDelete,
           orgId: item.orgId,
         };
@@ -233,7 +281,15 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
     node.type = item.type;
     node.contactType = item.contactType;
     const _multiple =
-      currentTab === 'tagContacts' ? item?.selectType === 'checkbox' : multiple;
+      // currentTab === 'customerTagContacts'
+      [
+        'customerTagContacts',
+        'groupTagContacts',
+        'circlesTagContacts',
+        'contentTagContacts',
+      ].indexOf(currentTab) > -1
+        ? item?.selectType === 'checkbox'
+        : multiple;
     // 获取当前节点是勾选还是取消勾选
     let checked = null;
     // 如果是多选
@@ -308,6 +364,41 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
     });
   };
 
+  const renderTagDom = (list: any, title: string, icon: any) => {
+    return (
+      <>
+        <div className="search-result-group-title">
+          {title}({list.length})
+        </div>
+        {list.map((tag: any, index: number) => {
+          return (
+            <div
+              className="search-result-group-item"
+              key={`${tag.key}-${index}`}
+              onClick={() => handleClick(tag, tag.type)}
+            >
+              <Popover
+                placement="bottomLeft"
+                overlayStyle={overlayStyle}
+                content={tag.label}
+                trigger="hover"
+              ></Popover>
+              {icon}
+              <div className="search-result-item-detail">
+                <div className="search-result-item-title">
+                  <div className="overflow-ellipsis">
+                    {renderSearchText(tag.label)}
+                  </div>
+                </div>
+              </div>
+            </div>
+          );
+        })}
+        {renderSearchHint(list)}
+      </>
+    );
+  };
+
   const renderDom = (list: any, title: string, infoList: any, icon: any) => {
     return (
       <>
@@ -318,25 +409,25 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
           let checked = false;
 
           for (const item of infoList) {
-            if ((user.userId || user.groupId) === item?.id) {
+            if ((user.key || user.groupId) === item?.id) {
               checked = true;
             }
           }
           return (
             <div
               className="search-result-group-item"
-              key={`${user.userId}-${index}`}
+              key={`${user.key}-${index}`}
             >
               <Popover
                 placement="bottomLeft"
                 overlayStyle={overlayStyle}
-                content={user.userName || user.groupName}
+                content={user.label || user.groupName}
                 trigger="hover"
               >
                 {icon}
                 <div className="search-result-item-detail">
                   <div className="search-result-item-title overflow-ellipsis">
-                    {renderSearchText(user.userName || user.groupName)}
+                    {renderSearchText(user.label || user.groupName)}
                   </div>
                 </div>
               </Popover>
@@ -365,6 +456,10 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
     const deptList: any[] = [];
     const orgList: any[] = [];
     const tagList: any[] = [];
+    const customerTagList: any[] = [];
+    const groupTagList: any[] = [];
+    const circlesTagList: any[] = [];
+    const contentTagList: any[] = [];
     const tagGroupList: any[] = [];
     const groupList: any[] = [];
     const orgRelList: any[] = [];
@@ -400,24 +495,44 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
           groupList.push(resultItem);
           break;
         case 'TAG':
-        case 'TAG_GROUP':
+        case 'CUSTOMER_TAG':
+        case 'GROUP_TAG':
+        case 'CIRCLES_TAG':
+        case 'CONTENT_TAG':
           tagList.push(resultItem);
           break;
+        // case 'CUSTOMER_TAG':
+        //   customerTagList.push(resultItem);
+        //   break;
+        // case 'GROUP_TAG':
+        //   groupTagList.push(resultItem);
+        //   break;
+        // case 'CIRCLES_TAG':
+        //   circlesTagList.push(resultItem);
+        //   break;
+        // case 'CONTENT_TAG':
+        //   contentTagList.push(resultItem);
+        //   break;
         case 'ORG_REL':
           orgRelList.push(resultItem);
           break;
       }
     }
 
-    for (const resultItem of searchResult?.tagList) {
+    for (const resultItem of searchResult?.tagGroupList) {
+      // debugger;
+      console.log('xxx', resultItem);
       switch (resultItem.type) {
         case 'TAG_GROUP':
-        case 'TAG':
+        case 'CUSTOMER_TAG_GROUP':
+        case 'GROUP_TAG_GROUP':
+        case 'CIRCLES_TAG_GROUP':
+        case 'CONTENT_TAG_GROUP':
           tagGroupList.push(resultItem);
           break;
       }
     }
-    console.log(tagGroupList, 'tagGroupList', tagInfoList);
+    console.log(tagGroupList, 'tagGroupList');
 
     return (
       <div className="search-result-box">
@@ -452,97 +567,22 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
             <EQUIPMENTICON />
           )
           : ''}
+        {groupList.length > 0
+          ? renderDom(groupList, '相关分组', groupInfoList, <GroupIcon />)
+          : ''}
+        {tagList.length > 0
+          ? renderTagDom(tagList, '相关标签', <TagIcon />)
+          : ''}
+        {/* {groupTagList.length > 0
+          ? renderTagDom(groupTagList, '相关群标签', <TagIcon />)
+          : ''}
+        {contentTagList.length > 0
+          ? renderTagDom(contentTagList, '相关内容标签', <TagIcon />)
+          : ''} */}
+        {tagGroupList.length > 0
+          ? renderTagDom(tagGroupList, '相关标签组', <TagIcon />)
+          : ''}
 
-        {/* {tvList.length > 0 ? (
-          <React.Fragment>
-            <div className="search-result-group-title">
-              相关广告电视({tvList.length})
-            </div>
-            {tvList.map((user, index) => {
-              let checked = false;
-
-              for (const item of tvInfoList) {
-                if (user.userId === item?.id) {
-                  checked = true;
-                }
-              }
-              return (
-                <div
-                  className="search-result-group-item"
-                  key={`${user.userId}-${index}`}
-                >
-                  <Popover
-                    placement="bottomLeft"
-                    overlayStyle={overlayStyle}
-                    content={user.userName || user.groupName}
-                    trigger="hover"
-                  >
-                    <EQUIPMENTICON />
-                    <div className="search-result-item-detail">
-                      <div className="search-result-item-title overflow-ellipsis">
-                        {renderSearchText(user.userName)}
-                      </div>
-                    </div>
-                  </Popover>
-                  <div className="checkbox-wrap">
-                    <Checkbox
-                      checked={checked}
-                      onChange={() => onCheckBoxChange(user, user.type)}
-                    />
-                  </div>
-                </div>
-              );
-            })}
-            {renderSearchHint(userList)}
-          </React.Fragment>
-        ) : (
-          ''
-        )} */}
-        {/* {equipmentList.length > 0 ? (
-          <React.Fragment>
-            <div className="search-result-group-title">
-              相关设备({equipmentList.length})
-            </div>
-            {equipmentList.map((user, index) => {
-              let checked = false;
-
-              for (const item of equipmentInfoList) {
-                if (user.userId === item?.id) {
-                  checked = true;
-                }
-              }
-              return (
-                <div
-                  className="search-result-group-item"
-                  key={`${user.userId}-${index}`}
-                >
-                  <Popover
-                    placement="bottomLeft"
-                    overlayStyle={overlayStyle}
-                    content={user.userName || user.groupName}
-                    trigger="hover"
-                  >
-                    <EQUIPMENTICON />
-                    <div className="search-result-item-detail">
-                      <div className="search-result-item-title overflow-ellipsis">
-                        {renderSearchText(user.userName)}
-                      </div>
-                    </div>
-                  </Popover>
-                  <div className="checkbox-wrap">
-                    <Checkbox
-                      checked={checked}
-                      onChange={() => onCheckBoxChange(user, user.type)}
-                    />
-                  </div>
-                </div>
-              );
-            })}
-            {renderSearchHint(userList)}
-          </React.Fragment>
-        ) : (
-          ''
-        )} */}
         {userList.length > 0 ? (
           <React.Fragment>
             <div className="search-result-group-title">
@@ -552,25 +592,25 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
               let checked = false;
 
               for (const item of userInfoList) {
-                if (user.userId === item?.id) {
+                if (user.key === item?.id) {
                   checked = true;
                 }
               }
               return (
                 <div
                   className="search-result-group-item"
-                  key={`${user.userId}-${index}`}
+                  key={`${user.key}-${index}`}
                 >
                   <Popover
                     placement="bottomLeft"
                     overlayStyle={overlayStyle}
-                    content={user.userName}
+                    content={user.label}
                     trigger="hover"
                   >
                     <UserIcon />
                     <div className="search-result-item-detail">
                       <div className="search-result-item-title overflow-ellipsis">
-                        {renderSearchText(user.userName)}
+                        {renderSearchText(user.label)}
                       </div>
                       {user.userDeptList?.map(
                         (deptItem: any, index: number) => {
@@ -632,15 +672,15 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
             {deptList.map((dept: any, index: number) => {
               let checked = false;
               for (const item of deptInfoList) {
-                if (dept.deptId === item?.id) {
+                if (dept.key === item?.id) {
                   checked = true;
                 }
               }
-              const deptNameAndOrgName = `${dept.orgName} - ${dept.deptNamePath}`;
+              const deptNameAndOrgName = `${dept.orgName} - ${dept.labelPath}`;
               return (
                 <div
                   className="search-result-group-item"
-                  key={`${dept.deptId}-${index}`}
+                  key={`${dept.key}-${index}`}
                 >
                   <Popover
                     placement="bottomLeft"
@@ -652,7 +692,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
                     <div className="search-result-item-detail">
                       <div className="search-result-item-title">
                         <div className="overflow-ellipsis">
-                          {renderSearchText(dept.deptName)}
+                          {renderSearchText(dept.label)}
                         </div>
                       </div>
                       <div className="search-result-item-des">
@@ -687,7 +727,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
           ''
         )}
 
-        {groupList.length > 0 ? (
+        {/* {groupList.length > 0 ? (
           <React.Fragment>
             <div className="search-result-group-title">
               相关分组({groupList.length})
@@ -734,8 +774,8 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
           </React.Fragment>
         ) : (
           ''
-        )}
-        {tagList.length > 0 ? (
+        )} */}
+        {/* {tagList.length > 0 ? (
           <React.Fragment>
             <div className="search-result-group-title">
               相关标签({tagList.length})
@@ -744,20 +784,20 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
               return (
                 <div
                   className="search-result-group-item"
-                  key={`${tag.userId}-${index}`}
+                  key={`${tag.key}-${index}`}
                   onClick={() => handleClick(tag, tag.type)}
                 >
                   <Popover
                     placement="bottomLeft"
                     overlayStyle={overlayStyle}
-                    content={tag.userName}
+                    content={tag.label}
                     trigger="hover"
                   ></Popover>
                   <TagIcon />
                   <div className="search-result-item-detail">
                     <div className="search-result-item-title">
                       <div className="overflow-ellipsis">
-                        {renderSearchText(tag.userName)}
+                        {renderSearchText(tag.label)}
                       </div>
                     </div>
                   </div>
@@ -768,8 +808,8 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
           </React.Fragment>
         ) : (
           ''
-        )}
-        {tagGroupList.length > 0 ? (
+        )} */}
+        {/* {tagGroupList.length > 0 ? (
           <React.Fragment>
             <div className="search-result-group-title">
               相关标签组({tagGroupList.length})
@@ -778,20 +818,20 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
               return (
                 <div
                   className="search-result-group-item"
-                  key={`${tag.userId}-${index}`}
+                  key={`${tag.key}-${index}`}
                   onClick={() => handleClick(tag, tag.type)}
                 >
                   <Popover
                     placement="bottomLeft"
                     overlayStyle={overlayStyle}
-                    content={tag.userName}
+                    content={tag.label}
                     trigger="hover"
                   >
                     <TagIcon />
                     <div className="search-result-item-detail">
                       <div className="search-result-item-title">
                         <div className="overflow-ellipsis">
-                          {renderSearchText(tag.userName)}
+                          {renderSearchText(tag.label)}
                         </div>
                       </div>
                     </div>
@@ -803,7 +843,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
           </React.Fragment>
         ) : (
           ''
-        )}
+        )} */}
       </div>
     );
   };
@@ -823,9 +863,10 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
     return (
       <>
         {$allNumberAlert}
-        {searchResult?.dataSource?.length > 0 ? (
-          <React.Fragment>{renderTabContent()}</React.Fragment>
-        ) : null}
+        {searchResult?.dataSource?.length > 0 ||
+        searchResult?.tagGroupList?.length > 0 ? (
+            <React.Fragment>{renderTabContent()}</React.Fragment>
+          ) : null}
       </>
     );
   };
@@ -833,12 +874,13 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
   const handleDefault = () => {
     return (
       <>
-        {searchResult?.dataSource?.length === 0 ? (
-          <div className="web-tree-result-empty">
-            <div className="empty-img"></div>
-            <div className="text">搜索结果为空，请调整搜索内容</div>
-          </div>
-        ) : null}
+        {searchResult?.dataSource?.length === 0 &&
+        searchResult?.tagGroupList?.length === 0 ? (
+            <div className="web-tree-result-empty">
+              <div className="empty-img"></div>
+              <div className="text">搜索结果为空，请调整搜索内容</div>
+            </div>
+          ) : null}
       </>
     );
   };

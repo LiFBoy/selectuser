@@ -19,6 +19,10 @@ const SelectPane: React.FunctionComponent<PropTypes> = (props: PropTypes) => {
     orgInfoList,
     userInfoList,
     tagInfoList,
+    customerTagInfoList,
+    groupTagInfoList,
+    circlesTagInfoList,
+    contentTagInfoList,
     groupInfoList,
     orgRelInfoList,
     userCount,
@@ -57,6 +61,18 @@ const SelectPane: React.FunctionComponent<PropTypes> = (props: PropTypes) => {
           break;
         case 'TAG':
           userCount.tagCount = 0;
+          break;
+        case 'CUSTOMER_TAG':
+          userCount.customerTagCount = 0;
+          break;
+        case 'GROUP_TAG':
+          userCount.groupTagCount = 0;
+          break;
+        case 'CIRCLES_TAG':
+          userCount.circlesTagCount = 0;
+          break;
+        case 'CONTENT_TAG':
+          userCount.contentTagCount = 0;
           break;
         case 'ORG_REL':
           userCount.orgRelCount = 0;
@@ -121,6 +137,47 @@ const SelectPane: React.FunctionComponent<PropTypes> = (props: PropTypes) => {
       unit: '人',
       count: userCount.tagCount || 0,
       itemList: tagInfoList,
+    };
+    groupList.push(groupItem);
+  }
+
+  if (customerTagInfoList?.length) {
+    const groupItem = {
+      title: '客户标签',
+      type: 'TAG',
+      unit: '人',
+      count: userCount.customerTagCount || 0,
+      itemList: customerTagInfoList,
+    };
+    groupList.push(groupItem);
+  }
+  if (groupTagInfoList?.length) {
+    const groupItem = {
+      title: '群标签',
+      type: 'TAG',
+      unit: '人',
+      count: userCount.groupTagCount || 0,
+      itemList: groupTagInfoList,
+    };
+    groupList.push(groupItem);
+  }
+  if (circlesTagInfoList?.length) {
+    const groupItem = {
+      title: '圈子标签',
+      type: 'TAG',
+      unit: '人',
+      count: userCount.circlesTagCount || 0,
+      itemList: circlesTagInfoList,
+    };
+    groupList.push(groupItem);
+  }
+  if (contentTagInfoList?.length) {
+    const groupItem = {
+      title: '内容标签',
+      type: 'TAG',
+      unit: '人',
+      count: userCount.contentTagCount || 0,
+      itemList: contentTagInfoList,
     };
     groupList.push(groupItem);
   }

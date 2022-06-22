@@ -11,7 +11,10 @@ const TAB_MAPS: any = {
   memberDeptContacts: '社区通讯录',
   schoolContacts: '家校通讯录',
   groupContacts: '互连微信群',
-  tagContacts: '标签',
+  customerTagContacts: '客户标签',
+  groupTagContacts: '群标签',
+  circlesTagContacts: '圈子标签',
+  contentTagContacts: '内容标签',
   orgRel: '行政组织',
 };
 
@@ -102,20 +105,7 @@ const SchoolContacts: React.FunctionComponent<PropType> = (props: PropType) => {
   console.log(treeState, 'treeState');
 
   const [currentTab, setCurrentTab] = useState<any>('');
-  const [activeKey, setActiveKey] = useState<any>(
-    showTabList || [
-      'dept',
-      'group',
-      'innerContacts',
-      'maternalContacts',
-      'disabledHomeContacts',
-      'equipmentContacts',
-      'schoolContacts',
-      'tagContacts',
-      'orgRel',
-      'groupContacts',
-    ]
-  );
+  const [activeKey, setActiveKey] = useState<any>(showTabList);
   const activeKeyRef = useRef<any>([]);
   const scrollDom = useRef<any>(null);
   const scrollRef = useRef<any>(0);
@@ -204,7 +194,10 @@ const SchoolContacts: React.FunctionComponent<PropType> = (props: PropType) => {
         return <InternalIcon />;
       case 'groupContacts': // 企微互联群
         return <GroupIcon />;
-      case 'tagContacts': // 标签
+      case 'customerTagContacts': // 客户标签
+      case 'groupTagContacts': // 群标签
+      case 'circlesTagContacts': // 圈子标签
+      case 'contentTagContacts': // 内容标签
         return <TagIcon />;
       case 'orgRel': // 行政组织-精准推送
         return <OrgRelIcon />;

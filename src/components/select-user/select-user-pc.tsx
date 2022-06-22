@@ -21,19 +21,7 @@ const SelectUserPc: React.FunctionComponent<PropTypes> = ({
   multiple = true,
   onCancel,
   requestParams = { campusType: 'base_school_type' },
-  showTabList = [
-    'dept',
-    'group',
-    'innerContacts',
-    'maternalContacts',
-    'disabledHomeContacts',
-    'equipmentContacts',
-    'memberContacts',
-    'memberDeptContacts',
-    'schoolContacts',
-    'tagContacts',
-    'orgRel',
-  ],
+  showTabList,
   selectType = 'user',
   searchPlaceholder = '搜索',
 }) => {
@@ -63,7 +51,7 @@ const SelectUserPc: React.FunctionComponent<PropTypes> = ({
 
       // 搜索图标点击事件
       const params = {
-        search: nextSearchValue,
+        keyword: nextSearchValue,
         types: searchTab === 'all' ? showTabList : [searchTab],
         ...requestParams,
       };
@@ -79,10 +67,13 @@ const SelectUserPc: React.FunctionComponent<PropTypes> = ({
     if (tab) {
       getTreeRoot(tab);
     }
-    if (tab === 'tagContacts' && (searchValue || lineHeigth?.length > 0)) {
+    if (
+      tab === 'customerTagContacts' &&
+      (searchValue || lineHeigth?.length > 0)
+    ) {
       getTreeRoot(tab);
     }
-  }, [tab, searchValue, lineHeigth]);
+  }, [tab]);
 
   useEffect(() => {
     if (!searchValue) {
@@ -120,12 +111,32 @@ const SelectUserPc: React.FunctionComponent<PropTypes> = ({
     setSearchTab(nextTab);
 
     const params = {
-      search: searchValue,
+      keyword: searchValue,
       types: nextTab === 'all' ? showTabList : [nextTab],
       ...requestParams,
     };
     getSearchResult(params);
   };
+  useEffect(() => {
+    switch (localStorage.getItem('tagType')) {
+      case 'GROUP_TAG':
+      case 'GROUP_TAG_GROUP':
+        setTab('groupTagContacts');
+        break;
+      case 'CUSTOMER_TAG':
+      case 'CUSTOMER_TAG_GROUP':
+        setTab('customerTagContacts');
+        break;
+      case 'CIRCLES_TAG':
+      case 'CIRCLES_TAG_GROUP':
+        setTab('circlesTagContacts');
+        break;
+      case 'CONTENT_TAG':
+      case 'CONTENT_TAG_GROUP':
+        setTab('contentTagContacts');
+        break;
+    }
+  }, [localStorage.getItem('tagType')]);
 
   return (
     <Modal

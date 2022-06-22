@@ -74,6 +74,7 @@ const PannelItem: React.FunctionComponent<PropType> = (props: PropType) => {
     if (!node.checkable) {
       return;
     }
+
     // if (
     //   currentTab === 'innerContacts' &&
     //   node.type === 'DEPT' &&
@@ -81,9 +82,9 @@ const PannelItem: React.FunctionComponent<PropType> = (props: PropType) => {
     // ) {
     //   return;
     // }
-    if (currentTab === 'tags' && node.isLeaf === false) {
-      return;
-    }
+    // if (currentTab === 'tags' && node.isLeaf === false) {
+    //   return;
+    // }
     const item: any = {
       id: node.key,
       label: node.label,

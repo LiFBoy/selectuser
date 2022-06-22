@@ -135,19 +135,13 @@ const SelectTagTree: React.FunctionComponent<PropType> = (props: PropType) => {
         // multiple={multiple}
         blockNode
         expandedKeys={
-          expandedKeys.length > 0
+          expandedKeys.length > 1
             ? expandedKeys
             : localStorage.getItem('labelPath')
               ? localStorage.getItem('labelPath').split('-')
               : expandedKeys
         }
-        // expandedKeys={[
-        //   '1519884017599488002',
-        //   '1519884121001664513',
-        //   '1519884206770987010',
-        //   '1519886599357177857',
-        //   '1519889504036134914',
-        // ]}
+        // expandedKeys={['3001001001000006', '1526430746303733762']}
         onExpand={setExpandedKeys}
         onSelect={handleSelect}
         checkStrictly
@@ -163,7 +157,6 @@ const SelectTagTree: React.FunctionComponent<PropType> = (props: PropType) => {
         'groupContacts',
         'maternalContacts',
         'disabledHomeContacts',
-        'tagContacts',
       ].indexOf(currentTab) > -1 &&
         treeData.length > 19 && (
         <div className="more-text">

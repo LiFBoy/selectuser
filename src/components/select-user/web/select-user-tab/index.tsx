@@ -15,7 +15,10 @@ const TAB_MAPS = {
   memberDeptContacts: '社区通讯录',
   schoolContacts: '家校通讯录',
   groupContacts: '互连微信群',
-  tagContacts: '标签',
+  customerTagContacts: '客户标签',
+  groupTagContacts: '群标签',
+  circlesTagContacts: '圈子标签',
+  contentTagContacts: '内容标签',
   orgRel: '行政组织',
 };
 

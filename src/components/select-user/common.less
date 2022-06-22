@@ -60,7 +60,7 @@
     height: 16px;
     min-width: 8px;
     padding: 0 4px;
-    font-size: 12px;
+    font-size: var(--desc-default-size, 12px);
     line-height: 16px;
     -webkit-transform: translateX(-50%);
     -ms-transform: translateX(-50%);
@@ -100,7 +100,7 @@
   .next-badge .next-badge-custom {
     line-height: 1.166667;
     white-space: nowrap;
-    font-size: 12px;
+    font-size: var(--desc-default-size, 12px);
     padding-left: 4px;
     padding-right: 4px;
     border-radius: 3px;
@@ -127,7 +127,7 @@
     display: block;
     height: 16px;
     line-height: 16px;
-    font-size: 12px;
+    font-size: var(--desc-default-size, 12px);
   }
 
   .next-badge-not-a-wrapper .next-badge-count,
@@ -398,19 +398,19 @@
 
     .next-icon.next-xxs:before {
       width: 16px;
-      font-size: 16px;
+      font-size: var(--title-default-size, 16px);
     }
   }
 
   .next-icon.next-xs:before {
     width: 12px;
-    font-size: 12px;
+    font-size: var(--desc-default-size, 12px);
     line-height: inherit;
   }
 
   .next-icon.next-small:before {
     width: 16px;
-    font-size: 16px;
+    font-size: var(--title-default-size, 16px);
     line-height: inherit;
   }
 
@@ -530,7 +530,7 @@
 
     .next-checkbox-wrapper .next-checkbox-inner > .next-icon::before {
       width: 16px;
-      font-size: 16px;
+      font-size: var(--title-default-size, 16px);
     }
   }
 
@@ -569,7 +569,7 @@
 
     .next-checkbox-wrapper.checked .next-checkbox-inner > .next-icon::before {
       width: 16px;
-      font-size: 16px;
+      font-size: var(--title-default-size, 16px);
     }
   }
 
@@ -660,7 +660,7 @@
   }
 
   .next-checkbox-label {
-    font-size: 12px;
+    font-size: var(--desc-default-size, 12px);
     vertical-align: middle;
     margin: 0;
     margin-left: 4px;
@@ -701,7 +701,7 @@
     line-height: 20px;
     padding: 0 4px;
     border-radius: 3px;
-    font-size: 12px;
+    font-size: var(--desc-default-size, 12px);
   }
 
   .next-tree-node-input.next-input {
@@ -733,7 +733,7 @@
 
   .next-tree-switcher.next-noline .next-tree-switcher-icon:before {
     width: 12px;
-    font-size: 12px;
+    font-size: var(--desc-default-size, 12px);
     line-height: inherit;
   }
 
@@ -745,7 +745,7 @@
 
   .next-tree-switcher.next-noline.next-close .next-tree-switcher-icon:before {
     width: 12px;
-    font-size: 12px;
+    font-size: var(--desc-default-size, 12px);
     line-height: inherit;
   }
 
@@ -799,7 +799,7 @@
 
     .next-tree-switcher.next-line .next-tree-switcher-icon:before {
       width: 16px;
-      font-size: 16px;
+      font-size: var(--title-default-size, 16px);
     }
   }
 
@@ -857,7 +857,7 @@
 
   .next-tree-switcher.next-loading .next-tree-switcher-icon:before {
     width: 12px;
-    font-size: 12px;
+    font-size: var(--desc-default-size, 12px);
     line-height: inherit;
   }
 
@@ -1019,7 +1019,7 @@
 
   .next-tree-select-not-found {
     height: 16px;
-    font-size: 12px;
+    font-size: var(--desc-default-size, 12px);
     color: #999;
   }
 }

@@ -9,6 +9,14 @@ export type NodeType =
   | 'CAMERA'
   | 'WORK_GROUP'
   | 'MATERNAL'
+  | 'CUSTOMER_TAG'
+  | 'GROUP_TAG'
+  | 'CIRCLES_TAG'
+  | 'CONTENT_TAG'
+  | 'CUSTOMER_TAG_GROUP'
+  | 'GROUP_TAG_GROUP'
+  | 'CIRCLES_TAG_GROUP'
+  | 'CONTENT_TAG_GROUP'
   | 'TAG'
   | 'GROUP_DEPT'
   | 'GROUP'
@@ -48,10 +56,21 @@ export interface ValueObj {
   deptInfoList: IlistItem[];
   // 标签列表
   tagInfoList: IlistItem[];
+
+  // 客户标签
+  customerTagInfoList: IlistItem[];
+  // 群标签
+  groupTagInfoList: IlistItem[];
+  // 圈子标签
+  circlesTagInfoList: IlistItem[];
+  // 内容标签
+  contentTagInfoList: IlistItem[];
+
   // 组织列表
   orgInfoList: IlistItem[];
-  // 分组列表
+  // 群
   groupInfoList?: IlistItem[];
+  // 相关告警群
   workGroupInfoList?: IlistItem[];
   // 行政组织
   orgRelInfoList?: IlistItem[];
@@ -73,6 +92,10 @@ export interface IdefaultValue {
   orgInfoList?: IlistItem[];
   userInfoList?: IlistItem[];
   tagInfoList?: IlistItem[];
+  customerTagInfoList?: IlistItem[];
+  groupTagInfoList?: IlistItem[];
+  circlesTagInfoList?: IlistItem[];
+  contentTagInfoList?: IlistItem[];
   groupInfoList?: IlistItem[];
   orgRelInfoList?: IlistItem[];
   maternalInfoList?: IlistItem[];
@@ -166,7 +189,10 @@ export interface PropTypes {
     | 'memberDeptContacts' // 社区通讯录
     | 'equipmentContacts' // 资产通讯录
     | 'schoolContacts' // 家校通讯录
-    | 'tagContacts' // 标签
+    | 'customerTagContacts' // 客户标签
+    | 'groupTagContacts' // 群标签
+    | 'circlesTagContacts' // 圈子标签
+    | 'contentTagContacts' // 内容标签
     | 'orgRel' // 行政组织--精准推送
     | 'groupContacts'
   )[];
@@ -247,6 +273,10 @@ export interface IsaveResultParams {
   groupInfoList?: any;
   workGroupInfoList?: any;
   tagInfoList?: any;
+  customerTagInfoList?: any;
+  groupTagInfoList?: any;
+  circlesTagInfoList?: any;
+  contentTagInfoList?: any;
   equipmentInfoList?: any;
   tvInfoList?: any;
   maternalInfoList?: any;

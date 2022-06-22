@@ -11,7 +11,7 @@ export const MethodInvoke2 = () => {
       multiple: false,
       selectType: 'dept',
 
-      userOrigin: 'http://gateway.sit.suosihulian.com/user-center',
+      userOrigin: 'http://gateway.dev.suosihulian.com/user-center',
       // searchPlaceholder: '请输入群主或群名称进行搜索',
       requestParams: {
         selectTypeList: ['dept'],
@@ -44,14 +44,14 @@ export const MethodInvoke = () => {
       visible: true,
       multiple: true,
       selectType: 'dept',
-      showTabList: ['tagContacts'],
+      showTabList: ['customerTagContacts'],
       dialogProps: {
         title: '标签',
       },
       // true 无限制 false 注明不可修改并禁用
       noTagLabelPermission: false,
       searchPlaceholder: '请输入标签名称进行搜索',
-      userOrigin: 'http://gateway.sit.suosihulian.com/user-center',
+      userOrigin: 'http://gateway.dev.suosihulian.com/user-center',
       requestParams: {
         selectTypeList: ['group_tag'],
         // 仅在tab为标签时生效，0全部，1运营，2系统 tagTypeList?: ['0', '1', '2'];
@@ -98,21 +98,23 @@ export const JSX = () => {
   const props: PropTypes = {
     visible,
     multiple: true,
-    selectType: 'user',
+    selectType: 'dept',
     unCheckableNodeType: ['ORG'],
     searchPlaceholder: '请输入姓名或手机号进行搜索',
     dialogProps: {
       title: '选人组件',
     },
-    userOrigin: 'http://gateway.sit.suosihulian.com/user-center',
+    userOrigin: 'http://gateway.dev.suosihulian.com/user-center',
     showTabList: ['innerContacts'],
     requestParams: {
-      strictUser: true,
-      selectTypeList: ['user'],
+      // strictUser: true,
+      selectTypeList: ['dept'],
     },
-    onlyLeafCheckable: true,
-    isSaveSelectSignature: false,
-    // selectSignature: '',
+
+    // onlyLeafCheckable: true,
+    isSaveSelectSignature: true,
+
+    selectSignature: '3001001001000006-202206221655897867496',
     onOk(data) {
       console.log('onOk data', data);
       const { selectSignature } = data;
@@ -154,7 +156,7 @@ export const JSX2 = () => {
       title: '标签',
     },
     searchPlaceholder: '请输入标签名称进行搜索',
-    userOrigin: 'http://gateway.sit.suosihulian.com/user-center',
+    userOrigin: 'http://gateway.dev.suosihulian.com/user-center',
     requestParams: {
       selectTypeList: ['user'],
     },
@@ -195,23 +197,34 @@ export const JSX10 = () => {
     multiple: true,
     selectType: 'dept',
     noTagLabelPermission: false,
-    showTabList: ['tagContacts'],
+    showTabList: ['customerTagContacts'],
     dialogProps: {
       title: '标签',
     },
     searchPlaceholder: '请输入标签名称进行搜索',
-    userOrigin: 'http://gateway.sit.suosihulian.com/user-center',
+    userOrigin: 'http://gateway.dev.suosihulian.com/user-center',
     requestParams: {
-      selectTypeList: ['group_tag'],
+      selectTypeList: ['tag'],
       tagTypeList: [0],
       noTagLabelPermission: false,
     },
     // target: 'tool',
     // modalWidth: 300,
     // onlyLeafCheckable: true,
-    isSaveSelectSignature: false,
-
-    // selectSignature: '',
+    isSaveSelectSignature: true,
+    // defaultValue: {
+    //   customerTagInfoList: [
+    //     {
+    //       id: '1526430948989280258',
+    //       name: '测试运营标签',
+    //       type: 'CUSTOMER_TAG',
+    //       contactType: 9,
+    //       childDelete: true,
+    //       noTagLabelPermission: true,
+    //     },
+    //   ],
+    // },
+    // selectSignature: '3001001001000006-202206221655897369692',
     onOk(data) {
       console.log('onOk data', data);
       const { selectSignature } = data;
@@ -253,7 +266,7 @@ export const JSX3 = () => {
       title: 'tv',
     },
     searchPlaceholder: '请输入设备编码进行搜素',
-    userOrigin: 'http://gateway.sit.suosihulian.com/user-center',
+    userOrigin: 'http://gateway.dev.suosihulian.com/user-center',
     requestParams: {
       // camera equipment tv
       selectTypeList: ['equipment'],
@@ -322,10 +335,10 @@ export const MOBILE = () => {
     },
     searchPlaceholder: '请搜索',
     requestParams: {
-      selectTypeList: ['user', 'dept'],
-      contactType: 1,
+      selectTypeList: ['user'],
+      // contactType: 1,
     },
-    userOrigin: 'http://gateway.sit.suosihulian.com/user-center',
+    userOrigin: 'http://gateway.dev.suosihulian.com/user-center',
     onOk(data) {
       console.log('onOk data', data);
       const { selectSignature } = data;
@@ -349,15 +362,15 @@ export const MOBILE = () => {
     selectType: 'dept',
     unCheckableNodeType: ['TAG_GROUP'],
     isSaveSelectSignature: true,
-    showTabList: ['tagContacts'],
+    showTabList: ['groupContacts'],
     // selectSignature: '3001001001000006-202205301653841789432',
     dialogProps: {
       title: '选人组件',
     },
     noTagLabelPermission: true,
-    userOrigin: 'http://gateway.sit.suosihulian.com/user-center',
+    userOrigin: 'http://gateway.dev.suosihulian.com/user-center',
     requestParams: {
-      selectTypeList: ['group_tag'],
+      selectTypeList: ['group'],
       // 仅在tab为标签时生效，0全部，1运营，2系统 tagTypeList?: ['0', '1', '2'];
       tagTypeList: [0],
       noTagLabelPermission: true,

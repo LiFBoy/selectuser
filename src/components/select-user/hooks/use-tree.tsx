@@ -55,6 +55,10 @@ type ItreeState = StaticProps & {
   maternalInfoList: ItreeItem[];
   cameraInfoList: ItreeItem[];
   tagInfoList: ItreeItem[];
+  customerTagInfoList: ItreeItem[];
+  groupTagInfoList: ItreeItem[];
+  circlesTagInfoList: ItreeItem[];
+  contentTagInfoList: ItreeItem[];
   groupInfoList: ItreeItem[];
   workGroupInfoList: ItreeItem[];
   orgRelInfoList: ItreeItem[];
@@ -75,16 +79,20 @@ interface IResult {
 }
 
 interface IuserCount {
-  orgCount: number;
-  deptCount: number;
+  orgCount?: number;
+  deptCount?: number;
   equipmentCount?: number;
   tvCount?: number;
   cameraCount?: number;
   workGroupCount?: number;
   maternalCount?: number;
-  tagCount: number;
-  groupCount: number;
-  orgRelCount: number;
+  tagCount?: number;
+  customerTagCount?: number;
+  groupTagCount?: number;
+  circlesTagCount?: number;
+  contentTagCount?: number;
+  groupCount?: number;
+  orgRelCount?: number;
   [key: string]: any;
 }
 
@@ -146,12 +154,21 @@ const INIT_STATE: ItreeState = {
   equipmentInfoList: [],
   // 选中的tv节点
   tvInfoList: [],
+  // 母婴
   maternalInfoList: [],
+  // 摄像头
   cameraInfoList: [],
   // 选中的标签类型节点
   tagInfoList: [],
-  // 选中的分组类型节点
+
+  customerTagInfoList: [],
+  groupTagInfoList: [],
+  circlesTagInfoList: [],
+  contentTagInfoList: [],
+
+  // 选中的群类型节点
   groupInfoList: [],
+  // 相关告警群
   workGroupInfoList: [],
   // 行政组织-精准推送
   orgRelInfoList: [],
@@ -165,6 +182,10 @@ const INIT_STATE: ItreeState = {
     workGroupCount: 0,
     maternalCount: 0,
     tagCount: 0,
+    customerTagCount: 0,
+    groupTagCount: 0,
+    circlesTagCount: 0,
+    contentTagCount: 0,
     groupCount: 0,
     orgRelCount: 0,
   },
@@ -200,6 +221,10 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
       GROUP_DEPT: 'deptInfoList',
       ORG: 'orgInfoList',
       TAG: 'tagInfoList',
+      CUSTOMER_TAG: 'customerTagInfoList',
+      GROUP_TAG: 'groupTagInfoList',
+      CIRCLES_TAG: 'circlesTagInfoList',
+      CONTENT_TAG: 'contentTagInfoList',
       USER: 'userInfoList',
       EQUIPMENT: 'equipmentInfoList',
       TV: 'tvInfoList',
@@ -211,6 +236,10 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
       REGULATORY: 'orgRelInfoList',
       SCHOOL: 'orgRelInfoList',
       TAG_GROUP: '',
+      CUSTOMER_TAG_GROUP: '',
+      GROUP_TAG_GROUP: '',
+      CIRCLES_TAG_GROUP: '',
+      CONTENT_TAG_GROUP: '',
     };
     const key: string = typeToKeyMap[type];
     // @ts-ignore
@@ -384,7 +413,14 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
         }
 
         // 标签组节点不可选
-        if (item.type === 'TAG_GROUP') {
+        if (
+          [
+            'CUSTOMER_TAG_GROUP',
+            'GROUP_TAG_GROUP',
+            'CIRCLES_TAG_GROUP',
+            'CONTENT_TAG_GROUP',
+          ].indexOf(item.type) > -1
+        ) {
           item.checkable = false;
         }
 
@@ -437,7 +473,15 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
     if (item.children && item.children.length !== 0) return;
     await fetchTreeNodes(item, type);
     const { id, selectType, type: _type } = item;
-    if (_type === 'TAG_GROUP' && selectType === 'radio') {
+    if (
+      [
+        'CUSTOMER_TAG_GROUP',
+        'GROUP_TAG_GROUP',
+        'CIRCLES_TAG_GROUP',
+        'CONTENT_TAG_GROUP',
+      ].indexOf(_type) > -1 &&
+      selectType === 'radio'
+    ) {
       const newTagGroup = treeState.tagGroupItemList.concat(
         getObjById(cachedDataSource.current, id)
       );
@@ -459,7 +503,6 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
         const { basePath, requestParams, selectType } = treeState;
         const { id, type: itemType, pos, nodeType, orgId } = item;
         const isRoot = pos === '0';
-
         net
           .request(`${URL()}/select/component/${type}`, {
             method: 'POST',
@@ -527,6 +570,8 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
       setLoading(true);
       // 清空之前的树内容
       setTreeData([]);
+      // debugger;
+
       fetchTreeNodes(
         { nodeType: null, orgId: null, key: null, id: null, pos: '0' },
         type
@@ -585,6 +630,10 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
           workGroupCount: 0,
           maternalCount: 0,
           tagCount: 0,
+          customerTagCount: 0,
+          groupTagCount: 0,
+          circlesTagCount: 0,
+          contentTagCount: 0,
           groupCount: 0,
           orgRelCount: 0,
           userCount: 0,
@@ -610,10 +659,22 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
               count.orgCount = item.userCount;
               break;
             case 'GROUP':
-              count.groupCount = item.userCount;
+              count.groupCount = item.groupCount;
               break;
             case 'TAG':
-              count.tagCount = item.userCount;
+              count.tagCount = item.tagCount;
+              break;
+            case 'CUSTOMER_TAG':
+              count.customerTagCount = item.customerTagCount;
+              break;
+            case 'GROUP_TAG':
+              count.groupTagCount = item.groupTagCount;
+              break;
+            case 'CIRCLES_TAG':
+              count.circlesTagCount = item.circlesTagCount;
+              break;
+            case 'CONTENT_TAG':
+              count.contentTagCount = item.contentTagCount;
               break;
             case 'ORG_REL':
               count.orgRelCount = item.userCount;
@@ -814,6 +875,10 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
     treeState.cameraInfoList = [];
     treeState.workGroupInfoList = [];
     treeState.tagInfoList = [];
+    treeState.customerTagInfoList = [];
+    treeState.groupTagInfoList = [];
+    treeState.circlesTagInfoList = [];
+    treeState.contentTagInfoList = [];
     treeState.groupInfoList = [];
     treeState.orgRelInfoList = [];
     treeState.userCount = {
@@ -825,6 +890,10 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
       workGroupCount: 0,
       maternalCount: 0,
       tagCount: 0,
+      customerTagCount: 0,
+      groupTagCount: 0,
+      circlesTagCount: 0,
+      contentTagCount: 0,
       groupCount: 0,
       orgRelCount: 0,
     };
@@ -957,6 +1026,34 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
                   item.userCount
                 );
                 break;
+              case 'CUSTOMER_TAG':
+                userCount.customerTagCount = resultCount(
+                  checked,
+                  userCount.customerTagCount,
+                  item.userCount
+                );
+                break;
+              case 'GROUP_TAG':
+                userCount.groupTagCount = resultCount(
+                  checked,
+                  userCount.groupTagCount,
+                  item.userCount
+                );
+                break;
+              case 'CIRCLES_TAG':
+                userCount.circlesTagCount = resultCount(
+                  checked,
+                  userCount.circlesTagCount,
+                  item.userCount
+                );
+                break;
+              case 'CONTENT_TAG':
+                userCount.contentTagCount = resultCount(
+                  checked,
+                  userCount.contentTagCount,
+                  item.userCount
+                );
+                break;
               case 'GROUP':
                 userCount.groupCount = resultCount(
                   checked,
@@ -1011,8 +1108,39 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
       case 'ORG':
         userCount.orgCount = resultCount(checked, userCount.orgCount, 1);
         break;
+
       case 'TAG':
         userCount.tagCount = resultCount(checked, userCount.tagCount, 1);
+        break;
+
+      case 'CUSTOMER_TAG':
+        userCount.customerTagCount = resultCount(
+          checked,
+          userCount.customerTagCount,
+          1
+        );
+        break;
+
+      case 'GROUP_TAG':
+        userCount.groupTagCount = resultCount(
+          checked,
+          userCount.groupTagCount,
+          1
+        );
+        break;
+      case 'CIRCLES_TAG':
+        userCount.circlesTagCount = resultCount(
+          checked,
+          userCount.circlesTagCount,
+          1
+        );
+        break;
+      case 'CONTENT_TAG':
+        userCount.contentTagCount = resultCount(
+          checked,
+          userCount.contentTagCount,
+          1
+        );
         break;
       case 'GROUP':
         userCount.groupCount = resultCount(checked, userCount.groupCount, 1);
@@ -1045,6 +1173,10 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
       workGroupInfoList,
       groupInfoList,
       tagInfoList,
+      customerTagInfoList,
+      groupTagInfoList,
+      circlesTagInfoList,
+      contentTagInfoList,
       orgRelInfoList,
       isSaveSelectSignature,
       selectSignature,
@@ -1063,7 +1195,7 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
       const finalList: any[] = [];
       for (const item of list) {
         const obj: any = {};
-      
+
         obj.id = item.id;
         obj.name = showNameFunc(item, staticProps?.requestParams?.strictUser);
         obj.type = item.type;
@@ -1105,6 +1237,10 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
       userInfoList: formatParam(userInfoList),
       groupInfoList: formatParam(groupInfoList),
       tagInfoList: formatParam(tagInfoList),
+      customerTagInfoList: formatParam(customerTagInfoList),
+      groupTagInfoList: formatParam(groupTagInfoList),
+      circlesTagInfoList: formatParam(circlesTagInfoList),
+      contentTagInfoList: formatParam(contentTagInfoList),
       orgRelInfoList: formatParam(orgRelInfoList),
       equipmentInfoList: formatParam(equipmentInfoList),
       tvInfoList: formatParam(tvInfoList),
@@ -1120,6 +1256,10 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
         deptInfoList: params.deptInfoList,
         userInfoList: params.userInfoList,
         tagInfoList: params.tagInfoList,
+        customerTagInfoList: params.customerTagInfoList,
+        groupTagInfoList: params.groupTagInfoList,
+        circlesTagInfoList: params.circlesTagInfoList,
+        contentTagInfoList: params.contentTagInfoList,
         orgInfoList: params.orgInfoList,
         groupInfoList: params.groupInfoList,
         orgRelInfoList: params.orgRelInfoList,
@@ -1157,6 +1297,10 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
           deptInfoList: params.deptInfoList,
           userInfoList: params.userInfoList,
           tagInfoList: params.tagInfoList,
+          customerTagInfoList: params.customerTagInfoList,
+          groupTagInfoList: params.groupTagInfoList,
+          circlesTagInfoList: params.circlesTagInfoList,
+          contentTagInfoList: params.contentTagInfoList,
           orgInfoList: params.orgInfoList,
           groupInfoList: params.groupInfoList,
           orgRelInfoList: params.orgRelInfoList,

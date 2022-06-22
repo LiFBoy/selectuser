@@ -113,7 +113,16 @@ const SelectPannel: React.FunctionComponent<Iprops> = (props: Iprops) => {
 
       // 如果获取的是跟节点,且是内部通讯录
 
-      if (isRoot && currentTab === 'innerContacts') {
+      if (
+        isRoot &&
+        [
+          'innerContacts',
+          'customerTagContacts',
+          'groupTagContacts',
+          'circlesTagContacts',
+          'contentTagContacts',
+        ].indexOf(currentTab) > -1
+      ) {
         item.checkable = false; // 内部通讯录的跟节点不允许被选择
       }
 
@@ -148,6 +157,18 @@ const SelectPannel: React.FunctionComponent<Iprops> = (props: Iprops) => {
 
       // 标签的非叶子节点不可选
       if (item.type === 'TAG' && item.isLeaf === false) {
+        item.checkable = false;
+      }
+
+      // 标签组节点不可选
+      if (
+        [
+          'CUSTOMER_TAG_GROUP',
+          'GROUP_TAG_GROUP',
+          'CIRCLES_TAG_GROUP',
+          'CONTENT_TAG_GROUP',
+        ].indexOf(item.type) > -1
+      ) {
         item.checkable = false;
       }
 

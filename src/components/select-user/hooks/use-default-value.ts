@@ -49,6 +49,10 @@ export default (
         groupInfoList = [],
         orgRelInfoList = [],
         maternalInfoList = [],
+        customerTagInfoList = [],
+        groupTagInfoList = [],
+        circlesTagInfoList = [],
+        contentTagInfoList = [],
       } = data;
       const checkedKeys: string[] = [];
 
@@ -94,6 +98,64 @@ export default (
         if (!item.type) item.type = 'TAG';
 
         tagObject.selectNodeList.push({
+          contactType: item.contactType,
+          id: item.id,
+        });
+      }
+
+      // 存储所有客户标签id
+      const customerTagObject: SelectUserCountRequestItem = {
+        selectNodeList: [],
+        type: 'CUSTOMER_TAG',
+      };
+      for (const item of customerTagInfoList) {
+        // 如果传入的数据中没有type属性，则在初始化时需要设置item的type
+        if (!item.type) item.type = 'CUSTOMER_TAG';
+
+        customerTagObject.selectNodeList.push({
+          contactType: item.contactType,
+          id: item.id,
+        });
+      }
+
+      // 存储所有群标签id
+      const groupTagObject: SelectUserCountRequestItem = {
+        selectNodeList: [],
+        type: 'GROUP_TAG',
+      };
+      for (const item of groupTagInfoList) {
+        // 如果传入的数据中没有type属性，则在初始化时需要设置item的type
+        if (!item.type) item.type = 'GROUP_TAG';
+
+        groupTagObject.selectNodeList.push({
+          contactType: item.contactType,
+          id: item.id,
+        });
+      }
+      // 存储所有圈子标签id
+      const circlesTagObject: SelectUserCountRequestItem = {
+        selectNodeList: [],
+        type: 'CIRCLES_TAG',
+      };
+      for (const item of circlesTagInfoList) {
+        // 如果传入的数据中没有type属性，则在初始化时需要设置item的type
+        if (!item.type) item.type = 'CIRCLES_TAG';
+
+        circlesTagObject.selectNodeList.push({
+          contactType: item.contactType,
+          id: item.id,
+        });
+      }
+      // 存储所有内容标签id
+      const contentTagObject: SelectUserCountRequestItem = {
+        selectNodeList: [],
+        type: 'CONTENT_TAG',
+      };
+      for (const item of contentTagInfoList) {
+        // 如果传入的数据中没有type属性，则在初始化时需要设置item的type
+        if (!item.type) item.type = 'CONTENT_TAG';
+
+        contentTagObject.selectNodeList.push({
           contactType: item.contactType,
           id: item.id,
         });
@@ -150,8 +212,14 @@ export default (
         tagObject,
         groupObject,
         maternalObject,
+        customerTagObject,
+        groupTagObject,
+        circlesTagObject,
+        contentTagObject,
         orgRelObject,
       ];
+
+      console.log(selectCountRequestList, 'selectCountRequestList');
 
       // selectType设置为dept则计算已选节点数量，否则计算可选节点的总人数
       if (selectType === 'dept') {
@@ -159,6 +227,10 @@ export default (
           orgCount: orgObject.selectNodeList.length,
           deptCount: deptObject.selectNodeList.length,
           tagCount: tagObject.selectNodeList.length,
+          customerTagCount: customerTagObject.selectNodeList.length,
+          groupTagCount: groupTagObject.selectNodeList.length,
+          circlesTagCount: circlesTagObject.selectNodeList.length,
+          contentTagCount: contentTagObject.selectNodeList.length,
           groupCount: groupObject.selectNodeList.length,
           orgRelCount: orgRelObject.selectNodeList.length,
           maternalCount: maternalObject.selectNodeList.length,
@@ -183,16 +255,24 @@ export default (
       generateKey(orgInfoList, 'ORG');
       generateKey(userInfoList);
       generateKey(tagInfoList);
+      generateKey(customerTagInfoList);
+      generateKey(groupTagInfoList);
+      generateKey(contentTagInfoList);
+      generateKey(circlesTagInfoList);
       generateKey(maternalInfoList);
       generateKey(groupInfoList);
       generateKey(orgRelInfoList);
-
+      // debugger;
       // 更新选中的节点数据
       setSelectedData({
         deptInfoList,
         orgInfoList,
         userInfoList,
         tagInfoList,
+        customerTagInfoList,
+        groupTagInfoList,
+        circlesTagInfoList,
+        contentTagInfoList,
         maternalInfoList,
         groupInfoList,
         orgRelInfoList,

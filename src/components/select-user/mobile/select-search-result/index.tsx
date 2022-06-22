@@ -30,7 +30,10 @@ const SHOW_TAB_LIST_ITEM_MAP: any = {
   memberDeptContacts: '社区通讯录',
   schoolContacts: '家校通迅录',
   groupContacts: '互连微信群',
-  tagContacts: '标签',
+  customerTagContacts: '客户标签',
+  groupTagContacts: '群标签',
+  circlesTagContacts: '圈子标签',
+  contentTagContacts: '内容标签',
   orgRel: '行政组织',
 };
 
@@ -96,9 +99,9 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
     switch (type) {
       case 'USER':
         node = {
-          id: item.userId,
-          key: item.userId,
-          name: item.userName,
+          id: item.key,
+          key: item.key,
+          name: item.label,
           type: item.type,
           contactType: item.contactType,
           orgId: item.orgId,
@@ -106,29 +109,21 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
           deptName: get(item.userDeptList, [0, 'deptName']),
         };
         break;
-      case 'ORG':
-        node = {
-          id: item.orgId,
-          key: item.orgId,
-          name: item.orgName,
-          type: item.type,
-          contactType: item.contactType,
-        };
-        break;
+
       case 'GROUP':
         node = {
-          id: item.groupId,
-          key: item.groupId,
-          name: item.groupName,
+          id: item.key,
+          key: item.key,
+          name: item.label,
           type: item.type,
           contactType: item.contactType,
         };
         break;
       case 'DEPT':
         node = {
-          id: item.deptId,
-          key: item.deptId,
-          name: item.deptName,
+          id: item.key,
+          key: item.key,
+          name: item.label,
           type: item.type,
           contactType: item.contactType,
           fullName: item.fullName,
@@ -136,21 +131,52 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
         break;
       case 'TAG':
         node = {
-          id: item.userId,
-          key: item.userId,
-          name: item.userName,
+          id: item.key,
+          key: item.key,
+          name: item.label,
           type: item.type,
           childDelete: item.childDelete,
           orgId: item.orgId,
         };
         break;
-      case 'ORG_REL':
+      case 'CONTENT_TAG':
         node = {
-          id: item.orgId,
-          key: item.orgId,
-          name: item.orgName,
+          id: item.key,
+          key: item.key,
+          name: item.label,
           type: item.type,
-          contactType: item.contactType,
+          childDelete: item.childDelete,
+          orgId: item.orgId,
+        };
+        break;
+      case 'CIRCLES_TAG':
+        node = {
+          id: item.key,
+          key: item.key,
+          name: item.label,
+          type: item.type,
+          childDelete: item.childDelete,
+          orgId: item.orgId,
+        };
+        break;
+      case 'GROUP_TAG':
+        node = {
+          id: item.key,
+          key: item.key,
+          name: item.label,
+          type: item.type,
+          childDelete: item.childDelete,
+          orgId: item.orgId,
+        };
+        break;
+      case 'CUSTOMER_TAG':
+        node = {
+          id: item.key,
+          key: item.key,
+          name: item.label,
+          type: item.type,
+          childDelete: item.childDelete,
+          orgId: item.orgId,
         };
         break;
       default:
@@ -199,6 +225,14 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
           groupList.push(resultItem);
           break;
         case 'TAG':
+
+        case 'CUSTOMER_TAG':
+
+        case 'GROUP_TAG':
+
+        case 'CIRCLES_TAG':
+
+        case 'CONTENT_TAG':
           tagList.push(resultItem);
           break;
         case 'ORG_REL':
@@ -207,7 +241,7 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
         default:
       }
     }
-    console.log(userList, 'userList');
+    console.log(userList, 'userList', tagList, tagInfoList);
 
     return (
       <div
@@ -228,7 +262,7 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
                 {userList.map((user, index) => {
                   let checked = false;
                   for (const item of userInfoList) {
-                    if (user.userId === item.id) {
+                    if (user.key === item.id) {
                       checked = true;
                     }
                   }
@@ -246,10 +280,10 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
                           onClick={() => onCheckBoxChange(user, user.type)}
                         >
                           <div className="item-name-icon">
-                            {user.userName.substring(user.userName.length - 2)}
+                            {user.label.substring(user.label.length - 2)}
                           </div>
                           <div className="search-result-item-detail userList">
-                            {searchResultNameReplace(user.userName)}
+                            {searchResultNameReplace(user.label)}
                             {user.userDeptList?.map(
                               (deptItem: any, index: number) => {
                                 return (
@@ -313,7 +347,7 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
                   let checked = false;
 
                   for (const item of deptInfoList) {
-                    if (dept.deptId === item.id) {
+                    if (dept.key === item.id) {
                       checked = true;
                     }
                   }
@@ -330,13 +364,13 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
                           className="search-result-item-detail"
                           onClick={() => onCheckBoxChange(dept, dept.type)}
                         >
-                          {searchResultNameReplace(dept.deptName)}
+                          {searchResultNameReplace(dept.label)}
                           <div className="search-result-item-des">
                             <div
                               className="overflow-ellipsis"
-                              title={`${dept.orgName} - ${dept.deptNamePath}`}
+                              title={`${dept.orgName} - ${dept.labelPath}`}
                             >
-                              位置:{`${dept.orgName} - ${dept.deptNamePath}`}
+                              位置:{`${dept.orgName} - ${dept.labelPath}`}
                             </div>
                           </div>
                         </div>
@@ -351,49 +385,7 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
         ) : (
           ''
         )}
-        {orgList.length > 0 ? (
-          <React.Fragment>
-            <Accordion defaultActiveKey="0" className="result-accordion">
-              <Accordion.Panel
-                header={
-                  <div className="custome-name">相关组织({orgList.length})</div>
-                }
-              >
-                {orgList.map((org, index) => {
-                  let checked = false;
-                  for (const item of orgInfoList) {
-                    // org也显示在相关组织下
-                    if (org.orgId === item.id) {
-                      checked = true;
-                    }
-                  }
 
-                  return (
-                    <div className="search-result-group-item" key={index}>
-                      <div className="line-result">
-                        <div className="checkbox-wrap">
-                          <Radio
-                            checked={checked}
-                            onChange={() => onCheckBoxChange(org, org.type)}
-                          />
-                        </div>
-                        <div
-                          className="search-result-item-detail"
-                          onClick={() => onCheckBoxChange(org, org.type)}
-                        >
-                          {searchResultNameReplace(org.orgName)}
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
-                {renderSearchHint(orgList)}
-              </Accordion.Panel>
-            </Accordion>
-          </React.Fragment>
-        ) : (
-          ''
-        )}
         {groupList.length > 0 ? (
           <React.Fragment>
             <Accordion defaultActiveKey="0" className="result-accordion">
@@ -408,7 +400,7 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
                   let checked = false;
 
                   for (const item of groupInfoList) {
-                    if (group.groupId === item.id) {
+                    if (group.key === item.id) {
                       checked = true;
                     }
                   }
@@ -426,7 +418,7 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
                           className="search-result-item-detail"
                           onClick={() => onCheckBoxChange(group, group.type)}
                         >
-                          {searchResultNameReplace(group.groupName)}
+                          {searchResultNameReplace(group.label)}
                         </div>
                       </div>
                     </div>
@@ -450,7 +442,7 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
                 {tagList.map((tag, index) => {
                   let checked = false;
                   for (const item of tagInfoList) {
-                    if (tag.userId === item.id) {
+                    if (tag.key === item.id) {
                       checked = true;
                     }
                   }
@@ -469,7 +461,7 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
                         >
                           <div>
                             <div className="search-result-item-title">
-                              {searchResultNameReplace(tag.userName)}
+                              {searchResultNameReplace(tag.label)}
                             </div>
                             <div className="search-result-item-des">
                               {TAG_TYPE[tag.tagType]}
@@ -481,52 +473,6 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
                   );
                 })}
                 {renderSearchHint(tagList)}
-              </Accordion.Panel>
-            </Accordion>
-          </React.Fragment>
-        ) : (
-          ''
-        )}
-        {orgRelList.length > 0 ? (
-          <React.Fragment>
-            <Accordion defaultActiveKey="0" className="result-accordion">
-              <Accordion.Panel
-                header={
-                  <div className="custome-name">
-                    相关组织({orgRelList.length})
-                  </div>
-                }
-              >
-                {orgRelList.map((orgRel, index) => {
-                  let checked = false;
-
-                  for (const item of orgRelInfoList) {
-                    if (orgRel.orgId === item.id) {
-                      checked = true;
-                    }
-                  }
-                  return (
-                    <div className="search-result-group-item" key={index}>
-                      <div className="line-result">
-                        <div className="checkbox-wrap">
-                          <Radio
-                            checked={checked}
-                            onChange={() =>
-                              onCheckBoxChange(orgRel, orgRel.type)
-                            }
-                          />
-                        </div>
-                        <div
-                          className="search-result-item-detail"
-                          onClick={() => onCheckBoxChange(orgRel, orgRel.type)}
-                        >
-                          {searchResultNameReplace(orgRel.orgName)}
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
-                {renderSearchHint(orgRelList)}
               </Accordion.Panel>
             </Accordion>
           </React.Fragment>

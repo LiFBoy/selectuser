@@ -62,6 +62,7 @@ export default (currentTab: string) => {
   // 点击树节点时，控制展开 & 收起，获取子节点
   const handleSelect = useCallback(
     (selectedKeys, event) => {
+      console.log(event.node.props, 'event.node.props');
       if (event.node.props.isLeaf) {
         return;
       }
