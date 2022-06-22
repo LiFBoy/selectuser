@@ -147,28 +147,20 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
           fullName: item.fullName,
         };
         break;
-      case 'ORG':
-        node = {
-          id: item.orgId,
-          key: item.orgId,
-          childDelete: item.childDelete,
-          name: item.orgName,
-        };
-        break;
       case 'GROUP':
         node = {
-          id: item.groupId,
-          key: item.groupId,
-          name: item.groupName,
+          id: item.key,
+          key: item.key,
+          name: item.label,
           childDelete: item.childDelete,
           orgId: item.orgId,
         };
         break;
       case 'DEPT':
         node = {
-          id: item.deptId,
-          key: item.deptId,
-          name: item.deptName,
+          id: item.key,
+          key: item.key,
+          name: item.label,
           orgId: item.orgId,
           childDelete: item.childDelete,
           fullName: item.fullName,
@@ -203,9 +195,9 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
         break;
       case 'WORK_GROUP':
         node = {
-          id: item.groupId,
-          key: item.groupId,
-          name: item.groupName,
+          id: item.key,
+          key: item.key,
+          name: item.label,
           orgId: item.orgId,
         };
         break;
@@ -265,15 +257,6 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
           type: item.type,
           childDelete: item.childDelete,
           orgId: item.orgId,
-        };
-        break;
-      case 'ORG_REL':
-        node = {
-          id: item.orgId,
-          key: item.orgId,
-          name: item.orgName,
-          childDelete: item.childDelete,
-          nodeType: item.orgType,
         };
         break;
     }
