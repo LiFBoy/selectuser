@@ -269,7 +269,7 @@ export const JSX3 = () => {
     userOrigin: 'http://gateway.sit.suosihulian.com/user-center',
     requestParams: {
       // camera equipment tv
-      selectTypeList: ['equipment'],
+      selectTypeList: ['camera'],
     },
     isSaveSelectSignature: true,
     // selectSignature: '3001001001000006-821519e77a59435494612498d95380c2',
