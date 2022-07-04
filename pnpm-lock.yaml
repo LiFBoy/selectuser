@@ -56,10 +56,11 @@ specifiers:
   react: 16.8.6
   react-dom: 16.8.6
   sass-loader: ~9.0.3
-  ss-mobile-card: ^0.0.2
+  suo-base-collapse: ^0.0.2
   style-loader: ~1.2.1
   stylelint: ^13.6.1
   stylelint-config-standard: ^20.0.0
+  suo-base-collapse: ^0.0.2
   ts-loader: ~8.0.3
   typescript: ^4.0.2
   webpack: ~4.44.1
@@ -78,7 +79,8 @@ dependencies:
   classnames: registry.npmmirror.com/classnames/2.3.1
   file-loader: registry.nlark.com/file-loader/6.2.0_webpack@4.44.2
   qs: registry.npmmirror.com/qs/6.10.3
-  ss-mobile-card: 0.0.2
+  suo-base-collapse: 0.0.2
+  suo-base-collapse: 0.0.2
 
 devDependencies:
   '@babel/core': registry.npmmirror.com/@babel/core/7.16.7
@@ -479,7 +481,7 @@ packages:
     dev: false
 
   /form-data/0.1.4:
-    resolution: {integrity: sha1-kavXiKupcCsaq/qLwBAxoqyeOxI=}
+    resolution: {integrity: sha512-x8eE+nzFtAMA0YYlSxf/Qhq6vP1f8wSoZ7Aw1GuctBcmudCNuTUmmx45TfEplyb6cjsZO/jvh6+1VpZn24ez+w==}
     engines: {node: '>= 0.8'}
     requiresBuild: true
     dependencies:
@@ -541,7 +543,7 @@ packages:
       function-bind: 1.1.1
 
   /hawk/1.0.0:
-    resolution: {integrity: sha1-uQuxaYByhUEdp//LjdJZhQLTtS0=}
+    resolution: {integrity: sha512-Sg+VzrI7TjUomO0rjD6UXawsj50ykn5sB/xKNW/IenxzRVyw/wt9A2FLzYpGL/r0QG5hyXY8nLx/2m8UutoDcg==}
     engines: {node: '>=0.8.0'}
     deprecated: This module moved to @hapi/hawk. Please make sure to switch over as this distribution is no longer supported and may contain bugs and critical security issues.
     requiresBuild: true
@@ -558,7 +560,7 @@ packages:
     dev: false
 
   /http-signature/0.10.1:
-    resolution: {integrity: sha1-T72sEyVZqoMjEh5UB3nAoBKyfmY=}
+    resolution: {integrity: sha512-coK8uR5rq2IMj+Hen+sKPA5ldgbCc1/spPdKCL1Fw6h+D0s/2LzMcRK0Cqufs1h0ryx/niwBHGFu8HC3hwU+lA==}
     engines: {node: '>=0.8'}
     requiresBuild: true
     dependencies:
@@ -583,7 +585,7 @@ packages:
     dev: false
 
   /image-size/0.5.5:
-    resolution: {integrity: sha1-Cd/Uq50g4p6xw+gLiZA3jfnjy5w=}
+    resolution: {integrity: sha512-6TDAlDPZxUFCv+fuOkIoXT/V/f3Qbq8e37p+YOiYrUv3v9cc3/6x78VdfPgFVaB9dZYeLUfKgHRebpkm/oP2VQ==}
     engines: {node: '>=0.10.0'}
     hasBin: true
     requiresBuild: true
@@ -683,7 +685,7 @@ packages:
     dev: true
 
   /min-document/2.19.0:
-    resolution: {integrity: sha1-e9KC4/WELtKVu3SM3Z8f+iyCRoU=}
+    resolution: {integrity: sha512-9Wy1B3m3f66bPPmU5hdA4DR4PB2OfDU/+GS3yAB7IQozE3tqXaVv2zOjgla7MEGSRv95+ILmOuvhLkOK6wJtCQ==}
     dependencies:
       dom-walk: 0.1.2
     dev: false
@@ -713,7 +715,7 @@ packages:
     dev: false
 
   /oauth-sign/0.3.0:
-    resolution: {integrity: sha1-y1QPk7srIqfVlBaRoojWDo6pOG4=}
+    resolution: {integrity: sha512-Tr31Sh5FnK9YKm7xTUPyDMsNOvMqkVDND0zvK/Wgj7/H9q8mpye0qG2nVzrnsvLhcsX5DtqXD0la0ks6rkPCGQ==}
     requiresBuild: true
     dev: true
     optional: true
@@ -726,7 +728,7 @@ packages:
     resolution: {integrity: sha512-Ho2z80bVIvJloH+YzRmpZVQe87+qASmBUKZDWgx9cu+KDrX2ZDH/3tMy+gXbZETVGs2M8YdxObOh7XAtim9Y0g==}
 
   /process/0.11.10:
-    resolution: {integrity: sha1-czIwDoQBYb2j5podHZGn1LwW8YI=}
+    resolution: {integrity: sha512-cdGef/drWFoydD1JsMzuFf8100nZl+GT+yacc2bEced5f9Rjk4z+WtFUTBu9PhOi9j/jfmBPu0mMEY4wIdAF8A==}
     engines: {node: '>= 0.6.0'}
     dev: false
 
@@ -981,7 +983,7 @@ packages:
     engines: {node: '>= 8'}
     dev: true
 
-  /ss-mobile-card/0.0.2:
+  /suo-base-collapse/0.0.2:
     resolution: {integrity: sha512-2HC4yXyOrQh0CnJrI5sGWF5gJyqn02rRu1842o+bW9qvwJ9Fn/9dK1WeXcaKIrSRGYgxIHCK5GW9OQMr/jDApA==}
     dependencies:
       axios: 0.18.1
@@ -1003,6 +1005,20 @@ packages:
       react: registry.npmmirror.com/react/16.8.6
     dev: false
 
+  /suo-base-collapse/0.0.2:
+    resolution: {integrity: sha512-ywOSnclWE4k2DJZTYeOVJx1V6BueCYYaJ4tAUC0atSJPefvhYYYUZyO5Fe0g+6ued/g/oVTaizRrWS71LFJpKQ==}
+    dependencies:
+      axios: 0.18.1
+      classnames: 2.3.1
+      dva-no-router: 1.2.1_react-dom@16.8.6+react@16.8.6
+      eventemitter3: 3.1.2
+      prop-types: 15.8.1
+      qs: 6.10.3
+      react: 16.8.6
+      react-content-loader: 4.3.4_react@16.8.6
+      react-dom: 16.8.6_react@16.8.6
+    dev: false
+
   /symbol-observable/1.2.0:
     resolution: {integrity: sha512-e900nM8RRtGhlV36KGEU9k65K3mPb1WV70OdjfxlG2EAuM1noi/E/BaW/uMhL7bPEssK8QV57vN3esixjUvcXQ==}
     engines: {node: '>=0.10.0'}
@@ -1018,13 +1034,13 @@ packages:
     optional: true
 
   /tunnel-agent/0.3.0:
-    resolution: {integrity: sha1-rWgbaPUyGtKCfEz7G31d8s/pQu4=}
+    resolution: {integrity: sha512-jlGqHGoKzyyjhwv/c9omAgohntThMcGtw8RV/RDLlkbbc08kni/akVxO62N8HaXMVbVsK1NCnpSK3N2xCt22ww==}
     requiresBuild: true
     dev: true
     optional: true
 
   /uglify-to-browserify/1.0.2:
-    resolution: {integrity: sha1-bgkk1r2mta/jSeOabWMoUKD4grc=}
+    resolution: {integrity: sha512-vb2s1lYx2xBtUgy+ta+b2J/GLVUR+wmpINwHePmPRhOsIVCG2wDzKJ0n14GslH1BifsqVzSOwQhRaCAsZ/nI4Q==}
     requiresBuild: true
     dev: true
     optional: true
@@ -1038,7 +1054,7 @@ packages:
     dev: false
 
   /warning/3.0.0:
-    resolution: {integrity: sha1-MuU3fLVy3kqwR1O9+IIcAe1gW3w=}
+    resolution: {integrity: sha512-jMBt6pUrKn5I+OGgtQ4YZLdhIeJmObddh6CsibPxyQ5yPZm1XExSyzC1LCNX7BzhxWgiHmizBWJTHJIjMjTQYQ==}
     dependencies:
       loose-envify: 1.4.0
     dev: false

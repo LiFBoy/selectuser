@@ -239,7 +239,8 @@
       background: var(--ant-primary-2, #edf6fe);
       opacity: 1;
       padding: 0 4px;
-      font-size: 11px;
+      // font-size: 11px;
+      font-size: var(--desc-default-size, 12px);
       margin-left: 10px;
       border-radius: 3px;
       // color: #2c7ef8;
@@ -251,7 +252,8 @@
 
       opacity: 1;
       padding: 0 4px;
-      font-size: 11px;
+      // font-size: 11px;
+      font-size: var(--desc-default-size, 12px);
       margin-left: 10px;
       color: #999;
     }
@@ -273,18 +275,7 @@
       text-overflow: ellipsis;
       overflow: hidden;
       word-break: break-all;
-      // overflow: hidden;
-      // white-space: nowrap;
-      // // text-overflow: ellipsis;
-      // -webkit-line-clamp: 1; // ⽤来限制在⼀个块元素显⽰的⽂本的⾏数
-      // display: -webkit-box; // 将对象作为弹性伸缩盒模型显⽰
-      // -webkit-box-orient: vertical; //设置或检查伸缩盒对象的⼦元素的排列⽅式
-      // text-overflow: ellipsis; // 在多⾏⽂本的情况下，⽤...隐藏超出范围的⽂本
-      // word-break: break-all;
-      // overflow: hidden;
       max-width: 272px;
-      // min-width: 120px;
-      // max-width: 12em;
       &.wrap {
         white-space: pre-line;
       }
@@ -386,7 +377,7 @@
       height: 20px;
       font-size: var(--content-second-size, 14px);
       font-weight: 400;
-      color: #1786ec;
+      color: #508cff;
       display: flex;
       flex-shrink: 0;
     }
@@ -424,7 +415,7 @@
   .scroll {
     height: 100%;
     overflow: auto;
-    background: #f7f7f7;
+    background: #f7f9fd;
     .ant-spin-nested-loading,
     .ant-spin-container {
       height: 100%;
@@ -468,7 +459,6 @@
 
     .num {
       flex: 1;
-      // font-size: 15px;
       font-size: var(--content-default-size, 15px);
       font-weight: 400;
 
@@ -477,12 +467,12 @@
       }
 
       span:nth-child(2) {
-        color: #1786ec;
+        color: #508cff;
         padding-left: 6px;
       }
 
       span:nth-child(3) {
-        color: #1786ec;
+        color: #508cff;
       }
     }
 
@@ -509,7 +499,7 @@
 }
 
 .my-accordion {
-  background: #f7f7f7;
+  background: #f7f9fd;
 
   .am-accordion-item {
     margin-bottom: 10px;
@@ -600,6 +590,12 @@
       display: flex;
       align-items: center;
       flex: 1;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      font-size: var(--title-default-size, 16px);
+      word-break: break-all;
+      font-weight: 400;
     }
     &-checkbox {
       padding-right: 10px;
@@ -623,11 +619,14 @@
 
   .label {
     flex: 1;
-    display: flex;
+
     align-items: center;
     font-size: var(--title-default-size, 16px);
     font-weight: 400;
     word-break: break-all;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
 
   .icon-arrow-right {
@@ -665,7 +664,7 @@
   left: 0;
   right: 0;
   overflow: hidden;
-
+  background-color: #f7f9fd;
   .am-modal-content {
     padding: 0 !important;
     height: 100%;
@@ -717,7 +716,7 @@
 
   .am-modal-footer {
     position: relative;
-    padding: 7px 15px;
+    padding: 8px 16px;
 
     .am-modal-button {
       // background-color: #1785ec;
@@ -726,7 +725,6 @@
       border-radius: 4px;
       height: 42px;
       line-height: 42px;
-      // font-size: 17px;
       font-size: var(--button-default-size, 17px);
 
       &::before {
@@ -814,7 +812,7 @@
     width: 37px;
     height: 37px;
     border-radius: 50%;
-    background: #3a98ef;
+    background: #508cff;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -862,6 +860,10 @@
     }
   }
 }
+.label-box {
+  display: flex;
+  align-items: center;
+}
 
 .item-name-icon {
   width: 37px;
@@ -880,14 +882,13 @@
 .left-pane {
   .ss-mobile-title-bar {
     // position: relative;
+    display: flex;
     box-sizing: border-box;
-    background-color: #3975c6 !important;
-    color: #fff;
+    background-color: #fff !important;
+    color: #333;
     height: 44px;
     line-height: 44px;
     font-size: var(--content-default-size, 15px);
-    // font-size: 15px;
-    // z-index: 98;
 
     .title-wrap {
       width: 100%;
@@ -900,28 +901,18 @@
 
     .btn-wrap {
       position: absolute;
-      top: 6px;
+      top: 0px;
       left: 12px;
+      img {
+        width: 16px;
+        height: 16px;
+      }
     }
-
-    // .left-wrap {
-    //   position: relative;
-
-    //   .left-back-btn {
-    //     position: relative;
-
-    //     .am-icon-md {
-    //       position: relative;
-    //       height: 44px !important;
-    //       width: 20px;
-    //       fill: #fff;
-    //     }
-    //   }
-    // }
   }
 
   .column-top {
     background-color: #fff;
+    margin-bottom: 10px;
     // 搜索
     .search {
       height: 56px;
@@ -930,7 +921,7 @@
       --background: #f8f8f8;
 
       .adm-search-bar-input-box .adm-search-bar-input-box-icon {
-        color: #1786ec;
+        color: #508cff;
       }
 
       .adm-search-bar-input-box .adm-search-bar-input {
@@ -938,7 +929,7 @@
       }
 
       .adm-search-bar-input-box .adm-search-bar-input .adm-input {
-        font-size: var(14px);
+        font-size: var(--content-second-size, 14px);
       }
     }
   }

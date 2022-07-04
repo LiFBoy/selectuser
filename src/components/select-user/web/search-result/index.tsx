@@ -143,6 +143,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
           name: item.label,
           orgId: item.orgId,
           childDelete: item.childDelete,
+          extendedAttribute: item.extendedAttribute,
           deptName: get(item.userDeptList, [0, 'deptName']),
           fullName: item.fullName,
         };
@@ -153,6 +154,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
           key: item.key,
           name: item.label,
           childDelete: item.childDelete,
+          extendedAttribute: item.extendedAttribute,
           orgId: item.orgId,
         };
         break;
@@ -163,6 +165,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
           name: item.label,
           orgId: item.orgId,
           childDelete: item.childDelete,
+          extendedAttribute: item.extendedAttribute,
           fullName: item.fullName,
         };
         break;
@@ -172,6 +175,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
           key: item.key,
           name: item.label,
           childDelete: item.childDelete,
+          extendedAttribute: item.extendedAttribute,
           orgId: item.orgId,
         };
         break;
@@ -181,6 +185,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
           key: item.key,
           name: item.label,
           childDelete: item.childDelete,
+          extendedAttribute: item.extendedAttribute,
           orgId: item.orgId,
         };
         break;
@@ -190,6 +195,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
           key: item.key,
           name: item.label,
           childDelete: item.childDelete,
+          extendedAttribute: item.extendedAttribute,
           orgId: item.orgId,
         };
         break;
@@ -198,6 +204,8 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
           id: item.key,
           key: item.key,
           name: item.label,
+          childDelete: item.childDelete,
+          extendedAttribute: item.extendedAttribute,
           orgId: item.orgId,
         };
         break;
@@ -207,6 +215,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
           key: item.key,
           name: item.label,
           childDelete: item.childDelete,
+          extendedAttribute: item.extendedAttribute,
           orgId: item.orgId,
         };
         break;
@@ -216,6 +225,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
           key: item.key,
           name: item.label,
           childDelete: item.childDelete,
+          extendedAttribute: item.extendedAttribute,
           orgId: item.orgId,
         };
         break;
@@ -226,6 +236,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
           name: item.label,
           type: item.type,
           childDelete: item.childDelete,
+          extendedAttribute: item.extendedAttribute,
           orgId: item.orgId,
         };
         break;
@@ -236,6 +247,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
           name: item.label,
           type: item.type,
           childDelete: item.childDelete,
+          extendedAttribute: item.extendedAttribute,
           orgId: item.orgId,
         };
         break;
@@ -246,6 +258,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
           name: item.label,
           type: item.type,
           childDelete: item.childDelete,
+          extendedAttribute: item.extendedAttribute,
           orgId: item.orgId,
         };
         break;
@@ -256,6 +269,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
           name: item.label,
           type: item.type,
           childDelete: item.childDelete,
+          extendedAttribute: item.extendedAttribute,
           orgId: item.orgId,
         };
         break;

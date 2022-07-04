@@ -5,7 +5,7 @@ import classnames from 'classnames';
 import { get } from 'lodash';
 import { TREE_CONTEXT } from '../../select-user';
 import { TAG_TYPE } from '../../../../constants';
-// import EMPTYSVG from './empty_02.svg';
+import EMPTYSVG from './icon_empty_03.svg';
 import './index.less';
 
 interface PropType {
@@ -58,6 +58,7 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
     deptInfoList = [],
     orgInfoList = [],
     tagInfoList = [],
+    circlesTagInfoList = [],
     groupInfoList = [],
     orgRelInfoList = [],
   } = treeState;
@@ -81,7 +82,7 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
         ? null
         : content.replace(
           search,
-          `<span style="color: #1786EC;">${search}</span>`
+          `<span style="color: #508CFF;">${search}</span>`
         ),
     };
     return (
@@ -104,6 +105,7 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
           name: item.label,
           type: item.type,
           contactType: item.contactType,
+          extendedAttribute: item.extendedAttribute,
           orgId: item.orgId,
           fullName: item.fullName,
           deptName: get(item.userDeptList, [0, 'deptName']),
@@ -116,6 +118,7 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
           key: item.key,
           name: item.label,
           type: item.type,
+          extendedAttribute: item.extendedAttribute,
           contactType: item.contactType,
         };
         break;
@@ -125,6 +128,7 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
           key: item.key,
           name: item.label,
           type: item.type,
+          extendedAttribute: item.extendedAttribute,
           contactType: item.contactType,
           fullName: item.fullName,
         };
@@ -135,6 +139,7 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
           key: item.key,
           name: item.label,
           type: item.type,
+          extendedAttribute: item.extendedAttribute,
           childDelete: item.childDelete,
           orgId: item.orgId,
         };
@@ -145,6 +150,7 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
           key: item.key,
           name: item.label,
           type: item.type,
+          extendedAttribute: item.extendedAttribute,
           childDelete: item.childDelete,
           orgId: item.orgId,
         };
@@ -155,6 +161,7 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
           key: item.key,
           name: item.label,
           type: item.type,
+          extendedAttribute: item.extendedAttribute,
           childDelete: item.childDelete,
           orgId: item.orgId,
         };
@@ -165,6 +172,7 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
           key: item.key,
           name: item.label,
           type: item.type,
+          extendedAttribute: item.extendedAttribute,
           childDelete: item.childDelete,
           orgId: item.orgId,
         };
@@ -175,6 +183,7 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
           key: item.key,
           name: item.label,
           type: item.type,
+          extendedAttribute: item.extendedAttribute,
           childDelete: item.childDelete,
           orgId: item.orgId,
         };
@@ -197,6 +206,7 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
       checked = updateCheckedNode(node);
     }
 
+    console.log(tagInfoList);
     // selectType为user时 需要请求获取人数，否则仅计算当前选中的部门及节点数量
     resetUserCount(node, checked, selectType === 'user');
   };
@@ -241,7 +251,7 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
         default:
       }
     }
-    console.log(userList, 'userList', tagList, tagInfoList);
+    console.log(userList, 'userList', tagList, circlesTagInfoList);
 
     return (
       <div
@@ -441,7 +451,7 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
               >
                 {tagList.map((tag, index) => {
                   let checked = false;
-                  for (const item of tagInfoList) {
+                  for (const item of circlesTagInfoList) {
                     if (tag.key === item.id) {
                       checked = true;
                     }
@@ -504,7 +514,9 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
           <React.Fragment>{renderTabContent()}</React.Fragment>
         ) : searchResult?.dataSource?.length === 0 ? (
           <div className="mobile-tree-result-empty">
-            <div className="empty-img"></div>
+            <div className="empty-img">
+              <img src={EMPTYSVG} alt="" />
+            </div>
             <div className="text">没有搜索到相关内容</div>
           </div>
         ) : null}

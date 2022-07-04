@@ -1,9 +1,7 @@
 import React from 'react';
-// @ts-ignore
-// import TitleBar from 'ss-mobile-title-bar';
-// @ts-ignore
-import Card from 'ss-mobile-card';
+import Card from 'suo-base-collapse';
 import { Icon } from 'antd-mobile';
+import empty02 from './empty_02.svg';
 import { PropType, IgroupItem, ItreeItem } from './interface';
 import './index.less';
 
@@ -32,10 +30,11 @@ const SelectedShowPane: React.FunctionComponent<PropType> = (
                   </span>
                 </div>
                 <Card
-                  className="customer-class-name"
+                  // className="customer-class-name"
                   closeText="展开全部"
                   wrapShowMode="normal"
-                  maxHeight={104}
+                  // maxHeight={104}
+                  maxHeight={75}
                 >
                   <div className="selected-show-pane-group-content">
                     {itemList.map((item: ItreeItem) => {
@@ -65,8 +64,10 @@ const SelectedShowPane: React.FunctionComponent<PropType> = (
         </div>
       ) : (
         <div className="empty-content">
-          <div className="empty-img"></div>
-          无任何对象
+          <div className="empty-img">
+            <img src={empty02} alt="" />
+          </div>
+          <span>暂无内容</span>
         </div>
       )}
     </div>

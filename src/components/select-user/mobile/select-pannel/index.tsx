@@ -85,14 +85,14 @@ const SelectPannel: React.FunctionComponent<Iprops> = (props: Iprops) => {
           break;
         case 'USER':
           item.label = (
-            <>
+            <div className="label-box">
               <div className="item-name-icon">
                 {initialName.substring(initialName.length - 2)}
               </div>
               <div className="cf-select-user-node-wrapper" title={initialName}>
                 <span className="cf-select-user-tree-node">{initialName}</span>
               </div>
-            </>
+            </div>
           );
           break;
         case 'GROUP':

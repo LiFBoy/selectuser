@@ -197,14 +197,14 @@ export const JSX10 = () => {
     multiple: true,
     selectType: 'dept',
     noTagLabelPermission: false,
-    showTabList: ['customerTagContacts'],
+    showTabList: ['customerTagContacts', 'maternalContacts'],
     dialogProps: {
       title: '标签',
     },
     searchPlaceholder: '请输入标签名称进行搜索',
     userOrigin: 'http://gateway.sit.suosihulian.com/user-center',
     requestParams: {
-      selectTypeList: ['tag'],
+      selectTypeList: ['tag', 'user'],
       tagTypeList: [0],
       noTagLabelPermission: false,
     },
@@ -335,7 +335,7 @@ export const MOBILE = () => {
     },
     searchPlaceholder: '请搜索',
     requestParams: {
-      selectTypeList: ['user'],
+      selectTypeList: ['user', 'member'],
       // contactType: 1,
     },
     userOrigin: 'http://gateway.sit.suosihulian.com/user-center',
@@ -360,17 +360,18 @@ export const MOBILE = () => {
     visible: visible2,
     multiple: true,
     selectType: 'dept',
+    // selectType: 'group',
     unCheckableNodeType: ['TAG_GROUP'],
     isSaveSelectSignature: true,
-    showTabList: ['groupContacts'],
-    // selectSignature: '3001001001000006-202205301653841789432',
+    showTabList: ['circlesTagContacts'],
+    // selectSignature: '3001001001000006-202206281656406607193',
     dialogProps: {
       title: '选人组件',
     },
     noTagLabelPermission: true,
     userOrigin: 'http://gateway.sit.suosihulian.com/user-center',
     requestParams: {
-      selectTypeList: ['group'],
+      selectTypeList: ['tag'],
       // 仅在tab为标签时生效，0全部，1运营，2系统 tagTypeList?: ['0', '1', '2'];
       tagTypeList: [0],
       noTagLabelPermission: true,

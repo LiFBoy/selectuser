@@ -44,9 +44,9 @@ const SelectPane: React.FunctionComponent<PropTypes> = (props: PropTypes) => {
   const delGroup = useCallback(
     (group: any) => {
       // 这里如果直接从group里面删除会直接操作state
-      const delGroup = [].concat(group.itemList);
+      const list = [].concat(group.itemList);
 
-      for (const item of delGroup) {
+      for (const item of list) {
         delKeys([item], item.type);
       }
 
@@ -130,21 +130,21 @@ const SelectPane: React.FunctionComponent<PropTypes> = (props: PropTypes) => {
     groupList.push(groupItem);
   }
 
-  if (tagInfoList?.length) {
-    const groupItem = {
-      title: '标签',
-      type: 'TAG',
-      unit: '人',
-      count: userCount.tagCount || 0,
-      itemList: tagInfoList,
-    };
-    groupList.push(groupItem);
-  }
+  // if (tagInfoList?.length) {
+  //   const groupItem = {
+  //     title: '标签',
+  //     type: 'TAG',
+  //     unit: '人',
+  //     count: userCount.tagCount || 0,
+  //     itemList: tagInfoList,
+  //   };
+  //   groupList.push(groupItem);
+  // }
 
   if (customerTagInfoList?.length) {
     const groupItem = {
       title: '客户标签',
-      type: 'TAG',
+      type: 'CUSTOMER_TAG',
       unit: '人',
       count: userCount.customerTagCount || 0,
       itemList: customerTagInfoList,
@@ -154,7 +154,7 @@ const SelectPane: React.FunctionComponent<PropTypes> = (props: PropTypes) => {
   if (groupTagInfoList?.length) {
     const groupItem = {
       title: '群标签',
-      type: 'TAG',
+      type: 'GROUP_TAG',
       unit: '人',
       count: userCount.groupTagCount || 0,
       itemList: groupTagInfoList,
@@ -164,7 +164,7 @@ const SelectPane: React.FunctionComponent<PropTypes> = (props: PropTypes) => {
   if (circlesTagInfoList?.length) {
     const groupItem = {
       title: '圈子标签',
-      type: 'TAG',
+      type: 'CIRCLES_TAG',
       unit: '人',
       count: userCount.circlesTagCount || 0,
       itemList: circlesTagInfoList,
@@ -174,7 +174,7 @@ const SelectPane: React.FunctionComponent<PropTypes> = (props: PropTypes) => {
   if (contentTagInfoList?.length) {
     const groupItem = {
       title: '内容标签',
-      type: 'TAG',
+      type: 'CONTENT_TAG',
       unit: '人',
       count: userCount.contentTagCount || 0,
       itemList: contentTagInfoList,

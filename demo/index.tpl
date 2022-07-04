@@ -13,6 +13,10 @@
     rel="stylesheet"
     href="http://g.alicdn.com/code/lib/antd/4.3.0/antd.compact.css"
   />
+ <link
+    rel="stylesheet"
+    href="https://static.suosihulian.com/switchvisual/true.css"
+  />
   <link crossorigin="anonymous" integrity="sha384-TZg017FMz7e/wOMOMIjY1WYbT5auS2YxHwNMaZkpDkknT9vR3TfFRrF/kSwdKSys" href="https://lib.baomitu.com/antd-mobile/2.3.1/antd-mobile.css" rel="stylesheet">
 
 </head>
@@ -32,23 +36,7 @@
 
   </script> 
 
-  <style>
-  
-   :root {
-  --clr-main: #EF8839;
-  --clr-sub:  #FFF9F0;
-  --clr-grdf: #FFB983;
-  --clr-grdt: #EF8839;
-  --clr_sel:  #ff6600;
-
-  --ant-primary-color: #ef8839 !important;
-  --ant-primary-2: #fff9f0 !important;
-
-  --fil_grey: brightness(0) saturate(100%) invert(94%) sepia(0%) saturate(0%)
-    hue-rotate(294deg) brightness(91%) contrast(84%);
-  --fil_main: brightness(0) saturate(100%) invert(77%) sepia(44%) saturate(6238%) hue-rotate(339deg) brightness(106%) contrast(87%);
-} 
-  </style>
+ 
 
 <!-- <script src="https://g.alicdn.com/code/lib/babel-polyfill/7.4.4/polyfill.min.js" charset="utf-8"></script> -->
 <script src="https://g.alicdn.com/code/lib/react/16.13.1/umd/react.development.js" charset="utf-8"></script>

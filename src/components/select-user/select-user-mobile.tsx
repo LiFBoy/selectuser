@@ -1,18 +1,9 @@
-import React, {
-  useState,
-  useCallback,
-  useContext,
-  useEffect,
-  useRef,
-} from 'react';
+import React, { useState, useCallback, useContext, useEffect } from 'react';
 import SelectPannel from './mobile/select-pannel';
 import SelectSearchResult from './mobile/select-search-result';
 import SelectFooter from './mobile/select-footer';
-// @ts-ignore
-// import TitleBar from 'ss-mobile-title-bar';
-
 import './index.less';
-import { Modal, Toast, Icon } from 'antd-mobile';
+import { Modal, Toast } from 'antd-mobile';
 import { SearchBar } from 'antd-mobile-v5';
 import net from '../../services/index';
 import SelectedPane from './mobile/selected-pane';
@@ -21,6 +12,7 @@ import { IsaveResultParams, PropTypes, IdefaultValue } from './interface';
 import { TREE_CONTEXT } from './select-user';
 import classnames from 'classnames';
 import { URL } from '../../utils/api';
+import lback from './l-back.svg';
 
 const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
   defaultValue,
@@ -603,12 +595,8 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
           >
             <div className="left-pane">
               <div className="ss-mobile-title-bar">
-                <div className="btn-wrap">
-                  <div className="left-wrap">
-                    <div className="left-back-btn" onClick={() => onCancel()}>
-                      <Icon type="left" style={{ height: '100% !important' }} />
-                    </div>
-                  </div>
+                <div className="btn-wrap" onClick={() => onCancel()}>
+                  <img src={lback} alt="" />
                 </div>
                 <div className="title-wrap">选择对象</div>
               </div>
