@@ -12,7 +12,6 @@ export default (currentTab: string) => {
   // fusion tree 的异步获取子节点回调
   const loadTreeData = useCallback(
     (node: any) => {
-      console.log(node, 'nodess');
       // 异步获取子树节点列表，需要传入当前的 tab 作为参数
       const {
         id,
@@ -40,7 +39,6 @@ export default (currentTab: string) => {
         pos,
         selectType,
       };
-      console.log(item, 'itemitemitem');
       return loadData(item, currentTab);
     },
     [loadData, currentTab]
@@ -62,7 +60,6 @@ export default (currentTab: string) => {
   // 点击树节点时，控制展开 & 收起，获取子节点
   const handleSelect = useCallback(
     (selectedKeys, event) => {
-      console.log(event.node.props, 'event.node.props');
       if (event.node.props.isLeaf) {
         return;
       }
@@ -83,7 +80,6 @@ export default (currentTab: string) => {
     },
     [loadTreeData, expandedKeys, setExpandedKeys]
   );
-  console.log(expandedKeys, 'expandedKeys111');
   return {
     expandedKeys,
     // eslint-disable-next-line no-warning-comments

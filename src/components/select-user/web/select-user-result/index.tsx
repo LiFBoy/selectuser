@@ -53,7 +53,7 @@ const SelectedUserResult: React.FunctionComponent<PropType> = (
               <div className="select-user-result-group-content">
                 {itemList.map((item: ItreeItem) => {
                   const { id, name } = item;
-                  console.log(item, 'selected-tag');
+                  // console.log(item, 'selected-tag');
                   return (
                     <Tag
                       className="selected-tag"

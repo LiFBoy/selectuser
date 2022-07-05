@@ -99,6 +99,9 @@ export interface IdefaultValue {
   groupInfoList?: IlistItem[];
   orgRelInfoList?: IlistItem[];
   maternalInfoList?: IlistItem[];
+  cameraInfoList?: IlistItem[];
+  tvInfoList?: IlistItem[];
+  equipmentInfoList?: IlistItem[];
 }
 
 export interface IlistItem {

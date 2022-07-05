@@ -61,7 +61,9 @@ const SelectedShowPane: React.FunctionComponent<PropType> = (
                 <span className="selected-show-pane-group-total">
                   {title} ({type === 'USER' ? itemList.length : count})
                 </span>
-                {(itemList.every((_: ItreeItem) => _.childDelete) ||
+                {(itemList.every(
+                  (_: ItreeItem) => _.childDelete || _.childDelete === undefined
+                ) ||
                   noTagLabelPermission) && (
                   <span
                     className="selected-show-pane-group-clear"
@@ -93,7 +95,9 @@ const SelectedShowPane: React.FunctionComponent<PropType> = (
                           {showName}
                         </span>
                       </Popover>
-                      {(item.childDelete || noTagLabelPermission) && (
+                      {(item.childDelete ||
+                        noTagLabelPermission ||
+                        item.childDelete === undefined) && (
                         <CloseOutlined
                           className="selected-tag-clear"
                           onClick={() => delItem(item, group)}

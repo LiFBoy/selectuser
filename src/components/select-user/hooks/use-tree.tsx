@@ -521,8 +521,6 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
           })
           .then((result: IResult) => {
             const _dataSource = result.data;
-            console.log(_dataSource, '_dataSource', requestParams);
-            // console.log(_dataSource, '_dataSource', type, isRoot, 'xxxxxxx');
             // @ts-ignore
             formatData(_dataSource, type, isRoot);
             if (isRoot) {
@@ -607,7 +605,6 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
 
   // 获取用户人数
   const getUserCount = (selectCountRequestList: any, userInfoList: any) => {
-    console.log(selectCountRequestList, 'selectCountRequestList');
     const { basePath, requestParams, getTotalCount } = treeState;
     // tslint:disable-next-line: no-floating-promises
     net
@@ -755,7 +752,6 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
           .concat(nextList.slice(nodeIndex + 1));
       }
 
-      console.log(nextTreeState, 'nextTreeState');
       // @ts-ignore
       nextTreeState[listKey] = nextList;
       return !deleteItem ? nextList.length > list.length : false;
@@ -1185,13 +1181,12 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
       requestParams,
       orgRelAnalysisRange,
     } = treeState;
-    console.log(maternalInfoList, 'maternalInfoList');
+
     /**
      * 保存快照参数格式化，主要是为了把之前组装的key还原
      * @param list 存储在treeState中的各种list
      */
     const formatParam = (list: IlistItem[]) => {
-      console.log(list, 'listlist');
       const finalList: any[] = [];
       for (const item of list) {
         const obj: any = {};

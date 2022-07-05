@@ -5,7 +5,7 @@ import classnames from 'classnames';
 import { get } from 'lodash';
 import { TREE_CONTEXT } from '../../select-user';
 import { TAG_TYPE } from '../../../../constants';
-import EMPTYSVG from './icon_empty_03.svg';
+import EMPTYSVG from './empty_02.svg';
 import './index.less';
 
 interface PropType {
@@ -251,7 +251,6 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
         default:
       }
     }
-    console.log(userList, 'userList', tagList, circlesTagInfoList);
 
     return (
       <div
@@ -494,7 +493,6 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
   };
 
   const $allNumberAlert = useMemo(() => {
-    console.log(allNumber, search, searchResult, 'xxxx');
     return allNumber &&
       selectType === 'user' &&
       !!searchResult &&

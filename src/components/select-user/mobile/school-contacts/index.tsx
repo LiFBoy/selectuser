@@ -102,7 +102,6 @@ const SchoolContacts: React.FunctionComponent<PropType> = (props: PropType) => {
   const { treeData = [] } = treeState || {};
   const [accordion, setAccordion] = useState<any>([]);
   const accordionRef = useRef<any>([]);
-  console.log(treeState, 'treeState');
 
   const [currentTab, setCurrentTab] = useState<any>('');
   const [activeKey, setActiveKey] = useState<any>(showTabList);
@@ -135,7 +134,7 @@ const SchoolContacts: React.FunctionComponent<PropType> = (props: PropType) => {
         icon: <React.Fragment>{formatIcon(item)}</React.Fragment>,
       };
     });
-    console.log(showTabList, 'showTabList');
+
     setAccordion(nextAccordion);
     accordionRef.current = nextAccordion;
     activeKeyRef.current = activeKey;

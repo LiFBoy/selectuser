@@ -68,7 +68,6 @@ const SelectCommonTree: React.FunctionComponent<PropType> = (
 
   const renderTreeNodes = (data: any) =>
     data.map((item: any) => {
-      console.log(item, 'item');
       if (item.children) {
         return (
           <TreeNode
@@ -86,6 +85,7 @@ const SelectCommonTree: React.FunctionComponent<PropType> = (
       }
       return <TreeNode key={item.key} {...item} />;
     });
+
   return treeData && treeData.length > 0 ? (
     <>
       <Tree

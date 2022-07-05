@@ -46,6 +46,9 @@ export default (
         orgInfoList = [],
         userInfoList = [],
         tagInfoList = [],
+        cameraInfoList = [],
+        tvInfoList = [],
+        equipmentInfoList = [],
         groupInfoList = [],
         orgRelInfoList = [],
         maternalInfoList = [],
@@ -54,6 +57,7 @@ export default (
         circlesTagInfoList = [],
         contentTagInfoList = [],
       } = data;
+
       const checkedKeys: string[] = [];
 
       let selectCountRequestList: SelectUserCountRequestItem[] = [];
@@ -118,6 +122,8 @@ export default (
         });
       }
 
+      console.log(customerTagObject, 'customerTagObject11');
+
       // 存储所有群标签id
       const groupTagObject: SelectUserCountRequestItem = {
         selectNodeList: [],
@@ -132,6 +138,7 @@ export default (
           id: item.id,
         });
       }
+
       // 存储所有圈子标签id
       const circlesTagObject: SelectUserCountRequestItem = {
         selectNodeList: [],
@@ -146,6 +153,22 @@ export default (
           id: item.id,
         });
       }
+
+      // 存储摄像头
+      const cameraObject: SelectUserCountRequestItem = {
+        selectNodeList: [],
+        type: 'CAMERA',
+      };
+      for (const item of cameraInfoList) {
+        // 如果传入的数据中没有type属性，则在初始化时需要设置item的type
+        if (!item.type) item.type = 'CAMERA';
+
+        cameraObject.selectNodeList.push({
+          contactType: item.contactType,
+          id: item.id,
+        });
+      }
+
       // 存储所有内容标签id
       const contentTagObject: SelectUserCountRequestItem = {
         selectNodeList: [],
@@ -215,11 +238,10 @@ export default (
         customerTagObject,
         groupTagObject,
         circlesTagObject,
+        cameraObject,
         contentTagObject,
         orgRelObject,
       ];
-
-      console.log(selectCountRequestList, 'selectCountRequestList');
 
       // selectType设置为dept则计算已选节点数量，否则计算可选节点的总人数
       if (selectType === 'dept') {
@@ -232,9 +254,11 @@ export default (
           circlesTagCount: circlesTagObject.selectNodeList.length,
           contentTagCount: contentTagObject.selectNodeList.length,
           groupCount: groupObject.selectNodeList.length,
+          cameraCount: cameraObject.selectNodeList.length,
           orgRelCount: orgRelObject.selectNodeList.length,
           maternalCount: maternalObject.selectNodeList.length,
         };
+        console.log(count, 'count111');
         setUserCount(count);
       } else {
         // 获取已选用户总人数
@@ -261,6 +285,7 @@ export default (
       generateKey(circlesTagInfoList);
       generateKey(maternalInfoList);
       generateKey(groupInfoList);
+      generateKey(cameraInfoList);
       generateKey(orgRelInfoList);
       // debugger;
       // 更新选中的节点数据
@@ -275,6 +300,7 @@ export default (
         contentTagInfoList,
         maternalInfoList,
         groupInfoList,
+        cameraInfoList,
         orgRelInfoList,
         checkedKeys,
       });
@@ -297,7 +323,6 @@ export default (
           }
         )
         .then((result: any) => {
-          console.log(result, 'result');
           // 处理响应数据
           if (result.data) {
             resolveData(result.data);

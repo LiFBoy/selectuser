@@ -36,6 +36,7 @@ const SelectUserPc: React.FunctionComponent<PropTypes> = ({
   const [searchValue, setSearchValue] = useState<string>('');
   const [searchTab, setSearchTab] = useState<string>('all');
   const [lineHeigth, setLineHeigth] = useState<any>([]);
+  console.log(userCount, 'userCount');
 
   // const { expandedKeys } = useSelectExpand(searchTab);
 
@@ -166,7 +167,9 @@ const SelectUserPc: React.FunctionComponent<PropTypes> = ({
             {target && (
               <>
                 <span className="pl8">已选对象</span>
-                {userCount.tagCount}
+                {userCount.tagCount +
+                  userCount.customerTagCount +
+                  userCount.groupTagCount}
               </>
             )}
           </div>

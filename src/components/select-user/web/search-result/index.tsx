@@ -99,7 +99,6 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
     orgRelInfoList,
     requestParams,
   } = treeState;
-  console.log(treeState, 'treeState');
 
   // 更多信息展开后悬浮框的位置
   const [moreInfoStyle, setMoreInfoStyle] = useState({});
@@ -124,7 +123,6 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
     localStorage.setItem('labelPath', item.labelPath);
     localStorage.setItem('selectId', item.key);
     localStorage.setItem('tagType', type);
-    console.log(item.labelPath, 'item.labelPath');
     setExpandedKeys(item.labelPath);
 
     setTimeout(() => {
@@ -462,7 +460,6 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
     const orgRelList: any[] = [];
 
     for (const resultItem of searchResult?.dataSource) {
-      console.log(resultItem.type, 'console.log(resultItem.type)');
       switch (resultItem.type) {
         case 'EQUIPMENT':
           equipmentList.push(resultItem);
@@ -517,8 +514,6 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
     }
 
     for (const resultItem of searchResult?.tagGroupList) {
-      // debugger;
-      console.log('xxx', resultItem);
       switch (resultItem.type) {
         case 'TAG_GROUP':
         case 'CUSTOMER_TAG_GROUP':
@@ -529,7 +524,6 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
           break;
       }
     }
-    console.log(tagGroupList, 'tagGroupList');
 
     return (
       <div className="search-result-box">

@@ -7,7 +7,6 @@ export default (basePath: string, tabType: string) => {
   } = useContext(TREE_CONTEXT);
   const [checkedTreeKeys, setCheckedTreeKeys] = useState([]);
   useEffect(() => {
-    // debugger;
     // 根据 dfs 获取选中的 key
     let stack = [...treeData];
     const _checkedTreeKeys = [];

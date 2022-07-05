@@ -1,6 +1,6 @@
 {
   "name": "suo-base-select-user",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "select-user",
   "repository": {
     "type": "git",
@@ -45,7 +45,7 @@
     "classnames": "^2.2.6",
     "file-loader": "^6.2.0",
     "qs": "^6.9.4",
-    "suo-base-collapse": "^0.0.2"
+    "suo-base-collapse": "0.0.2"
   },
   "devDependencies": {
     "@babel/core": "^7.4.5",

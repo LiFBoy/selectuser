@@ -8,16 +8,19 @@ import SelectUserResult from '../src/components/select-user/web/select-user-resu
 export const MethodInvoke2 = () => {
   const show = () => {
     SelectUser.show({
-      multiple: false,
+      multiple: true,
       selectType: 'dept',
-
-      userOrigin: 'http://gateway.sit.suosihulian.com/user-center',
-      // searchPlaceholder: '请输入群主或群名称进行搜索',
-      requestParams: {
-        selectTypeList: ['dept'],
+      showTabList: ['equipmentContacts'],
+      dialogProps: {
+        title: 'tv',
       },
-      isSaveSelectSignature: false,
-      showTabList: ['disabledHomeContacts'],
+      searchPlaceholder: '请输入设备编码进行搜素',
+      userOrigin: 'http://gateway.sit.suosihulian.com/user-center',
+      requestParams: {
+        selectTypeList: ['camera'],
+      },
+      isSaveSelectSignature: true,
+      selectSignature: '3001001001000006-202207041656942373568',
       onOk: (data) => {
         console.log('onOk data', data);
         const { selectSignature } = data;
@@ -98,7 +101,7 @@ export const JSX = () => {
   const props: PropTypes = {
     visible,
     multiple: true,
-    selectType: 'dept',
+    selectType: 'user',
     unCheckableNodeType: ['ORG'],
     searchPlaceholder: '请输入姓名或手机号进行搜索',
     dialogProps: {
@@ -107,14 +110,40 @@ export const JSX = () => {
     userOrigin: 'http://gateway.sit.suosihulian.com/user-center',
     showTabList: ['innerContacts'],
     requestParams: {
-      // strictUser: true,
-      selectTypeList: ['dept'],
+      selectTypeList: ['user'],
+    },
+    onlyLeafCheckable: true,
+    isSaveSelectSignature: false,
+    defaultValue: {
+      userInfoList: [
+        {
+          contactType: '1',
+          id: '1437253451940294722&1437253451344703508',
+          type: 'USER',
+          name: '旺财',
+        },
+        {
+          contactType: '1',
+          id: '1437253451940294812&1437253451344703508',
+          type: 'USER',
+          name: '李建彬',
+        },
+        {
+          contactType: '1',
+          id: '1539538693971296258',
+          type: 'USER',
+          name: '小方',
+        },
+        {
+          contactType: '1',
+          id: '1437253451940294710',
+          type: 'USER',
+          name: '陈新',
+        },
+      ],
     },
 
-    // onlyLeafCheckable: true,
-    isSaveSelectSignature: true,
-
-    selectSignature: '3001001001000006-202206221655897867496',
+    // selectSignature: '3001001001000006-202207041656944162233',
     onOk(data) {
       console.log('onOk data', data);
       const { selectSignature } = data;
@@ -135,7 +164,7 @@ export const JSX = () => {
   return (
     <>
       <Button onClick={show}>内部通讯录1</Button>
-      <SelectUser {...props} />
+      {visible && <SelectUser {...props} />}
     </>
   );
 };
@@ -160,12 +189,8 @@ export const JSX2 = () => {
     requestParams: {
       selectTypeList: ['user'],
     },
-    // target: 'tool',
-    // modalWidth: 300,
-    // onlyLeafCheckable: true,
     isSaveSelectSignature: true,
-
-    // selectSignature: '3001001001000006-cb94f644c7384e9db6bef86fa1228758',
+    selectSignature: '3001001001000006-202207041656940481196',
     onOk(data) {
       console.log('onOk data', data);
       const { selectSignature } = data;
@@ -197,19 +222,19 @@ export const JSX10 = () => {
     multiple: true,
     selectType: 'dept',
     noTagLabelPermission: false,
-    showTabList: ['customerTagContacts', 'maternalContacts'],
+    showTabList: ['customerTagContacts'],
     dialogProps: {
       title: '标签',
     },
     searchPlaceholder: '请输入标签名称进行搜索',
     userOrigin: 'http://gateway.sit.suosihulian.com/user-center',
     requestParams: {
-      selectTypeList: ['tag', 'user'],
+      selectTypeList: ['tag'],
       tagTypeList: [0],
       noTagLabelPermission: false,
     },
-    // target: 'tool',
-    // modalWidth: 300,
+    target: 'tool',
+    modalWidth: 300,
     // onlyLeafCheckable: true,
     isSaveSelectSignature: true,
     // defaultValue: {
@@ -224,7 +249,7 @@ export const JSX10 = () => {
     //     },
     //   ],
     // },
-    // selectSignature: '3001001001000006-202206221655897369692',
+    selectSignature: '3001001001000006-202207051657002925935',
     onOk(data) {
       console.log('onOk data', data);
       const { selectSignature } = data;
@@ -245,7 +270,7 @@ export const JSX10 = () => {
   return (
     <>
       <Button onClick={show}>标签10</Button>
-      <SelectUser {...props} />
+      {visible && <SelectUser {...props} />}
     </>
   );
 };
@@ -268,11 +293,10 @@ export const JSX3 = () => {
     searchPlaceholder: '请输入设备编码进行搜素',
     userOrigin: 'http://gateway.sit.suosihulian.com/user-center',
     requestParams: {
-      // camera equipment tv
       selectTypeList: ['camera'],
     },
     isSaveSelectSignature: true,
-    // selectSignature: '3001001001000006-821519e77a59435494612498d95380c2',
+    selectSignature: '3001001001000006-202207041656942373568',
     onOk(data) {
       console.log('onOk data', data);
       const { selectSignature } = data;
@@ -293,7 +317,7 @@ export const JSX3 = () => {
   return (
     <>
       <Button onClick={show}>摄像头</Button>
-      <SelectUser {...props} />
+      {visible && <SelectUser {...props} />}
     </>
   );
 };
@@ -329,7 +353,7 @@ export const MOBILE = () => {
     isSaveSelectSignature: true,
     showTabList: ['innerContacts'],
     onlyLeafCheckable: true,
-    // selectSignature: '3001001001000006-202205291653834732160',
+    // selectSignature: '3001001001000006-202207041656940230935',
     dialogProps: {
       title: '选人组件',
     },
@@ -349,12 +373,6 @@ export const MOBILE = () => {
     onCancel() {
       setVisible(false);
     },
-    // getCheckedNodes(data) {
-    //   console.log('getCheckedNodes data', data);
-    // },
-    // getTotalCount(data) {
-    //   console.log('getTotalCount data', data);
-    // },
   };
   const props2: PropTypes = {
     visible: visible2,

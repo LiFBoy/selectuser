@@ -14,7 +14,6 @@ interface PropType {
 const SelectArea: React.FunctionComponent<PropType> = (props: PropType) => {
   // 获取props
   const { currentTab, multiple, selectType, noTagLabelPermission } = props;
-  console.log(currentTab, 'currentTab');
 
   return (
     <>
