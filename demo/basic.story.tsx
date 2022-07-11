@@ -233,8 +233,8 @@ export const JSX10 = () => {
       tagTypeList: [0],
       noTagLabelPermission: false,
     },
-    target: 'tool',
-    modalWidth: 300,
+    // target: 'tool',
+    // modalWidth: 300,
     // onlyLeafCheckable: true,
     isSaveSelectSignature: true,
     // defaultValue: {
@@ -351,7 +351,7 @@ export const MOBILE = () => {
     selectType: 'user',
     unCheckableNodeType: ['ORG'],
     isSaveSelectSignature: true,
-    showTabList: ['innerContacts'],
+    showTabList: ['innerContacts', 'circlesTagContacts'],
     onlyLeafCheckable: true,
     // selectSignature: '3001001001000006-202207041656940230935',
     dialogProps: {

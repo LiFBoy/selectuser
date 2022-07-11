@@ -1,7 +1,7 @@
 import React from 'react';
 import Card from 'suo-base-collapse';
 import { Icon } from 'antd-mobile';
-import empty02 from './empty.svg';
+import empty02 from './icon_empty_02.svg';
 import { PropType, IgroupItem, ItreeItem } from './interface';
 import './index.less';
 

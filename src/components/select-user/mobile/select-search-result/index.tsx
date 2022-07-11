@@ -5,7 +5,7 @@ import classnames from 'classnames';
 import { get } from 'lodash';
 import { TREE_CONTEXT } from '../../select-user';
 import { TAG_TYPE } from '../../../../constants';
-import EMPTYSVG from './empty_02.svg';
+import EMPTYSVG from './icon_empty_03.svg';
 import './index.less';
 
 interface PropType {

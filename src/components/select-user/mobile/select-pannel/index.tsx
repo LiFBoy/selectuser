@@ -6,6 +6,11 @@ import { ItreeItem } from '../school-contacts';
 import { NodeType } from '../../../select-user/interface';
 import { Toast } from 'antd-mobile';
 import { URL } from '../../../../utils/api';
+import BUSER from '../../../tree-node-icon/user.svg';
+import BDEPT from '../../../tree-node-icon/dept.svg';
+import TAGGROUPIMG from '../../../tree-node-icon/tag-group.svg';
+import TAGIMG from '../../../tree-node-icon/tag.svg';
+import ROOTIMG from '../../../tree-node-icon/root.svg';
 interface IResult {
   code: number;
   data: {
@@ -73,21 +78,41 @@ const SelectPannel: React.FunctionComponent<Iprops> = (props: Iprops) => {
 
       // 根据类型生成带icon的label
       switch (item.type) {
-        case 'TAG': // 标签需要展示标签下的人数
+        case 'root':
           item.label = (
-            <>
+            <div className="label-box">
+              <div className="item-name-icon">
+                <img src={ROOTIMG} alt="" />
+              </div>
               <span className="cf-select-user-tree-node">{initialName}</span>
-              {/* <span className="cf-select-user-tree-node-num">
-                {item.isLeaf ? ` (${item.count || 0})` : ''}
-              </span> */}
-            </>
+            </div>
+          );
+          break;
+        case 'CIRCLES_TAG':
+          item.label = (
+            <div className="label-box">
+              <div className="item-name-icon">
+                <img src={TAGIMG} alt="" />
+              </div>
+              <span className="cf-select-user-tree-node">{initialName}</span>
+            </div>
+          );
+          break;
+        case 'CIRCLES_TAG_GROUP':
+          item.label = (
+            <div className="label-box">
+              <div className="item-name-icon">
+                <img src={TAGGROUPIMG} alt="" />
+              </div>
+              <span className="cf-select-user-tree-node">{initialName}</span>
+            </div>
           );
           break;
         case 'USER':
           item.label = (
             <div className="label-box">
               <div className="item-name-icon">
-                {initialName.substring(initialName.length - 2)}
+                <img src={BUSER} alt="" />
               </div>
               <div className="cf-select-user-node-wrapper" title={initialName}>
                 <span className="cf-select-user-tree-node">{initialName}</span>
@@ -101,8 +126,13 @@ const SelectPannel: React.FunctionComponent<Iprops> = (props: Iprops) => {
         case 'ORG':
         case 'DEPT':
           item.label = (
-            <div className="cf-select-user-node-wrapper" title={initialName}>
-              <span className="cf-select-user-tree-node">{initialName}</span>
+            <div className="label-box">
+              <div className="item-name-icon">
+                <img src={BDEPT} alt="" />
+              </div>
+              <div className="cf-select-user-node-wrapper" title={initialName}>
+                <span className="cf-select-user-tree-node">{initialName}</span>
+              </div>
             </div>
           );
           break;

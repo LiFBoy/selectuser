@@ -12,7 +12,7 @@ import { IsaveResultParams, PropTypes, IdefaultValue } from './interface';
 import { TREE_CONTEXT } from './select-user';
 import classnames from 'classnames';
 import { URL } from '../../utils/api';
-// import lback from './l-back.svg';
+import lback from './l-back.svg';
 
 const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
   defaultValue,
@@ -595,7 +595,7 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
             <div className="left-pane">
               <div className="ss-mobile-title-bar">
                 <div className="btn-wrap" onClick={() => onCancel()}>
-                  {/* <img src={lback} alt="" /> */}
+                  <img src={lback} alt="" />
                 </div>
                 <div className="title-wrap">选择对象</div>
               </div>

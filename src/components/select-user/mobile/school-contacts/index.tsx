@@ -31,6 +31,9 @@ export interface ItreeItem {
     | 'USER' // 个人
     | 'ORG' // 组织
     | 'TAG' // 标签
+    | 'CIRCLES_TAG_GROUP' // 内容标签组
+    | 'CIRCLES_TAG' // 内容标签
+    | 'root' // 根
     | 'GROUP' // 分组
     | 'ORG_REL'; // 行政组织-精准推送业务
   deptType?:
@@ -254,7 +257,7 @@ const SchoolContacts: React.FunctionComponent<PropType> = (props: PropType) => {
       scrollDom.current.scrollTop = 0;
     }
   }, [breadcrumb, scrollRef]);
-  console.log(accordion, 'accordion');
+  console.log(accordion, 'accordion', treeState, 'treeState');
   return (
     <div className="scroll" ref={scrollDom}>
       <Breadcrumb

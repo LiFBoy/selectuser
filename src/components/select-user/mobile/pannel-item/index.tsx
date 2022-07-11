@@ -153,6 +153,7 @@ const PannelItem: React.FunctionComponent<PropType> = (props: PropType) => {
         </div>
         {arrow && node.type !== 'USER' && !node.isLeaf && (
           <div className="icon" onClick={() => handleSelect(node, currentTab)}>
+            <div>下级</div>
             <div className="icon-arrow-right" />
           </div>
         )}
