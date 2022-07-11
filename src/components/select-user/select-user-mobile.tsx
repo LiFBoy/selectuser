@@ -1,5 +1,6 @@
 import React, { useState, useCallback, useContext, useEffect } from 'react';
 import SelectPannel from './mobile/select-pannel';
+import SelectUserTab from './mobile/select-user-tab';
 import SelectSearchResult from './mobile/select-search-result';
 import SelectFooter from './mobile/select-footer';
 import './index.less';
@@ -35,7 +36,8 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
   orgRelAnalysisRange,
   ...others
 }) => {
-  // const [loading, setLoading] = useState<boolean>(false);
+  const [tab, setTab] = useState<''>('');
+
   const [hoverSearch, setHoverSearch] = useState<boolean>(false);
 
   // 当前的搜索字段
@@ -49,18 +51,6 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
   // 获取treeContext
   const treeContext = useContext(TREE_CONTEXT);
 
-  // blur
-  const handleBlur = () => {
-    // debugger;
-    setHoverSearch(false);
-    // setSearchResult(null);
-    // setSearchValue('');
-  };
-  const handleFocus = () => {
-    setHoverSearch(true);
-    setSearchResult(null);
-    setSearchValue('');
-  };
   const {
     treeState,
     setBasePath,
@@ -68,16 +58,9 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
     setSelectedData,
     setUserCount,
     clear,
+    getTreeRoot,
     setRequest,
   } = treeContext;
-  // const {
-  //   deptInfoList,
-  //   orgInfoList,
-  //   userInfoList,
-  //   groupInfoList,
-  //   orgRelInfoList,
-  //   tagInfoList
-  // } = treeState;
 
   // 当搜索的tab改变
   const onSearchTabChange = (nextTab: any) => {
@@ -96,6 +79,11 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
     setBasePath(basePath);
     setCorpidAppId({ appId: others?.appId, corpid: others?.corpid });
   }, []);
+
+  // 选择tab切换
+  const onTabChange = (selectTab: any) => {
+    setTab(selectTab);
+  };
 
   useEffect(() => {
     /**
@@ -620,48 +608,7 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
                   showCancelButton
                 />
               </div>
-              {/* <div
-                className={`${
-                  hoverSearch || searchValue
-                    ? 'hover-search-show'
-                    : 'hover-search-hidden'
-                }`}
-              >
-                <SearchBar
-                  value={searchValue}
-                  onFocus={handleFocus}
-                  onBlur={handleBlur}
-                  onClear={() => setSearchValue('')}
-                  className="select-user-mobile-search"
-                  onChange={(value) => setSearchValue(value)}
-                  onSubmit={(value: any) => {
-                    const params = {
-                      search: value,
-                      types: searchTab === 'all' ? showTabList : [searchTab],
-                      ...requestParams,
-                    };
-                    getSearchResult(params);
-                    setSearchValue(value);
-                  }}
-                  placeholder={
-                    showTabList.length > 1 ? '搜索' : searchPlaceholder
-                  }
-                />
-                <div
-                  onClick={() => {
-                    const params = {
-                      search: searchValue,
-                      types: searchTab === 'all' ? showTabList : [searchTab],
-                      ...requestParams,
-                    };
-                    getSearchResult(params);
-                    setSearchValue(searchValue);
-                  }}
-                  className="my-search-btn am-search-cancel am-search-cancel-show am-search-cancel-anim"
-                >
-                  搜索
-                </div>
-              </div> */}
+
               {searchValue && !!searchResult ? (
                 <SelectSearchResult
                   searchResult={searchResult}
@@ -673,17 +620,25 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
                   showTabList={showTabList}
                 />
               ) : (
-                <SelectPannel
-                  visible={visible}
-                  showTabList={showTabList}
-                  multiple={multiple}
-                  selectType={selectType}
-                  basePath={basePath}
-                  requestParams={requestParams}
-                  unCheckableNodeType={unCheckableNodeType}
-                  onlyLeafCheckable={onlyLeafCheckable}
-                  {...others}
-                />
+                <>
+                  <SelectUserTab
+                    activeKey={tab}
+                    onTabChange={onTabChange}
+                    showTabList={showTabList}
+                  />
+                  <SelectPannel
+                    currentTab={tab}
+                    visible={visible}
+                    showTabList={showTabList}
+                    multiple={multiple}
+                    selectType={selectType}
+                    basePath={basePath}
+                    requestParams={requestParams}
+                    unCheckableNodeType={unCheckableNodeType}
+                    onlyLeafCheckable={onlyLeafCheckable}
+                    {...others}
+                  />
+                </>
               )}
             </div>
             <SelectFooter

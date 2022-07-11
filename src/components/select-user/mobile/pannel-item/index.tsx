@@ -14,6 +14,7 @@ export interface ItreeItem {
     | 'USER' // 个人
     | 'ORG' // 组织
     | 'TAG' // 标签
+    | 'root' // 标签
     | 'GROUP' // 分组
     | 'ORG_REL'; // 行政组织-精准推送业务
   deptType?:
@@ -153,7 +154,7 @@ const PannelItem: React.FunctionComponent<PropType> = (props: PropType) => {
         </div>
         {arrow && node.type !== 'USER' && !node.isLeaf && (
           <div className="icon" onClick={() => handleSelect(node, currentTab)}>
-            <div>下级</div>
+            <div className="text">下级</div>
             <div className="icon-arrow-right" />
           </div>
         )}
