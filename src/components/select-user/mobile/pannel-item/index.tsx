@@ -1,5 +1,5 @@
 import { get } from 'lodash';
-
+import { RightOutlined } from '@ant-design/icons';
 export interface ItreeItem {
   id: string;
   key: string;
@@ -34,8 +34,6 @@ import { TREE_CONTEXT } from '../../select-user';
 import { Radio } from 'antd-mobile-v5';
 import classnames from 'classnames';
 import { NodeType } from '../../interface';
-// import { render } from 'react-dom';
-// const CheckboxItem = Checkbox.CheckboxItem;
 
 interface PropType {
   currentTab: string; // 用当前选中的tab作为Tree组件的key，当切换tab时使Tree组件重新生成
@@ -59,7 +57,6 @@ const PannelItem: React.FunctionComponent<PropType> = (props: PropType) => {
     node,
     handleSelect,
     arrow = true,
-    className,
     selectType,
   } = props;
   // 获取treeContext
@@ -75,17 +72,6 @@ const PannelItem: React.FunctionComponent<PropType> = (props: PropType) => {
     if (!node.checkable) {
       return;
     }
-
-    // if (
-    //   currentTab === 'innerContacts' &&
-    //   node.type === 'DEPT' &&
-    //   selectType === 'user'
-    // ) {
-    //   return;
-    // }
-    // if (currentTab === 'tags' && node.isLeaf === false) {
-    //   return;
-    // }
     const item: any = {
       id: node.key,
       label: node.label,
@@ -140,12 +126,7 @@ const PannelItem: React.FunctionComponent<PropType> = (props: PropType) => {
   };
 
   return (
-    <div
-      className={classnames('panel-header', {
-        'panel-user-header': !!className,
-      })}
-      style={{ height: '54px' }}
-    >
+    <div className={classnames('panel-header')} style={{ height: '54px' }}>
       <div className="line">
         <div className="line-item" onClick={() => onCheck(node)}>
           {renderCheckboxItem(node)}
@@ -155,7 +136,9 @@ const PannelItem: React.FunctionComponent<PropType> = (props: PropType) => {
         {arrow && node.type !== 'USER' && !node.isLeaf && (
           <div className="icon" onClick={() => handleSelect(node, currentTab)}>
             <div className="text">下级</div>
-            <div className="icon-arrow-right" />
+            <div className="icon-arrow-right">
+              <RightOutlined />
+            </div>
           </div>
         )}
       </div>

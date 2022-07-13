@@ -1,6 +1,5 @@
 import React, { useContext, useMemo, useState } from 'react';
 import { Tabs, Checkbox, Typography, Radio, Popover } from 'antd';
-import { InfoCircleFilled } from '@ant-design/icons';
 import { TREE_CONTEXT } from '../../select-user';
 import useSelectExpand from '../../hooks/use-select-expand';
 import { funTransformationSubstr } from '../../../../utils';
@@ -9,9 +8,7 @@ import {
   TagIcon,
   UserIcon,
   DeptIcon,
-  OrgIcon,
   GroupIcon,
-  OrgRelIcon,
   EQUIPMENTICON,
 } from '../../../../components/tree-node-icon';
 import './index.less';
@@ -58,8 +55,6 @@ const SHOW_TAB_LIST_ITEM_MAP: any = {
   orgRel: '行政组织',
 };
 
-const TAGTYPELIST: any = { '0': '个人标签', '1': '通用标签', '2': '系统标签' };
-
 // 信息展示条数限制，超过INFO_LIMIT_NUM则以鼠标悬浮框展示
 const INFO_LIMIT_NUM = 2;
 
@@ -84,20 +79,12 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
   const {
     userInfoList,
     deptInfoList,
-    orgInfoList,
-    tagInfoList,
-    customerTagInfoList,
-    groupTagInfoList,
-    circlesTagInfoList,
-    contentTagInfoList,
     equipmentInfoList,
     tvInfoList,
     maternalInfoList,
     cameraInfoList,
     workGroupInfoList,
     groupInfoList,
-    orgRelInfoList,
-    requestParams,
   } = treeState;
 
   // 更多信息展开后悬浮框的位置
@@ -116,9 +103,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
     }
   };
 
-  // const funStitching = (id: string, key: string, name: string, orgId: string, type: string, contactType: string) => {
-  //   return { id, key, name, orgId, type, contactType };
-  // };
+
   const handleClick = (item: any, type: string) => {
     localStorage.setItem('labelPath', item.labelPath);
     localStorage.setItem('selectId', item.key);
@@ -451,10 +436,6 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
     const deptList: any[] = [];
     const orgList: any[] = [];
     const tagList: any[] = [];
-    const customerTagList: any[] = [];
-    const groupTagList: any[] = [];
-    const circlesTagList: any[] = [];
-    const contentTagList: any[] = [];
     const tagGroupList: any[] = [];
     const groupList: any[] = [];
     const orgRelList: any[] = [];
@@ -495,18 +476,6 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
         case 'CONTENT_TAG':
           tagList.push(resultItem);
           break;
-        // case 'CUSTOMER_TAG':
-        //   customerTagList.push(resultItem);
-        //   break;
-        // case 'GROUP_TAG':
-        //   groupTagList.push(resultItem);
-        //   break;
-        // case 'CIRCLES_TAG':
-        //   circlesTagList.push(resultItem);
-        //   break;
-        // case 'CONTENT_TAG':
-        //   contentTagList.push(resultItem);
-        //   break;
         case 'ORG_REL':
           orgRelList.push(resultItem);
           break;
@@ -564,18 +533,13 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
         {tagList.length > 0
           ? renderTagDom(tagList, '相关标签', <TagIcon />)
           : ''}
-        {/* {groupTagList.length > 0
-          ? renderTagDom(groupTagList, '相关群标签', <TagIcon />)
-          : ''}
-        {contentTagList.length > 0
-          ? renderTagDom(contentTagList, '相关内容标签', <TagIcon />)
-          : ''} */}
+
         {tagGroupList.length > 0
           ? renderTagDom(tagGroupList, '相关标签组', <TagIcon />)
           : ''}
 
         {userList.length > 0 ? (
-          <React.Fragment>
+          <>
             <div className="search-result-group-title">
               相关人员({userList.length})
             </div>
@@ -651,12 +615,12 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
               );
             })}
             {renderSearchHint(userList)}
-          </React.Fragment>
+          </>
         ) : (
           ''
         )}
         {deptList.length > 0 ? (
-          <React.Fragment>
+          <>
             <div className="search-result-group-title">
               相关部门({deptList.length})
             </div>
@@ -713,128 +677,10 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
               );
             })}
             {renderSearchHint(deptList)}
-          </React.Fragment>
+          </>
         ) : (
           ''
         )}
-
-        {/* {groupList.length > 0 ? (
-          <React.Fragment>
-            <div className="search-result-group-title">
-              相关分组({groupList.length})
-            </div>
-            {groupList.map((group: any, index: number) => {
-              let checked = false;
-
-              for (const item of groupInfoList) {
-                if (group.groupId === item?.id) {
-                  checked = true;
-                }
-              }
-
-              return (
-                <div
-                  className="search-result-group-item"
-                  key={`${group.groupId}-${index}`}
-                >
-                  <Popover
-                    placement="bottomLeft"
-                    overlayStyle={overlayStyle}
-                    content={group.groupName}
-                    trigger="hover"
-                  >
-                    <GroupIcon />
-                    <div className="search-result-item-detail">
-                      <div className="search-result-item-title">
-                        <div className="overflow-ellipsis">
-                          {renderSearchText(group.groupName)}
-                        </div>
-                      </div>
-                    </div>
-                  </Popover>
-                  <div className="checkbox-wrap">
-                    <Checkbox
-                      checked={checked}
-                      onChange={() => onCheckBoxChange(group, group.type)}
-                    />
-                  </div>
-                </div>
-              );
-            })}
-            {renderSearchHint(groupList)}
-          </React.Fragment>
-        ) : (
-          ''
-        )} */}
-        {/* {tagList.length > 0 ? (
-          <React.Fragment>
-            <div className="search-result-group-title">
-              相关标签({tagList.length})
-            </div>
-            {tagList.map((tag: any, index: number) => {
-              return (
-                <div
-                  className="search-result-group-item"
-                  key={`${tag.key}-${index}`}
-                  onClick={() => handleClick(tag, tag.type)}
-                >
-                  <Popover
-                    placement="bottomLeft"
-                    overlayStyle={overlayStyle}
-                    content={tag.label}
-                    trigger="hover"
-                  ></Popover>
-                  <TagIcon />
-                  <div className="search-result-item-detail">
-                    <div className="search-result-item-title">
-                      <div className="overflow-ellipsis">
-                        {renderSearchText(tag.label)}
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              );
-            })}
-            {renderSearchHint(tagList)}
-          </React.Fragment>
-        ) : (
-          ''
-        )} */}
-        {/* {tagGroupList.length > 0 ? (
-          <React.Fragment>
-            <div className="search-result-group-title">
-              相关标签组({tagGroupList.length})
-            </div>
-            {tagGroupList.map((tag: any, index: number) => {
-              return (
-                <div
-                  className="search-result-group-item"
-                  key={`${tag.key}-${index}`}
-                  onClick={() => handleClick(tag, tag.type)}
-                >
-                  <Popover
-                    placement="bottomLeft"
-                    overlayStyle={overlayStyle}
-                    content={tag.label}
-                    trigger="hover"
-                  >
-                    <TagIcon />
-                    <div className="search-result-item-detail">
-                      <div className="search-result-item-title">
-                        <div className="overflow-ellipsis">
-                          {renderSearchText(tag.label)}
-                        </div>
-                      </div>
-                    </div>
-                  </Popover>
-                </div>
-              );
-            })}
-            {renderSearchHint(tagGroupList)}
-          </React.Fragment>
-        ) : (
-          ''
-        )} */}
       </div>
     );
   };
@@ -842,7 +688,6 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
   const $allNumberAlert = useMemo(() => {
     return allNumber && selectType === 'user' && search.length < 8 ? (
       <div className="search-result-tips">
-        {/* <InfoCircleFilled className="search-result-tips-icon" /> */}
         <Text type="secondary">
           为保证通讯录安全，手机号码输入超过8位后才能展示相关的人员结果
         </Text>
@@ -856,7 +701,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
         {$allNumberAlert}
         {searchResult?.dataSource?.length > 0 ||
         searchResult?.tagGroupList?.length > 0 ? (
-            <React.Fragment>{renderTabContent()}</React.Fragment>
+            <>{renderTabContent()}</>
           ) : null}
       </>
     );

@@ -9,5 +9,6 @@ rules:
   selector-pseudo-class-no-unknown: null
   no-empty-source: null
   no-duplicate-selectors: true
+  rule-empty-line-before: null
   font-family-no-missing-generic-family-keyword: null
 

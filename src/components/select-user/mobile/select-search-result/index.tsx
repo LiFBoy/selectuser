@@ -6,6 +6,10 @@ import { get } from 'lodash';
 import { TREE_CONTEXT } from '../../select-user';
 import { TAG_TYPE } from '../../../../constants';
 import EMPTYSVG from './icon_empty_03.svg';
+import BUSER from '../../../tree-node-icon/user.svg';
+import BDEPT from '../../../tree-node-icon/dept.svg';
+import TAGIMG from '../../../tree-node-icon/tag.svg';
+
 import './index.less';
 
 interface PropType {
@@ -56,11 +60,9 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
   const {
     userInfoList = [],
     deptInfoList = [],
-    orgInfoList = [],
     tagInfoList = [],
     circlesTagInfoList = [],
     groupInfoList = [],
-    orgRelInfoList = [],
   } = treeState;
 
   // 判断搜索字段是否为纯数字
@@ -259,7 +261,7 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
         })}
       >
         {userList.length > 0 ? (
-          <React.Fragment>
+          <>
             <Accordion defaultActiveKey="0" className="result-accordion">
               <Accordion.Panel
                 header={
@@ -277,19 +279,16 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
                   }
                   return (
                     <div className="search-result-group-item" key={index}>
-                      <div className="line-result">
+                      <div
+                        className="line-result"
+                        onClick={() => onCheckBoxChange(user, user.type)}
+                      >
                         <div className="checkbox-wrap">
-                          <Radio
-                            checked={checked}
-                            onChange={() => onCheckBoxChange(user, user.type)}
-                          />
+                          <Radio checked={checked} />
                         </div>
-                        <div
-                          className="search-result-item"
-                          onClick={() => onCheckBoxChange(user, user.type)}
-                        >
+                        <div className="search-result-item">
                           <div className="item-name-icon">
-                            {user.label.substring(user.label.length - 2)}
+                            <img src={BUSER} alt="" />
                           </div>
                           <div className="search-result-item-detail userList">
                             {searchResultNameReplace(user.label)}
@@ -338,12 +337,12 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
                 {renderSearchHint(userList)}
               </Accordion.Panel>
             </Accordion>
-          </React.Fragment>
+          </>
         ) : (
           ''
         )}
         {deptList.length > 0 ? (
-          <React.Fragment>
+          <>
             <Accordion defaultActiveKey="0" className="result-accordion">
               <Accordion.Panel
                 header={
@@ -362,17 +361,17 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
                   }
                   return (
                     <div className="search-result-group-item" key={index}>
-                      <div className="line-result">
+                      <div
+                        className="line-result"
+                        onClick={() => onCheckBoxChange(dept, dept.type)}
+                      >
                         <div className="checkbox-wrap">
-                          <Radio
-                            checked={checked}
-                            onChange={() => onCheckBoxChange(dept, dept.type)}
-                          />
+                          <Radio checked={checked} />
                         </div>
-                        <div
-                          className="search-result-item-detail"
-                          onClick={() => onCheckBoxChange(dept, dept.type)}
-                        >
+                        <div className="item-name-icon">
+                          <img src={BDEPT} alt="" />
+                        </div>
+                        <div className="search-result-item-detail">
                           {searchResultNameReplace(dept.label)}
                           <div className="search-result-item-des">
                             <div
@@ -390,13 +389,13 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
                 {renderSearchHint(deptList)}
               </Accordion.Panel>
             </Accordion>
-          </React.Fragment>
+          </>
         ) : (
           ''
         )}
 
         {groupList.length > 0 ? (
-          <React.Fragment>
+          <>
             <Accordion defaultActiveKey="0" className="result-accordion">
               <Accordion.Panel
                 header={
@@ -436,12 +435,12 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
                 {renderSearchHint(groupList)}
               </Accordion.Panel>
             </Accordion>
-          </React.Fragment>
+          </>
         ) : (
           ''
         )}
         {tagList.length > 0 ? (
-          <React.Fragment>
+          <>
             <Accordion defaultActiveKey="0" className="result-accordion">
               <Accordion.Panel
                 header={
@@ -457,25 +456,21 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
                   }
                   return (
                     <div className="search-result-group-item" key={index}>
-                      <div className="line-result">
+                      <div
+                        className="line-result"
+                        onClick={() => onCheckBoxChange(tag, tag.type)}
+                      >
                         <div className="checkbox-wrap">
-                          <Radio
-                            checked={checked}
-                            onChange={() => onCheckBoxChange(tag, tag.type)}
-                          />
+                          <Radio checked={checked} />
                         </div>
-                        <div
-                          className="search-result-item-detail"
-                          onClick={() => onCheckBoxChange(tag, tag.type)}
-                        >
-                          <div>
-                            <div className="search-result-item-title">
-                              {searchResultNameReplace(tag.label)}
-                            </div>
-                            <div className="search-result-item-des">
-                              {TAG_TYPE[tag.tagType]}
-                            </div>
-                          </div>
+                        <div className="item-name-icon">
+                          <img src={TAGIMG} alt="" />
+                        </div>
+                        <div className="search-result-item-title">
+                          {searchResultNameReplace(tag.label)}
+                        </div>
+                        <div className="search-result-item-des">
+                          {TAG_TYPE[tag.tagType]}
                         </div>
                       </div>
                     </div>
@@ -484,7 +479,7 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
                 {renderSearchHint(tagList)}
               </Accordion.Panel>
             </Accordion>
-          </React.Fragment>
+          </>
         ) : (
           ''
         )}
@@ -509,7 +504,7 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
         {/* 标签tab下不展示手机号提示*/}
         {searchTab !== 'tags' && $allNumberAlert}
         {searchResult?.dataSource?.length > 0 ? (
-          <React.Fragment>{renderTabContent()}</React.Fragment>
+          <>{renderTabContent()}</>
         ) : searchResult?.dataSource?.length === 0 ? (
           <div className="mobile-tree-result-empty">
             <div className="empty-img">

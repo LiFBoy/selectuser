@@ -1,6 +1,5 @@
 import React, { useState, useCallback, useContext, useEffect } from 'react';
 import SelectPannel from './mobile/select-pannel';
-import SelectUserTab from './mobile/select-user-tab';
 import SelectSearchResult from './mobile/select-search-result';
 import SelectFooter from './mobile/select-footer';
 import './index.less';
@@ -36,10 +35,6 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
   orgRelAnalysisRange,
   ...others
 }) => {
-  const [tab, setTab] = useState<''>('');
-
-  const [hoverSearch, setHoverSearch] = useState<boolean>(false);
-
   // 当前的搜索字段
   const [searchValue, setSearchValue] = useState<string>('');
   // 当前的搜索结果
@@ -79,11 +74,6 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
     setBasePath(basePath);
     setCorpidAppId({ appId: others?.appId, corpid: others?.corpid });
   }, []);
-
-  // 选择tab切换
-  const onTabChange = (selectTab: any) => {
-    setTab(selectTab);
-  };
 
   useEffect(() => {
     /**
@@ -621,13 +611,7 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
                 />
               ) : (
                 <>
-                  <SelectUserTab
-                    activeKey={tab}
-                    onTabChange={onTabChange}
-                    showTabList={showTabList}
-                  />
                   <SelectPannel
-                    currentTab={tab}
                     visible={visible}
                     showTabList={showTabList}
                     multiple={multiple}

@@ -32,8 +32,6 @@
     }
 
     .search-result-mobile-box {
-      // padding: 0 8px;
-      // height: 330px;
       overflow: auto;
       background: #f7f9fd;
       height: 100%;
@@ -45,14 +43,6 @@
       }
 
       .search-result-group-item {
-        // display: flex;
-        // justify-content: space-between;
-        // // padding: 4px;
-        // box-sizing: border-box;
-        // // margin: 8px 0;
-        // position: relative;
-        // right: 0;
-        // background-color: #fff;
         display: flex;
         align-items: center;
         min-height: 54px;
@@ -88,29 +78,32 @@
         }
 
         .search-result-item-detail {
-          display: inline-block;
-          width: 87%;
+          display: flex;
+          flex-direction: column;
+          flex: 1;
           &.userList {
             width: 70%;
           }
+        }
+        .search-result-item-title {
+          font-size: var(--title-default-size, 16px);
+          font-weight: 400;
+          overflow: hidden;
+          display: -webkit-box;
+          text-overflow: ellipsis;
+          -webkit-line-clamp: 1;
+          word-break: break-all;
+          /* ! autoprefixer: off */
+          -webkit-box-orient: vertical;
+          /* autoprefixer: on */
+        }
 
-          .search-result-item-title {
-            font-size: var(--title-default-size, 16px);
-            // width: 200px;
-            font-weight: 400;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-          }
-
-          .search-result-item-des {
-            font-size: var(--desc-default-size, 12px);
-            white-space: nowrap;
-            font-weight: 400;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            color: #777;
-          }
+        .search-result-item-des {
+          font-size: var(--desc-default-size, 12px);
+          font-weight: 400;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          color: #777;
         }
 
         .checkbox-wrap {
