@@ -83,7 +83,6 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
     function resolveData(data: IdefaultValue) {
       const {
         deptInfoList = [],
-        orgInfoList = [],
         userInfoList = [],
         tagInfoList = [],
         customerTagInfoList = [],
@@ -91,7 +90,6 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
         circlesTagInfoList = [],
         contentTagInfoList = [],
         groupInfoList = [],
-        orgRelInfoList = [],
       } = data;
       const checkedKeys: string[] = [];
 
@@ -107,21 +105,6 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
         if (!item.type) item.type = 'DEPT';
 
         deptObject.selectNodeList.push({
-          contactType: item.contactType,
-          id: item.id,
-        });
-      }
-
-      // 存储所有组织id
-      const orgObject: SelectUserCountRequestItem = {
-        selectNodeList: [],
-        type: 'ORG',
-      };
-      for (const item of orgInfoList) {
-        // 如果传入的数据中没有type属性，则在初始化时需要设置item的type
-        if (!item.type) item.type = 'ORG';
-
-        orgObject.selectNodeList.push({
           contactType: item.contactType,
           id: item.id,
         });
@@ -215,33 +198,11 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
         });
       }
 
-      // 存储所有行政组织id
-      const orgRelObject: SelectUserCountRequestItem = {
-        selectNodeList: [],
-        type: 'ORG_REL',
-      };
-      for (const item of orgRelInfoList) {
-        // 如果传入的数据中没有type属性，则在初始化时需要设置item的type
-        if (!item.type) item.type = 'ORG_REL';
-
-        orgRelObject.selectNodeList.push({
-          contactType: item.contactType,
-          id: item.id,
-        });
-      }
-
-      selectCountRequestList = [
-        deptObject,
-        orgObject,
-        tagObject,
-        groupObject,
-        orgRelObject,
-      ];
+      selectCountRequestList = [deptObject, tagObject, groupObject];
 
       // selectType设置为dept则计算已选节点数量，否则计算可选节点的总人数
       if (selectType === 'dept') {
         const count = {
-          orgCount: orgObject.selectNodeList.length,
           deptCount: deptObject.selectNodeList.length,
           tagCount: tagObject.selectNodeList.length,
           customerTagCount: customerTagObject.selectNodeList.length,
@@ -249,7 +210,6 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
           circlesTagCount: circlesTagObject.selectNodeList.length,
           contentTagCount: contentTagObject.selectNodeList.length,
           groupCount: groupObject.selectNodeList.length,
-          orgRelCount: groupObject.selectNodeList.length,
         };
         setUserCount(count);
       } else {
@@ -267,7 +227,6 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
       };
 
       generateKey(deptInfoList);
-      generateKey(orgInfoList);
       generateKey(userInfoList);
       generateKey(tagInfoList);
       generateKey(customerTagInfoList);
@@ -275,12 +234,10 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
       generateKey(contentTagInfoList);
       generateKey(circlesTagInfoList);
       generateKey(groupInfoList);
-      generateKey(orgRelInfoList);
 
       // 更新
       setSelectedData({
         deptInfoList,
-        orgInfoList,
         userInfoList,
         tagInfoList,
         customerTagInfoList,
@@ -288,7 +245,6 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
         contentTagInfoList,
         circlesTagInfoList,
         groupInfoList,
-        orgRelInfoList,
         checkedKeys,
       });
     }
@@ -348,7 +304,6 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
       .then((res) => {
         const data = res.data;
         const count = {
-          orgCount: 0,
           deptCount: 0,
           tagCount: 0,
           customerTagCount: 0,
@@ -356,7 +311,6 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
           circlesTagCount: 0,
           contentTagCount: 0,
           groupCount: 0,
-          orgRelCount: 0,
           userCount: 0,
         };
 
@@ -364,9 +318,6 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
           switch (item.type) {
             case 'DEPT':
               count.deptCount = item.deptCount;
-              break;
-            case 'ORG':
-              count.orgCount = item.userCount;
               break;
             case 'GROUP':
               count.groupCount = item.groupCount;
@@ -386,8 +337,6 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
             case 'CONTENT_TAG':
               count.contentTagCount = item.contentTagCount;
               break;
-            case 'ORG_REL':
-              count.orgRelCount = item.userCount;
             default:
           }
         }
@@ -441,7 +390,6 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
 
     const {
       deptInfoList,
-      orgInfoList,
       userInfoList,
       groupInfoList,
       tagInfoList,
@@ -449,7 +397,6 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
       groupTagInfoList,
       circlesTagInfoList,
       contentTagInfoList,
-      orgRelInfoList,
       userCount,
       equipmentInfoList,
     } = treeState;
@@ -463,7 +410,6 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
     // 保存参数
     const params: IsaveResultParams = {
       deptInfoList: formatParam(deptInfoList),
-      orgInfoList: formatParam(orgInfoList),
       userInfoList: formatParam(userInfoList),
       groupInfoList: formatParam(groupInfoList),
       tagInfoList: formatParam(tagInfoList),
@@ -471,7 +417,6 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
       groupTagInfoList: formatParam(groupTagInfoList),
       circlesTagInfoList: formatParam(circlesTagInfoList),
       contentTagInfoList: formatParam(contentTagInfoList),
-      orgRelInfoList: formatParam(orgRelInfoList),
       equipmentInfoList: formatParam(equipmentInfoList),
       id: null,
       totalCount,
@@ -487,9 +432,7 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
         groupTagInfoList: params.groupTagInfoList,
         circlesTagInfoList: params.circlesTagInfoList,
         contentTagInfoList: params.contentTagInfoList,
-        orgInfoList: params.orgInfoList,
         groupInfoList: params.groupInfoList,
-        orgRelInfoList: params.orgRelInfoList,
         totalCount: params.totalCount,
         equipmentInfoList: params.equipmentInfoList,
         count: userCount,
@@ -528,9 +471,7 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
           groupTagInfoList: params.groupTagInfoList,
           circlesTagInfoList: params.circlesTagInfoList,
           contentTagInfoList: params.contentTagInfoList,
-          orgInfoList: params.orgInfoList,
           groupInfoList: params.groupInfoList,
-          orgRelInfoList: params.orgRelInfoList,
           equipmentInfoList: params.equipmentInfoList,
           totalCount: params.totalCount,
           count: userCount,

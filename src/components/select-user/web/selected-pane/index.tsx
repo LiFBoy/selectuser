@@ -24,7 +24,6 @@ const SelectPane: React.FunctionComponent<PropTypes> = (props: PropTypes) => {
   const { treeState, delKeys, setUserCount, resetUserCount } = treeContext;
   const {
     deptInfoList,
-    orgInfoList,
     userInfoList,
     tagInfoList,
     customerTagInfoList,
@@ -37,7 +36,6 @@ const SelectPane: React.FunctionComponent<PropTypes> = (props: PropTypes) => {
     cameraInfoList,
     workGroupInfoList,
     maternalInfoList,
-    orgRelInfoList,
     userCount,
   } = treeState;
 
@@ -79,9 +77,7 @@ const SelectPane: React.FunctionComponent<PropTypes> = (props: PropTypes) => {
           userCount.maternalCount = 0;
           break;
         case 'GROUP':
-        case 'ORG': // 分组和组织放在一起展示，因此清空的时候两个一起清空
           userCount.groupCount = 0;
-          userCount.orgCount = 0;
           break;
         case 'TAG':
           userCount.tagCount = 0;
@@ -97,9 +93,6 @@ const SelectPane: React.FunctionComponent<PropTypes> = (props: PropTypes) => {
           break;
         case 'CONTENT_TAG':
           userCount.contentTagCount = 0;
-          break;
-        case 'ORG_REL':
-          userCount.orgRelCount = 0;
           break;
       }
       setUserCount(userCount);
@@ -180,18 +173,6 @@ const SelectPane: React.FunctionComponent<PropTypes> = (props: PropTypes) => {
     groupList.push(groupItem);
   }
 
-  // 选中的组织或分组，统一放到组织中
-  if (orgInfoList?.length) {
-    const orgItem = {
-      title: '组织',
-      type: 'ORG',
-      unit: '人',
-      count: userCount.orgCount || 0,
-      itemList: orgInfoList,
-    };
-    groupList.push(orgItem);
-  }
-
   // 选中的分组
   if (groupInfoList?.length) {
     const groupItem = {
@@ -243,36 +224,6 @@ const SelectPane: React.FunctionComponent<PropTypes> = (props: PropTypes) => {
       itemList: contentTagInfoList,
     };
     groupList.push(groupItem);
-  }
-
-  if (orgRelInfoList?.length) {
-    const schoolList = orgRelInfoList?.filter(
-      (parameter: any) => parameter?.nodeType === 'SCHOOL'
-    );
-    if (schoolList.length > 0) {
-      const orgRelSchoolItem = {
-        title: '已选学校',
-        type: 'SCHOOL',
-        unit: '组',
-        count: schoolList.length || 0,
-        itemList: schoolList,
-      };
-      groupList.push(orgRelSchoolItem);
-    }
-
-    const regulatoryList = orgRelInfoList?.filter(
-      (parameter: any) => parameter?.nodeType === 'REGULATORY'
-    );
-    if (regulatoryList?.length > 0) {
-      const orgRelRegulatoryItem = {
-        title: '已选教育局及下属学校',
-        type: 'REGULATORY',
-        unit: '组',
-        count: regulatoryList.length || 0,
-        itemList: regulatoryList,
-      };
-      groupList.push(orgRelRegulatoryItem);
-    }
   }
 
   return (

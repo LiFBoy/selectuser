@@ -16,7 +16,6 @@ const SelectPane: React.FunctionComponent<PropTypes> = (props: PropTypes) => {
     treeContext || {};
   const {
     deptInfoList,
-    orgInfoList,
     userInfoList,
     tagInfoList,
     customerTagInfoList,
@@ -24,7 +23,6 @@ const SelectPane: React.FunctionComponent<PropTypes> = (props: PropTypes) => {
     circlesTagInfoList,
     contentTagInfoList,
     groupInfoList,
-    orgRelInfoList,
     userCount,
   } = treeState;
 
@@ -54,9 +52,7 @@ const SelectPane: React.FunctionComponent<PropTypes> = (props: PropTypes) => {
           userCount.deptCount = 0;
           break;
         case 'GROUP':
-        case 'ORG': // 分组和组织放在一起展示，因此清空的时候两个一起清空
           userCount.groupCount = 0;
-          userCount.orgCount = 0;
           break;
         case 'TAG':
           userCount.tagCount = 0;
@@ -72,9 +68,6 @@ const SelectPane: React.FunctionComponent<PropTypes> = (props: PropTypes) => {
           break;
         case 'CONTENT_TAG':
           userCount.contentTagCount = 0;
-          break;
-        case 'ORG_REL':
-          userCount.orgRelCount = 0;
           break;
       }
       setUserCount(userCount);
@@ -103,18 +96,6 @@ const SelectPane: React.FunctionComponent<PropTypes> = (props: PropTypes) => {
       itemList: deptInfoList,
     };
     groupList.push(groupItem);
-  }
-
-  // 选中的组织或分组，统一放到组织中
-  if (orgInfoList?.length) {
-    const orgItem = {
-      title: '组织',
-      type: 'ORG',
-      unit: '人',
-      count: userCount.orgCount || 0,
-      itemList: orgInfoList,
-    };
-    groupList.push(orgItem);
   }
 
   // 选中的分组
@@ -168,17 +149,6 @@ const SelectPane: React.FunctionComponent<PropTypes> = (props: PropTypes) => {
       itemList: contentTagInfoList,
     };
     groupList.push(groupItem);
-  }
-
-  if (orgRelInfoList?.length) {
-    const orgRelItem = {
-      title: '组织',
-      type: 'ORG_REL',
-      unit: '组',
-      count: userCount.orgRelCount || 0,
-      itemList: orgRelInfoList,
-    };
-    groupList.push(orgRelItem);
   }
 
   return (

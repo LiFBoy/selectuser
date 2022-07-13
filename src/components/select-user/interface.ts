@@ -2,7 +2,6 @@ import { ModalProps } from 'antd/lib/modal';
 
 export type NodeType =
   | 'USER'
-  | 'ORG'
   | 'DEPT'
   | 'EQUIPMENT'
   | 'TV'
@@ -20,10 +19,7 @@ export type NodeType =
   | 'TAG'
   | 'GROUP_DEPT'
   | 'GROUP'
-  | 'TAG_GROUP'
-  | 'REGULATORY'
-  | 'SCHOOL'
-  | 'ORG_REL';
+  | 'TAG_GROUP';
 
 export interface ListItem {
   id: string;
@@ -66,14 +62,11 @@ export interface ValueObj {
   // 内容标签
   contentTagInfoList: IlistItem[];
 
-  // 组织列表
-  orgInfoList: IlistItem[];
   // 群
   groupInfoList?: IlistItem[];
   // 相关告警群
   workGroupInfoList?: IlistItem[];
-  // 行政组织
-  orgRelInfoList?: IlistItem[];
+
   // 设备
   equipmentInfoList?: IlistItem[];
   tvInfoList?: IlistItem[];
@@ -89,7 +82,6 @@ export type Value = ValueObj;
 
 export interface IdefaultValue {
   deptInfoList?: IlistItem[];
-  orgInfoList?: IlistItem[];
   userInfoList?: IlistItem[];
   tagInfoList?: IlistItem[];
   customerTagInfoList?: IlistItem[];
@@ -97,7 +89,6 @@ export interface IdefaultValue {
   circlesTagInfoList?: IlistItem[];
   contentTagInfoList?: IlistItem[];
   groupInfoList?: IlistItem[];
-  orgRelInfoList?: IlistItem[];
   maternalInfoList?: IlistItem[];
   cameraInfoList?: IlistItem[];
   tvInfoList?: IlistItem[];
@@ -267,7 +258,6 @@ export interface SelectUserStaticFunctions {
 
 export interface IsaveResultParams {
   deptInfoList: any;
-  orgInfoList: any;
   userInfoList?: any;
   groupInfoList?: any;
   workGroupInfoList?: any;
@@ -282,7 +272,6 @@ export interface IsaveResultParams {
   cameraInfoList?: any;
   id: string | null;
   totalCount?: any;
-  orgRelInfoList: any;
   strictUser?: boolean;
   orgRelRange?: {
     orgRelUser: boolean;

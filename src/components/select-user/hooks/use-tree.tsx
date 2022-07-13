@@ -47,7 +47,6 @@ type ItreeState = StaticProps & {
   searchResult: any[];
   checkedKeys: string[];
   tagGroupItemList?: any[];
-  orgInfoList: ItreeItem[];
   deptInfoList: ItreeItem[];
   userInfoList: ItreeItem[];
   equipmentInfoList: ItreeItem[];
@@ -61,7 +60,6 @@ type ItreeState = StaticProps & {
   contentTagInfoList: ItreeItem[];
   groupInfoList: ItreeItem[];
   workGroupInfoList: ItreeItem[];
-  orgRelInfoList: ItreeItem[];
   userCount: IuserCount;
   corpidAppId: {
     corpid?: string;
@@ -79,7 +77,6 @@ interface IResult {
 }
 
 interface IuserCount {
-  orgCount?: number;
   deptCount?: number;
   equipmentCount?: number;
   tvCount?: number;
@@ -92,7 +89,6 @@ interface IuserCount {
   circlesTagCount?: number;
   contentTagCount?: number;
   groupCount?: number;
-  orgRelCount?: number;
   [key: string]: any;
 }
 
@@ -144,8 +140,6 @@ const INIT_STATE: ItreeState = {
   // 存储当前所有选中的keys
   checkedKeys: [],
   tagGroupItemList: [],
-  // 选中的组织类型节点
-  orgInfoList: [],
   // 选中的部门类型节点
   deptInfoList: [],
   // 选中的用户类型节点
@@ -165,16 +159,13 @@ const INIT_STATE: ItreeState = {
   groupTagInfoList: [],
   circlesTagInfoList: [],
   contentTagInfoList: [],
-
   // 选中的群类型节点
   groupInfoList: [],
   // 相关告警群
   workGroupInfoList: [],
-  // 行政组织-精准推送
-  orgRelInfoList: [],
+
   // 不同类型选中的人员数量统计
   userCount: {
-    orgCount: 0,
     deptCount: 0,
     equipmentCount: 0,
     tvCount: 0,
@@ -187,7 +178,6 @@ const INIT_STATE: ItreeState = {
     circlesTagCount: 0,
     contentTagCount: 0,
     groupCount: 0,
-    orgRelCount: 0,
   },
   // 请求基本路径
   basePath: 'pc',
@@ -219,7 +209,6 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
     const typeToKeyMap = {
       DEPT: 'deptInfoList',
       GROUP_DEPT: 'deptInfoList',
-      ORG: 'orgInfoList',
       TAG: 'tagInfoList',
       CUSTOMER_TAG: 'customerTagInfoList',
       GROUP_TAG: 'groupTagInfoList',
@@ -232,9 +221,6 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
       MATERNAL: 'maternalInfoList',
       GROUP: 'groupInfoList',
       WORK_GROUP: 'workGroupInfoList',
-      ORG_REL: 'orgRelInfoList',
-      REGULATORY: 'orgRelInfoList',
-      SCHOOL: 'orgRelInfoList',
       TAG_GROUP: '',
       CUSTOMER_TAG_GROUP: '',
       GROUP_TAG_GROUP: '',
@@ -618,7 +604,6 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
       .then((res) => {
         const data = res.data;
         const count = {
-          orgCount: 0,
           deptCount: 0,
           equipmentCount: 0,
           tvCount: 0,
@@ -631,7 +616,6 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
           circlesTagCount: 0,
           contentTagCount: 0,
           groupCount: 0,
-          orgRelCount: 0,
           userCount: 0,
         };
 
@@ -651,9 +635,6 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
             case 'MATERNAL':
               count.maternalCount = item.maternalCount;
               break;
-            case 'ORG':
-              count.orgCount = item.userCount;
-              break;
             case 'GROUP':
               count.groupCount = item.groupCount;
               break;
@@ -671,9 +652,6 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
               break;
             case 'CONTENT_TAG':
               count.contentTagCount = item.contentTagCount;
-              break;
-            case 'ORG_REL':
-              count.orgRelCount = item.userCount;
               break;
           }
         }
@@ -832,7 +810,6 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
         // 没传type就只能一个一个找着删了
         [
           'deptInfoList',
-          'orgInfoList',
           'userInfoList',
           'equipmentInfoList',
           'tvInfoList',
@@ -841,7 +818,6 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
           'workGroupInfoList',
           'tagInfoList',
           'groupInfoList',
-          'orgRelInfoList',
         ].some((listKey) => {
           // @ts-ignore
           const infoList: ItreeItem[] = nextTreeState[listKey];
@@ -859,9 +835,7 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
   // 清除所有所选项
   const clear = () => {
     treeState.checkedKeys = [];
-    // treeState.checkedKeys.length = 0;
     treeState.deptInfoList = [];
-    treeState.orgInfoList = [];
     treeState.userInfoList = [];
     treeState.equipmentInfoList = [];
     treeState.tvInfoList = [];
@@ -874,9 +848,7 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
     treeState.circlesTagInfoList = [];
     treeState.contentTagInfoList = [];
     treeState.groupInfoList = [];
-    treeState.orgRelInfoList = [];
     treeState.userCount = {
-      orgCount: 0,
       deptCount: 0,
       equipmentCount: 0,
       tvCount: 0,
@@ -889,7 +861,6 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
       circlesTagCount: 0,
       contentTagCount: 0,
       groupCount: 0,
-      orgRelCount: 0,
     };
 
     setTreeState({
@@ -1006,13 +977,7 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
                   item.userCount
                 );
                 break;
-              case 'ORG':
-                userCount.orgCount = resultCount(
-                  checked,
-                  userCount.orgCount,
-                  item.userCount
-                );
-                break;
+
               case 'TAG':
                 userCount.tagCount = resultCount(
                   checked,
@@ -1055,13 +1020,6 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
                   item.userCount
                 );
                 break;
-              case 'ORG_REL':
-                userCount.orgRelCount = resultCount(
-                  checked,
-                  userCount.orgRelCount,
-                  item.userCount
-                );
-                break;
             }
           }
           setUserCount(userCount);
@@ -1098,9 +1056,6 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
           userCount.maternalCount,
           1
         );
-        break;
-      case 'ORG':
-        userCount.orgCount = resultCount(checked, userCount.orgCount, 1);
         break;
 
       case 'TAG':
@@ -1139,9 +1094,7 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
       case 'GROUP':
         userCount.groupCount = resultCount(checked, userCount.groupCount, 1);
         break;
-      case 'ORG_REL':
-        userCount.orgRelCount = resultCount(checked, userCount.orgRelCount, 1);
-        break;
+
       default:
         break;
     }
@@ -1158,7 +1111,6 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
   const handleOk = useCallback(() => {
     const {
       deptInfoList,
-      orgInfoList,
       userInfoList,
       equipmentInfoList,
       tvInfoList,
@@ -1171,7 +1123,6 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
       groupTagInfoList,
       circlesTagInfoList,
       contentTagInfoList,
-      orgRelInfoList,
       isSaveSelectSignature,
       selectSignature,
       onOk,
@@ -1225,7 +1176,6 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
     // 保存参数
     const params: IsaveResultParams = {
       deptInfoList: formatParam(deptInfoList),
-      orgInfoList: formatParam(orgInfoList),
       userInfoList: formatParam(userInfoList),
       groupInfoList: formatParam(groupInfoList),
       tagInfoList: formatParam(tagInfoList),
@@ -1233,7 +1183,6 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
       groupTagInfoList: formatParam(groupTagInfoList),
       circlesTagInfoList: formatParam(circlesTagInfoList),
       contentTagInfoList: formatParam(contentTagInfoList),
-      orgRelInfoList: formatParam(orgRelInfoList),
       equipmentInfoList: formatParam(equipmentInfoList),
       tvInfoList: formatParam(tvInfoList),
       maternalInfoList: formatParam(maternalInfoList),
@@ -1252,9 +1201,7 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
         groupTagInfoList: params.groupTagInfoList,
         circlesTagInfoList: params.circlesTagInfoList,
         contentTagInfoList: params.contentTagInfoList,
-        orgInfoList: params.orgInfoList,
         groupInfoList: params.groupInfoList,
-        orgRelInfoList: params.orgRelInfoList,
         equipmentInfoList: params.equipmentInfoList,
         tvInfoList: params.tvInfoList,
         maternalInfoList: params.maternalInfoList,
@@ -1293,9 +1240,7 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
           groupTagInfoList: params.groupTagInfoList,
           circlesTagInfoList: params.circlesTagInfoList,
           contentTagInfoList: params.contentTagInfoList,
-          orgInfoList: params.orgInfoList,
           groupInfoList: params.groupInfoList,
-          orgRelInfoList: params.orgRelInfoList,
           equipmentInfoList: params.equipmentInfoList,
           tvInfoList: params.tvInfoList,
           maternalInfoList: params.maternalInfoList,
