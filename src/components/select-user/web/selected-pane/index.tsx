@@ -19,7 +19,6 @@ const SelectPane: React.FunctionComponent<PropTypes> = (props: PropTypes) => {
     selectType,
     showUserDeptName,
     selectPaneProps,
-    selectTypeList,
     noTagLabelPermission,
   } = props;
   const { treeState, delKeys, setUserCount, resetUserCount } = treeContext;
@@ -204,18 +203,6 @@ const SelectPane: React.FunctionComponent<PropTypes> = (props: PropTypes) => {
     };
     groupList.push(groupItem);
   }
-
-  // if (tagInfoList?.length) {
-  //   const groupItem = {
-  //     // title: '标签2',
-  //     title: selectTypeList.indexOf('tag') > -1 ? '客户标签' : '群标签',
-  //     type: 'TAG',
-  //     unit: '人',
-  //     count: userCount.tagCount || 0,
-  //     itemList: tagInfoList,
-  //   };
-  //   groupList.push(groupItem);
-  // }
 
   if (customerTagInfoList?.length) {
     const groupItem = {

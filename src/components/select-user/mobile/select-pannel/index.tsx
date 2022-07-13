@@ -158,7 +158,6 @@ const SelectPannel: React.FunctionComponent<Iprops> = (props: Iprops) => {
 
       if (
         (currentTab === 'innerContacts' ||
-          currentTab === 'schoolContacts' ||
           currentTab === 'disabledHomeContacts' ||
           currentTab === 'maternalContacts') && // 在家校通迅录和内部通迅录
         item.type === 'DEPT' && // 如果节点类型为DEPT
@@ -168,7 +167,6 @@ const SelectPannel: React.FunctionComponent<Iprops> = (props: Iprops) => {
         item.isLeaf = false; // 则DEPT节点一律视为非叶子结点 (实际场景中DEPT节点下一定有子节点)
       } else if (
         (currentTab === 'innerContacts' ||
-          currentTab === 'schoolContacts' ||
           currentTab === 'disabledHomeContacts' ||
           currentTab === 'maternalContacts') &&
         selectType === 'dept'

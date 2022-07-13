@@ -53,7 +53,6 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
     setSelectedData,
     setUserCount,
     clear,
-    getTreeRoot,
     setRequest,
   } = treeContext;
 

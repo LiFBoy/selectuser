@@ -71,7 +71,6 @@ export type IconType =
   | 'DEPT'
   | 'dept'
   | 'tag'
-  | 'orgRel'
   | 'TAG';
 
 const iconMap: {
@@ -87,7 +86,6 @@ const iconMap: {
   ORG: OrgIcon,
   DEPT: DeptIcon,
   TAG: TagIcon,
-  orgRel: OrgRelIcon,
 };
 
 export default iconMap;

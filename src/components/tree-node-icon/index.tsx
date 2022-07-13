@@ -49,13 +49,6 @@ export const MATERNALCON: React.FunctionComponent = () => {
   return <span className="user-center-tree-node-icon select-user-icon-user" />;
 };
 
-// 行政组织
-export const OrgRelIcon: React.FunctionComponent = () => {
-  return (
-    <span className="user-center-tree-node-icon select-user-icon-orgRel-mobile" />
-  );
-};
-
 export type IconType =
   | 'org'
   | 'dept'
@@ -84,10 +77,8 @@ export type IconType =
   | 'GROUP_TAG_GROUP'
   | 'CIRCLES_TAG_GROUP'
   | 'CONTENT_TAG_GROUP'
-  | 'orgRel'
   | 'ORG_REL'
-  | 'REGULATORY'
-  | 'SCHOOL'; // 行政组织-精准推送业务
+  | 'REGULATORY';
 
 const iconMap: {
   [iconType in IconType]: React.ComponentType;
@@ -108,7 +99,6 @@ const iconMap: {
   MATERNAL: MATERNALCON,
   WORK_GROUP: GroupIcon,
   GROUP_DEPT: GroupIcon,
-  ORG_REL: OrgRelIcon,
   GROUP: GroupIcon,
   TAG: TagIcon,
   GROUP_TAG: TagIcon,
@@ -120,9 +110,6 @@ const iconMap: {
   GROUP_TAG_GROUP: TagGroupIcon,
   CIRCLES_TAG_GROUP: TagGroupIcon,
   CONTENT_TAG_GROUP: TagGroupIcon,
-  orgRel: OrgRelIcon,
-  REGULATORY: OrgRelIcon,
-  SCHOOL: OrgIcon,
 };
 
 export default iconMap;

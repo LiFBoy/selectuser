@@ -6,7 +6,6 @@ import RightPane from './web/right-pane';
 import SelectArea from './web/select-area';
 import { PropTypes } from './interface';
 import SelectedPane from './web/selected-pane';
-// import useSelectExpand from './hooks/use-select-expand';
 import classnames from 'classnames';
 import { Modal, Input, Spin, Button } from 'antd';
 import { TREE_CONTEXT } from './select-user';
@@ -36,11 +35,7 @@ const SelectUserPc: React.FunctionComponent<PropTypes> = ({
   const [searchValue, setSearchValue] = useState<string>('');
   const [searchTab, setSearchTab] = useState<string>('all');
   const [lineHeigth, setLineHeigth] = useState<any>([]);
-  console.log(userCount, 'userCount');
 
-  // const { expandedKeys } = useSelectExpand(searchTab);
-
-  // console.log(expandedKeys, 'expandedKeys');
   // 搜索的回调
   const handleSearch = useCallback(
     (nextSearchValue: string) => {

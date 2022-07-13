@@ -6,7 +6,6 @@ import { showNameFunc } from '../../utils/index';
 import { PropType, IgroupItem } from './interface';
 import { ItreeItem } from '../select-user/interface';
 import './index.less';
-import { Group } from 'antd/lib/avatar';
 
 const SelectedShowPane: React.FunctionComponent<PropType> = (
   props: PropType
@@ -33,7 +32,7 @@ const SelectedShowPane: React.FunctionComponent<PropType> = (
     }
     return total;
   }, [groupList]);
-  console.log(unit, 'unit');
+
   const { expand: isExpand } = useContext(MyContext);
   const overlayStyle = {
     maxWidth: '20em',
@@ -44,7 +43,7 @@ const SelectedShowPane: React.FunctionComponent<PropType> = (
     maxHeight: '400px',
     boxShadow: '5px 5px 10px rgba(129, 133, 167, 0.2)',
   };
-  console.log(groupList, 'groupList');
+
   return (
     <div className="selected-show-pane-wrap">
       <div className="selected-show-pane-total">
@@ -56,7 +55,6 @@ const SelectedShowPane: React.FunctionComponent<PropType> = (
           return (
             <div className="selected-show-pane-group" key={title}>
               <div className="selected-show-pane-group-top">
-                {/* <NodeIcon /> */}
                 <i className="selected-show-pane-group-top-icon">&nbsp;</i>
                 <span className="selected-show-pane-group-total">
                   {title} ({type === 'USER' ? itemList.length : count})

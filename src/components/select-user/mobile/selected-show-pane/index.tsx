@@ -8,16 +8,10 @@ import './index.less';
 const SelectedShowPane: React.FunctionComponent<PropType> = (
   props: PropType
 ) => {
-  const { groupList, delItem, setModal, showUserDeptName } = props;
+  const { groupList, delItem, showUserDeptName } = props;
 
   return (
     <div className="mobile-selected-show-pane-wrap">
-      {/* <TitleBar
-        showBackbtn
-        titleMaxWidth={120}
-        title="已选对象"
-        onBack={() => setModal(false)}
-      /> */}
       {groupList.length > 0 ? (
         <div className="selected-show-pane-detail-box">
           {groupList.map((group: IgroupItem) => {
@@ -29,13 +23,7 @@ const SelectedShowPane: React.FunctionComponent<PropType> = (
                     {title} ({type === 'USER' ? itemList.length : count})
                   </span>
                 </div>
-                <Card
-                  // className="customer-class-name"
-                  closeText="展开全部"
-                  wrapShowMode="normal"
-                  // maxHeight={104}
-                  maxHeight={75}
-                >
+                <Card closeText="展开全部" wrapShowMode="normal" maxHeight={75}>
                   <div className="selected-show-pane-group-content">
                     {itemList.map((item: ItreeItem) => {
                       const { fullName, name, deptName } = item;

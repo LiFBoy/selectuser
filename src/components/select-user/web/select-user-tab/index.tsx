@@ -5,21 +5,17 @@ import './index.less';
 
 // tab类型对应的中文名
 const TAB_MAPS = {
-  dept: '所属部门',
-  group: '下属组织',
   innerContacts: '内部通讯录',
   maternalContacts: '母婴通讯录',
   disabledHomeContacts: '残疾人之家',
   equipmentContacts: '资产通讯录',
   memberContacts: '居民',
   memberDeptContacts: '社区通讯录',
-  schoolContacts: '家校通讯录',
   groupContacts: '互连微信群',
   customerTagContacts: '客户标签',
   groupTagContacts: '群标签',
   circlesTagContacts: '圈子标签',
   contentTagContacts: '内容标签',
-  orgRel: '行政组织',
 };
 
 const SelectUserTab: React.FunctionComponent<PropTypes> = (

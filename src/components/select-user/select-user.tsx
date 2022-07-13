@@ -3,7 +3,6 @@
  */
 import React from 'react';
 import { ConfigProvider } from 'antd';
-import locale from '../../utils/locale';
 import useTree, { ItreeContext } from './hooks/use-tree';
 import SelectUserPc from './select-user-pc';
 import SelectUserMobile from './select-user-mobile';
@@ -62,7 +61,6 @@ export default function SelectUser({
   });
   const Com = basePath === 'pc' ? SelectUserPc : SelectUserMobile;
   const others = basePath === 'pc' ? {} : { appId, corpid };
-  console.log(userOrigin, 'userOrigin');
 
   (window as any).userOrigin = userOrigin;
   return (

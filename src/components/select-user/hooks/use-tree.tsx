@@ -381,7 +381,6 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
         if (
           [
             'innerContacts',
-            'schoolContacts',
             'maternalContacts',
             'disabledHomeContacts',
           ].includes(type)
@@ -500,7 +499,7 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
       type: string
     ): Promise<any> => {
       return new Promise<any>((resolve: any) => {
-        const { basePath, requestParams, selectType } = treeState;
+        const { requestParams, selectType } = treeState;
         const { id, type: itemType, pos, nodeType, orgId } = item;
         const isRoot = pos === '0';
         net
@@ -605,7 +604,7 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
 
   // 获取用户人数
   const getUserCount = (selectCountRequestList: any, userInfoList: any) => {
-    const { basePath, requestParams, getTotalCount } = treeState;
+    const { requestParams, getTotalCount } = treeState;
     // tslint:disable-next-line: no-floating-promises
     net
       .request(`${URL()}/select/component/getUserCount`, {
@@ -703,7 +702,6 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
 
   // 请求获取搜索结果
   const getSearchResult = (params: any) => {
-    const { basePath } = treeState;
     setLoading(true);
     // tslint:disable-next-line: no-floating-promises
     net
@@ -1176,7 +1174,6 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
       orgRelInfoList,
       isSaveSelectSignature,
       selectSignature,
-      basePath,
       onOk,
       requestParams,
       orgRelAnalysisRange,

@@ -183,20 +183,16 @@ export interface PropTypes {
   // 需要展示的 tab 选项列表，默认为当前组织类型下的所有 tab
   // 展示的选项卡列表
   showTabList?: (
-    | 'dept' // 用户所属部门
-    | 'group' // 局端-下属组织
-    | 'innerContacts' // 内部通讯录
-    | 'maternalContacts' // 母婴通讯录
-    | 'disabledHomeContacts' // 残疾人之家
-    | 'memberContacts' // 居民
-    | 'memberDeptContacts' // 社区通讯录
-    | 'equipmentContacts' // 资产通讯录
-    | 'schoolContacts' // 家校通讯录
-    | 'customerTagContacts' // 客户标签
-    | 'groupTagContacts' // 群标签
-    | 'circlesTagContacts' // 圈子标签
-    | 'contentTagContacts' // 内容标签
-    | 'orgRel' // 行政组织--精准推送
+    | 'innerContacts'
+    | 'maternalContacts'
+    | 'disabledHomeContacts'
+    | 'memberContacts'
+    | 'memberDeptContacts'
+    | 'equipmentContacts'
+    | 'customerTagContacts'
+    | 'groupTagContacts'
+    | 'circlesTagContacts'
+    | 'contentTagContacts'
     | 'groupContacts'
   )[];
   onCancel?(): void;

@@ -1,13 +1,4 @@
-// api prefix
-// @author Pluto <huarse@gmail.com>
-// @create 2020/07/01 11:11
-
 import { NetOptions } from '../interface';
-const meta = document.querySelector('meta[name="x-server-env"]');
-// @ts-ignore
-const env = meta?.content || 'sit';
-
-// export const env = 'test';
 
 // 域名配置
 
@@ -26,7 +17,6 @@ export function apiPrefix(api: string) {
     return api;
   }
 
-  // const domain = domain || 'xxx';
   const urlPrefix = (window as any).userOrigin;
 
   if (!urlPrefix) {

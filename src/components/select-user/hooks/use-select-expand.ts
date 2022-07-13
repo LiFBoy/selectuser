@@ -17,7 +17,6 @@ export default (currentTab: string) => {
         id,
         label,
         name,
-        key,
         children,
         type,
         nodeType,

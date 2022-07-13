@@ -129,17 +129,6 @@ const SelectPane: React.FunctionComponent<PropTypes> = (props: PropTypes) => {
     groupList.push(groupItem);
   }
 
-  // if (tagInfoList?.length) {
-  //   const groupItem = {
-  //     title: '标签',
-  //     type: 'TAG',
-  //     unit: '人',
-  //     count: userCount.tagCount || 0,
-  //     itemList: tagInfoList,
-  //   };
-  //   groupList.push(groupItem);
-  // }
-
   if (customerTagInfoList?.length) {
     const groupItem = {
       title: '客户标签',

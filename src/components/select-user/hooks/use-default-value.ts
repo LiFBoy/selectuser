@@ -47,8 +47,6 @@ export default (
         userInfoList = [],
         tagInfoList = [],
         cameraInfoList = [],
-        tvInfoList = [],
-        equipmentInfoList = [],
         groupInfoList = [],
         orgRelInfoList = [],
         maternalInfoList = [],
@@ -121,8 +119,6 @@ export default (
           id: item.id,
         });
       }
-
-      console.log(customerTagObject, 'customerTagObject11');
 
       // 存储所有群标签id
       const groupTagObject: SelectUserCountRequestItem = {
@@ -258,7 +254,7 @@ export default (
           orgRelCount: orgRelObject.selectNodeList.length,
           maternalCount: maternalObject.selectNodeList.length,
         };
-        console.log(count, 'count111');
+
         setUserCount(count);
       } else {
         // 获取已选用户总人数

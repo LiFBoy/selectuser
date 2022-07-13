@@ -1,21 +1,17 @@
 import { NodeType } from '../../../../components/select-user/interface';
 
 const TAB_MAPS: any = {
-  dept: '所属部门',
-  group: '下属组织',
   innerContacts: '内部通讯录',
   maternalContacts: '母婴通讯录',
   disabledHomeContacts: '残疾人之家',
   equipmentContacts: '资产通讯录',
   memberContacts: '居民',
   memberDeptContacts: '社区通讯录',
-  schoolContacts: '家校通讯录',
   groupContacts: '互连微信群',
   customerTagContacts: '客户标签',
   groupTagContacts: '群标签',
   circlesTagContacts: '圈子标签',
   contentTagContacts: '内容标签',
-  orgRel: '行政组织',
 };
 
 export interface ItreeItem {
@@ -69,10 +65,7 @@ import { Accordion, Toast } from 'antd-mobile';
 
 import {
   TagIcon,
-  DeptIcon,
-  OrgIcon,
   InternalIcon,
-  OrgRelIcon,
   GroupIcon,
 } from '../../../tree-node-icon-mobile';
 
@@ -182,17 +175,12 @@ const SchoolContacts: React.FunctionComponent<PropType> = (props: PropType) => {
 
   const formatIcon = (key: string) => {
     switch (key) {
-      case 'dept': // 所属部门
-        return <DeptIcon />;
-      case 'group': // 下属组织
-        return <OrgIcon />;
       case 'innerContacts': // 内部通讯录
       case 'maternalContacts': // 母婴通讯录
       case 'disabledHomeContacts': // 残疾人之家
       case 'equipmentContacts': // 资产通讯录
       case 'memberContacts': // 居民
       case 'memberDeptContacts': // 社区通讯录
-      case 'schoolContacts': // 家校通讯录
         return <InternalIcon />;
       case 'groupContacts': // 企微互联群
         return <GroupIcon />;
@@ -201,8 +189,6 @@ const SchoolContacts: React.FunctionComponent<PropType> = (props: PropType) => {
       case 'circlesTagContacts': // 圈子标签
       case 'contentTagContacts': // 内容标签
         return <TagIcon />;
-      case 'orgRel': // 行政组织-精准推送
-        return <OrgRelIcon />;
       default:
     }
   };
@@ -257,7 +243,7 @@ const SchoolContacts: React.FunctionComponent<PropType> = (props: PropType) => {
       scrollDom.current.scrollTop = 0;
     }
   }, [breadcrumb, scrollRef]);
-  console.log(accordion, 'accordion', treeState, 'treeState');
+  // console.log(accordion, 'accordion', treeState, 'treeState');
   return (
     <div className="scroll" ref={scrollDom}>
       <Breadcrumb

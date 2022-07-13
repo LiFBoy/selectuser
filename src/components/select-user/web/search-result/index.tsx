@@ -38,21 +38,17 @@ const overlayStyle = {
 };
 
 const SHOW_TAB_LIST_ITEM_MAP: any = {
-  dept: '所属部门',
-  group: '下属组织',
   innerContacts: '内部通迅录',
   maternalContacts: '母婴通迅录',
   disabledHomeContacts: '残疾人之家',
   equipmentContacts: '资产通迅录',
   memberContacts: '居民',
   memberDeptContacts: '社区通讯录',
-  schoolContacts: '家校通迅录',
   groupContacts: '互连微信群',
   customerTagContacts: '客户标签',
   groupTagContacts: '群标签',
   circlesTagContacts: '圈子标签',
   contentTagContacts: '内容标签',
-  orgRel: '行政组织',
 };
 
 // 信息展示条数限制，超过INFO_LIMIT_NUM则以鼠标悬浮框展示
@@ -103,7 +99,6 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
     }
   };
 
-
   const handleClick = (item: any, type: string) => {
     localStorage.setItem('labelPath', item.labelPath);
     localStorage.setItem('selectId', item.key);
@@ -114,6 +109,16 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
       onExpandedKeys(item.labelPath);
     }, 0);
   };
+  const common = (item: any) => {
+    return {
+      id: item.key,
+      key: item.key,
+      name: item.label,
+      orgId: item.orgId,
+      childDelete: item.childDelete,
+      extendedAttribute: item.extendedAttribute,
+    };
+  };
 
   // checkbox状态改变事件
   const onCheckBoxChange = (item: any, type: string) => {
@@ -121,139 +126,74 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
     switch (type) {
       case 'USER':
         node = {
-          id: item.key,
-          key: item.key,
-          name: item.label,
-          orgId: item.orgId,
-          childDelete: item.childDelete,
-          extendedAttribute: item.extendedAttribute,
+          ...common(item),
           deptName: get(item.userDeptList, [0, 'deptName']),
           fullName: item.fullName,
         };
         break;
       case 'GROUP':
         node = {
-          id: item.key,
-          key: item.key,
-          name: item.label,
-          childDelete: item.childDelete,
-          extendedAttribute: item.extendedAttribute,
-          orgId: item.orgId,
+          ...common(item),
         };
         break;
       case 'DEPT':
         node = {
-          id: item.key,
-          key: item.key,
-          name: item.label,
-          orgId: item.orgId,
-          childDelete: item.childDelete,
-          extendedAttribute: item.extendedAttribute,
+          ...common(item),
           fullName: item.fullName,
         };
         break;
       case 'EQUIPMENT':
         node = {
-          id: item.key,
-          key: item.key,
-          name: item.label,
-          childDelete: item.childDelete,
-          extendedAttribute: item.extendedAttribute,
-          orgId: item.orgId,
+          ...common(item),
         };
         break;
       case 'CAMERA':
         node = {
-          id: item.key,
-          key: item.key,
-          name: item.label,
-          childDelete: item.childDelete,
-          extendedAttribute: item.extendedAttribute,
-          orgId: item.orgId,
+          ...common(item),
         };
         break;
       case 'TV':
         node = {
-          id: item.key,
-          key: item.key,
-          name: item.label,
-          childDelete: item.childDelete,
-          extendedAttribute: item.extendedAttribute,
-          orgId: item.orgId,
+          ...common(item),
         };
         break;
       case 'WORK_GROUP':
         node = {
-          id: item.key,
-          key: item.key,
-          name: item.label,
-          childDelete: item.childDelete,
-          extendedAttribute: item.extendedAttribute,
-          orgId: item.orgId,
+          ...common(item),
         };
         break;
       case 'MATERNAL':
         node = {
-          id: item.key,
-          key: item.key,
-          name: item.label,
-          childDelete: item.childDelete,
-          extendedAttribute: item.extendedAttribute,
-          orgId: item.orgId,
+          ...common(item),
         };
         break;
       case 'TAG':
         node = {
-          id: item.key,
-          key: item.key,
-          name: item.label,
-          childDelete: item.childDelete,
-          extendedAttribute: item.extendedAttribute,
-          orgId: item.orgId,
+          ...common(item),
         };
         break;
       case 'CONTENT_TAG':
         node = {
-          id: item.key,
-          key: item.key,
-          name: item.label,
           type: item.type,
-          childDelete: item.childDelete,
-          extendedAttribute: item.extendedAttribute,
-          orgId: item.orgId,
+          ...common(item),
         };
         break;
       case 'CIRCLES_TAG':
         node = {
-          id: item.key,
-          key: item.key,
-          name: item.label,
+          ...common(item),
           type: item.type,
-          childDelete: item.childDelete,
-          extendedAttribute: item.extendedAttribute,
-          orgId: item.orgId,
         };
         break;
       case 'GROUP_TAG':
         node = {
-          id: item.key,
-          key: item.key,
-          name: item.label,
+          ...common(item),
           type: item.type,
-          childDelete: item.childDelete,
-          extendedAttribute: item.extendedAttribute,
-          orgId: item.orgId,
         };
         break;
       case 'CUSTOMER_TAG':
         node = {
-          id: item.key,
-          key: item.key,
-          name: item.label,
+          ...common(item),
           type: item.type,
-          childDelete: item.childDelete,
-          extendedAttribute: item.extendedAttribute,
-          orgId: item.orgId,
         };
         break;
     }
@@ -496,49 +436,40 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
 
     return (
       <div className="search-result-box">
-        {workGroupList.length > 0
-          ? renderDom(
+        {workGroupList.length > 0 &&
+          renderDom(
             workGroupList,
             '相关告警群',
             workGroupInfoList,
             <GroupIcon />
-          )
-          : ''}
-        {cameraList.length > 0
-          ? renderDom(
+          )}
+        {cameraList.length > 0 &&
+          renderDom(
             cameraList,
             '相关摄像头',
             cameraInfoList,
             <EQUIPMENTICON />
-          )
-          : ''}
-        {maternalList.length > 0
-          ? renderDom(maternalList, '相关人员', maternalInfoList, <UserIcon />)
-          : ''}
+          )}
+        {maternalList.length > 0 &&
+          renderDom(maternalList, '相关人员', maternalInfoList, <UserIcon />)}
 
-        {tvList.length > 0
-          ? renderDom(tvList, '相关广告电视', tvInfoList, <EQUIPMENTICON />)
-          : ''}
-        {equipmentList.length > 0
-          ? renderDom(
+        {tvList.length > 0 &&
+          renderDom(tvList, '相关广告电视', tvInfoList, <EQUIPMENTICON />)}
+        {equipmentList.length > 0 &&
+          renderDom(
             equipmentList,
             '相关设备',
             equipmentInfoList,
             <EQUIPMENTICON />
-          )
-          : ''}
-        {groupList.length > 0
-          ? renderDom(groupList, '相关分组', groupInfoList, <GroupIcon />)
-          : ''}
-        {tagList.length > 0
-          ? renderTagDom(tagList, '相关标签', <TagIcon />)
-          : ''}
+          )}
+        {groupList.length > 0 &&
+          renderDom(groupList, '相关分组', groupInfoList, <GroupIcon />)}
+        {tagList.length > 0 && renderTagDom(tagList, '相关标签', <TagIcon />)}
 
-        {tagGroupList.length > 0
-          ? renderTagDom(tagGroupList, '相关标签组', <TagIcon />)
-          : ''}
+        {tagGroupList.length > 0 &&
+          renderTagDom(tagGroupList, '相关标签组', <TagIcon />)}
 
-        {userList.length > 0 ? (
+        {userList.length > 0 && (
           <>
             <div className="search-result-group-title">
               相关人员({userList.length})
@@ -616,10 +547,8 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
             })}
             {renderSearchHint(userList)}
           </>
-        ) : (
-          ''
         )}
-        {deptList.length > 0 ? (
+        {deptList.length > 0 && (
           <>
             <div className="search-result-group-title">
               相关部门({deptList.length})
@@ -678,8 +607,6 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
             })}
             {renderSearchHint(deptList)}
           </>
-        ) : (
-          ''
         )}
       </div>
     );
