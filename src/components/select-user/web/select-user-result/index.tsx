@@ -40,11 +40,9 @@ const SelectedUserResult: React.FunctionComponent<PropType> = (
       <div className="select-user-result-detail-box">
         {groupList.map((group: IgroupItem) => {
           const { title, itemList } = group;
-          // const NodeIcon = iconMap[type as IconType];
           return (
             <div className="select-user-result-group" key={title}>
               <div className="select-user-result-group-top">
-                {/* <NodeIcon /> */}
                 <i className="select-user-result-group-top-icon">&nbsp;</i>
                 <span className="select-user-result-group-total">
                   {title} ({itemList.length})
@@ -53,15 +51,8 @@ const SelectedUserResult: React.FunctionComponent<PropType> = (
               <div className="select-user-result-group-content">
                 {itemList.map((item: ItreeItem) => {
                   const { id, name } = item;
-                  // console.log(item, 'selected-tag');
                   return (
-                    <Tag
-                      className="selected-tag"
-                      // closable
-                      visible
-                      key={id}
-                      title={name}
-                    >
+                    <Tag className="selected-tag" visible key={id} title={name}>
                       {name}
                     </Tag>
                   );

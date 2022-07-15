@@ -374,11 +374,9 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
     const workGroupList: any[] = [];
     const maternalList: any[] = [];
     const deptList: any[] = [];
-    const orgList: any[] = [];
     const tagList: any[] = [];
     const tagGroupList: any[] = [];
     const groupList: any[] = [];
-    const orgRelList: any[] = [];
 
     for (const resultItem of searchResult?.dataSource) {
       switch (resultItem.type) {
@@ -403,9 +401,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
         case 'DEPT':
           deptList.push(resultItem);
           break;
-        case 'ORG':
-          orgList.push(resultItem);
-          break;
+
         case 'GROUP':
           groupList.push(resultItem);
           break;
@@ -415,9 +411,6 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
         case 'CIRCLES_TAG':
         case 'CONTENT_TAG':
           tagList.push(resultItem);
-          break;
-        case 'ORG_REL':
-          orgRelList.push(resultItem);
           break;
       }
     }

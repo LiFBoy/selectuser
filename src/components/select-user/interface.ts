@@ -5,6 +5,9 @@ export type NodeType =
   | 'DEPT'
   | 'EQUIPMENT'
   | 'TV'
+  | 'root'
+  | 'ORG_REL'
+  | 'ORG'
   | 'CAMERA'
   | 'WORK_GROUP'
   | 'MATERNAL'
@@ -16,16 +19,13 @@ export type NodeType =
   | 'GROUP_TAG_GROUP'
   | 'CIRCLES_TAG_GROUP'
   | 'CONTENT_TAG_GROUP'
+  | 'CUSTOMER_MANAGER_USER'
   | 'TAG'
-  | 'GROUP_DEPT'
   | 'GROUP'
   | 'TAG_GROUP';
 
 export interface ListItem {
   id: string;
-  // 标签类型：系统标签，
-  tagType: 'SYS_TAG' | 'COMMON_TAG' | 'PERSONAL_TAG';
-  // tagType: '个人标签'|'通用标签'|'系统标签';
   // 名称
   name: string;
   // 用户数
@@ -35,9 +35,9 @@ export interface ListItem {
   isRoot: boolean;
   // 组织名称
   orgName?: string;
-  // 所属部门 id（用于区分不同部门下的同一人，对应 strictUser 配置）
+  // 所属部门 id（用于区分不同部门下的同一人）
   deptId?: string;
-  // 所属部门名称（用于区分不同部门下的同一人，对应 strictUser 配置）
+  // 所属部门名称（用于区分不同部门下的同一人）
   deptName?: string;
 }
 
@@ -48,11 +48,12 @@ export interface ValueObj {
   orgId?: string | number;
   // 人员列表
   userInfoList: IlistItem[];
+  // 虚拟客户列表
+  customerManagerInfoList?: IlistItem[];
   // 部门列表
   deptInfoList: IlistItem[];
   // 标签列表
   tagInfoList: IlistItem[];
-
   // 客户标签
   customerTagInfoList: IlistItem[];
   // 群标签
@@ -61,19 +62,15 @@ export interface ValueObj {
   circlesTagInfoList: IlistItem[];
   // 内容标签
   contentTagInfoList: IlistItem[];
-
   // 群
   groupInfoList?: IlistItem[];
   // 相关告警群
   workGroupInfoList?: IlistItem[];
-
   // 设备
   equipmentInfoList?: IlistItem[];
   tvInfoList?: IlistItem[];
   cameraInfoList?: IlistItem[];
-
   maternalInfoList?: IlistItem[];
-
   totalCount?: number;
   count?: any;
 }
@@ -83,6 +80,7 @@ export type Value = ValueObj;
 export interface IdefaultValue {
   deptInfoList?: IlistItem[];
   userInfoList?: IlistItem[];
+  customerManagerInfoList?: IlistItem[];
   tagInfoList?: IlistItem[];
   customerTagInfoList?: IlistItem[];
   groupTagInfoList?: IlistItem[];
@@ -102,12 +100,11 @@ export interface IlistItem {
   orgId?: string;
   orgName?: string;
   contactType?: string;
-  nodeType?: string; // 所属部门 id（用于区分不同部门下的同一人，对应 strictUser 配置）
   deptId?: string;
   extendedAttribute?: any;
   childDelete?: boolean;
   noTagLabelPermission?: boolean;
-  // 所属部门名称（用于区分不同部门下的同一人，对应 strictUser 配置）
+  // 所属部门名称（用于区分不同部门下的同一人）
   deptName?: string;
 }
 
@@ -124,17 +121,13 @@ export interface SelectUserCountRequestItem {
   type: string;
 }
 
-export interface ItreeItem
-  extends Omit<ListItem, 'type' | 'isRoot' | 'tagType'> {
+export interface ItreeItem extends Omit<ListItem, 'type' | 'isRoot'> {
   key: string;
-  title: any;
-  nodeType?: NodeType;
+  title?: any;
   orgId?: string;
+  // label?: string;
   type?: NodeType;
   childDelete?: boolean;
-  deptType?:
-    | 0 // 基础校区
-    | 1; // 自定义校区
   // 直接子节点
   children?: ItreeItem[];
   // 是否可选中
@@ -143,8 +136,8 @@ export interface ItreeItem
   isLeaf?: boolean;
   // 当前节点所在层级的序号路径
   pos?: string;
-  label?: string;
-  // 只在下属组织人员信息中出现，携带了学校信息
+  label?: any;
+  // 只在下属组织人员信息中出现
   fullName?: string;
   // 图标
   icon?: any;
@@ -175,6 +168,7 @@ export interface PropTypes {
   // 展示的选项卡列表
   showTabList?: (
     | 'innerContacts'
+    | 'customerManagerContacts'
     | 'maternalContacts'
     | 'disabledHomeContacts'
     | 'memberContacts'
@@ -189,7 +183,7 @@ export interface PropTypes {
   onCancel?(): void;
   onOk(value: Value): void;
   // 选择模式：人 or 部门，默认 'user'
-  selectType?: 'user' | 'dept'; // 对应异步请求传 selectUser: true, false
+  selectType?: 'user' | 'dept';
   // 不可选节点类型, 不传默认全部可选
   unCheckableNodeType?: NodeType[];
   // 仅叶子节点可选, 搭配selectType使用, 默认为false
@@ -200,28 +194,15 @@ export interface PropTypes {
   searchPlaceholder?: string;
   // 是否多选，默认 true
   multiple?: boolean;
-  appId?: string | number;
-  corpid?: string | number;
   // 透传给模态框的属性，如标题等，默认 {}
   dialogProps?: ModalProps;
   // 请求的基础路径，默认 'pc'
   basePath?: 'pc' | 'mobile';
   // 请求需要的额外参数
   requestParams?: {
-    // 基础校区还是自定义校区
-    campusType?: 'base_school_type' | 'custom_school_type';
-    // 仅展示分组
-    onlySelectGroup?: boolean;
-    // 是否严格区分不同部门下的同一个人，默认为 false，如果为 true，则不同部门下的同一个人会认为是两个人，选择后会带上部门信息。
-    strictUser?: boolean;
-    // 企业微信 id，移动端鉴权用
-    corpId?: string;
-    // 部门类型 家校通讯录基础校区下班级class/自定义校区下自定义班级custom_class
-    deptTypeList?: any;
     // 选择类型 只可选用户user,部门dept,组织org,分组group,标签tag
     selectTypeList?: any;
-    // 仅在tab为下属组织时生效，'0' 虚拟节点|'1'实体节点
-    nodeType?: '0' | '1';
+
     // 仅在tab为标签时生效，0个人标签，1通用标签，2系统标签，3员工系统标签
     tagTypeList?: ['0', '1', '2', '3'];
 
@@ -263,6 +244,7 @@ export interface IsaveResultParams {
   workGroupInfoList?: any;
   tagInfoList?: any;
   customerTagInfoList?: any;
+  customerManagerInfoList?: any;
   groupTagInfoList?: any;
   circlesTagInfoList?: any;
   contentTagInfoList?: any;
@@ -272,7 +254,6 @@ export interface IsaveResultParams {
   cameraInfoList?: any;
   id: string | null;
   totalCount?: any;
-  strictUser?: boolean;
   orgRelRange?: {
     orgRelUser: boolean;
     userTypeList: number[];

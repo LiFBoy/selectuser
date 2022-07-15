@@ -43,6 +43,7 @@ const SelectedShowPane: React.FunctionComponent<PropType> = (
     maxHeight: '400px',
     boxShadow: '5px 5px 10px rgba(129, 133, 167, 0.2)',
   };
+  console.log(groupList, 'groupList');
 
   return (
     <div className="selected-show-pane-wrap">

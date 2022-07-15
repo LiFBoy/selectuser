@@ -49,6 +49,7 @@ type ItreeState = StaticProps & {
   tagGroupItemList?: any[];
   deptInfoList: ItreeItem[];
   userInfoList: ItreeItem[];
+  customerManagerInfoList: ItreeItem[];
   equipmentInfoList: ItreeItem[];
   tvInfoList: ItreeItem[];
   maternalInfoList: ItreeItem[];
@@ -139,6 +140,7 @@ const INIT_STATE: ItreeState = {
   searchResult: [],
   // 存储当前所有选中的keys
   checkedKeys: [],
+
   tagGroupItemList: [],
   // 选中的部门类型节点
   deptInfoList: [],
@@ -154,7 +156,7 @@ const INIT_STATE: ItreeState = {
   cameraInfoList: [],
   // 选中的标签类型节点
   tagInfoList: [],
-
+  customerManagerInfoList: [],
   customerTagInfoList: [],
   groupTagInfoList: [],
   circlesTagInfoList: [],
@@ -186,7 +188,7 @@ const INIT_STATE: ItreeState = {
     appId: '',
   },
   // 请求附加参数
-  requestParams: { campusType: 'base_school_type' },
+  requestParams: {},
   isSaveSelectSignature: false,
   onOk() {},
   getCheckedNodes(value) {},
@@ -208,9 +210,9 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
   const getListByType = (type: NodeType, treeStateToFind = treeState) => {
     const typeToKeyMap = {
       DEPT: 'deptInfoList',
-      GROUP_DEPT: 'deptInfoList',
       TAG: 'tagInfoList',
       CUSTOMER_TAG: 'customerTagInfoList',
+      CUSTOMER_MANAGER_USER: 'customerManagerInfoList',
       GROUP_TAG: 'groupTagInfoList',
       CIRCLES_TAG: 'circlesTagInfoList',
       CONTENT_TAG: 'contentTagInfoList',
@@ -222,6 +224,9 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
       GROUP: 'groupInfoList',
       WORK_GROUP: 'workGroupInfoList',
       TAG_GROUP: '',
+      root: '',
+      ORG_REL: '',
+      ORG: '',
       CUSTOMER_TAG_GROUP: '',
       GROUP_TAG_GROUP: '',
       CIRCLES_TAG_GROUP: '',
@@ -298,7 +303,7 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
         item.id = item.key;
         // item.key = getUid();
         item.name = item.label;
-        let NodeIcon = treeNodeIconMap[item.type];
+        const NodeIcon = treeNodeIconMap[item.type];
         let label: any = item.name;
 
         if (item.type === 'TAG') {
@@ -317,11 +322,6 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
           // NodeIcon = treeNodeIconMap.dept;
         }
 
-        // 若为行政组织时，Icon进行覆盖
-        if (item.type === 'ORG_REL' && item?.nodeType) {
-          // nodeType展示学校或教育局icon
-          NodeIcon = treeNodeIconMap[item.nodeType];
-        }
         const overlayStyle = {
           maxWidth: '20em',
           fontSize: '12px',
@@ -478,30 +478,20 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
   // 动态获取子节点列表
   const fetchTreeNodes = useCallback(
     (
-      item: Pick<
-        ItreeItem,
-        'nodeType' | 'orgId' | 'key' | 'type' | 'id' | 'pos'
-      >,
+      item: Pick<ItreeItem, 'orgId' | 'key' | 'type' | 'id' | 'pos'>,
       type: string
     ): Promise<any> => {
       return new Promise<any>((resolve: any) => {
-        const { requestParams, selectType } = treeState;
-        const { id, type: itemType, pos, nodeType, orgId } = item;
+        const { requestParams } = treeState;
+        const { id, pos, orgId } = item;
         const isRoot = pos === '0';
         net
           .request(`${URL()}/select/component/${type}`, {
             method: 'POST',
             data: {
-              nodeType: nodeType,
               orgId: orgId,
               parentId: id,
               ...requestParams,
-              // 只有根节点或者GROUP_DEPT / DEPT类型的节点下才有人的信息
-              selectUser:
-                selectType === 'user' &&
-                (isRoot || itemType === 'GROUP_DEPT' || itemType === 'DEPT')
-                  ? true
-                  : false,
             },
           })
           .then((result: IResult) => {
@@ -555,10 +545,7 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
       setTreeData([]);
       // debugger;
 
-      fetchTreeNodes(
-        { nodeType: null, orgId: null, key: null, id: null, pos: '0' },
-        type
-      )
+      fetchTreeNodes({ orgId: null, key: null, id: null, pos: '0' }, type)
         .then(() => {
           // 如果只有一个根节点，则默认获取其子节点
           if (
@@ -597,7 +584,7 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
         method: 'POST',
         data: {
           category: requestParams?.category,
-          corpId: requestParams?.corpId,
+
           selectCountRequestList,
         },
       })
@@ -710,7 +697,6 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
       const nodeIndex = list.findIndex((item: ItreeItem) => {
         return item.id === node.id;
       });
-      // debugger;
       // 如果节点未选中则选中
       if (nodeIndex === -1) {
         nextList = list.concat({ ...node });
@@ -754,11 +740,9 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
         resetUserCount(node, true, false);
       }
     }
-    // debugger;
     const keyIndex = checkedKeys.indexOf(dealtKey(basePath, node, tabType));
 
     // 更新node节点选中状态
-
     // 如果key不在被选中的数组中，则添加
     const _nextCheckedKeys =
       keyIndex === -1
@@ -844,6 +828,7 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
     treeState.workGroupInfoList = [];
     treeState.tagInfoList = [];
     treeState.customerTagInfoList = [];
+    treeState.customerManagerInfoList = [];
     treeState.groupTagInfoList = [];
     treeState.circlesTagInfoList = [];
     treeState.contentTagInfoList = [];
@@ -925,7 +910,6 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
             method: 'POST',
             data: {
               category: requestParams?.category,
-              corpId: requestParams?.corpId,
               selectCountRequestList,
             },
           }
@@ -1120,6 +1104,7 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
       groupInfoList,
       tagInfoList,
       customerTagInfoList,
+      customerManagerInfoList,
       groupTagInfoList,
       circlesTagInfoList,
       contentTagInfoList,
@@ -1140,7 +1125,7 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
         const obj: any = {};
 
         obj.id = item.id;
-        obj.name = showNameFunc(item, staticProps?.requestParams?.strictUser);
+        obj.name = showNameFunc(item, true);
         obj.type = item.type;
         if (item.orgId) {
           obj.orgId = item.orgId;
@@ -1164,10 +1149,6 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
           obj.noTagLabelPermission = item.noTagLabelPermission;
         }
 
-        if (item?.nodeType) {
-          obj.nodeType = item.nodeType;
-        }
-
         finalList.push(obj);
       }
       return finalList;
@@ -1180,6 +1161,7 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
       groupInfoList: formatParam(groupInfoList),
       tagInfoList: formatParam(tagInfoList),
       customerTagInfoList: formatParam(customerTagInfoList),
+      customerManagerInfoList: formatParam(customerManagerInfoList),
       groupTagInfoList: formatParam(groupTagInfoList),
       circlesTagInfoList: formatParam(circlesTagInfoList),
       contentTagInfoList: formatParam(contentTagInfoList),
@@ -1197,6 +1179,7 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
         deptInfoList: params.deptInfoList,
         userInfoList: params.userInfoList,
         tagInfoList: params.tagInfoList,
+        customerManagerInfoList: params.customerManagerInfoList,
         customerTagInfoList: params.customerTagInfoList,
         groupTagInfoList: params.groupTagInfoList,
         circlesTagInfoList: params.circlesTagInfoList,
@@ -1237,6 +1220,7 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
           userInfoList: params.userInfoList,
           tagInfoList: params.tagInfoList,
           customerTagInfoList: params.customerTagInfoList,
+          customerManagerInfoList: params.customerManagerInfoList,
           groupTagInfoList: params.groupTagInfoList,
           circlesTagInfoList: params.circlesTagInfoList,
           contentTagInfoList: params.contentTagInfoList,

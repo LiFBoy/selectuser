@@ -26,7 +26,7 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
   basePath = 'mobile',
   selectSignature = '',
   isSaveSelectSignature = true,
-  requestParams = { campusType: 'base_school_type' },
+  requestParams,
   showTabList,
   selectType = 'user',
   unCheckableNodeType = [],
@@ -71,7 +71,7 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
   useEffect(() => {
     clear();
     setBasePath(basePath);
-    setCorpidAppId({ appId: others?.appId, corpid: others?.corpid });
+    // setCorpidAppId({ appId: others?.appId, corpid: others?.corpid });
   }, []);
 
   useEffect(() => {
@@ -291,16 +291,12 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
   const getUserCount = (selectCountRequestList: any, userInfoList: any) => {
     // tslint:disable-next-line: no-floating-promises
     net
-      .request(
-        `/select/compent/getUserCount?corpid=${others?.corpid}&appId=${others?.appId}`,
-        {
-          method: 'POST',
-          data: {
-            corpId: requestParams?.corpId,
-            selectCountRequestList,
-          },
-        }
-      )
+      .request('/select/compent/getUserCount', {
+        method: 'POST',
+        data: {
+          selectCountRequestList,
+        },
+      })
       .then((res) => {
         const data = res.data;
         const count = {
@@ -377,10 +373,6 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
 
         if (item.contactType) {
           obj.contactType = item.contactType;
-        }
-
-        if (item?.nodeType) {
-          obj.nodeType = item.nodeType;
         }
 
         finalList.push(obj);
@@ -591,7 +583,7 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
               >
                 <SelectedPane
                   setModal={setModal}
-                  showUserDeptName={requestParams?.strictUser}
+                  showUserDeptName={true}
                   selectType={selectType}
                 />
               </Modal>

@@ -28,7 +28,6 @@ const SelectCommonTree: React.FunctionComponent<PropType> = (
     handleSelect,
     loadTreeData: loadData,
   } = useSelectExpand(currentTab);
-  // console.log(currentTab, 'currentTab');
 
   const [checkedKeys] = useCheckedKeys(basePath, currentTab);
 
@@ -41,10 +40,6 @@ const SelectCommonTree: React.FunctionComponent<PropType> = (
       title: node.label,
     };
 
-    // const multiple = node.selectType
-    //   ? node.selectType === 'checkbox'
-    //   : _multiple;
-    // 获取当前节点是勾选还是取消勾选
     let checked = null;
 
     // 如果是多选
@@ -91,22 +86,15 @@ const SelectCommonTree: React.FunctionComponent<PropType> = (
       <Tree
         className="cf-select-user-tree"
         selectedKeys={[]}
-        // key={currentTab}
         checkedKeys={checkedKeys}
         onCheck={onCheck}
         checkable
-        // multiple={multiple}
-        // selectable={false}
         blockNode
         expandedKeys={expandedKeys}
         onExpand={setExpandedKeys}
         onSelect={handleSelect}
         checkStrictly
         loadData={loadData}
-        // height={340}
-        // isLabelBlock
-        // isNodeBlock
-        // treeData={treeData}
       >
         {renderTreeNodes(treeData)}
       </Tree>

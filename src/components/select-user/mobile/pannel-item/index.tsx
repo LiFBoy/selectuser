@@ -6,20 +6,15 @@ export interface ItreeItem {
   name: string;
   label: any;
   title: any;
-  nodeType: NodeType;
   orgId?: string;
   type?:
     | 'DEPT' // 部门
-    | 'GROUP_DEPT' //  虚拟部门
     | 'USER' // 个人
     | 'ORG' // 组织
     | 'TAG' // 标签
-    | 'root' // 标签
+    | 'root' // 根
     | 'GROUP' // 分组
     | 'ORG_REL'; // 行政组织-精准推送业务
-  deptType?:
-    | 0 // 基础校区
-    | 1; // 自定义校区
   userCount?: number;
   children?: ItreeItem[];
   checkable?: boolean;
@@ -33,7 +28,6 @@ import React, { useContext } from 'react';
 import { TREE_CONTEXT } from '../../select-user';
 import { Radio } from 'antd-mobile-v5';
 import classnames from 'classnames';
-import { NodeType } from '../../interface';
 
 interface PropType {
   currentTab: string; // 用当前选中的tab作为Tree组件的key，当切换tab时使Tree组件重新生成
@@ -78,7 +72,6 @@ const PannelItem: React.FunctionComponent<PropType> = (props: PropType) => {
       name: node.name,
       key: node.key,
       type: node.type,
-      nodeType: node?.nodeType,
       orgId: node.orgId,
       contactType: node.contactType,
       fullName: node.fullName,

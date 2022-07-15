@@ -27,6 +27,7 @@ const SelectPane: React.FunctionComponent<PropTypes> = (props: PropTypes) => {
     userInfoList,
     tagInfoList,
     customerTagInfoList,
+    customerManagerInfoList,
     groupTagInfoList,
     circlesTagInfoList,
     contentTagInfoList,
@@ -106,7 +107,6 @@ const SelectPane: React.FunctionComponent<PropTypes> = (props: PropTypes) => {
     const groupItem = {
       title: '人员',
       type: 'USER',
-      unit: '人',
       itemList: userInfoList,
     };
     groupList.push(groupItem);
@@ -115,7 +115,6 @@ const SelectPane: React.FunctionComponent<PropTypes> = (props: PropTypes) => {
     const equipmentItem = {
       title: '设备',
       type: 'EQUIPMENT',
-      unit: '个',
       count: userCount.equipmentCount || 0,
       itemList: equipmentInfoList,
     };
@@ -125,7 +124,6 @@ const SelectPane: React.FunctionComponent<PropTypes> = (props: PropTypes) => {
     const tvItem = {
       title: '广告电视',
       type: 'TV',
-      unit: '个',
       count: userCount.tvCount || 0,
       itemList: tvInfoList,
     };
@@ -135,7 +133,6 @@ const SelectPane: React.FunctionComponent<PropTypes> = (props: PropTypes) => {
     const tvItem = {
       title: '摄像头',
       type: 'CAMERA',
-      unit: '个',
       count: userCount.cameraCount || 0,
       itemList: cameraInfoList,
     };
@@ -145,7 +142,6 @@ const SelectPane: React.FunctionComponent<PropTypes> = (props: PropTypes) => {
     const tvItem = {
       title: '告警群',
       type: 'WORK_GROUP',
-      unit: '个',
       count: userCount.workGroupCount || 0,
       itemList: workGroupInfoList,
     };
@@ -155,7 +151,6 @@ const SelectPane: React.FunctionComponent<PropTypes> = (props: PropTypes) => {
     const maternalItem = {
       title: '人员',
       type: 'MATERNAL',
-      unit: '人',
       count: userCount.maternalCount || 0,
       itemList: maternalInfoList,
     };
@@ -165,7 +160,6 @@ const SelectPane: React.FunctionComponent<PropTypes> = (props: PropTypes) => {
     const groupItem = {
       title: '部门',
       type: 'DEPT',
-      unit: '人',
       count: userCount.deptCount || 0,
       itemList: deptInfoList,
       ...selectPaneProps?.dept,
@@ -173,12 +167,10 @@ const SelectPane: React.FunctionComponent<PropTypes> = (props: PropTypes) => {
     groupList.push(groupItem);
   }
 
-  // 选中的分组
   if (groupInfoList?.length) {
     const groupItem = {
       title: '互连微信群',
       type: 'GROUP',
-      unit: '人',
       count: userCount.groupCount || 0,
       itemList: groupInfoList,
     };
@@ -189,9 +181,17 @@ const SelectPane: React.FunctionComponent<PropTypes> = (props: PropTypes) => {
     const groupItem = {
       title: '客户标签',
       type: 'CUSTOMER_TAG',
-      unit: '人',
       count: userCount.customerTagCount || 0,
       itemList: customerTagInfoList,
+    };
+    groupList.push(groupItem);
+  }
+  if (customerManagerInfoList?.length) {
+    const groupItem = {
+      title: '虚拟客户',
+      type: 'CUSTOMER_MANAGER_USER',
+      count: userCount.customerTagCount || 0,
+      itemList: customerManagerInfoList,
     };
     groupList.push(groupItem);
   }
@@ -199,7 +199,6 @@ const SelectPane: React.FunctionComponent<PropTypes> = (props: PropTypes) => {
     const groupItem = {
       title: '群标签',
       type: 'GROUP_TAG',
-      unit: '人',
       count: userCount.groupTagCount || 0,
       itemList: groupTagInfoList,
     };
@@ -209,7 +208,6 @@ const SelectPane: React.FunctionComponent<PropTypes> = (props: PropTypes) => {
     const groupItem = {
       title: '圈子标签',
       type: 'CIRCLES_TAG',
-      unit: '人',
       count: userCount.circlesTagCount || 0,
       itemList: circlesTagInfoList,
     };
@@ -219,7 +217,6 @@ const SelectPane: React.FunctionComponent<PropTypes> = (props: PropTypes) => {
     const groupItem = {
       title: '内容标签',
       type: 'CONTENT_TAG',
-      unit: '人',
       count: userCount.contentTagCount || 0,
       itemList: contentTagInfoList,
     };

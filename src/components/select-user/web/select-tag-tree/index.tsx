@@ -15,7 +15,6 @@ interface PropType {
 }
 
 const SelectTagTree: React.FunctionComponent<PropType> = (props: PropType) => {
-  // 获取props
   const { currentTab, selectType, noTagLabelPermission } = props;
   // 获取treeContext
   const treeContext = useContext(TREE_CONTEXT);
@@ -87,13 +86,10 @@ const SelectTagTree: React.FunctionComponent<PropType> = (props: PropType) => {
 
   const renderTreeNodes = (data: any) =>
     data.map((item: any) => {
-      // console.log(item, 'item222');
-
       if (item.children) {
         return (
           <TreeNode
             checkable={false}
-            // title={renderSearchText(item.title)}
             key={item.id}
             isLeaf={item.isLeaf}
             {...item}
@@ -106,7 +102,6 @@ const SelectTagTree: React.FunctionComponent<PropType> = (props: PropType) => {
         return (
           <TreeNode
             key={item.id}
-            // disabled={true}
             disabled={setDisiabled(noTagLabelPermission, item.labelPermission)}
             {...item}
             className="radio"
@@ -122,7 +117,6 @@ const SelectTagTree: React.FunctionComponent<PropType> = (props: PropType) => {
       );
     });
 
-  // console.log(treeData, 'treeData');
   return treeData && treeData.length > 0 ? (
     <div ref={pageView} className="select-area-wrap">
       <Tree
@@ -132,7 +126,6 @@ const SelectTagTree: React.FunctionComponent<PropType> = (props: PropType) => {
         checkedKeys={checkedKeys}
         onCheck={onCheck}
         checkable
-        // multiple={multiple}
         blockNode
         expandedKeys={
           expandedKeys.length > 1
@@ -141,13 +134,10 @@ const SelectTagTree: React.FunctionComponent<PropType> = (props: PropType) => {
               ? localStorage.getItem('labelPath').split('-')
               : expandedKeys
         }
-        // expandedKeys={['3001001001000006', '1526430746303733762']}
         onExpand={setExpandedKeys}
         onSelect={handleSelect}
         checkStrictly
         loadData={loadData}
-        // height={340}
-        // treeData={treeData}
       >
         {renderTreeNodes(treeData)}
       </Tree>

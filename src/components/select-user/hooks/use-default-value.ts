@@ -45,6 +45,7 @@ export default (
         deptInfoList = [],
         userInfoList = [],
         tagInfoList = [],
+        customerManagerInfoList = [],
         cameraInfoList = [],
         groupInfoList = [],
         maternalInfoList = [],
@@ -96,6 +97,20 @@ export default (
       for (const item of customerTagInfoList) {
         // 如果传入的数据中没有type属性，则在初始化时需要设置item的type
         if (!item.type) item.type = 'CUSTOMER_TAG';
+
+        customerTagObject.selectNodeList.push({
+          contactType: item.contactType,
+          id: item.id,
+        });
+      }
+      // 存储所有客户标签id
+      const customerManageObject: SelectUserCountRequestItem = {
+        selectNodeList: [],
+        type: 'CUSTOMER_MANAGER_USER',
+      };
+      for (const item of customerManagerInfoList) {
+        // 如果传入的数据中没有type属性，则在初始化时需要设置item的type
+        if (!item.type) item.type = 'CUSTOMER_MANAGER_USER';
 
         customerTagObject.selectNodeList.push({
           contactType: item.contactType,
@@ -201,6 +216,7 @@ export default (
         customerTagObject,
         groupTagObject,
         circlesTagObject,
+        customerManageObject,
         cameraObject,
         contentTagObject,
       ];
@@ -237,6 +253,7 @@ export default (
 
       generateKey(deptInfoList);
       generateKey(userInfoList);
+      generateKey(customerManagerInfoList);
       generateKey(tagInfoList);
       generateKey(customerTagInfoList);
       generateKey(groupTagInfoList);
@@ -250,6 +267,7 @@ export default (
       setSelectedData({
         deptInfoList,
         userInfoList,
+        customerManagerInfoList,
         tagInfoList,
         customerTagInfoList,
         groupTagInfoList,

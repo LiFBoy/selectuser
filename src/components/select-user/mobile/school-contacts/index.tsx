@@ -1,7 +1,9 @@
-import { NodeType } from '../../../../components/select-user/interface';
+// import { NodeType } from '../../../../components/select-user/interface';
+import { ItreeItem } from '../../../select-user/interface';
 
 const TAB_MAPS: any = {
   innerContacts: '内部通讯录',
+  customerManagerContacts: '虚拟客户经理',
   maternalContacts: '母婴通讯录',
   disabledHomeContacts: '残疾人之家',
   equipmentContacts: '资产通讯录',
@@ -14,35 +16,30 @@ const TAB_MAPS: any = {
   contentTagContacts: '内容标签',
 };
 
-export interface ItreeItem {
-  id: string;
-  key: string;
-  name: string;
-  label: any;
-  nodeType: NodeType;
-  orgId?: string;
-  type?:
-    | 'DEPT' // 部门
-    | 'GROUP_DEPT' //  虚拟部门
-    | 'USER' // 个人
-    | 'ORG' // 组织
-    | 'TAG' // 标签
-    | 'CIRCLES_TAG_GROUP' // 内容标签组
-    | 'CIRCLES_TAG' // 内容标签
-    | 'root' // 根
-    | 'GROUP' // 分组
-    | 'ORG_REL'; // 行政组织-精准推送业务
-  deptType?:
-    | 0 // 基础校区
-    | 1; // 自定义校区
-  userCount?: number;
-  children?: ItreeItem[];
-  checkable?: boolean;
-  isLeaf?: boolean;
-  icon?: any;
-  contactType?: string;
-  count?: number;
-}
+// export interface ItreeItem {
+//   id: string;
+//   key: string;
+//   name: string;
+//   label: any;
+//   orgId?: string;
+//   type?:
+//     | 'DEPT' // 部门
+//     | 'USER' // 个人
+//     | 'ORG' // 组织
+//     | 'TAG' // 标签
+//     | 'CIRCLES_TAG_GROUP' // 内容标签组
+//     | 'CIRCLES_TAG' // 内容标签
+//     | 'root' // 根
+//     | 'GROUP' // 分组
+//     | 'ORG_REL'; // 行政组织-精准推送业务
+//   userCount?: number;
+//   children?: ItreeItem[];
+//   checkable?: boolean;
+//   isLeaf?: boolean;
+//   icon?: any;
+//   contactType?: string;
+//   count?: number;
+// }
 
 interface AccordionItem {
   key: string;
@@ -176,6 +173,7 @@ const SchoolContacts: React.FunctionComponent<PropType> = (props: PropType) => {
   const formatIcon = (key: string) => {
     switch (key) {
       case 'innerContacts': // 内部通讯录
+      case 'customerManagerContacts': // 虚拟客户经理
       case 'maternalContacts': // 母婴通讯录
       case 'disabledHomeContacts': // 残疾人之家
       case 'equipmentContacts': // 资产通讯录

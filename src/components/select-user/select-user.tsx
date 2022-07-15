@@ -22,8 +22,6 @@ export default function SelectUser({
   modalWidth = 0,
   onCancel,
   userOrigin,
-  appId,
-  corpid,
   basePath = 'pc',
   selectType = 'user',
   multiple = true,
@@ -34,10 +32,7 @@ export default function SelectUser({
   dialogProps = {},
   unCheckableNodeType = [],
   onlyLeafCheckable = false,
-  requestParams = {
-    campusType: 'base_school_type',
-    selectTypeList: ['user', 'dept', 'org', 'group', 'tag', 'org_rel'],
-  },
+  requestParams,
   selectPaneProps = {},
   getCheckedNodes,
   getTotalCount,
@@ -60,7 +55,7 @@ export default function SelectUser({
     orgRelAnalysisRange,
   });
   const Com = basePath === 'pc' ? SelectUserPc : SelectUserMobile;
-  const others = basePath === 'pc' ? {} : { appId, corpid };
+  const others = {};
 
   (window as any).userOrigin = userOrigin;
   return (

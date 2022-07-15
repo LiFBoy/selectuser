@@ -6,6 +6,7 @@ import './index.less';
 // tab类型对应的中文名
 const TAB_MAPS = {
   innerContacts: '内部通讯录',
+  customerManagerContacts: '虚拟客户经理',
   maternalContacts: '母婴通讯录',
   disabledHomeContacts: '残疾人之家',
   equipmentContacts: '资产通讯录',

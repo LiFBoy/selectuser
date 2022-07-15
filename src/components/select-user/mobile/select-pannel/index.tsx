@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { TREE_CONTEXT } from '../../select-user';
 import SchoolContacts from '../school-contacts';
 import net from '../../../../services/index';
-import { ItreeItem } from '../school-contacts';
+import { ItreeItem } from '../../../select-user/interface';
 import { NodeType } from '../../../select-user/interface';
 import { Toast } from 'antd-mobile';
 import { URL } from '../../../../utils/api';
@@ -31,16 +31,7 @@ interface Iprops {
   selectType: 'dept' | 'user';
   unCheckableNodeType: NodeType[];
   requestParams?: {
-    // 基础校区还是自定义校区
-    campusType?: 'base_school_type' | 'custom_school_type';
-    // 仅展示分组
-    onlySelectGroup?: boolean;
-    // 企业微信 id，移动端鉴权用
-    corpId?: string;
-    // 部门类型 家校通讯录基础校区下班级class/自定义校区下自定义班级custom_class
-    deptTypeList?: any;
-    // 仅在tab为下属组织时生效，'0' 虚拟节点|'1'实体节点
-    nodeType?: '0' | '1';
+    // deptTypeList?: any;
     // 仅在tab为标签时生效，0个人标签，1通用标签，2系统标签，3员工系统标签
     tagTypeList?: ['0', '1', '2', '3'];
   };
@@ -72,7 +63,7 @@ const SelectPannel: React.FunctionComponent<Iprops> = (props: Iprops) => {
     isRoot?: boolean
   ) => {
     for (const item of list) {
-      item.name = item.label;
+      // item.name = item.label;
       const initialName = item.label || '';
       // const interceptName = item.label; // funTransformationSubstr(item.label);
 
@@ -121,9 +112,7 @@ const SelectPannel: React.FunctionComponent<Iprops> = (props: Iprops) => {
           );
           break;
         case 'GROUP':
-        case 'GROUP_DEPT':
-        case 'ORG_REL':
-        case 'ORG':
+
         case 'DEPT':
           item.label = (
             <div className="label-box">
@@ -218,11 +207,9 @@ const SelectPannel: React.FunctionComponent<Iprops> = (props: Iprops) => {
         .request(`${URL()}/select/component/${currentTab}`, {
           method: 'POST',
           data: {
-            nodeType: null,
             orgId: null,
             parentId: null,
             ...requestParams,
-            selectUser: selectType === 'user',
           },
         })
         .then((result: IResult) => {
@@ -249,7 +236,6 @@ const SelectPannel: React.FunctionComponent<Iprops> = (props: Iprops) => {
       name: nodeProps.name,
       key: nodeProps.key,
       type: nodeProps.type,
-      nodeType: nodeProps?.nodeType,
       orgId: nodeProps.orgId,
       contactType: nodeProps.contactType,
     };
@@ -258,14 +244,9 @@ const SelectPannel: React.FunctionComponent<Iprops> = (props: Iprops) => {
         .request(`${URL()}/select/component/${currentTab}`, {
           method: 'POST',
           data: {
-            nodeType: item?.nodeType,
             orgId: item.orgId,
             parentId: item.key,
             ...requestParams,
-            // 只有GROUP_DEPT / DEPT类型的节点下才有人的信息
-            selectUser:
-              selectType === 'user' &&
-              (item.type === 'GROUP_DEPT' || item.type === 'DEPT'),
           },
         })
         .then((result: any) => {

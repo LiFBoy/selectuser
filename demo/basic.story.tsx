@@ -10,17 +10,17 @@ export const MethodInvoke2 = () => {
     SelectUser.show({
       multiple: true,
       selectType: 'dept',
-      showTabList: ['equipmentContacts'],
+      showTabList: ['customerManagerContacts'],
       dialogProps: {
-        title: 'tv',
+        title: '虚拟客户',
       },
-      searchPlaceholder: '请输入设备编码进行搜素',
-      userOrigin: 'http://gateway.dev.suosihulian.com/user-center',
+      searchPlaceholder: '虚拟客户',
+      userOrigin: 'http://gateway.sit.suosihulian.com/user-center',
       requestParams: {
-        selectTypeList: ['camera'],
+        selectTypeList: ['user'],
       },
       isSaveSelectSignature: true,
-      selectSignature: '3001001001000006-202207041656942373568',
+      // selectSignature: '3001001001000006-202207041656942373568',
       onOk: (data) => {
         console.log('onOk data', data);
         const { selectSignature } = data;
@@ -101,7 +101,7 @@ export const JSX = () => {
   const props: PropTypes = {
     visible,
     multiple: true,
-    selectType: 'user',
+    selectType: 'dept',
     unCheckableNodeType: ['ORG'],
     searchPlaceholder: '请输入姓名或手机号进行搜索',
     dialogProps: {
@@ -110,38 +110,26 @@ export const JSX = () => {
     userOrigin: 'http://gateway.dev.suosihulian.com/user-center',
     showTabList: ['innerContacts'],
     requestParams: {
-      selectTypeList: ['user'],
+      selectTypeList: ['dept'],
     },
-    onlyLeafCheckable: true,
+    // onlyLeafCheckable: true,
     isSaveSelectSignature: false,
-    defaultValue: {
-      userInfoList: [
-        {
-          contactType: '1',
-          id: '1437253451940294722&1437253451344703508',
-          type: 'USER',
-          name: '旺财',
-        },
-        {
-          contactType: '1',
-          id: '1437253451940294812&1437253451344703508',
-          type: 'USER',
-          name: '李建彬',
-        },
-        {
-          contactType: '1',
-          id: '1539538693971296258',
-          type: 'USER',
-          name: '小方',
-        },
-        {
-          contactType: '1',
-          id: '1437253451940294710',
-          type: 'USER',
-          name: '陈新',
-        },
-      ],
-    },
+    // defaultValue: {
+    //   userInfoList: [
+    //     {
+    //       contactType: '1',
+    //       id: '1539538693971296258',
+    //       type: 'USER',
+    //       name: '小方',
+    //     },
+    //     {
+    //       contactType: '1',
+    //       id: '1437253451940294710',
+    //       type: 'USER',
+    //       name: '陈新',
+    //     },
+    //   ],
+    // },
 
     // selectSignature: '3001001001000006-202207041656944162233',
     onOk(data) {
@@ -358,7 +346,6 @@ export const MOBILE = () => {
     searchPlaceholder: '请搜索',
     requestParams: {
       selectTypeList: ['user'],
-      // contactType: 1,
     },
     userOrigin: 'http://gateway.dev.suosihulian.com/user-center',
     onOk(data) {

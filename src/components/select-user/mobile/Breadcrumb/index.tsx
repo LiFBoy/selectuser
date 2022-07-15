@@ -1,5 +1,5 @@
 import React from 'react';
-import { ItreeItem } from '../school-contacts';
+import { ItreeItem } from '../../../select-user/interface';
 import { RightOutlined } from '@ant-design/icons';
 export default (props: any) => {
   const { handleClickBreadcrumb, currentTab, breadcrumb = [], tabmaps } = props;

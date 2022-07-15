@@ -4,7 +4,6 @@ export interface ItreeItem {
   name: string;
   title: any;
   label: any;
-  nodeType: string;
   orgId?: string;
   type?:
     | 'DEPT' // 部门
@@ -13,19 +12,12 @@ export interface ItreeItem {
     | 'CAMERA' //  摄像头
     | 'WORK_GROUP' //  告警群
     | 'MATERNAL' //  母婴
-    | 'GROUP_DEPT' //  虚拟部门
-    | 'USER' // 个人
-    | 'ORG' // 组织
     | 'TAG' // 标签
     | 'CUSTOMER_TAG' // 标签
     | 'GROUP_TAG' // 标签
     | 'CIRCLES_TAG' // 标签
     | 'CONTENT_TAG' // 标签
-    | 'GROUP' // 分组
-    | 'ORG_REL'; // 行政组织-精准推送业务
-  deptType?:
-    | 0 // 基础校区
-    | 1; // 自定义校区
+    | 'GROUP'; // 分组
   userCount?: number;
   children?: [];
   checkable?: boolean;
@@ -33,7 +25,7 @@ export interface ItreeItem {
   icon?: any;
   contactType?: string;
   count?: number;
-  // 只在下属组织人员信息中出现，携带了学校信息
+  // 只在下属组织人员信息中出现
   fullName?: string;
   deptName?: string;
 }

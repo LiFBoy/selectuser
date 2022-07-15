@@ -65,7 +65,6 @@ export type IconType =
   | 'CAMERA'
   | 'MATERNAL'
   | 'WORK_GROUP'
-  | 'GROUP_DEPT'
   | 'GROUP'
   | 'TAG'
   | 'CUSTOMER_TAG'
@@ -78,6 +77,7 @@ export type IconType =
   | 'CIRCLES_TAG_GROUP'
   | 'CONTENT_TAG_GROUP'
   | 'ORG_REL'
+  | 'CUSTOMER_MANAGER_USER'
   | 'REGULATORY';
 
 const iconMap: {
@@ -89,6 +89,7 @@ const iconMap: {
   tag: TagIcon,
   user: UserIcon,
   USER: UserIcon,
+  CUSTOMER_MANAGER_USER: UserIcon,
   ROOT: RootIcon,
   root: RootIcon,
   ORG: OrgIcon,
@@ -98,7 +99,6 @@ const iconMap: {
   CAMERA: EQUIPMENTICON,
   MATERNAL: MATERNALCON,
   WORK_GROUP: GroupIcon,
-  GROUP_DEPT: GroupIcon,
   GROUP: GroupIcon,
   TAG: TagIcon,
   GROUP_TAG: TagIcon,
@@ -110,6 +110,8 @@ const iconMap: {
   GROUP_TAG_GROUP: TagGroupIcon,
   CIRCLES_TAG_GROUP: TagGroupIcon,
   CONTENT_TAG_GROUP: TagGroupIcon,
+  ORG_REL: undefined,
+  REGULATORY: undefined,
 };
 
 export default iconMap;

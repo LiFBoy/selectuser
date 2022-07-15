@@ -308,20 +308,6 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
                                 );
                               }
                             )}
-                            {user.contactType === '3' ? (
-                              <div className="search-result-item-des">
-                                {
-                                  <div
-                                    className="overflow-ellipsis"
-                                    title={user.orgName}
-                                  >
-                                    学校: {user.orgName}
-                                  </div>
-                                }
-                              </div>
-                            ) : (
-                              ''
-                            )}
                           </div>
                         </div>
                       </div>
@@ -463,9 +449,9 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
                         <div className="search-result-item-title">
                           {searchResultNameReplace(tag.label)}
                         </div>
-                        <div className="search-result-item-des">
+                        {/* <div className="search-result-item-des">
                           {TAG_TYPE[tag.tagType]}
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                   );

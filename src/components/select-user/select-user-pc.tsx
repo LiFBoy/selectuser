@@ -19,7 +19,7 @@ const SelectUserPc: React.FunctionComponent<PropTypes> = ({
   visible = false,
   multiple = true,
   onCancel,
-  requestParams = { campusType: 'base_school_type' },
+  requestParams,
   showTabList,
   selectType = 'user',
   searchPlaceholder = '搜索',
@@ -82,8 +82,6 @@ const SelectUserPc: React.FunctionComponent<PropTypes> = ({
   useEffect(() => {
     if (showTabList && showTabList.length > 0) {
       setTab(showTabList[0]);
-    } else {
-      setTab('dept');
     }
   }, []);
 
@@ -144,12 +142,10 @@ const SelectUserPc: React.FunctionComponent<PropTypes> = ({
       }
       okText="确认"
       cancelText="取消"
-      // confirmLoading={true}
       wrapClassName={classnames('select-user-pc-modal', {
         'ct-modal-close': target,
       })}
       destroyOnClose
-      // closable={false}
       maskClosable={false}
       bodyStyle={{ padding: 0 }}
       visible={visible}
@@ -173,12 +169,7 @@ const SelectUserPc: React.FunctionComponent<PropTypes> = ({
             取消
           </Button>
 
-          <Button
-            key="submit"
-            type="primary"
-            // loading={loading}
-            onClick={handleOk}
-          >
+          <Button key="submit" type="primary" onClick={handleOk}>
             确认
           </Button>
         </div>
@@ -197,7 +188,6 @@ const SelectUserPc: React.FunctionComponent<PropTypes> = ({
                 allowClear
                 className="select-user-pc-search"
                 onSearch={handleSearch}
-                // onChange={onSearchChange}    // 这里暂时取消onChange时搜索,以后有机会再用上吧
                 placeholder={
                   showTabList.length > 1 ? '搜索' : searchPlaceholder
                 }
@@ -243,7 +233,7 @@ const SelectUserPc: React.FunctionComponent<PropTypes> = ({
             <SelectedPane
               noTagLabelPermission={noTagLabelPermission}
               selectType={selectType}
-              showUserDeptName={requestParams?.strictUser}
+              showUserDeptName={true}
               selectTypeList={requestParams.selectTypeList}
               selectPaneProps={selectPaneProps}
             />

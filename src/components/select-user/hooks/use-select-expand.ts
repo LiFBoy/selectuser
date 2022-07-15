@@ -19,7 +19,6 @@ export default (currentTab: string) => {
         name,
         children,
         type,
-        nodeType,
         orgId,
         contactType,
         pos,
@@ -32,7 +31,6 @@ export default (currentTab: string) => {
         key: id,
         children,
         type,
-        nodeType,
         orgId,
         contactType,
         pos,
@@ -81,8 +79,6 @@ export default (currentTab: string) => {
   );
   return {
     expandedKeys,
-    // eslint-disable-next-line no-warning-comments
-    // TODO: 数据渲染滞后问题待解决
     setExpandedKeys,
     handleSelect,
     loadTreeData,
