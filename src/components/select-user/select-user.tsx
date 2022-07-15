@@ -55,7 +55,6 @@ export default function SelectUser({
     orgRelAnalysisRange,
   });
   const Com = basePath === 'pc' ? SelectUserPc : SelectUserMobile;
-  const others = {};
 
   (window as any).userOrigin = userOrigin;
   return (
@@ -85,7 +84,6 @@ export default function SelectUser({
           onlyLeafCheckable={onlyLeafCheckable}
           requestParams={requestParams}
           orgRelAnalysisRange={orgRelAnalysisRange}
-          {...others}
         />
       </TREE_CONTEXT.Provider>
     </ConfigProvider>

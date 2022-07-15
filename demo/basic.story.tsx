@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { Button } from 'antd';
 import { action } from './utils';
 import SelectUser, { PropTypes } from '../src/components/select-user';
-import SelectUserResult from '../src/components/select-user/web/select-user-result';
+// import SelectUserResult from '../src/components/select-user/web/select-user-result';
 
 export const MethodInvoke2 = () => {
   const show = () => {
@@ -20,7 +20,7 @@ export const MethodInvoke2 = () => {
         selectTypeList: ['user'],
       },
       isSaveSelectSignature: true,
-      // selectSignature: '3001001001000006-202207041656942373568',
+      selectSignature: '3001001001000006-202207151657859967617',
       onOk: (data) => {
         console.log('onOk data', data);
         const { selectSignature } = data;

@@ -33,7 +33,6 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
   searchPlaceholder = '搜索姓名、部门名称、手机号',
   onlyLeafCheckable = false,
   orgRelAnalysisRange,
-  ...others
 }) => {
   // 当前的搜索字段
   const [searchValue, setSearchValue] = useState<string>('');
@@ -49,7 +48,6 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
   const {
     treeState,
     setBasePath,
-    setCorpidAppId,
     setSelectedData,
     setUserCount,
     clear,
@@ -71,7 +69,6 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
   useEffect(() => {
     clear();
     setBasePath(basePath);
-    // setCorpidAppId({ appId: others?.appId, corpid: others?.corpid });
   }, []);
 
   useEffect(() => {
@@ -552,7 +549,6 @@ const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
                     requestParams={requestParams}
                     unCheckableNodeType={unCheckableNodeType}
                     onlyLeafCheckable={onlyLeafCheckable}
-                    {...others}
                   />
                 </>
               )}

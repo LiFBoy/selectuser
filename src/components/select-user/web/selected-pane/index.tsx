@@ -86,6 +86,9 @@ const SelectPane: React.FunctionComponent<PropTypes> = (props: PropTypes) => {
         case 'CUSTOMER_TAG':
           userCount.customerTagCount = 0;
           break;
+        case 'CUSTOMER_MANAGER_USER':
+          userCount.customerManagerCount = 0;
+          break;
         case 'GROUP_TAG':
           userCount.groupTagCount = 0;
           break;
@@ -190,7 +193,7 @@ const SelectPane: React.FunctionComponent<PropTypes> = (props: PropTypes) => {
     const groupItem = {
       title: '虚拟客户',
       type: 'CUSTOMER_MANAGER_USER',
-      count: userCount.customerTagCount || 0,
+      count: userCount.customerManagerCount || 0,
       itemList: customerManagerInfoList,
     };
     groupList.push(groupItem);

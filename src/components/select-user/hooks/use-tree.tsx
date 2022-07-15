@@ -1,8 +1,7 @@
 import React, { useState, useCallback, useRef } from 'react';
-import { stringify } from 'qs';
 import net from '../../../services/index';
 import { URL } from '../../../utils/api';
-import { intersectionWith, isEqual } from 'lodash';
+import { intersectionWith, isEqual, setWith, clone } from 'lodash';
 import { Popover } from 'antd';
 import {
   NodeType,
@@ -13,7 +12,6 @@ import {
   IlistItem,
 } from '../interface';
 import treeNodeIconMap from '../../../components/tree-node-icon';
-import { setWith, clone } from 'lodash';
 import useDefaultValue from './use-default-value';
 import { dealtKey, dealtKeyByType } from '../../../utils/index';
 import { showNameFunc } from '../../../utils/index';
@@ -62,10 +60,6 @@ type ItreeState = StaticProps & {
   groupInfoList: ItreeItem[];
   workGroupInfoList: ItreeItem[];
   userCount: IuserCount;
-  corpidAppId: {
-    corpid?: string;
-    appId?: string;
-  };
 };
 
 interface IResult {
@@ -86,6 +80,7 @@ interface IuserCount {
   maternalCount?: number;
   tagCount?: number;
   customerTagCount?: number;
+  customerManagerCount?: number;
   groupTagCount?: number;
   circlesTagCount?: number;
   contentTagCount?: number;
@@ -98,7 +93,6 @@ export interface ItreeContext {
   treeState: ItreeState;
   // 设置bath
   setBasePath: (basePath: string) => void;
-  setCorpidAppId: (corpidAppId: any) => void;
   // 设置当前树的data方法
   setTreeData: (treeData: ItreeItem[]) => void;
   // 设置当前选中数据的方法
@@ -128,7 +122,6 @@ export interface ItreeContext {
   ) => void;
 
   handleOk: () => void;
-  // result 保存时loading
   setRequest?: (loading: boolean) => void;
   resultLoading?: boolean;
 }
@@ -176,6 +169,7 @@ const INIT_STATE: ItreeState = {
     maternalCount: 0,
     tagCount: 0,
     customerTagCount: 0,
+    customerManagerCount: 0,
     groupTagCount: 0,
     circlesTagCount: 0,
     contentTagCount: 0,
@@ -183,10 +177,6 @@ const INIT_STATE: ItreeState = {
   },
   // 请求基本路径
   basePath: 'pc',
-  corpidAppId: {
-    corpid: '',
-    appId: '',
-  },
   // 请求附加参数
   requestParams: {},
   isSaveSelectSignature: false,
@@ -599,6 +589,7 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
           maternalCount: 0,
           tagCount: 0,
           customerTagCount: 0,
+          customerManagerCount: 0,
           groupTagCount: 0,
           circlesTagCount: 0,
           contentTagCount: 0,
@@ -630,6 +621,9 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
               break;
             case 'CUSTOMER_TAG':
               count.customerTagCount = item.customerTagCount;
+              break;
+            case 'CUSTOMER_MANAGER_USER':
+              count.customerManagerCount = item.customerManagerCount;
               break;
             case 'GROUP_TAG':
               count.groupTagCount = item.groupTagCount;
@@ -842,6 +836,7 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
       maternalCount: 0,
       tagCount: 0,
       customerTagCount: 0,
+      customerManagerCount: 0,
       groupTagCount: 0,
       circlesTagCount: 0,
       contentTagCount: 0,
@@ -872,15 +867,6 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
     });
   };
 
-  const setCorpidAppId = (corpidAppId: any) => {
-    setTreeState((treeState) => {
-      return {
-        ...treeState,
-        corpidAppId,
-      };
-    });
-  };
-
   /**
    * 请求后重新计算用户人数
    * @param item 操作的节点
@@ -892,7 +878,7 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
     checked: boolean,
     isRequest = true
   ) => {
-    const { userCount, basePath, requestParams } = treeState;
+    const { userCount, requestParams } = treeState;
 
     const selectCountRequestList: any = [];
 
@@ -901,19 +887,15 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
     selectCountRequestList.push({ selectNodeList, type: item.type });
     // 如果需要请求获取人数，则请求
     if (isRequest) {
-      const others = basePath === 'pc' ? {} : treeState.corpidAppId;
       // tslint:disable-next-line: no-floating-promises
       net
-        .request(
-          `${URL()}/select/component/getUserCount?${stringify(others)}`,
-          {
-            method: 'POST',
-            data: {
-              category: requestParams?.category,
-              selectCountRequestList,
-            },
-          }
-        )
+        .request(`${URL()}/select/component/getUserCount`, {
+          method: 'POST',
+          data: {
+            category: requestParams?.category,
+            selectCountRequestList,
+          },
+        })
         .then((res) => {
           const data = res.data;
 
@@ -973,6 +955,13 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
                 userCount.customerTagCount = resultCount(
                   checked,
                   userCount.customerTagCount,
+                  item.userCount
+                );
+                break;
+              case 'CUSTOMER_MANAGER_USER':
+                userCount.customerManagerCount = resultCount(
+                  checked,
+                  userCount.customerManagerCount,
                   item.userCount
                 );
                 break;
@@ -1050,6 +1039,13 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
         userCount.customerTagCount = resultCount(
           checked,
           userCount.customerTagCount,
+          1
+        );
+        break;
+      case 'CUSTOMER_MANAGER_USER':
+        userCount.customerManagerCount = resultCount(
+          checked,
+          userCount.customerManagerCount,
           1
         );
         break;
@@ -1239,7 +1235,6 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
     resultLoading,
     treeState,
     setBasePath,
-    setCorpidAppId,
     setSelectedData,
     setRequest,
     updateCheckedNode,

@@ -104,7 +104,7 @@ export default (
         });
       }
       // 存储所有客户标签id
-      const customerManageObject: SelectUserCountRequestItem = {
+      const customerManagerObject: SelectUserCountRequestItem = {
         selectNodeList: [],
         type: 'CUSTOMER_MANAGER_USER',
       };
@@ -112,7 +112,7 @@ export default (
         // 如果传入的数据中没有type属性，则在初始化时需要设置item的type
         if (!item.type) item.type = 'CUSTOMER_MANAGER_USER';
 
-        customerTagObject.selectNodeList.push({
+        customerManagerObject.selectNodeList.push({
           contactType: item.contactType,
           id: item.id,
         });
@@ -216,7 +216,7 @@ export default (
         customerTagObject,
         groupTagObject,
         circlesTagObject,
-        customerManageObject,
+        customerManagerObject,
         cameraObject,
         contentTagObject,
       ];
@@ -227,6 +227,7 @@ export default (
           deptCount: deptObject.selectNodeList.length,
           tagCount: tagObject.selectNodeList.length,
           customerTagCount: customerTagObject.selectNodeList.length,
+          customerManagerCount: customerManagerObject.selectNodeList.length,
           groupTagCount: groupTagObject.selectNodeList.length,
           circlesTagCount: circlesTagObject.selectNodeList.length,
           contentTagCount: contentTagObject.selectNodeList.length,
@@ -234,6 +235,7 @@ export default (
           cameraCount: cameraObject.selectNodeList.length,
           maternalCount: maternalObject.selectNodeList.length,
         };
+        // debugger;
 
         setUserCount(count);
       } else {
@@ -243,7 +245,7 @@ export default (
 
       /**
        * @param list
-       * @param type 判断是否是“下属组织”或“行政组织”
+       * @param type
        */
       const generateKey = (list: IlistItem[], type?: string) => {
         list?.forEach((item: IlistItem) => {
