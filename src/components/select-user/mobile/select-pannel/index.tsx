@@ -63,7 +63,7 @@ const SelectPannel: React.FunctionComponent<Iprops> = (props: Iprops) => {
     isRoot?: boolean
   ) => {
     for (const item of list) {
-      // item.name = item.label;
+      item.name = item.label;
       const initialName = item.label || '';
       // const interceptName = item.label; // funTransformationSubstr(item.label);
 

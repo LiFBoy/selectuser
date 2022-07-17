@@ -16,7 +16,6 @@ import lback from './l-back.svg';
 
 const SelectUserMobile: React.FunctionComponent<PropTypes> = ({
   defaultValue,
-  dialogProps = {},
   visible = false,
   multiple = true,
   onOk,
