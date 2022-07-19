@@ -1,7 +1,9 @@
 import React, { useContext, useMemo, useState } from 'react';
 import { Tabs, Checkbox, Typography, Radio, Popover } from 'antd';
 import { TREE_CONTEXT } from '../../select-user';
+import { TAB_MAPS } from '../../../../constants';
 import useSelectExpand from '../../hooks/use-select-expand';
+import { renderSearchHint } from '../../common';
 import { funTransformationSubstr } from '../../../../utils';
 import { get } from 'lodash';
 import {
@@ -35,20 +37,6 @@ const overlayStyle = {
   backgroud: '#fff',
   maxHeight: '400px',
   boxShadow: '5px 5px 10px rgba(129, 133, 167, 0.2)',
-};
-
-const SHOW_TAB_LIST_ITEM_MAP: any = {
-  innerContacts: '内部通迅录',
-  maternalContacts: '母婴通迅录',
-  disabledHomeContacts: '残疾人之家',
-  equipmentContacts: '资产通迅录',
-  memberContacts: '居民',
-  memberDeptContacts: '社区通讯录',
-  groupContacts: '互连微信群',
-  customerTagContacts: '客户标签',
-  groupTagContacts: '群标签',
-  circlesTagContacts: '圈子标签',
-  contentTagContacts: '内容标签',
 };
 
 // 信息展示条数限制，超过INFO_LIMIT_NUM则以鼠标悬浮框展示
@@ -89,15 +77,15 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
   // 判断搜索字段是否为纯数字
   const allNumber = /^([0-9])+$/.test(search);
 
-  const renderSearchHint = (list: Array<any>) => {
-    if (list && list.length > 19) {
-      return (
-        <div className="more-text">
-          仅展示前20个搜索结果，请输入更精确的搜索内容获取
-        </div>
-      );
-    }
-  };
+  // const renderSearchHint = (list: Array<any>) => {
+  //   if (list && list.length > 19) {
+  //     return (
+  //       <div className="more-text">
+  //         仅展示前20个搜索结果，请输入更精确的搜索内容获取
+  //       </div>
+  //     );
+  //   }
+  // };
 
   const handleClick = (item: any, type: string) => {
     localStorage.setItem('labelPath', item.labelPath);
@@ -401,7 +389,6 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
         case 'DEPT':
           deptList.push(resultItem);
           break;
-
         case 'GROUP':
           groupList.push(resultItem);
           break;
@@ -658,7 +645,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
           }
           {showTabList.map((item: string) => {
             return (
-              <TabPane tab={SHOW_TAB_LIST_ITEM_MAP[item]} key={item}>
+              <TabPane tab={TAB_MAPS[item]} key={item}>
                 {renderContent()}
                 {handleDefault()}
               </TabPane>

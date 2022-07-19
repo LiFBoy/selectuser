@@ -59,9 +59,9 @@ const PannelItem: React.FunctionComponent<PropType> = (props: PropType) => {
 
   // 树节点选中事件
   const onCheck = (node: any) => {
-    if (currentTab === 'innerContacts' && node.type === 'ORG') {
-      return;
-    }
+    // if (currentTab === 'innerContacts' && node.type === 'ORG') {
+    //   return;
+    // }
 
     if (!node.checkable) {
       return;

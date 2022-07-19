@@ -131,7 +131,6 @@ const SelectPannel: React.FunctionComponent<Iprops> = (props: Iprops) => {
       item.checkable = true;
 
       // 如果获取的是跟节点,且是内部通讯录
-
       if (
         isRoot &&
         [
@@ -144,22 +143,19 @@ const SelectPannel: React.FunctionComponent<Iprops> = (props: Iprops) => {
       ) {
         item.checkable = false; // 内部通讯录的跟节点不允许被选择
       }
+      const flag =
+        ['innerContacts', 'disabledHomeContacts', 'maternalContacts'].indexOf(
+          currentTab
+        ) > -1;
 
       if (
-        (currentTab === 'innerContacts' ||
-          currentTab === 'disabledHomeContacts' ||
-          currentTab === 'maternalContacts') && // 在家校通迅录和内部通迅录
+        flag && // 内部通迅录
         item.type === 'DEPT' && // 如果节点类型为DEPT
         selectType === 'user'
       ) {
         // 且当前组件selectType为user
         item.isLeaf = false; // 则DEPT节点一律视为非叶子结点 (实际场景中DEPT节点下一定有子节点)
-      } else if (
-        (currentTab === 'innerContacts' ||
-          currentTab === 'disabledHomeContacts' ||
-          currentTab === 'maternalContacts') &&
-        selectType === 'dept'
-      ) {
+      } else if (flag && selectType === 'dept') {
         // 如果当前组件selectType为dept
         // 如果仅叶子节点可选
         if (onlyLeafCheckable && item.isLeaf === false) {

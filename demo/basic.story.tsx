@@ -168,17 +168,17 @@ export const JSX2 = () => {
     visible,
     multiple: true,
     selectType: 'dept',
-    showTabList: ['maternalContacts'],
+    showTabList: ['memberDeptContacts'],
     dialogProps: {
       title: '标签',
     },
     searchPlaceholder: '请输入标签名称进行搜索',
-    userOrigin: 'http://gateway.dev.suosihulian.com/user-center',
+    userOrigin: 'http://gateway.sit.suosihulian.com/user-center',
     requestParams: {
       selectTypeList: ['user'],
     },
     isSaveSelectSignature: true,
-    selectSignature: '3001001001000006-202207041656940481196',
+    // selectSignature: '3001001001000006-202207041656940481196',
     onOk(data) {
       console.log('onOk data', data);
       const { selectSignature } = data;

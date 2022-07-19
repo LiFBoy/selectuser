@@ -291,25 +291,14 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
       };
       for (const item of list) {
         item.id = item.key;
-        // item.key = getUid();
         item.name = item.label;
         const NodeIcon = treeNodeIconMap[item.type];
         let label: any = item.name;
 
-        if (item.type === 'TAG') {
-          // 标签需要展示标签下的人数
-          // label = `${item.name} ${
-          //   item.isLeaf ? '(' + (item.count || 0) + ')' : ''
-          // }`;
-          label = `${item.name}`;
-        }
-
-        // 特殊处理内部通讯录根节点
+        // 特殊处理内部通讯录根节点 与标签有区别
         if (isRoot && type === 'innerContacts') {
           // 内部通讯录的跟节点不允许被选择
           item.checkable = false;
-          // 强制使用部门的 icon
-          // NodeIcon = treeNodeIconMap.dept;
         }
 
         const overlayStyle = {
@@ -353,13 +342,11 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
           </div>
         );
 
-        // 家校通迅录和内部通迅录的特殊逻辑
+        // 内部通迅录、残疾人、母婴特殊逻辑
         if (
-          [
-            'innerContacts',
-            'maternalContacts',
-            'disabledHomeContacts',
-          ].includes(type)
+          ['innerContacts', 'maternalContacts', 'disabledHomeContacts'].indexOf(
+            type
+          ) > -1
         ) {
           if (
             item.type === 'DEPT' && // 如果节点类型为DEPT
@@ -399,7 +386,7 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
           item.checkable = false;
         }
 
-        // 下属组织分组的非叶子节点不可勾选
+        // 分组的非叶子节点不可勾选
         if (
           onlyLeafCheckable &&
           item.type === 'GROUP' &&

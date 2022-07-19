@@ -4,7 +4,8 @@ import { Radio } from 'antd-mobile-v5';
 import classnames from 'classnames';
 import { get } from 'lodash';
 import { TREE_CONTEXT } from '../../select-user';
-import { TAG_TYPE } from '../../../../constants';
+import { TAG_TYPE, TAB_MAPS } from '../../../../constants';
+import { renderSearchHint } from '../../common';
 import EMPTYSVG from './icon_empty_03.svg';
 import BUSER from '../../../tree-node-icon/user.svg';
 import BDEPT from '../../../tree-node-icon/dept.svg';
@@ -21,21 +22,6 @@ interface PropType {
   selectType: 'user' | 'dept';
   searchTab: string;
 }
-
-const SHOW_TAB_LIST_ITEM_MAP: any = {
-  all: '全部',
-  innerContacts: '内部通迅录',
-  maternalContacts: '母婴通迅录',
-  disabledHomeContacts: '残疾人之家',
-  equipmentContacts: '资产通迅录',
-  memberContacts: '居民',
-  memberDeptContacts: '社区通讯录',
-  groupContacts: '互连微信群',
-  customerTagContacts: '客户标签',
-  groupTagContacts: '群标签',
-  circlesTagContacts: '圈子标签',
-  contentTagContacts: '内容标签',
-};
 
 const SelectSearchResult: React.FunctionComponent<PropType> = (
   props: PropType
@@ -64,15 +50,15 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
   // 判断搜索字段是否为纯数字
   const allNumber = /^([0-9])+$/.test(search);
 
-  const renderSearchHint = (list: Array<any>) => {
-    if (list && list.length > 19) {
-      return (
-        <div className="more-text">
-          仅展示前 20 个搜索结果，请输入更精确的搜索内容。
-        </div>
-      );
-    }
-  };
+  // const renderSearchHint = (list: Array<any>) => {
+  //   if (list && list.length > 19) {
+  //     return (
+  //       <div className="more-text">
+  //         仅展示前 20 个搜索结果，请输入更精确的搜索内容。
+  //       </div>
+  //     );
+  //   }
+  // };
 
   const searchResultNameReplace = (content: string) => {
     const __html = {
@@ -92,101 +78,63 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
     );
   };
 
+  const common = (item: any) => {
+    return {
+      id: item.key,
+      key: item.key,
+      name: item.label,
+      orgId: item.orgId,
+      childDelete: item.childDelete,
+      extendedAttribute: item.extendedAttribute,
+    };
+  };
+
   // checkbox状态改变事件
   const onCheckBoxChange = (item: any, type: string) => {
     let node: any = {};
     switch (type) {
       case 'USER':
         node = {
-          id: item.key,
-          key: item.key,
-          name: item.label,
-          type: item.type,
-          contactType: item.contactType,
-          extendedAttribute: item.extendedAttribute,
-          orgId: item.orgId,
-          fullName: item.fullName,
+          ...common(item),
           deptName: get(item.userDeptList, [0, 'deptName']),
+          fullName: item.fullName,
         };
         break;
-
       case 'GROUP':
         node = {
-          id: item.key,
-          key: item.key,
-          name: item.label,
-          type: item.type,
-          extendedAttribute: item.extendedAttribute,
-          contactType: item.contactType,
+          ...common(item),
         };
         break;
       case 'DEPT':
         node = {
-          id: item.key,
-          key: item.key,
-          name: item.label,
-          type: item.type,
-          extendedAttribute: item.extendedAttribute,
-          contactType: item.contactType,
+          ...common(item),
           fullName: item.fullName,
-        };
-        break;
-      case 'TAG':
-        node = {
-          id: item.key,
-          key: item.key,
-          name: item.label,
-          type: item.type,
-          extendedAttribute: item.extendedAttribute,
-          childDelete: item.childDelete,
-          orgId: item.orgId,
         };
         break;
       case 'CONTENT_TAG':
         node = {
-          id: item.key,
-          key: item.key,
-          name: item.label,
           type: item.type,
-          extendedAttribute: item.extendedAttribute,
-          childDelete: item.childDelete,
-          orgId: item.orgId,
+          ...common(item),
         };
         break;
       case 'CIRCLES_TAG':
         node = {
-          id: item.key,
-          key: item.key,
-          name: item.label,
+          ...common(item),
           type: item.type,
-          extendedAttribute: item.extendedAttribute,
-          childDelete: item.childDelete,
-          orgId: item.orgId,
         };
         break;
       case 'GROUP_TAG':
         node = {
-          id: item.key,
-          key: item.key,
-          name: item.label,
+          ...common(item),
           type: item.type,
-          extendedAttribute: item.extendedAttribute,
-          childDelete: item.childDelete,
-          orgId: item.orgId,
         };
         break;
       case 'CUSTOMER_TAG':
         node = {
-          id: item.key,
-          key: item.key,
-          name: item.label,
+          ...common(item),
           type: item.type,
-          extendedAttribute: item.extendedAttribute,
-          childDelete: item.childDelete,
-          orgId: item.orgId,
         };
         break;
-      default:
     }
 
     // 获取当前节点是勾选还是取消勾选
@@ -230,14 +178,9 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
         case 'GROUP':
           groupList.push(resultItem);
           break;
-        case 'TAG':
-
         case 'CUSTOMER_TAG':
-
         case 'GROUP_TAG':
-
         case 'CIRCLES_TAG':
-
         case 'CONTENT_TAG':
           tagList.push(resultItem);
           break;
@@ -449,9 +392,6 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
                         <div className="search-result-item-title">
                           {searchResultNameReplace(tag.label)}
                         </div>
-                        {/* <div className="search-result-item-des">
-                          {TAG_TYPE[tag.tagType]}
-                        </div> */}
                       </div>
                     </div>
                   );
@@ -508,7 +448,7 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
             tabs={[
               { title: '全部', key: 'all' },
               ...showTabList.map((item: string) => ({
-                title: SHOW_TAB_LIST_ITEM_MAP[item],
+                title: TAB_MAPS[item],
                 key: item,
               })),
             ]}

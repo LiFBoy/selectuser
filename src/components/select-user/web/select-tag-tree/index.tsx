@@ -141,18 +141,6 @@ const SelectTagTree: React.FunctionComponent<PropType> = (props: PropType) => {
       >
         {renderTreeNodes(treeData)}
       </Tree>
-      {[
-        'equipmentContacts',
-        'memberContacts',
-        'groupContacts',
-        'maternalContacts',
-        'disabledHomeContacts',
-      ].indexOf(currentTab) > -1 &&
-        treeData.length > 19 && (
-        <div className="more-text">
-            仅展示前20条数据，请输入更精确的搜索内容获取
-        </div>
-      )}
     </div>
   ) : (
     <div className="cf-tree-result-empty no-data-result-empty">暂无内容</div>

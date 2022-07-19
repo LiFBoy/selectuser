@@ -1,20 +1,6 @@
 // import { NodeType } from '../../../../components/select-user/interface';
 import { ItreeItem } from '../../../select-user/interface';
-
-const TAB_MAPS: any = {
-  innerContacts: '内部通讯录',
-  customerManagerContacts: '虚拟客户经理',
-  maternalContacts: '母婴通讯录',
-  disabledHomeContacts: '残疾人之家',
-  equipmentContacts: '资产通讯录',
-  memberContacts: '居民',
-  memberDeptContacts: '社区通讯录',
-  groupContacts: '互连微信群',
-  customerTagContacts: '客户标签',
-  groupTagContacts: '群标签',
-  circlesTagContacts: '圈子标签',
-  contentTagContacts: '内容标签',
-};
+import { TAB_MAPS } from '../../../../constants';
 
 // export interface ItreeItem {
 //   id: string;
@@ -173,12 +159,7 @@ const SchoolContacts: React.FunctionComponent<PropType> = (props: PropType) => {
   const formatIcon = (key: string) => {
     switch (key) {
       case 'innerContacts': // 内部通讯录
-      case 'customerManagerContacts': // 虚拟客户经理
       case 'maternalContacts': // 母婴通讯录
-      case 'disabledHomeContacts': // 残疾人之家
-      case 'equipmentContacts': // 资产通讯录
-      case 'memberContacts': // 居民
-      case 'memberDeptContacts': // 社区通讯录
         return <InternalIcon />;
       case 'groupContacts': // 企微互联群
         return <GroupIcon />;
