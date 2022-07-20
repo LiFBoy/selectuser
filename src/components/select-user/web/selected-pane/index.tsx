@@ -191,7 +191,7 @@ const SelectPane: React.FunctionComponent<PropTypes> = (props: PropTypes) => {
   }
   if (customerManagerInfoList?.length) {
     const groupItem = {
-      title: '虚拟客户',
+      title: '虚拟客户经理',
       type: 'CUSTOMER_MANAGER_USER',
       count: userCount.customerManagerCount || 0,
       itemList: customerManagerInfoList,

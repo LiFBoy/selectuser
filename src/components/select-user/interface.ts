@@ -40,7 +40,7 @@ export interface ValueObj {
   orgId?: string | number;
   // 人员列表
   userInfoList: IlistItem[];
-  // 虚拟客户列表
+  // 虚拟客户经理列表
   customerManagerInfoList?: IlistItem[];
   // 部门列表
   deptInfoList: IlistItem[];

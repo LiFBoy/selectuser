@@ -69,6 +69,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
     cameraInfoList,
     workGroupInfoList,
     groupInfoList,
+    customerManagerInfoList,
   } = treeState;
 
   // 更多信息展开后悬浮框的位置
@@ -116,6 +117,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
       case 'CIRCLES_TAG':
       case 'GROUP_TAG':
       case 'CUSTOMER_TAG':
+      case 'CUSTOMER_MANAGER_USER':
         node = {
           ...commonItem(item),
         };
@@ -308,6 +310,9 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
         case 'EQUIPMENT':
           equipmentList.push(resultItem);
           break;
+        case 'CUSTOMER_MANAGER_USER':
+          customerManagerList.push(resultItem);
+          break;
         case 'TV':
           tvList.push(resultItem);
           break;
@@ -351,6 +356,8 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
       }
     }
 
+    console.log(customerManagerList, 'customerManagerList');
+
     return (
       <div className="search-result-box">
         {workGroupList.length > 0 &&
@@ -369,6 +376,13 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
           )}
         {maternalList.length > 0 &&
           renderDom(maternalList, '相关人员', maternalInfoList, <UserIcon />)}
+        {customerManagerList.length > 0 &&
+          renderDom(
+            customerManagerList,
+            '相关虚拟客户经理',
+            customerManagerInfoList,
+            <UserIcon />
+          )}
 
         {tvList.length > 0 &&
           renderDom(tvList, '相关广告电视', tvInfoList, <EQUIPMENTICON />)}

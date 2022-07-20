@@ -15,7 +15,7 @@ export const MethodInvoke2 = () => {
         title: '虚拟客户',
       },
       searchPlaceholder: '虚拟客户',
-      userOrigin: 'http://gateway.dev.suosihulian.com/user-center',
+      userOrigin: 'http://gateway.sit.suosihulian.com/user-center',
       requestParams: {
         selectTypeList: ['user'],
       },
