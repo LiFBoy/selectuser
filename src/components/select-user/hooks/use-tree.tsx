@@ -212,6 +212,8 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
       CAMERA: 'cameraInfoList',
       MATERNAL: 'maternalInfoList',
       GROUP: 'groupInfoList',
+      root: '',
+      CIRCLES_TAG_GROUP: '',
       WORK_GROUP: 'workGroupInfoList',
     };
     const key: string = typeToKeyMap[type];

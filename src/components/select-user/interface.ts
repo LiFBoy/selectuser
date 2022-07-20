@@ -10,8 +10,10 @@ export type NodeType =
   | 'MATERNAL'
   | 'CUSTOMER_TAG'
   | 'GROUP_TAG'
+  | 'root'
   | 'CIRCLES_TAG'
   | 'CONTENT_TAG'
+  | 'CIRCLES_TAG_GROUP'
   | 'CUSTOMER_MANAGER_USER'
   | 'TAG'
   | 'GROUP';
