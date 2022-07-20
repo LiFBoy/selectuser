@@ -31,9 +31,8 @@ interface Iprops {
   selectType: 'dept' | 'user';
   unCheckableNodeType: NodeType[];
   requestParams?: {
-    // deptTypeList?: any;
-    // 仅在tab为标签时生效，0个人标签，1通用标签，2系统标签，3员工系统标签
-    tagTypeList?: ['0', '1', '2', '3'];
+    // 仅在tab为标签时生效，0全部，1运营，2系统
+    tagTypeList?: ['0', '1', '2'];
   };
 }
 

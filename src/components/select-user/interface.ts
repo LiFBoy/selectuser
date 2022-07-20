@@ -5,9 +5,6 @@ export type NodeType =
   | 'DEPT'
   | 'EQUIPMENT'
   | 'TV'
-  | 'root'
-  | 'ORG_REL'
-  | 'ORG'
   | 'CAMERA'
   | 'WORK_GROUP'
   | 'MATERNAL'
@@ -15,14 +12,9 @@ export type NodeType =
   | 'GROUP_TAG'
   | 'CIRCLES_TAG'
   | 'CONTENT_TAG'
-  | 'CUSTOMER_TAG_GROUP'
-  | 'GROUP_TAG_GROUP'
-  | 'CIRCLES_TAG_GROUP'
-  | 'CONTENT_TAG_GROUP'
   | 'CUSTOMER_MANAGER_USER'
   | 'TAG'
-  | 'GROUP'
-  | 'TAG_GROUP';
+  | 'GROUP';
 
 export interface ListItem {
   id: string;
@@ -203,8 +195,8 @@ export interface PropTypes {
     // 选择类型 只可选用户user,部门dept,组织org,分组group,标签tag
     selectTypeList?: any;
 
-    // 仅在tab为标签时生效，0个人标签，1通用标签，2系统标签，3员工系统标签
-    tagTypeList?: ['0', '1', '2', '3'];
+    // 仅在tab为标签时生效，0全部，1运营，2系统
+    tagTypeList?: ['0', '1', '2'];
 
     category?: string; // 区分选人或选部门，只有选部门时才传
   };

@@ -5,7 +5,7 @@ import classnames from 'classnames';
 import { get } from 'lodash';
 import { TREE_CONTEXT } from '../../select-user';
 import { TAG_TYPE, TAB_MAPS } from '../../../../constants';
-import { renderSearchHint } from '../../common';
+import { renderSearchHint, commonItem } from '../../common';
 import EMPTYSVG from './icon_empty_03.svg';
 import BUSER from '../../../tree-node-icon/user.svg';
 import BDEPT from '../../../tree-node-icon/dept.svg';
@@ -50,16 +50,6 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
   // 判断搜索字段是否为纯数字
   const allNumber = /^([0-9])+$/.test(search);
 
-  // const renderSearchHint = (list: Array<any>) => {
-  //   if (list && list.length > 19) {
-  //     return (
-  //       <div className="more-text">
-  //         仅展示前 20 个搜索结果，请输入更精确的搜索内容。
-  //       </div>
-  //     );
-  //   }
-  // };
-
   const searchResultNameReplace = (content: string) => {
     const __html = {
       __html: !content
@@ -78,65 +68,36 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
     );
   };
 
-  const common = (item: any) => {
-    return {
-      id: item.key,
-      key: item.key,
-      name: item.label,
-      orgId: item.orgId,
-      childDelete: item.childDelete,
-      extendedAttribute: item.extendedAttribute,
-    };
-  };
-
   // checkbox状态改变事件
   const onCheckBoxChange = (item: any, type: string) => {
     let node: any = {};
     switch (type) {
       case 'USER':
         node = {
-          ...common(item),
+          ...commonItem(item),
           deptName: get(item.userDeptList, [0, 'deptName']),
           fullName: item.fullName,
         };
         break;
-      case 'GROUP':
-        node = {
-          ...common(item),
-        };
-        break;
       case 'DEPT':
         node = {
-          ...common(item),
+          ...commonItem(item),
           fullName: item.fullName,
         };
         break;
+      case 'GROUP':
       case 'CONTENT_TAG':
-        node = {
-          type: item.type,
-          ...common(item),
-        };
-        break;
       case 'CIRCLES_TAG':
-        node = {
-          ...common(item),
-          type: item.type,
-        };
-        break;
       case 'GROUP_TAG':
-        node = {
-          ...common(item),
-          type: item.type,
-        };
-        break;
       case 'CUSTOMER_TAG':
         node = {
-          ...common(item),
-          type: item.type,
+          ...commonItem(item),
         };
         break;
     }
 
+    node.type = item.type;
+    node.contactType = item.contactType;
     // 获取当前节点是勾选还是取消勾选
     let checked = null;
 

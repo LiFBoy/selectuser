@@ -253,6 +253,8 @@ export default (
         });
       };
 
+      // 迭代模式
+
       generateKey(deptInfoList);
       generateKey(userInfoList);
       generateKey(customerManagerInfoList);

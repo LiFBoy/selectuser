@@ -206,7 +206,7 @@ const SelectUserPc: React.FunctionComponent<PropTypes> = ({
               onExpandedKeys={(v: any) => setLineHeigth(v)}
             />
           ) : (
-            <React.Fragment>
+            <>
               <SelectUserTab
                 activeKey={tab}
                 onTabChange={onTabChange}
@@ -219,7 +219,7 @@ const SelectUserPc: React.FunctionComponent<PropTypes> = ({
                 noTagLabelPermission={noTagLabelPermission}
                 selectType={selectType}
               />
-            </React.Fragment>
+            </>
           )}
           <Spin
             spinning={loading}

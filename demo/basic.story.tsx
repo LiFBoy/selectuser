@@ -113,7 +113,7 @@ export const JSX = () => {
       selectTypeList: ['dept'],
     },
     // onlyLeafCheckable: true,
-    isSaveSelectSignature: false,
+    // isSaveSelectSignature: false,
     // defaultValue: {
     //   userInfoList: [
     //     {

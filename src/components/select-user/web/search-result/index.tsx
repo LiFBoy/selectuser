@@ -3,7 +3,7 @@ import { Tabs, Checkbox, Typography, Radio, Popover } from 'antd';
 import { TREE_CONTEXT } from '../../select-user';
 import { TAB_MAPS } from '../../../../constants';
 import useSelectExpand from '../../hooks/use-select-expand';
-import { renderSearchHint } from '../../common';
+import { renderSearchHint, commonItem } from '../../common';
 import { funTransformationSubstr } from '../../../../utils';
 import { get } from 'lodash';
 import {
@@ -77,16 +77,6 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
   // 判断搜索字段是否为纯数字
   const allNumber = /^([0-9])+$/.test(search);
 
-  // const renderSearchHint = (list: Array<any>) => {
-  //   if (list && list.length > 19) {
-  //     return (
-  //       <div className="more-text">
-  //         仅展示前20个搜索结果，请输入更精确的搜索内容获取
-  //       </div>
-  //     );
-  //   }
-  // };
-
   const handleClick = (item: any, type: string) => {
     localStorage.setItem('labelPath', item.labelPath);
     localStorage.setItem('selectId', item.key);
@@ -97,16 +87,6 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
       onExpandedKeys(item.labelPath);
     }, 0);
   };
-  const common = (item: any) => {
-    return {
-      id: item.key,
-      key: item.key,
-      name: item.label,
-      orgId: item.orgId,
-      childDelete: item.childDelete,
-      extendedAttribute: item.extendedAttribute,
-    };
-  };
 
   // checkbox状态改变事件
   const onCheckBoxChange = (item: any, type: string) => {
@@ -114,74 +94,30 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
     switch (type) {
       case 'USER':
         node = {
-          ...common(item),
+          ...commonItem(item),
           deptName: get(item.userDeptList, [0, 'deptName']),
           fullName: item.fullName,
         };
         break;
-      case 'GROUP':
-        node = {
-          ...common(item),
-        };
-        break;
       case 'DEPT':
         node = {
-          ...common(item),
+          ...commonItem(item),
           fullName: item.fullName,
         };
         break;
+      case 'GROUP':
       case 'EQUIPMENT':
-        node = {
-          ...common(item),
-        };
-        break;
       case 'CAMERA':
-        node = {
-          ...common(item),
-        };
-        break;
       case 'TV':
-        node = {
-          ...common(item),
-        };
-        break;
       case 'WORK_GROUP':
-        node = {
-          ...common(item),
-        };
-        break;
       case 'MATERNAL':
-        node = {
-          ...common(item),
-        };
-        break;
       case 'TAG':
-        node = {
-          ...common(item),
-        };
-        break;
       case 'CONTENT_TAG':
-        node = {
-          type: item.type,
-          ...common(item),
-        };
-        break;
       case 'CIRCLES_TAG':
-        node = {
-          ...common(item),
-          type: item.type,
-        };
-        break;
       case 'GROUP_TAG':
-        node = {
-          ...common(item),
-          type: item.type,
-        };
-        break;
       case 'CUSTOMER_TAG':
         node = {
-          ...common(item),
-          type: item.type,
+          ...commonItem(item),
         };
         break;
     }
@@ -365,6 +301,7 @@ const SearchResult: React.FunctionComponent<PropType> = (props: PropType) => {
     const tagList: any[] = [];
     const tagGroupList: any[] = [];
     const groupList: any[] = [];
+    const customerManagerList: any[] = [];
 
     for (const resultItem of searchResult?.dataSource) {
       switch (resultItem.type) {

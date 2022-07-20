@@ -134,7 +134,7 @@ const INIT_STATE: ItreeState = {
   // 存储当前所有选中的keys
   checkedKeys: [],
 
-  tagGroupItemList: [],
+  tagGroupItemList: [], // todo
   // 选中的部门类型节点
   deptInfoList: [],
   // 选中的用户类型节点
@@ -213,14 +213,6 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
       MATERNAL: 'maternalInfoList',
       GROUP: 'groupInfoList',
       WORK_GROUP: 'workGroupInfoList',
-      TAG_GROUP: '',
-      root: '',
-      ORG_REL: '',
-      ORG: '',
-      CUSTOMER_TAG_GROUP: '',
-      GROUP_TAG_GROUP: '',
-      CIRCLES_TAG_GROUP: '',
-      CONTENT_TAG_GROUP: '',
     };
     const key: string = typeToKeyMap[type];
     // @ts-ignore
@@ -259,6 +251,7 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
   const setRequest = (loading: boolean) => {
     setResultLoading(loading);
   };
+
   const renderSearchText = (text: string) => {
     const nextSearchValue = localStorage.getItem('nextSearchValue');
     if (!text?.includes(nextSearchValue)) return text;

@@ -58,8 +58,6 @@ interface PropType {
   loadData: (node: any, currentTab: string) => Promise<void>;
   showTabList: any;
   getTree: any;
-  corpid?: string | number;
-  appId?: string | number;
   visible?: boolean;
   formatData: any;
   selectType: 'user' | 'dept';
@@ -110,7 +108,7 @@ const SchoolContacts: React.FunctionComponent<PropType> = (props: PropType) => {
     const nextAccordion = showTabList.map((item: string) => {
       return {
         key: item,
-        icon: <React.Fragment>{formatIcon(item)}</React.Fragment>,
+        icon: <>{formatIcon(item)}</>,
       };
     });
 
