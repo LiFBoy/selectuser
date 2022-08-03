@@ -157,7 +157,7 @@ const SchoolContacts: React.FunctionComponent<PropType> = (props: PropType) => {
   const formatIcon = (key: string) => {
     switch (key) {
       case 'innerContacts': // 内部通讯录
-      case 'maternalContacts': // 母婴通讯录
+      case 'maternalContacts': // 私域通讯录
         return <InternalIcon />;
       case 'groupContacts': // 企微互联群
         return <GroupIcon />;

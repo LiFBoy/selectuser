@@ -178,7 +178,7 @@ export default (
         });
       }
 
-      // 存储所有母婴id
+      // 存储所有私域id
       const maternalObject: SelectUserCountRequestItem = {
         selectNodeList: [],
         type: 'MATERNAL',

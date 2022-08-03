@@ -11,7 +11,7 @@ export interface ItreeItem {
     | 'TV' //  广告电视
     | 'CAMERA' //  摄像头
     | 'WORK_GROUP' //  告警群
-    | 'MATERNAL' //  母婴
+    | 'MATERNAL' //  私域
     | 'TAG' // 标签
     | 'CUSTOMER_TAG' // 标签
     | 'GROUP_TAG' // 标签

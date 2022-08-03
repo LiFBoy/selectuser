@@ -7,7 +7,7 @@ export interface PropTypes {
 export type TabTypes =
   | 'innerContacts' // 内部通讯录
   | 'customerManagerContacts' // 虚拟客户经理
-  | 'maternalContacts' // 母婴通讯录
+  | 'maternalContacts' // 私域通讯录
   | 'disabledHomeContacts' // 残疾人之家
   | 'equipmentContacts' // 资产通讯录
   | 'memberContacts' // 居民

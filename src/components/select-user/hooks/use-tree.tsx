@@ -143,7 +143,7 @@ const INIT_STATE: ItreeState = {
   equipmentInfoList: [],
   // 选中的tv节点
   tvInfoList: [],
-  // 母婴
+  // 私域
   maternalInfoList: [],
   // 摄像头
   cameraInfoList: [],
@@ -337,7 +337,7 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
           </div>
         );
 
-        // 内部通迅录、残疾人、母婴特殊逻辑
+        // 内部通迅录、残疾人、私域特殊逻辑
         if (
           ['innerContacts', 'maternalContacts', 'disabledHomeContacts'].indexOf(
             type

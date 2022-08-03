@@ -44,7 +44,7 @@ export const EQUIPMENTICON: React.FunctionComponent = () => {
   );
 };
 
-// 母婴
+// 私域
 export const MATERNALCON: React.FunctionComponent = () => {
   return <span className="user-center-tree-node-icon select-user-icon-user" />;
 };
