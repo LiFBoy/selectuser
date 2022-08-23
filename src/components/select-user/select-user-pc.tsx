@@ -132,6 +132,10 @@ const SelectUserPc: React.FunctionComponent<PropTypes> = ({
     }
   }, [localStorage.getItem('tagType')]);
 
+  const isinnerdeptuser =
+    showTabList?.find((item) => item === 'innerContacts') &&
+    requestParams?.selectTypeList.find((_) => _ === 'dept_user');
+
   return (
     <Modal
       {...dialogProps}
@@ -233,7 +237,7 @@ const SelectUserPc: React.FunctionComponent<PropTypes> = ({
             <SelectedPane
               noTagLabelPermission={noTagLabelPermission}
               selectType={selectType}
-              showUserDeptName={true}
+              showUserDeptName={isinnerdeptuser}
               selectTypeList={requestParams.selectTypeList}
               selectPaneProps={selectPaneProps}
             />

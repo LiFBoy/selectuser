@@ -1,9 +1,9 @@
 import React from 'react';
 import './index.less';
-import icon_dept from './b-dept.svg';
-import icon_group from './b-group.svg';
+import icon_dept from '../tree-node-icon/dept.svg';
+import icon_group from '../tree-node-icon/group.svg';
 import icon_org from './b-org.svg';
-import icon_tag from './b-tag.svg';
+import icon_tag from '../tree-node-icon/tag.svg';
 import icon_user from './b-user.svg';
 
 // 标签

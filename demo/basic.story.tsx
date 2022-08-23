@@ -101,17 +101,18 @@ export const JSX = () => {
   const props: PropTypes = {
     visible,
     multiple: true,
-    selectType: 'dept',
+    selectType: 'user',
     unCheckableNodeType: ['ORG'],
     searchPlaceholder: '请输入姓名或手机号进行搜索',
     dialogProps: {
       title: '选人组件',
     },
-    userOrigin: 'http://gateway.dev.suosihulian.com/user-center',
+    userOrigin: 'http://gateway.sit.suosihulian.com/user-center',
     showTabList: ['innerContacts'],
     requestParams: {
-      selectTypeList: ['dept'],
+      selectTypeList: ['dept_user'],
     },
+    isSaveSelectSignature: false,
     // onlyLeafCheckable: true,
     // isSaveSelectSignature: false,
     // defaultValue: {

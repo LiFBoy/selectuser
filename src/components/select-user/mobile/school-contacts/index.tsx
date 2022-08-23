@@ -1,7 +1,8 @@
 // import { NodeType } from '../../../../components/select-user/interface';
 import { ItreeItem } from '../../../select-user/interface';
 import { TAB_MAPS } from '../../../../constants';
-
+import empty02 from '../select-search-result/icon_empty_02.svg';
+import './index.less';
 // export interface ItreeItem {
 //   id: string;
 //   key: string;
@@ -249,20 +250,22 @@ const SchoolContacts: React.FunctionComponent<PropType> = (props: PropType) => {
                     </div>
                   }
                 >
-                  {item.children?.map((child: ItreeItem) => {
-                    return (
-                      <PannelItem
-                        key={child.key}
-                        accordion={accordion}
-                        breadcrumb={breadcrumb}
-                        selectType={selectType}
-                        multiple={multiple}
-                        currentTab={item.key}
-                        handleSelect={handleSelect}
-                        node={child}
-                      />
-                    );
-                  })}
+                  {item.children?.length > 0
+                    ? item.children?.map((child: ItreeItem) => {
+                      return (
+                        <PannelItem
+                          key={child.key}
+                          accordion={accordion}
+                          breadcrumb={breadcrumb}
+                          selectType={selectType}
+                          multiple={multiple}
+                          currentTab={item.key}
+                          handleSelect={handleSelect}
+                          node={child}
+                        />
+                      );
+                    })
+                    : null}
                 </Accordion.Panel>
               );
             })}
@@ -287,7 +290,14 @@ const SchoolContacts: React.FunctionComponent<PropType> = (props: PropType) => {
               );
             })}
           </div>
-        ) : null)}
+        ) : (
+          <div className="empty-content">
+            <div className="empty-img">
+              <img src={empty02} alt="" />
+            </div>
+            <span>暂无内容</span>
+          </div>
+        ))}
     </div>
   );
 };

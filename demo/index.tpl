@@ -15,7 +15,7 @@
   />
  <link
     rel="stylesheet"
-    href="https://static.suosihulian.com/switchvisual/true.css"
+    href="https://static.suosihulian.com/switchvisual/false.css"
   />
   <link crossorigin="anonymous" integrity="sha384-TZg017FMz7e/wOMOMIjY1WYbT5auS2YxHwNMaZkpDkknT9vR3TfFRrF/kSwdKSys" href="https://lib.baomitu.com/antd-mobile/2.3.1/antd-mobile.css" rel="stylesheet">
 
