@@ -134,7 +134,7 @@ const SelectUserPc: React.FunctionComponent<PropTypes> = ({
 
   const isinnerdeptuser =
     showTabList?.find((item) => item === 'innerContacts') &&
-    requestParams?.selectTypeList.find((_) => _ === 'dept_user');
+    requestParams?.selectTypeList.find((_: any) => _ === 'dept_user');
 
   return (
     <Modal
@@ -237,7 +237,7 @@ const SelectUserPc: React.FunctionComponent<PropTypes> = ({
             <SelectedPane
               noTagLabelPermission={noTagLabelPermission}
               selectType={selectType}
-              showUserDeptName={isinnerdeptuser}
+              showUserDeptName={!!isinnerdeptuser}
               selectTypeList={requestParams.selectTypeList}
               selectPaneProps={selectPaneProps}
             />

@@ -6,7 +6,11 @@ import { IlistItem } from '../components/select-user/interface';
  * @param sIndex 前半部分展示内容长度（英文占1个字符，中文占2个字符）「“默认12个字符”」
  * @param eIndex 后半部分要展示内容长度（英文占1个字符，中文占2个字符）「“默认12个字符”」
  */
-export const funTransformationSubstr = (str: string, sIndex?: number, eIndex?: number) => {
+export const funTransformationSubstr = (
+  str: string,
+  sIndex?: number,
+  eIndex?: number
+) => {
   if (!str) {
     return str;
   }
@@ -17,7 +21,11 @@ export const funTransformationSubstr = (str: string, sIndex?: number, eIndex?: n
   if (sumLen <= START_NUMBER + END_NUMBER) {
     return str;
   }
-  return str.substr(0, getStrIndex(str, START_NUMBER) + 1) + '...' + str.substr(getStrIndex(str, END_NUMBER, true), sumLen);
+  return (
+    str.substr(0, getStrIndex(str, START_NUMBER) + 1) +
+    '...' +
+    str.substr(getStrIndex(str, END_NUMBER, true), sumLen)
+  );
 };
 
 /**
@@ -43,7 +51,7 @@ const getStrIndex = (str: string, limitLen: number, fromEnd?: boolean) => {
   const actStr = fromEnd ? str.split('').reverse().join('') : str;
   for (let i = 0; i < strLen; i++) {
     actualLen += gblen(actStr[i]); // 通过下标取字符串中字符，再通过gblen方法判断改字符长度
-    if ((actualLen + 1) === limitLen || (actualLen + 2) === limitLen) {
+    if (actualLen + 1 === limitLen || actualLen + 2 === limitLen) {
       index = i;
       break;
     }
@@ -58,15 +66,22 @@ const getStrIndex = (str: string, limitLen: number, fromEnd?: boolean) => {
  * @param tabType tab类型
  * @returns string
  */
-export const dealtKey = (basePath: string, treeItem: IlistItem, tabType: string) => {
+export const dealtKey = (
+  basePath: string,
+  treeItem: IlistItem,
+  tabType: string
+) => {
   const { id, type } = treeItem;
   /* 当且仅当满足一下所有条件时需要去对id进行拼接
       1.当前是"pc"端环境
       2.当前所处tab为“下属组织“或搜索情况下的”全部“时
       3.当前节点属性为"ORG"
    */
-  return basePath === 'pc' && ['all', 'group'].includes(tabType) && type === 'ORG' ?
-    `group@${id}` : id;
+  return basePath === 'pc' &&
+    ['all', 'group'].includes(tabType) &&
+    type === 'ORG'
+    ? `group@${id}`
+    : id;
 };
 
 /**
@@ -77,20 +92,29 @@ export const dealtKey = (basePath: string, treeItem: IlistItem, tabType: string)
  * @returns string
  */
 // 用于数据回显和右侧删除数据
-export const dealtKeyByType = (basePath: string, treeItem: IlistItem, type: string) => {
-  const tabTypeMap: { [key:string]: string } = {
-    'ORG': 'group',
+export const dealtKeyByType = (
+  basePath: string,
+  treeItem: IlistItem,
+  type: string
+) => {
+  const tabTypeMap: { [key: string]: string } = {
+    ORG: 'group',
   };
   return dealtKey(basePath, treeItem, tabTypeMap[type]);
 };
 
 export const showNameFunc = (data: any, isShowDeptName: boolean) => {
-  const { name, deptName, fullName, userViewDeptList } = data;
+  const { name, deptName, fullName, userDeptList } = data;
   let showName = fullName || name;
   if (isShowDeptName && deptName) {
     showName = `${showName} (${deptName})`;
-  } else if (isShowDeptName && userViewDeptList && userViewDeptList[0] && userViewDeptList[0].name) {
-    showName = `${showName} (${userViewDeptList[0].name})`;
+  } else if (
+    isShowDeptName &&
+    userDeptList &&
+    userDeptList[0] &&
+    userDeptList[0].deptName
+  ) {
+    showName = `${showName} (${userDeptList[0].deptName})`;
   }
   return showName;
 };

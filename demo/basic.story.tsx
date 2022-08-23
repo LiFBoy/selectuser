@@ -107,10 +107,10 @@ export const JSX = () => {
     dialogProps: {
       title: '选人组件',
     },
-    userOrigin: 'http://gateway.sit.suosihulian.com/user-center',
+    userOrigin: 'http://gateway.dev.suosihulian.com/user-center',
     showTabList: ['innerContacts'],
     requestParams: {
-      selectTypeList: ['dept_user'],
+      selectTypeList: ['dept'],
     },
     isSaveSelectSignature: false,
     // onlyLeafCheckable: true,

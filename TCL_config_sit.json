@@ -1,0 +1,7 @@
+{
+  "base_url": "https://gateway.sit.suosihulian.com/equipment/",
+  "token_url": "https://auth.sit.suosihulian.com/",
+  "client_id": "sit",
+  "client_secret": "sit",
+  "from": "assets_equipment_login"
+}

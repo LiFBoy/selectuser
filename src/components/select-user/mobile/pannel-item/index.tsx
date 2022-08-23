@@ -75,7 +75,7 @@ const PannelItem: React.FunctionComponent<PropType> = (props: PropType) => {
       orgId: node.orgId,
       contactType: node.contactType,
       fullName: node.fullName,
-      deptName: get(node.userViewDeptList, [0, 'name']),
+      deptName: get(node.userDeptList, [0, 'deptName']),
     };
     // 获取当前节点是勾选还是取消勾选
     let checked = null;
