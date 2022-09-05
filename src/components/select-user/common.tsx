@@ -13,7 +13,17 @@ export const commonItem = (item: any) => {
 export const renderSearchHint = (list: Array<any>) => {
   if (list && list.length > 19) {
     return (
-      <div className="more-text">
+      <div className="more-m-text">
+        仅展示前20个搜索结果，请输入更精确的搜索内容获取
+      </div>
+    );
+  }
+};
+
+export const renderMSearchHint = (list: Array<any>) => {
+  if (list && list.length > 19) {
+    return (
+      <div className="more-m-text">
         仅展示前20个搜索结果，请输入更精确的搜索内容获取
       </div>
     );

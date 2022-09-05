@@ -40,6 +40,7 @@ export default function SelectUser({
 }: PropTypes) {
   // 获取treeContext
   const treeContext = useTree({
+    showTabList,
     basePath,
     requestParams,
     selectType,

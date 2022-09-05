@@ -1,32 +1,7 @@
-// import { NodeType } from '../../../../components/select-user/interface';
 import { ItreeItem } from '../../../select-user/interface';
 import { TAB_MAPS } from '../../../../constants';
 import empty02 from '../select-search-result/icon_empty_02.svg';
 import './index.less';
-// export interface ItreeItem {
-//   id: string;
-//   key: string;
-//   name: string;
-//   label: any;
-//   orgId?: string;
-//   type?:
-//     | 'DEPT' // 部门
-//     | 'USER' // 个人
-//     | 'ORG' // 组织
-//     | 'TAG' // 标签
-//     | 'CIRCLES_TAG_GROUP' // 内容标签组
-//     | 'CIRCLES_TAG' // 内容标签
-//     | 'root' // 根
-//     | 'GROUP' // 分组
-//     | 'ORG_REL'; // 行政组织-精准推送业务
-//   userCount?: number;
-//   children?: ItreeItem[];
-//   checkable?: boolean;
-//   isLeaf?: boolean;
-//   icon?: any;
-//   contactType?: string;
-//   count?: number;
-// }
 
 interface AccordionItem {
   key: string;
@@ -250,8 +225,8 @@ const SchoolContacts: React.FunctionComponent<PropType> = (props: PropType) => {
                     </div>
                   }
                 >
-                  {item.children?.length > 0
-                    ? item.children?.map((child: ItreeItem) => {
+                  {item.children?.length > 0 &&
+                    item.children?.map((child: ItreeItem) => {
                       return (
                         <PannelItem
                           key={child.key}
@@ -264,8 +239,14 @@ const SchoolContacts: React.FunctionComponent<PropType> = (props: PropType) => {
                           node={child}
                         />
                       );
-                    })
-                    : null}
+                    })}
+
+                  {['groupContacts'].indexOf(showTabList[0]) > -1 &&
+                    item.children?.length > 19 && (
+                    <div className="more-m-text">
+                        仅展示前20条数据，请输入更精确的搜索内容获取
+                    </div>
+                  )}
                 </Accordion.Panel>
               );
             })}

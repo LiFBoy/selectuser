@@ -110,7 +110,7 @@ export const JSX = () => {
     userOrigin: 'http://gateway.dev.suosihulian.com/user-center',
     showTabList: ['innerContacts'],
     requestParams: {
-      selectTypeList: ['dept'],
+      selectTypeList: ['dept_user'],
     },
     isSaveSelectSignature: false,
     // onlyLeafCheckable: true,
@@ -367,7 +367,7 @@ export const MOBILE = () => {
     // selectType: 'group',
     unCheckableNodeType: ['TAG_GROUP'],
     isSaveSelectSignature: true,
-    showTabList: ['circlesTagContacts'],
+    showTabList: ['groupContacts'],
     // selectSignature: '3001001001000006-202206281656406607193',
     dialogProps: {
       title: '选人组件',
@@ -375,7 +375,7 @@ export const MOBILE = () => {
     noTagLabelPermission: true,
     userOrigin: 'http://gateway.dev.suosihulian.com/user-center',
     requestParams: {
-      selectTypeList: ['tag'],
+      selectTypeList: ['group'],
       // 仅在tab为标签时生效，0全部，1运营，2系统 tagTypeList?: ['0', '1', '2'];
       tagTypeList: [0],
       noTagLabelPermission: true,

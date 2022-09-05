@@ -26,6 +26,7 @@ export function getUid(): string {
 // 持久化的属性，设置一次之后就不会修改
 type StaticProps = Pick<
   PropTypes,
+  | 'showTabList'
   | 'selectType'
   | 'basePath'
   | 'requestParams'
@@ -1089,10 +1090,14 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
       isSaveSelectSignature,
       selectSignature,
       onOk,
+      showTabList,
       requestParams,
       orgRelAnalysisRange,
     } = treeState;
 
+    const isinnerdeptuser =
+      showTabList?.find((item) => item === 'innerContacts') &&
+      requestParams?.selectTypeList.find((_: any) => _ === 'dept_user');
     /**
      * 保存快照参数格式化，主要是为了把之前组装的key还原
      * @param list 存储在treeState中的各种list
@@ -1103,7 +1108,7 @@ const useTree = (staticProps: StaticProps): ItreeContext => {
         const obj: any = {};
 
         obj.id = item.id;
-        obj.name = showNameFunc(item, true);
+        obj.name = showNameFunc(item, !!isinnerdeptuser);
         obj.type = item.type;
         if (item.orgId) {
           obj.orgId = item.orgId;

@@ -4,8 +4,8 @@ import { Radio } from 'antd-mobile-v5';
 import classnames from 'classnames';
 import { get } from 'lodash';
 import { TREE_CONTEXT } from '../../select-user';
-import { TAG_TYPE, TAB_MAPS } from '../../../../constants';
-import { renderSearchHint, commonItem } from '../../common';
+import { TAB_MAPS } from '../../../../constants';
+import { renderMSearchHint, commonItem } from '../../common';
 import EMPTYSVG from './icon_empty_03.svg';
 import BUSER from '../../../tree-node-icon/user.svg';
 import BDEPT from '../../../tree-node-icon/dept.svg';
@@ -42,7 +42,6 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
   const {
     userInfoList = [],
     deptInfoList = [],
-    tagInfoList = [],
     circlesTagInfoList = [],
     groupInfoList = [],
   } = treeState;
@@ -158,211 +157,189 @@ const SelectSearchResult: React.FunctionComponent<PropType> = (
           multiple: multiple === false,
         })}
       >
-        {userList.length > 0 ? (
-          <>
-            <Accordion defaultActiveKey="0" className="result-accordion">
-              <Accordion.Panel
-                header={
-                  <div className="custome-name">
-                    相关人员({userList.length})
-                  </div>
-                }
-              >
-                {userList.map((user, index) => {
-                  let checked = false;
-                  for (const item of userInfoList) {
-                    if (user.key === item.id) {
-                      checked = true;
-                    }
+        {userList.length > 0 && (
+          <Accordion defaultActiveKey="0" className="result-accordion">
+            <Accordion.Panel
+              header={
+                <div className="custome-name">相关人员({userList.length})</div>
+              }
+            >
+              {userList.map((user, index) => {
+                let checked = false;
+                for (const item of userInfoList) {
+                  if (user.key === item.id) {
+                    checked = true;
                   }
-                  return (
-                    <div className="search-result-group-item" key={index}>
-                      <div
-                        className="line-result"
-                        onClick={() => onCheckBoxChange(user, user.type)}
-                      >
-                        <div className="checkbox-wrap">
-                          <Radio checked={checked} />
-                        </div>
-                        <div className="search-result-item">
-                          <div className="item-name-icon">
-                            <img src={BUSER} alt="" />
-                          </div>
-                          <div className="search-result-item-detail userList">
-                            {searchResultNameReplace(user.label)}
-                            {user.userDeptList?.map(
-                              (deptItem: any, index: number) => {
-                                return (
-                                  <div
-                                    className="search-result-item-des"
-                                    key={index}
-                                  >
-                                    {
-                                      <div
-                                        className="overflow-ellipsis"
-                                        title={deptItem.deptName}
-                                      >
-                                        {user.contactType === '3'
-                                          ? '类别'
-                                          : '部门'}
-                                        : {deptItem.deptName}
-                                      </div>
-                                    }
-                                  </div>
-                                );
-                              }
-                            )}
-                          </div>
-                        </div>
+                }
+                return (
+                  <div className="search-result-group-item" key={index}>
+                    <div
+                      className="line-result"
+                      onClick={() => onCheckBoxChange(user, user.type)}
+                    >
+                      <div className="checkbox-wrap">
+                        <Radio checked={checked} />
                       </div>
-                    </div>
-                  );
-                })}
-                {renderSearchHint(userList)}
-              </Accordion.Panel>
-            </Accordion>
-          </>
-        ) : (
-          ''
-        )}
-        {deptList.length > 0 ? (
-          <>
-            <Accordion defaultActiveKey="0" className="result-accordion">
-              <Accordion.Panel
-                header={
-                  <div className="custome-name">
-                    相关部门({deptList.length})
-                  </div>
-                }
-              >
-                {deptList.map((dept, index) => {
-                  let checked = false;
-
-                  for (const item of deptInfoList) {
-                    if (dept.key === item.id) {
-                      checked = true;
-                    }
-                  }
-                  return (
-                    <div className="search-result-group-item" key={index}>
-                      <div
-                        className="line-result"
-                        onClick={() => onCheckBoxChange(dept, dept.type)}
-                      >
-                        <div className="checkbox-wrap">
-                          <Radio checked={checked} />
-                        </div>
+                      <div className="search-result-item">
                         <div className="item-name-icon">
-                          <img src={BDEPT} alt="" />
+                          <img src={BUSER} alt="" />
                         </div>
-                        <div className="search-result-item-detail">
-                          {searchResultNameReplace(dept.label)}
-                          <div className="search-result-item-des">
-                            <div
-                              className="overflow-ellipsis"
-                              title={`${dept.orgName} - ${dept.labelPath}`}
-                            >
-                              位置:{`${dept.orgName} - ${dept.labelPath}`}
-                            </div>
+                        <div className="search-result-item-detail userList">
+                          {searchResultNameReplace(user.label)}
+                          {user.userDeptList?.map(
+                            (deptItem: any, index: number) => {
+                              return (
+                                <div
+                                  className="search-result-item-des"
+                                  key={index}
+                                >
+                                  {
+                                    <div
+                                      className="overflow-ellipsis"
+                                      title={deptItem.deptName}
+                                    >
+                                      {user.contactType === '3'
+                                        ? '类别'
+                                        : '部门'}
+                                      : {deptItem.deptName}
+                                    </div>
+                                  }
+                                </div>
+                              );
+                            }
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+              {renderMSearchHint(userList)}
+            </Accordion.Panel>
+          </Accordion>
+        )}
+        {deptList.length > 0 && (
+          <Accordion defaultActiveKey="0" className="result-accordion">
+            <Accordion.Panel
+              header={
+                <div className="custome-name">相关部门({deptList.length})</div>
+              }
+            >
+              {deptList.map((dept, index) => {
+                let checked = false;
+
+                for (const item of deptInfoList) {
+                  if (dept.key === item.id) {
+                    checked = true;
+                  }
+                }
+                return (
+                  <div className="search-result-group-item" key={index}>
+                    <div
+                      className="line-result"
+                      onClick={() => onCheckBoxChange(dept, dept.type)}
+                    >
+                      <div className="checkbox-wrap">
+                        <Radio checked={checked} />
+                      </div>
+                      <div className="item-name-icon">
+                        <img src={BDEPT} alt="" />
+                      </div>
+                      <div className="search-result-item-detail">
+                        {searchResultNameReplace(dept.label)}
+                        <div className="search-result-item-des">
+                          <div
+                            className="overflow-ellipsis"
+                            title={`${dept.orgName} - ${dept.labelPath}`}
+                          >
+                            位置:{`${dept.orgName} - ${dept.labelPath}`}
                           </div>
                         </div>
                       </div>
                     </div>
-                  );
-                })}
-                {renderSearchHint(deptList)}
-              </Accordion.Panel>
-            </Accordion>
-          </>
-        ) : (
-          ''
-        )}
-
-        {groupList.length > 0 ? (
-          <>
-            <Accordion defaultActiveKey="0" className="result-accordion">
-              <Accordion.Panel
-                header={
-                  <div className="custome-name">
-                    相关分组({groupList.length})
                   </div>
-                }
-              >
-                {groupList.map((group, index) => {
-                  let checked = false;
-
-                  for (const item of groupInfoList) {
-                    if (group.key === item.id) {
-                      checked = true;
-                    }
-                  }
-
-                  return (
-                    <div className="search-result-group-item" key={index}>
-                      <div className="line-result">
-                        <div className="checkbox-wrap">
-                          <Radio
-                            checked={checked}
-                            onChange={() => onCheckBoxChange(group, group.type)}
-                          />
-                        </div>
-                        <div
-                          className="search-result-item-detail"
-                          onClick={() => onCheckBoxChange(group, group.type)}
-                        >
-                          {searchResultNameReplace(group.label)}
-                        </div>
-                      </div>
-                    </div>
-                  );
-                })}
-                {renderSearchHint(groupList)}
-              </Accordion.Panel>
-            </Accordion>
-          </>
-        ) : (
-          ''
+                );
+              })}
+              {renderMSearchHint(deptList)}
+            </Accordion.Panel>
+          </Accordion>
         )}
-        {tagList.length > 0 ? (
-          <>
-            <Accordion defaultActiveKey="0" className="result-accordion">
-              <Accordion.Panel
-                header={
-                  <div className="custome-name">相关标签({tagList.length})</div>
-                }
-              >
-                {tagList.map((tag, index) => {
-                  let checked = false;
-                  for (const item of circlesTagInfoList) {
-                    if (tag.key === item.id) {
-                      checked = true;
-                    }
+
+        {groupList.length > 0 && (
+          <Accordion defaultActiveKey="0" className="result-accordion">
+            <Accordion.Panel
+              header={
+                <div className="custome-name">相关分组({groupList.length})</div>
+              }
+            >
+              {groupList.map((group, index) => {
+                let checked = false;
+
+                for (const item of groupInfoList) {
+                  if (group.key === item.id) {
+                    checked = true;
                   }
-                  return (
-                    <div className="search-result-group-item" key={index}>
+                }
+
+                return (
+                  <div className="search-result-group-item" key={index}>
+                    <div className="line-result">
+                      <div className="checkbox-wrap">
+                        <Radio
+                          checked={checked}
+                          onChange={() => onCheckBoxChange(group, group.type)}
+                        />
+                      </div>
                       <div
-                        className="line-result"
-                        onClick={() => onCheckBoxChange(tag, tag.type)}
+                        className="search-result-item-detail"
+                        onClick={() => onCheckBoxChange(group, group.type)}
                       >
-                        <div className="checkbox-wrap">
-                          <Radio checked={checked} />
-                        </div>
-                        <div className="item-name-icon">
-                          <img src={TAGIMG} alt="" />
-                        </div>
-                        <div className="search-result-item-title">
-                          {searchResultNameReplace(tag.label)}
-                        </div>
+                        {searchResultNameReplace(group.label)}
                       </div>
                     </div>
-                  );
-                })}
-                {renderSearchHint(tagList)}
-              </Accordion.Panel>
-            </Accordion>
-          </>
-        ) : (
-          ''
+                  </div>
+                );
+              })}
+              {renderMSearchHint(groupList)}
+            </Accordion.Panel>
+          </Accordion>
+        )}
+        {tagList.length > 0 && (
+          <Accordion defaultActiveKey="0" className="result-accordion">
+            <Accordion.Panel
+              header={
+                <div className="custome-name">相关标签({tagList.length})</div>
+              }
+            >
+              {tagList.map((tag, index) => {
+                let checked = false;
+                for (const item of circlesTagInfoList) {
+                  if (tag.key === item.id) {
+                    checked = true;
+                  }
+                }
+                return (
+                  <div className="search-result-group-item" key={index}>
+                    <div
+                      className="line-result"
+                      onClick={() => onCheckBoxChange(tag, tag.type)}
+                    >
+                      <div className="checkbox-wrap">
+                        <Radio checked={checked} />
+                      </div>
+                      <div className="item-name-icon">
+                        <img src={TAGIMG} alt="" />
+                      </div>
+                      <div className="search-result-item-title">
+                        {searchResultNameReplace(tag.label)}
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+              {renderMSearchHint(tagList)}
+            </Accordion.Panel>
+          </Accordion>
         )}
       </div>
     );

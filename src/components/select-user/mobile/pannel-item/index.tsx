@@ -27,7 +27,6 @@ export interface ItreeItem {
 import React, { useContext } from 'react';
 import { TREE_CONTEXT } from '../../select-user';
 import { Radio } from 'antd-mobile-v5';
-import classnames from 'classnames';
 
 interface PropType {
   currentTab: string; // 用当前选中的tab作为Tree组件的key，当切换tab时使Tree组件重新生成
@@ -119,7 +118,7 @@ const PannelItem: React.FunctionComponent<PropType> = (props: PropType) => {
   };
 
   return (
-    <div className={classnames('panel-header')} style={{ height: '54px' }}>
+    <div className="panel-header height-54">
       <div className="line">
         <div className="line-item" onClick={() => onCheck(node)}>
           {renderCheckboxItem(node)}
