@@ -1,6 +1,6 @@
 {
   "name": "suo-base-select-user",
-  "version": "0.0.12",
+  "version": "0.0.14",
   "description": "select-user",
   "repository": {
     "type": "git",
@@ -34,10 +34,6 @@
     }
   },
   "dependencies": {
-    "@alifd/next": "^1.21.8",
-    "@ant-design/icons": "^4.1.0",
-    "@irim/ds-core": "^1.0.3",
-    "@irim/ds-net": "^1.0.7",
     "@irim/saber": "1.2.1",
     "@types/qs": "^6.9.5",
     "antd-mobile": "^2.3.4",
@@ -65,7 +61,7 @@
     "@types/react-dom": "16.9.13",
     "@typescript-eslint/eslint-plugin": "^4.7.0",
     "@typescript-eslint/parser": "^4.7.0",
-    "antd": "^4.7.0",
+    "antd": "4.19.5",
     "anyproxy": "^4.1.0",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^8.0.6",
@@ -83,8 +79,8 @@
     "gulp-typescript": "^6.0.0-alpha.1",
     "html-webpack-plugin": "~4.3.0",
     "husky": "~4.2.5",
-    "less": "^3.12.2",
-    "less-loader": "^5.0.0",
+    "less": "3.12.2",
+    "less-loader": "5.0.0",
     "lint-staged": "^10.5.1",
     "lodash": "^4.17.20",
     "moment": "^2.29.1",
